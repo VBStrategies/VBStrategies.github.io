@@ -214,7 +214,7 @@ h3 {
   position: relative;
   max-width: 100%;
   margin: 0 auto;
-  height: calc(100vh - 140px);
+  height: calc(100vh - 320px);
   display: flex;
   align-items: center;
 }
