@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">VB Strategies</div>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">On Investments</a>
+      <a href="blog.html" class="nav-link active">Blog</a>
+      <a href="about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h1>Blog</h1>
+      <p class="section-sub">Strukturované poznámky z učení. Filtruj podle tématu.</p>
+
+      <div class="filter-row">
+        <button class="tag-filter active" data-tag="all">Vše</button>
+        <button class="tag-filter" data-tag="crypto">Crypto Finance</button>
+        <button class="tag-filter" data-tag="valuace">Valuace</button>
+        <button class="tag-filter" data-tag="risk">Risk</button>
+        <button class="tag-filter" data-tag="asset">Asset Management</button>
+      </div>
+
+      <a class="blog-card" href="blog/crypto-finance-intro.html" data-tags="crypto">
+        <h3>Úvod do Crypto Finance <span class="arrow">→</span></h3>
+        <p class="blog-meta">Crypto Finance · poznámky</p>
+      </a>
+
+      <a class="blog-card" href="blog/dcf-basics.html" data-tags="valuace">
+        <h3>Základy DCF <span class="arrow">→</span></h3>
+        <p class="blog-meta">Valuace · poznámky</p>
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

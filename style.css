@@ -1,0 +1,208 @@
+:root {
+  --navy: #0a2e70;
+  --ink: #000000;
+  --bg: #FFFFFF;
+  --line: rgba(10, 46, 112, 0.15);
+  --line-soft: rgba(10, 46, 112, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 40px;
+  border-bottom: 1px solid var(--line-soft);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.brand {
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--navy);
+  letter-spacing: 0.3px;
+}
+.nav { display: flex; gap: 26px; }
+.nav-link {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 19px;
+  padding-bottom: 3px;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--navy); }
+.nav-link.active {
+  color: var(--navy);
+  font-weight: 700;
+  border-bottom: 2px solid var(--navy);
+}
+
+/* LAYOUT */
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 40px;
+}
+.section { margin-bottom: 56px; scroll-margin-top: 90px; }
+h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.section-sub {
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.7;
+  margin-bottom: 24px;
+}
+
+/* PROJECT + BLOG CARDS */
+.project-card, .blog-card {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  transition: border-color 0.15s, transform 0.1s;
+}
+.project-card:hover, .blog-card:hover {
+  border-color: var(--navy);
+  transform: translateY(-1px);
+}
+.project-card p, .blog-card p {
+  color: var(--ink);
+  opacity: 0.78;
+  margin-top: 6px;
+  font-size: 18px;
+}
+.blog-meta { font-style: italic; }
+.arrow { font-size: 18px; }
+
+/* BLOG FILTER */
+.filter-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.tag-filter {
+  font-family: inherit;
+  font-size: 17px;
+  background: rgba(10, 46, 112, 0.06);
+  color: var(--navy);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tag-filter:hover { background: rgba(10, 46, 112, 0.12); }
+.tag-filter.active {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* ACCORDION */
+.accordion {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.acc-head {
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--navy);
+  background: #fff;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.acc-icon { font-size: 22px; font-weight: 400; }
+.acc-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+  padding: 0 20px;
+}
+.acc-body p {
+  padding: 4px 0 18px;
+  font-size: 18px;
+  opacity: 0.85;
+}
+.accordion.open .acc-body { max-height: 300px; }
+.accordion.open .acc-icon { transform: rotate(45deg); }
+
+/* ABOUT TILES */
+.about-tiles {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.tile {
+  flex: 1;
+  min-width: 220px;
+  background: rgba(10, 46, 112, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+.tile-title {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.tile-sub { font-size: 17px; opacity: 0.75; }
+
+/* FOOTER */
+.site-footer {
+  border-top: 1px solid var(--line-soft);
+  padding: 22px 40px;
+  text-align: center;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.6;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .site-header { padding: 16px 20px; }
+  .container { padding: 32px 20px; }
+  .brand { font-size: 20px; }
+  h1 { font-size: 30px; }
+  .nav { gap: 16px; }
+  .nav-link { font-size: 16px; }
+}
