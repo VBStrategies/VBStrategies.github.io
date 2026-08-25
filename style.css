@@ -159,7 +159,7 @@ h3 {
   font-size: 18px;
   opacity: 0.85;
 }
-.accordion.open .acc-body { max-height: 300px; }
+.accordion.open .acc-body { max-height: 2000px; }
 .accordion.open .acc-icon { transform: rotate(45deg); }
 
 /* ABOUT TILES */
