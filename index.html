@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VB Strategies — On Investments</title>
+  <title>VB Strategies — Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,30 +12,59 @@
 <body>
 
   <header class="site-header">
-    <div class="brand">VB Strategies</div>
+    <a href="index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
     <nav class="nav">
-      <a href="index.html" class="nav-link active">On Investments</a>
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="investments.html" class="nav-link">On Investments</a>
       <a href="blog.html" class="nav-link">Blog</a>
       <a href="about.html" class="nav-link">About</a>
     </nav>
   </header>
 
-  <main class="container">
-    <section class="section">
-      <h1>On Investments</h1>
-      <p class="section-sub">Každý projekt má vlastní stránku: Objective · Process · Conclusion · Key takeaways · přiložené soubory.</p>
+  <div class="hero">
+    <svg id="heroSvg" class="hero-lines" width="100%" viewBox="0 0 680 460" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="hero-text">
+      <div class="hero-title">Home</div>
+      <div class="hero-sub">A personal record of my work in investment analysis — valuations, financial models, and structured notes from my studies.</div>
+    </div>
+  </div>
 
-      <a class="project-card" href="projects/dcf-company-x.html">
-        <h3>DCF Valuation — [Company X] <span class="arrow">→</span></h3>
-        <p>Krátký popis projektu. Po rozkliknutí: cíl, průběh, závěr, klíčové poznatky a přiložený Excel, PDF a odkaz na zdroj.</p>
-      </a>
-
-      <a class="project-card" href="projects/lbo-target-co.html">
-        <h3>LBO Model — [Target Co] <span class="arrow">→</span></h3>
-        <p>Krátký popis projektu. Po rozkliknutí: cíl, průběh, závěr, klíčové poznatky a přiložený Excel, PDF a odkaz na zdroj.</p>
-      </a>
-    </section>
-  </main>
+  <script>
+  (function(){
+    var svg = document.getElementById('heroSvg');
+    if(!svg) return;
+    var ns = 'http://www.w3.org/2000/svg';
+    var cx = 340, cy = 230, W = 680, H = 460;
+    var halfW = 190, halfH = 95, N = 36;
+    function boxHit(cosA, sinA, hw, hh){
+      var tx = cosA!==0 ? hw/Math.abs(cosA) : Infinity;
+      var ty = sinA!==0 ? hh/Math.abs(sinA) : Infinity;
+      return Math.min(tx, ty);
+    }
+    var g = document.createElementNS(ns,'g');
+    g.setAttribute('stroke','#0a2e70');
+    g.setAttribute('stroke-width','0.9');
+    g.setAttribute('fill','none');
+    g.setAttribute('opacity','0.9');
+    for (var i=0; i<N; i++){
+      var a = (i/N)*Math.PI*2 + Math.PI/N;
+      var cosA = Math.cos(a), sinA = Math.sin(a);
+      var tin = boxHit(cosA, sinA, halfW, halfH);
+      var ix = cx + tin*cosA, iy = cy + tin*sinA;
+      var toutX = cosA>0 ? (W-cx)/cosA : (cosA<0 ? -cx/cosA : Infinity);
+      var toutY = sinA>0 ? (H-cy)/sinA : (sinA<0 ? -cy/sinA : Infinity);
+      var tout = Math.min(toutX, toutY);
+      var ox = cx + tout*cosA, oy = cy + tout*sinA;
+      var line = document.createElementNS(ns,'line');
+      line.setAttribute('x1', ox.toFixed(1));
+      line.setAttribute('y1', oy.toFixed(1));
+      line.setAttribute('x2', ix.toFixed(1));
+      line.setAttribute('y2', iy.toFixed(1));
+      g.appendChild(line);
+    }
+    svg.appendChild(g);
+  })();
+  </script>
 
   <footer class="site-footer">
     Illustrative research, not investment advice. Past performance does not indicate future results.

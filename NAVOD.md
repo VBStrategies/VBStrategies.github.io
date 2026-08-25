@@ -24,7 +24,8 @@ Máš složku se soubory. Teď z ní uděláme živý web na veřejné adrese. Z
 1. V novém repozitáři klikni **uploading an existing file**
    (nebo záložka **Add file** → **Upload files**).
 2. Otevři složku `website` v počítači a **přetáhni dovnitř VŠECHNY soubory a složky**:
-   - `index.html` (On Investments)
+   - `index.html` (úvodní stránka Home)
+   - `investments.html` (On Investments)
    - `blog.html`
    - `about.html`
    - `style.css`
@@ -50,16 +51,22 @@ Hotovo — web je online. 🎉
 ## 5. Jak přidávat obsah později
 
 - **Nový projekt (DCF/LBO):** zkopíruj `projects/dcf-company-x.html`, přejmenuj,
-  uprav text, a přidej odkaz do `index.html` (sekce On Investments).
+  uprav text, a přidej odkaz do `investments.html`.
 - **Nový blog:** zkopíruj `blog/crypto-finance-intro.html`, uprav, a přidej
-  odkaz + `data-tags` do `index.html` (sekce Blog).
+  odkaz + `data-tags` do `blog.html`.
 - **Soubory (Excel/PDF):** nahraj do složky `files/` a odkaz už v šabloně je.
 
 ## Co upravit jako první
 
-V `index.html`:
+Kde upravit texty:
 - [ ] Doplň text do About → Why? / Cíl / Contact
 - [ ] Vyměň `[Company X]` a `[Target Co]` za reálné názvy, až budeš mít projekty
 - [ ] Doplň odkaz na Support a Cal.com do About tiles
 
 Barvy, font i disclaimer jsou už nastavené podle tvého zadání.
+
+
+## Home je už nastavená jako úvodní stránka
+
+Web začíná na Home (`index.html`) s grafikou a popisem. On Investments je
+v `investments.html`, přístupná z menu. Vše je propojené, nemusíš nic prohazovat.
