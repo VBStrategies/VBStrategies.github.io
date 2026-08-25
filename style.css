@@ -158,6 +158,7 @@ h3 {
   padding: 4px 0 18px;
   font-size: 18px;
   opacity: 0.85;
+  text-align: justify;
 }
 .accordion.open .acc-body { max-height: 2000px; }
 .accordion.open .acc-icon { transform: rotate(45deg); }
