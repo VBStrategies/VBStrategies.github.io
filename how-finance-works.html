@@ -28,7 +28,9 @@
 }
 
 /* Body prose inside sections */
-.prose p { margin-bottom: 16px; text-align: justify; }
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.role { margin-bottom: 34px; }
+.role h3 { margin-bottom: 10px; }
 .prose p:last-child { margin-bottom: 0; }
 .prose strong { color: var(--navy); font-weight: 700; }
 .prose ul { margin: 0 0 16px 22px; }
@@ -205,87 +207,76 @@ table.compare td:first-child { font-weight: 700; color: var(--navy); }
     <h3 style="margin-bottom:16px;">The twelve areas, one by one</h3>
 
     <!-- 1 Asset Management -->
-    <div class="accordion">
-      <button class="acc-head">1 · Asset Management <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> Managing other people's money — institutional clients' capital — to grow entrusted investments while managing risk. Strategic and broad in scope: equities, bonds, real estate, commodities, with an emphasis on allocation, diversification, and long-term growth. The term typically attaches to institutions.</p>
+    <div class="role">
+      <h3>1 · Asset Management</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> Managing other people's money — institutional clients' capital — to grow entrusted investments while managing risk. Strategic and broad in scope: equities, bonds, real estate, commodities, with an emphasis on allocation, diversification, and long-term growth. The term typically attaches to institutions.</p>
           <p><strong>Money flow.</strong> Capital comes from pension funds, universities, insurers, and wealthy families, flowing into diversified portfolios.</p>
           <p><strong>Skills.</strong> Continuous market research and buy/sell decisions. The CFA is the standard benchmark.</p>
           <p><strong>Players &amp; process.</strong> Vanguard, Fidelity, BlackRock. <strong>Active funds</strong> hire managers to beat the market; <strong>passive funds</strong> track an index (e.g. S&amp;P 500) at much lower fees. The "Big Three" (BlackRock, Vanguard, State Street) are among the largest shareholders in most major public companies and vote on behalf of their investors.</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>Top 500 managers oversee ~<strong>$140tn</strong> — near the size of the global economy. BlackRock alone &gt;<strong>$15tn</strong> (mid-2026); Vanguard ~<strong>$12tn</strong>. Top 20 control ~<strong>47%</strong> of assets. Passive fees run <strong>0.03–0.20%</strong>/yr vs. active at <strong>0.50–1.00%</strong> — which is why passive wins on volume.</div>
           <p><strong>Everyday contact.</strong> Pension and retirement accounts, mutual funds, ETFs. Buy an index fund or pay into a pension and the money almost always lands with one of a handful of giants.</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://www.straitsfinancial.com/insights/asset-vs-investment-managament">Straits Financial</a>; <a href="https://www.mappr.co/largest-asset-managers-world/">Mappr</a>; <a href="https://investingintheweb.com/blog/largest-asset-managers/">Investing in the Web</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 2 Investment Management -->
-    <div class="accordion">
-      <button class="acc-head">2 · Investment Management <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> Narrower, more tactical, more performance-oriented than asset management. Concentrates on securities (stocks, bonds, funds) and portfolio performance — timing, positioning, active decisions. Most sources call it a <strong>subset</strong> of asset management.</p>
+    <div class="role">
+      <h3>2 · Investment Management</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> Narrower, more tactical, more performance-oriented than asset management. Concentrates on securities (stocks, bonds, funds) and portfolio performance — timing, positioning, active decisions. Most sources call it a <strong>subset</strong> of asset management.</p>
           <p>The one-sentence version: asset management is the "chef" running the whole mix and overall strategy; investment management is the "sommelier" picking individual investments. In practice the terms are used interchangeably and mean slightly different things at different firms.</p>
           <div class="quant-note"><span class="quant-label">📊 Fee note</span><br>Both priced as a % of AUM. Asset management can carry a <em>higher</em> effective fee because it covers coordination across asset types, not just performance on one securities portfolio.</div>
           <p class="sources">Sources: <a href="https://corporatefinanceinstitute.com/resources/career/asset-management-vs-wealth-management/">CFI</a>; <a href="https://www.wiseradvisor.com/blog/investment-management/key-differences-between-asset-management-and-investment-management/">WiserAdvisor</a>; <a href="https://bipwealth.com/investment-vs-asset-management/">BIP Wealth</a>. NotebookLM material is silent on this term.</p>
-        </div>
       </div>
     </div>
 
     <!-- 3 Wealth -->
-    <div class="accordion">
-      <button class="acc-head">3 · Wealth / Private Banking <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> Focuses on individuals and families, not institutions. Combines investing, financial planning, tax strategy, and estate management. Asset management is effectively a <em>subset</em> of wealth management — the latter targets people, not institutions.</p>
+    <div class="role">
+      <h3>3 · Wealth / Private Banking</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> Focuses on individuals and families, not institutions. Combines investing, financial planning, tax strategy, and estate management. Asset management is effectively a <em>subset</em> of wealth management — the latter targets people, not institutions.</p>
           <p><strong>Money flow.</strong> From high-net-worth individuals (HNWIs) and families into long-term schemes to protect and build wealth.</p>
           <p><strong>Skills.</strong> Investment knowledge plus relationship management. Suits people who like working with people rather than spreadsheets all day.</p>
           <p><strong>Players.</strong> The large private banks — UBS is the biggest non-US player and directly DACH-relevant.</p>
           <div class="quant-note"><span class="quant-label">📊 Thresholds</span><br>"Mass affluent" starts ~<strong>$100k–$1m</strong> investable; "high-net-worth" ~<strong>$1m+</strong>; "ultra-high-net-worth" ~<strong>$30m+</strong>. Advisory fees commonly ~<strong>1%</strong>/yr, declining as balances rise.</div>
           <p class="sources">Sources: NotebookLM notes; <a href="https://www.chase.com/personal/investments/learning-and-insights/article/asset-management-vs-wealth-management">Chase</a>; <a href="https://corporatefinanceinstitute.com/resources/career/asset-management-vs-wealth-management/">CFI</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 4 Commercial Banking -->
-    <div class="accordion">
-      <button class="acc-head">4 · Commercial Banking <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> The part of finance almost everyone touches daily: it takes <strong>deposits</strong> and makes <strong>loans</strong>. A <em>balance-sheet model</em> — deposits are liabilities, loans are assets — earning the <em>spread</em> between what it pays depositors and charges borrowers. Fundamentally different from IB's fee-and-advisory model; it takes no retail deposits.</p>
+    <div class="role">
+      <h3>4 · Commercial Banking</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> The part of finance almost everyone touches daily: it takes <strong>deposits</strong> and makes <strong>loans</strong>. A <em>balance-sheet model</em> — deposits are liabilities, loans are assets — earning the <em>spread</em> between what it pays depositors and charges borrowers. Fundamentally different from IB's fee-and-advisory model; it takes no retail deposits.</p>
           <p><strong>Money flow.</strong> In as deposits (checking, savings, CDs), out as mortgages, auto loans, business credit, and cards. The job is pricing credit risk and charging a spread above funding cost.</p>
           <p><strong>Skills.</strong> Credit analysis, relationship management, risk assessment. More stable, better work-life balance than IB — "volume business, small fees from many customers."</p>
           <p><strong>Players.</strong> JPMorgan Chase, Bank of America, Wells Fargo, Citi.</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>Key metric: <strong>net interest margin (NIM)</strong>, typically <strong>2.5–3.5%</strong> (US average ~3.3%). Net interest income drives <strong>60–85%</strong> of revenue for a traditional lender. At scale: JPMorgan generated ~<strong>$92bn</strong> net interest income in 2024 (on $2.4tn+ deposits), ~<strong>$58bn</strong> net income.</div>
           <p><strong>Everyday contact.</strong> Constantly — salary account, mortgage, card, small-business loan. The sector people most often <em>wrongly</em> imagine investment bankers work in.</p>
           <p class="sources">Sources: <a href="https://banksift.org/faq/commercial-vs-investment-banks">BankSift</a>; <a href="https://clfi.co.uk/resources/investment-banking-vs-commercial-banking/">CLFI</a>; <a href="https://ibinterviewquestions.com/guides/fig-investment-banking/how-commercial-banks-make-money">FIG IB Guide</a>; <a href="https://legalclarity.org/commercial-vs-investment-banking-roles-rules-and-revenue/">LegalClarity</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 5 Investment Banking -->
-    <div class="accordion">
-      <button class="acc-head">5 · Investment Banking <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> Helps large companies (not individuals) raise money and execute major transactions. Bankers act as financial advisers to firms. Differs from commercial banking (deposits/loans) and corporate finance (in-house).</p>
+    <div class="role">
+      <h3>5 · Investment Banking</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> Helps large companies (not individuals) raise money and execute major transactions. Bankers act as financial advisers to firms. Differs from commercial banking (deposits/loans) and corporate finance (in-house).</p>
           <p><strong>Money flow.</strong> Connects large companies, governments, and institutions with capital. Clients are pension funds, insurers, sovereign wealth funds, Fortune 500 corporations — not a retail branch queue.</p>
           <p><strong>Skills.</strong> Long hours, complex financial modelling. Often a launchpad into higher-paid buy-side careers.</p>
           <p><strong>Players &amp; process.</strong> Goldman Sachs, Morgan Stanley, Citigroup. Two pillars: <strong>Advisory / M&amp;A</strong> (value the target, negotiate, due diligence) and <strong>Capital Markets</strong> (IPOs — e.g. Facebook's 2012 IPO led by Morgan Stanley — plus bond issuance and large loans).</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>Revenue is <em>lumpy</em> — spikes in deal-heavy periods, drops sharply when activity stalls. M&amp;A advisers charge ~<strong>1%</strong> on large deals (~$1m on $100m); IPO underwriting ~<strong>3–7%</strong> of the raise. Junior hours: famously <strong>80–100/week</strong>.</div>
           <p><strong>Everyday contact.</strong> Indirect — news of large mergers, or when a favourite brand goes public.</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://www.wallstreetprep.com/knowledge/sell-side-vs-buy-side/">Wall Street Prep</a>; <a href="https://growthequityinterviewguide.com/investment-banking/investment-banking-industry/buy-side-vs-sell-side">Growth Equity Interview Guide</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 6 Corporate Finance -->
-    <div class="accordion">
-      <button class="acc-head">6 · Corporate Finance (the in-house "misfit") <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> The role most often confused with IB. Finance done <em>inside</em> an operating company, not at a sell-side adviser. Where a banker advises from outside on a transaction, corporate finance manages that firm's money from inside: how to fund the business, where to allocate capital, how to keep cash flowing. It doesn't fit buy-side or sell-side — the classic "misfit."</p>
+    <div class="role">
+      <h3>6 · Corporate Finance (the in-house "misfit")</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> The role most often confused with IB. Finance done <em>inside</em> an operating company, not at a sell-side adviser. Where a banker advises from outside on a transaction, corporate finance manages that firm's money from inside: how to fund the business, where to allocate capital, how to keep cash flowing. It doesn't fit buy-side or sell-side — the classic "misfit."</p>
           <p><strong>Three classic pillars</strong> (all reporting to the CFO):</p>
           <ul>
             <li><strong>FP&amp;A:</strong> budgeting, forecasting, variance analysis, the models that guide management. The "eyes and ears" of the company.</li>
@@ -295,93 +286,80 @@ table.compare td:first-child { font-weight: 700; color: var(--navy); }
           <p><strong>Where M&amp;A fits.</strong> A company's <strong>corporate development</strong> team is its internal M&amp;A arm — deciding whether to acquire or divest, working <em>with</em> bankers to execute.</p>
           <div class="quant-note"><span class="quant-label">📊 Career note</span><br>Advancement is slow vs. IB — reaching the top can take <em>decades</em> — but senior comp (VP Finance, Treasurer, Controller, CFO) still reaches hundreds of thousands, millions at CFO of a large firm, with far better work-life balance.</div>
           <p class="sources">Sources: <a href="https://mergersandinquisitions.com/corporate-finance/">M&amp;I — Corporate Finance</a>; <a href="https://www.wallstreetprep.com/knowledge/financial-planning-and-analysis-fpa/">Wall Street Prep — FP&amp;A</a>; <a href="https://300hours.com/corporate-finance-career-path/">300 Hours</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 7 PE & VC -->
-    <div class="accordion">
-      <button class="acc-head">7 · Private Equity &amp; Venture Capital <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> <strong>PE</strong> buys entire companies, improves them, sells at a profit — "house flippers" for corporations. <strong>VC</strong> works similarly but invests in young, high-growth startups instead of mature businesses.</p>
+    <div class="role">
+      <h3>7 · Private Equity &amp; Venture Capital</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> <strong>PE</strong> buys entire companies, improves them, sells at a profit — "house flippers" for corporations. <strong>VC</strong> works similarly but invests in young, high-growth startups instead of mature businesses.</p>
           <p><strong>Money flow.</strong> PE raises from pension funds, insurers, banks, wealthy investors, and uses heavy leverage — the <strong>leveraged buyout (LBO)</strong>: put up ~20% equity, borrow ~80%, load the debt onto the acquired company. VC pools from endowments, sovereign funds, insurers into risky startups.</p>
           <p><strong>Skills.</strong> PE professionals often come from IB (transferable hard skills). VC needs an eye for "diamonds in the rough" and a grasp of the <strong>power law</strong>.</p>
           <p><strong>Players &amp; process.</strong> PE: Blackstone, Apollo, KKR — raise fund → LBO → restructure aggressively → sell in 3–5 years. Blackstone's Hilton sale is a win; Toys "R" Us (KKR, Bain, Vornado) the cautionary tale. VC: Sequoia, Andreessen Horowitz, Founders Fund — Founders Fund's $500K into an early Facebook (2004) became ~$1bn at the 2012 IPO.</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>PE funds a buyout ~<strong>20% equity / 80% debt</strong>, exits in <strong>3–5 years</strong>. VC power law: ~<strong>90%</strong> of investments fail, but a rare winner returns <strong>10,000x+</strong>. Both charge <strong>"2 and 20"</strong> over a long, illiquid horizon.</div>
           <p><strong>Everyday contact.</strong> PE — as employees of firms undergoing restructuring. VC — the tech you use daily (Uber, Airbnb, Stripe, Facebook).</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://www.dfinsolutions.com/knowledge-hub/thought-leadership/knowledge-resources/buy-side-vs-sell-side">DFIN — LBO mechanics</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 8 Hedge Funds -->
-    <div class="accordion">
-      <button class="acc-head">8 · Hedge Funds <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> Investment vehicles for wealthy, accredited investors. Unlike mutual funds (which only bet on assets rising), hedge funds can speculate on almost anything — stocks up <em>or</em> down, currencies, rates, commodities, crypto, even elections. High-risk, lightly regulated, with lock-up periods.</p>
+    <div class="role">
+      <h3>8 · Hedge Funds</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> Investment vehicles for wealthy, accredited investors. Unlike mutual funds (which only bet on assets rising), hedge funds can speculate on almost anything — stocks up <em>or</em> down, currencies, rates, commodities, crypto, even elections. High-risk, lightly regulated, with lock-up periods.</p>
           <p><strong>Money flow.</strong> From pension funds and wealthy individuals into bold bets using short selling, leverage, and derivatives (options, futures, swaps).</p>
           <p><strong>Skills.</strong> Advanced quantitative modelling; increasingly AI-driven execution.</p>
           <p><strong>Players.</strong> Bridgewater, Jane Street, Citadel — usually on <strong>"2 and 20"</strong>, modified by a <strong>high-water mark</strong> and sometimes a <strong>hurdle rate</strong>.</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>US accreditation: net worth &gt;<strong>$1m</strong> (excl. home) <em>or</em> income &gt;<strong>$200k</strong>; top funds need "qualified purchaser" status (<strong>$5m+</strong>). Minimums <strong>$250k–$1m+</strong>. Fee <strong>2%+20%</strong>, all-in cost up to ~<strong>6%</strong> with pass-through expenses. Bridgewater ~<strong>$90bn+</strong> portfolio.</div>
           <p><strong>Everyday contact.</strong> Generally none directly — "mutual funds are for peasants, hedge funds for the big dogs." Indirect, through market movements.</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://corporatefinanceinstitute.com/resources/wealth-management/2-and-20-hedge-fund-fees/">CFI — 2 and 20</a>; <a href="https://ryanoconnellfinance.com/hedge-funds/">Ryan O'Connell, CFA</a>; <a href="https://legalclarity.org/how-much-do-hedge-funds-charge-2-and-20-explained/">LegalClarity</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 9 Insurance -->
-    <div class="accordion">
-      <button class="acc-head">9 · Insurance <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> One of the largest financial sectors, doing two things at once. First, <strong>risk-spreading</strong>: distributing the cost of unexpected events (fire, accident, illness, death) across millions of clients, so the lucky subsidise the unlucky. Second — less obviously — one of the world's <strong>biggest investors</strong>, because premiums collected up front (the "float") get invested long before claims are paid. Splits into <strong>life</strong>, <strong>non-life / P&amp;C</strong>, and <strong>reinsurance</strong>.</p>
+    <div class="role">
+      <h3>9 · Insurance</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> One of the largest financial sectors, doing two things at once. First, <strong>risk-spreading</strong>: distributing the cost of unexpected events (fire, accident, illness, death) across millions of clients, so the lucky subsidise the unlucky. Second — less obviously — one of the world's <strong>biggest investors</strong>, because premiums collected up front (the "float") get invested long before claims are paid. Splits into <strong>life</strong>, <strong>non-life / P&amp;C</strong>, and <strong>reinsurance</strong>.</p>
           <p><strong>Money flow.</strong> From premiums. Insurers invest the float into bonds, equities, real estate, even PE and VC — which is how "car insurance" becomes a major institutional investor.</p>
           <p><strong>Skills.</strong> The signature quantitative profession is the <strong>actuary</strong> (pricing risk with probability and statistics). Also underwriting, claims, and managing the float. Exam-driven, strong work-life balance.</p>
           <p><strong>Players.</strong> Allianz (Germany — DACH-relevant), AXA, reinsurers Munich Re and Swiss Re; US: State Farm, Allstate, Geico.</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>Insurers collected ~<strong>€6.9tn</strong> (~$7–8tn) in premiums in 2025, up ~<strong>7%</strong> YoY, holding ~<strong>$42tn</strong> in assets (end-2024). Hybrid actuaries (Python/R/SQL) earn <strong>10–15%</strong> more; specialty underwriters command <strong>25–50%</strong> premiums. ~<strong>81%</strong> of insurers now use AI.</div>
           <p><strong>Everyday contact.</strong> Every car, home, health, life, or pet premium — protection against catastrophe, feeding one of the largest investment pools on earth.</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://www.oecd.org/en/publications/global-insurance-market-trends-2025_0d11ecf4-en.html">OECD</a>; <a href="https://takafulreview.com/how-big-is-the-global-insurance-industry/">Takaful Review</a>; <a href="https://www.statista.com/topics/6529/global-insurance-industry/">Statista</a>; <a href="https://www.quantt.co.uk/resources/actuary-salary-guide">Quantt</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 10 Quant -->
-    <div class="accordion">
-      <button class="acc-head">10 · Quantitative Finance ("Quants") <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> Less a sector than a <em>skill layer</em> running through trading, hedge funds, asset management, risk, and insurance. Quants build mathematical and statistical models to price instruments, find trading signals, and measure risk. Where a traditional analyst reads filings, a quant writes code and models probability.</p>
+    <div class="role">
+      <h3>10 · Quantitative Finance ("Quants")</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> Less a sector than a <em>skill layer</em> running through trading, hedge funds, asset management, risk, and insurance. Quants build mathematical and statistical models to price instruments, find trading signals, and measure risk. Where a traditional analyst reads filings, a quant writes code and models probability.</p>
           <p><strong>Where it lives.</strong> Prop trading and market makers (Jane Street, Citadel Securities), systematic hedge funds (Renaissance, Two Sigma, D.E. Shaw), bank derivatives desks, and modelling teams inside insurers and asset managers.</p>
           <p><strong>Skills.</strong> Heavy maths (probability, linear algebra, stochastic calculus), programming (Python, C++, R, SQL), often a PhD. Roles: quant <em>researcher</em>, quant <em>developer</em>, quant <em>risk</em>.</p>
           <div class="quant-note"><span class="quant-label">📊 By the numbers</span><br>Highest-paid technical track in finance — but the <em>least reliably surveyed</em>, so treat headline numbers sceptically. The showcase: Renaissance's Medallion fund reportedly averaged ~<strong>71%</strong>/yr (pre-fee) over 1994–2015, which is why investors tolerated fees far above the standard 20%.</div>
           <p class="sources">Sources: <a href="https://corporatefinanceinstitute.com/resources/wealth-management/2-and-20-hedge-fund-fees/">CFI</a>; <a href="https://www.quantt.co.uk/resources/actuary-salary-guide">Quantt</a>; NotebookLM notes.</p>
-        </div>
       </div>
     </div>
 
     <!-- 11 Risk -->
-    <div class="accordion">
-      <button class="acc-head">11 · Risk Management (cross-cutting) <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p><strong>Definition.</strong> A genuine cross-cutting discipline in the <strong>middle office</strong>, on both buy- and sell-side. Its job: keep front-office decisions (investing, trading) from destroying the firm, using quantitative methods. Overlaps heavily with quant finance (Value-at-Risk) and, in insurance, the actuarial world.</p>
+    <div class="role">
+      <h3>11 · Risk Management (cross-cutting)</h3>
+      <div class="prose">
+<p><strong>Definition.</strong> A genuine cross-cutting discipline in the <strong>middle office</strong>, on both buy- and sell-side. Its job: keep front-office decisions (investing, trading) from destroying the firm, using quantitative methods. Overlaps heavily with quant finance (Value-at-Risk) and, in insurance, the actuarial world.</p>
           <div class="quant-note"><span class="quant-label">📊 Career note</span><br>Typically a <strong>salaried, middle-office</strong> function — steadier pay than front-office trading, smaller bonuses. One of the most direct homes for a risk-analysis background and a natural bridge into quant or actuarial work.</div>
           <p><strong>Everyday contact.</strong> Invisible — the reason (when it works) a bank or insurer stays solvent through a crisis.</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://www.investmentbankingcouncil.org/blog/sell-side-vs-buy-side-whats-the-difference">IBCA</a>.</p>
-        </div>
       </div>
     </div>
 
     <!-- 12 Buy/Sell frame -->
-    <div class="accordion">
-      <button class="acc-head">12 · Sell-side vs. Buy-side (the frame) <span class="acc-icon">+</span></button>
-      <div class="acc-body">
-        <div class="prose" style="padding:6px 0 18px;">
-          <p>The organising frame of the whole industry (see the top of this article). The <strong>sell-side</strong> issues, sells, or trades securities — investment banks, advisory firms, broker-dealers, market makers. The <strong>buy-side</strong> purchases securities — investment managers, pension funds, hedge funds. Sell-side firms offer more entry-level analyst roles because of the sales-driven nature of the business, which is why IB skills transfer so well into higher-paid buy-side careers like PE.</p>
+    <div class="role">
+      <h3>12 · Sell-side vs. Buy-side (the frame)</h3>
+      <div class="prose">
+<p>The organising frame of the whole industry (see the top of this article). The <strong>sell-side</strong> issues, sells, or trades securities — investment banks, advisory firms, broker-dealers, market makers. The <strong>buy-side</strong> purchases securities — investment managers, pension funds, hedge funds. Sell-side firms offer more entry-level analyst roles because of the sales-driven nature of the business, which is why IB skills transfer so well into higher-paid buy-side careers like PE.</p>
           <p class="sources">Sources: NotebookLM notes; <a href="https://corporatefinanceinstitute.com/resources/careers/roles/buy-side-vs-sell-side">CFI</a>; <a href="https://mergersandinquisitions.com/buy-side-vs-sell-side/">Mergers &amp; Inquisitions</a>.</p>
-        </div>
       </div>
     </div>
 
@@ -500,14 +478,7 @@ table.compare td:first-child { font-weight: 700; color: var(--navy); }
   Vašek · MSc Finance, University of Liechtenstein
 </footer>
 
-<script>
-// Accordion toggle — respects existing .accordion.open CSS
-document.querySelectorAll('.acc-head').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    btn.parentElement.classList.toggle('open');
-  });
-});
-</script>
+
 
 </body>
 </html>
