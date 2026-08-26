@@ -195,7 +195,6 @@ h3 {
   font-style: italic;
   color: var(--ink);
   opacity: 0.8;
-  max-width: 780px;
   margin: 0 auto;
   background: #fff;
   position: relative;
