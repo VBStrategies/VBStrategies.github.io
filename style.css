@@ -197,6 +197,9 @@ h3 {
   opacity: 0.8;
   max-width: 780px;
   margin: 0 auto;
+  background: #fff;
+  position: relative;
+  margin-top: 20px;
 }
 
 /* RESPONSIVE */
@@ -225,7 +228,7 @@ h3 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  width: 320px;
+  width: 460px;
   max-width: 80%;
 }
 .hero-title {
@@ -261,10 +264,12 @@ h3 {
 }
 .home-row {
   display: block;
-  color: var(--navy);
-  text-decoration: none;
+  color: var(--ink);
   font-size: 16px;
   padding: 5px 0;
 }
-.home-row strong { font-weight: 700; }
-.home-row:hover { text-decoration: underline; }
+.home-row a {
+  color: var(--navy);
+  text-decoration: none;
+}
+.home-row a:hover { text-decoration: underline; }
