@@ -193,12 +193,10 @@ h3 {
   text-align: center;
   font-size: 15px;
   font-style: italic;
-  color: var(--ink);
-  opacity: 0.8;
+  color: var(--navy);
+  opacity: 0.6;
+  max-width: 780px;
   margin: 0 auto;
-  background: #fff;
-  position: relative;
-  margin-top: 20px;
 }
 
 /* RESPONSIVE */
