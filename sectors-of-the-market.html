@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sectors of the Market — VB Strategies (Kompletní: 11 sektorů + rotace)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===================================================== */
+/* ==  DOLADĚNÍ VELIKOSTÍ — vše na jednom místě        == */
+/* ===================================================== */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* ===================================================== */
+/* ==  ČLÁNKOVÉ STYLY (převzato z How Finance Works)   == */
+/* ===================================================== */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* ===================================================== */
+/* ==  NOVÉ UČEBNÍ PRVKY (specifické pro tento článek) == */
+/* ===================================================== */
+
+/* Table of contents nahoře */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* Sektor jako velký blok */
+.sector { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.sector-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.sector-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.sector-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.sector-ticker { font-size: 16px; opacity: 0.7; font-style: italic; }
+
+/* Podnadpis vrstvy uvnitř sektoru */
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+
+/* Metriky / KPI box */
+.metrics-box { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.metrics-box .mb-title { font-weight: 700; color: var(--navy); font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px; margin: 14px 0 8px; }
+.metric-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.metric-row:last-child { border-bottom: none; }
+.metric-name { font-weight: 700; color: var(--navy); }
+.metric-formula { font-family: 'Courier New', monospace; font-size: 15px; background: rgba(10,46,112,0.05); padding: 1px 6px; border-radius: 4px; }
+
+/* Value chain vizualizace */
+.chain { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; align-items: stretch; }
+.chain-step { flex: 1; min-width: 130px; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; background: rgba(10,46,112,0.03); }
+.chain-step .cs-name { font-weight: 700; color: var(--navy); font-size: 17px; margin-bottom: 3px; }
+.chain-step .cs-desc { font-size: 15px; opacity: 0.8; }
+.chain-arrow { display: flex; align-items: center; color: var(--navy); font-size: 20px; opacity: 0.5; }
+@media (max-width: 600px) { .chain-arrow { display: none; } }
+
+/* Watch-out (na co pozor) box */
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+
+/* Glosář */
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="investments.html" class="nav-link">On Investments</a>
+    <a href="blog.html" class="nav-link active">Blog</a>
+    <a href="about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>The Sectors of the Market</h1>
+    <p class="section-sub">A working manual: classification, capital flows, and how each sector is actually analysed and traded</p>
+    <p class="article-lead">This is a study reference, not an overview. It maps how the market is carved into sectors, then works through each one in depth — what it does, where its money comes from, the specific metrics analysts use to value it, how it behaves across the cycle, and what to watch when trading its securities.</p>
+    <p class="article-meta">⚠️ Kompletní referenční článek: klasifikace (GICS/ICB/NAICS/NACE) → všech 11 GICS sektorů do hloubky → sector rotation → souhrnná tabulka → glosář.</p>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#classification">How sectors are classified</a></li>
+      <li><a href="#energy">Energy</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#industrials">Industrials</a></li>
+      <li><a href="#discretionary">Consumer Discretionary</a></li>
+      <li><a href="#staples">Consumer Staples</a></li>
+      <li><a href="#healthcare">Health Care</a></li>
+      <li><a href="#financials">Financials</a></li>
+      <li><a href="#tech">Information Technology</a></li>
+      <li><a href="#comms">Communication Services</a></li>
+      <li><a href="#utilities">Utilities</a></li>
+      <li><a href="#realestate">Real Estate</a></li>
+      <li><a href="#rotation">Cross-cutting: cycles &amp; rotation</a></li>
+      <li><a href="#conclusion">Conclusion &amp; master table</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ol>
+  </div>
+
+  <!-- ============ OBJECTIVE ============ -->
+  <div class="section prose">
+    <h3>Objective</h3>
+    <p>The word "sector" hides a surprising amount of ambiguity. Ask three people in finance which sector a company belongs to and you may get three answers — not because anyone is wrong, but because there is more than one system for carving up the economy, and each was built for a different purpose. This reference sets out to remove that ambiguity. It does three things: it explains <strong>how</strong> the market is classified and why several competing systems exist; it works through <strong>each of the eleven GICS sectors</strong> in the depth an analyst actually needs — value chain, capital flows, the specific metrics used to value it, cyclical behaviour, and the concrete things to watch when trading its securities; and it pulls back to the <strong>cross-cutting mechanics</strong> of how sectors rotate across the economic cycle.</p>
+    <p>It is written to be studied, not skimmed. Where a sector has its own specialised vocabulary or valuation metric, that is spelled out rather than assumed, because the whole point is to be able to open a company's filings and know what you are looking at.</p>
+  </div>
+
+  <!-- ============ CLASSIFICATION ============ -->
+  <div class="section prose" id="classification">
+    <div class="sector-header">
+      <div class="sector-num">Part One · The Map</div>
+      <h2 class="sector-title">How sectors are classified</h2>
+      <div class="sector-ticker">Why several systems exist, and how they differ</div>
+    </div>
+
+    <p>Before looking at any individual sector, you have to know what kind of map you are reading. There is no single official division of the economy into industries — there are several, built by different organisations for different users. They fall into two broad philosophies, and understanding that split is the key that makes everything else click into place.</p>
+
+    <div class="layer-label">Two philosophies of classification</div>
+    <p>The first philosophy is the <strong>market (or investment) approach</strong>. It groups companies by what they sell, who buys it, and what economic forces move them — the questions an investor cares about. Its purpose is portfolio construction, index building, and performance comparison. <strong>GICS</strong> and <strong>ICB</strong> both belong here.</p>
+    <p>The second philosophy is the <strong>production approach</strong>. It groups companies by how they produce — their physical process and inputs — regardless of who ends up buying. Its purpose is government statistics and national accounts: measuring output, employment, and trade across a whole economy. <strong>NAICS</strong> and <strong>NACE</strong> (and the UN's <strong>ISIC</strong>) belong here. The same company can therefore sit in different places depending on which map you use, because the two families are literally asking different questions — "who is your customer and what moves you?" versus "what is your production process?"</p>
+
+    <div class="layer-label">GICS — the investor's standard</div>
+    <p>The <strong>Global Industry Classification Standard</strong> was created in 1999 by <strong>MSCI</strong> and <strong>S&amp;P Dow Jones Indices</strong>, and it is the dominant system in the investment world. It is a four-level hierarchy: <strong>11 sectors → 25 industry groups → 74 industries → 163 sub-industries</strong>. A company is placed according to its <strong>principal business activity</strong>, judged primarily by where its <em>revenue</em> comes from. GICS is what sits behind the S&amp;P 500 sector breakdown, the SPDR Select Sector ETFs, and most sector-based research you will read.</p>
+    <p>GICS is reviewed annually (announced each March), and the structure genuinely moves. The most consequential recent change was the <strong>2018 creation of the Communication Services sector</strong>, which pulled Facebook and Alphabet out of Technology and Netflix out of Consumer Discretionary — no business changed, but sector weights and ETF rosters shifted overnight. Knowing the review happens, and roughly when, is part of using the system correctly.</p>
+
+    <div class="layer-label">ICB — the competing standard</div>
+    <p>The <strong>Industry Classification Benchmark</strong> is GICS's main rival. Launched in 2005 by Dow Jones and FTSE, it is now owned and maintained by <strong>FTSE Russell</strong> (part of the London Stock Exchange Group). It too is a four-level hierarchy, but with different counts and different labels: <strong>11 industries → 20 supersectors → 45 sectors → 173 subsectors</strong>. It classifies roughly 85,000 securities across 80+ countries and is the sector system behind FTSE Russell indices, STOXX, and a number of exchanges.</p>
+    <p>The differences from GICS are mostly at the edges, but they matter when you compare data from two sources. ICB traditionally splits consumer companies into <strong>"goods" versus "services,"</strong> whereas GICS splits them by <strong>"cyclical versus non-cyclical"</strong> (Consumer Discretionary versus Consumer Staples). Real Estate also sits at a different level in the two hierarchies. The practical lesson: if you pull sector data from two providers and the numbers don't tie out, check whether one is GICS and the other ICB before assuming an error.</p>
+
+    <div class="layer-label">NAICS &amp; NACE — the government's systems</div>
+    <p><strong>NAICS</strong> (the North American Industry Classification System) is the statistical standard shared by the United States, Canada, and Mexico. It was introduced in 1997 to replace the older SIC system, is built on a <strong>six-digit hierarchical code</strong>, and is reviewed every five years. Crucially, it classifies by <strong>production process</strong> — how something is made — not by the market it serves. Its job is to let statistical agencies collect and compare economic data across the North American bloc, not to help anyone build a portfolio.</p>
+    <p><strong>NACE</strong> is the European Union's equivalent, maintained for Eurostat and national statistics offices. It follows the same production-based logic and is aligned with the UN's global <strong>ISIC</strong> system, which makes European data translatable worldwide. NACE covers the entire economy — including unlisted firms, government, and households — which is exactly why a statistician uses it and an equity investor does not.</p>
+
+    <div class="callout">
+      <div class="callout-title">The hierarchy, in one line</div>
+      <p style="margin:0;">Every one of these systems is a tree. In GICS terms: a <strong>sub-industry</strong> belongs to exactly one <strong>industry</strong>, which belongs to one <strong>industry group</strong>, which belongs to one <strong>sector</strong>. When you say a stock is "in the Energy sector," you are naming the top of a branch that narrows all the way down to a precise sub-industry like "Oil &amp; Gas Refining &amp; Marketing." The precision lives at the bottom; the sector is just the headline.</p>
+    </div>
+
+    <div class="layer-label">Why the same company lands in different places</div>
+    <p>The cleanest way to feel the difference between systems is to watch a familiar company get classified. Under GICS, a company is placed by its <strong>primary source of revenue</strong> — which produces some famously counter-intuitive results:</p>
+    <p><strong>Amazon</strong> is <em>Consumer Discretionary</em>, not Technology — because e-commerce retail, not AWS cloud, drives the majority of its revenue. Yet the market often <em>prices</em> Amazon more like a technology company, so its stock behaves differently from the rest of its GICS sector. <strong>Tesla</strong> is <em>Consumer Discretionary</em> too, classified as an <em>automaker</em> despite its software-and-battery image. And after 2018, <strong>Alphabet and Meta</strong> sit in <em>Communication Services</em>, not Technology at all. The practical takeaway is blunt: if you buy the technology ETF (XLK) expecting "big tech," you are missing Amazon, Alphabet, and Meta entirely — they live in other sectors. <strong>Always check the actual holdings, not the sector name.</strong></p>
+
+    <div class="layer-label">The four systems side by side</div>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>System</th><th>Owner</th><th>Philosophy</th><th>Top level</th><th>Full structure</th><th>Used for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GICS</td><td>MSCI + S&amp;P DJI</td><td>Market / revenue</td><td>11 sectors</td><td>11 / 25 / 74 / 163</td><td>Investing, indices, ETFs</td></tr>
+          <tr><td>ICB</td><td>FTSE Russell (LSEG)</td><td>Market / revenue</td><td>11 industries</td><td>11 / 20 / 45 / 173</td><td>FTSE/STOXX indices</td></tr>
+          <tr><td>NAICS</td><td>US / Canada / Mexico</td><td>Production process</td><td>20 sectors</td><td>6-digit code</td><td>Government statistics (N. America)</td></tr>
+          <tr><td>NACE</td><td>EU / Eurostat</td><td>Production process</td><td>21 sections</td><td>Aligned to UN ISIC</td><td>Government statistics (EU)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="sources">Sources: <a href="https://www.msci.com/indexes/index-resources/gics">MSCI — GICS</a>; <a href="https://www.nasdaq.com/articles/what-advisors-need-to-know-about-the-gics-structure-changes">Nasdaq — GICS 2023 changes</a>; <a href="https://www.lseg.com/en/ftse-russell/industry-classification-benchmark-icb">LSEG / FTSE Russell — ICB</a>; <a href="https://corporatefinanceinstitute.com/resources/commercial-lending/north-american-industry-classification-system-naics">CFI — NAICS</a>; <a href="https://equicurious.com/learn/equities/global-and-sector-investing/using-gics-and-sector-classification-systems">Equicurious — Using GICS</a>; <a href="https://www.syntaxdata.com/research/know-what-you-own-investing-in-the-power-of-the-consumer">Syntax — Amazon &amp; Tesla classification</a>.</p>
+  </div>
+
+  <!-- ============ ENERGY SECTOR (VZOR) ============ -->
+  <div class="sector prose" id="energy">
+    <div class="sector-header">
+      <div class="sector-num">Sector 01 · GICS Energy</div>
+      <h2 class="sector-title">Energy</h2>
+      <div class="sector-ticker">Sector ETF: XLE (State Street) · VDE (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Energy is the smallest of the eleven GICS sectors by market capitalisation, and one of the most misunderstood — largely because the GICS definition is far narrower than the everyday meaning of the word. In GICS, "Energy" means <strong>fossil fuels and the companies that find, move, and refine them</strong>. It does not include solar, wind, or most nuclear names — those live in Materials, Industrials, or Utilities. This gap is the first thing to internalise, because it changes what you are actually buying when you buy "energy exposure."</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>The GICS Energy sector contains two industries — <strong>Energy Equipment &amp; Services</strong> (the companies that drill and service wells) and <strong>Oil, Gas &amp; Consumable Fuels</strong> (the companies that own the hydrocarbons). Underneath sit the sub-industries: integrated oil &amp; gas, exploration &amp; production, refining &amp; marketing, storage &amp; transportation, drilling, and equipment &amp; services. The cleanest way to organise the whole sector, though, is not by GICS label but by <strong>position in the value chain</strong>, because that position — not the company's size or name — is what determines its risk profile.</p>
+
+    <div class="chain">
+      <div class="chain-step"><div class="cs-name">Upstream</div><div class="cs-desc">Exploration &amp; production (E&amp;P). Finds and extracts oil and gas. Most exposed to commodity price.</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step"><div class="cs-name">Midstream</div><div class="cs-desc">Pipelines, storage, transport. Earns a fee per unit moved. Utility-like, contract-based.</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="chain-step"><div class="cs-name">Downstream</div><div class="cs-desc">Refining &amp; marketing. Turns crude into products. Often profits when crude is cheap.</div></div>
+    </div>
+
+    <p>The value-chain view immediately explains a counter-intuitive fact: not all energy companies want the same oil price. An <strong>upstream</strong> producer's revenue rises and falls almost directly with the price of crude. A <strong>downstream</strong> refiner buys crude as its raw material (feedstock), so it can actually do <em>better</em> when crude is cheap and product demand is high — its margin is the "crack spread" between the two. A <strong>midstream</strong> pipeline, by contrast, cares less about the absolute price and more about the <em>volume</em> flowing through it, because it earns a fee per barrel transported under long-term contracts. Three companies all labelled "Energy" can therefore be betting in three different directions.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Energy revenue ultimately comes from the global demand for fuel and petrochemical feedstock — transport, industry, heating, and plastics. The cash flows in through the sale of physical commodities (crude, natural gas, refined products) priced off global benchmarks (Brent, WTI, Henry Hub). It flows back out in three characteristic directions: enormous <strong>capital expenditure</strong> (drilling and infrastructure are among the most capital-intensive activities in any sector), <strong>dividends</strong> (energy is traditionally one of the highest-yielding sectors, used to attract investors to an otherwise volatile business), and <strong>reserve replacement</strong> — because oil is a depleting asset, a producer that does not constantly spend to find new reserves is slowly liquidating itself.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Margin &amp; capital profile</span><br>Energy is <strong>capital-intensive and margin-volatile</strong>. Upstream margins swing violently with commodity prices; downstream refining runs on thin, spread-driven margins; midstream margins are steadier and fee-based. Because projects are so capital-heavy, the sector is judged less on accounting earnings and more on <strong>cash flow</strong> and <strong>returns on capital</strong>.</div>
+
+    <div class="layer-label">3 · The value chain in detail</div>
+    <p><strong>Upstream (E&amp;P)</strong> is the highest-beta part of the sector. Its economics are driven by the price it receives per barrel, the cost to find and develop new reserves (finding &amp; development cost), and the rate at which existing wells deplete (the decline curve). Because production and reserves matter so much, upstream companies are often valued on a <strong>Net Asset Value (NAV)</strong> basis — a discounted cash flow built up well-by-well from proved reserves — rather than on simple earnings multiples.</p>
+    <p><strong>Midstream</strong> behaves "like a utility with a bit of commodity exposure." Revenue comes from long-term, fee-per-unit contracts, which gives it far more predictable cash flow than upstream. Many midstream firms in the US are structured as <strong>Master Limited Partnerships (MLPs)</strong> — a tax-advantaged structure that must pay out nearly all income, so it is analysed on <strong>distribution yield</strong> much like a dividend stock.</p>
+    <p><strong>Downstream</strong> (refining &amp; marketing) is a spread business. A refiner's profitability is the <strong>crack spread</strong> — the gap between the price of the refined products it sells and the crude feedstock it buys. Growth is structurally hard in developed markets: the last major US refinery was built in 1976, so downstream companies grow mainly by acquisition or by upgrading existing assets, not by building new capacity.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>This is where energy departs sharply from a generic company. The standard toolkit (P/E, EV/EBITDA) is supplemented — and often replaced — by metrics that exist because of the depleting-asset, commodity-priced nature of the business. If you learn one sector's specialised metrics, learn these, because they show the pattern you'll meet everywhere else.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Energy</div>
+      <div class="metric-row"><span class="metric-name">EBITDAX</span> — <span class="metric-formula">EBITDA + Exploration expense</span>. Adds back exploration costs so companies using different accounting (successful-efforts vs. full-cost) can be compared like-for-like. The energy analogue of plain EBITDA.</div>
+      <div class="metric-row"><span class="metric-name">EV / EBITDAX</span> — the most common relative-valuation multiple for E&amp;P companies; strips out capital structure and accounting-policy noise.</div>
+      <div class="metric-row"><span class="metric-name">PV-10 / PV-20</span> — present value of future cash flows from proved reserves, discounted at 10% (or 20%). A standardised, SEC-referenced measure of what the reserves in the ground are worth.</div>
+      <div class="metric-row"><span class="metric-name">Reserve Replacement Ratio</span> — <span class="metric-formula">reserves added ÷ reserves produced</span>. Above 100% means the company is replacing what it pumps; below 100% means it is shrinking. The single clearest "is this business sustainable" number.</div>
+      <div class="metric-row"><span class="metric-name">Production (boe/d)</span> — barrels of oil equivalent per day. The output measure; growth here drives upstream valuation.</div>
+      <div class="metric-row"><span class="metric-name">Free Cash Flow</span> — after the enormous capex, how much is actually left. In a capital-intensive, dividend-paying sector, FCF is the real test of health.</div>
+      <div class="metric-row"><span class="metric-name">Crack spread</span> — for refiners: the margin between refined-product prices and crude feedstock cost.</div>
+      <div class="metric-row"><span class="metric-name">Distribution yield</span> — for midstream MLPs: the payout as a % of unit price, analysed like a dividend yield.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Energy is a <strong>cyclical</strong> sector, and specifically a <strong>late-cycle</strong> one: it has historically performed best in the late stage of an economic expansion, when demand and inflation are running hot and commodity prices peak. It is also a classic <strong>value</strong> sector rather than a growth one, which makes it a useful diversifier against growth-heavy technology exposure. Its correlation to the broad market is looser than most sectors because its primary driver — the oil price — responds to supply shocks, OPEC decisions, and geopolitics that have nothing to do with the domestic business cycle.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Energy securities</span><br>
+    <strong>Commodity price is the master variable.</strong> Upstream names move almost tick-for-tick with crude; know whether you're long the company or effectively long oil.<br><br>
+    <strong>Direction depends on value-chain position.</strong> Cheap crude hurts producers but can help refiners. Don't treat "energy" as one directional bet.<br><br>
+    <strong>Geopolitics &amp; OPEC.</strong> Supply decisions, conflicts, and sanctions can spike or crater prices independent of demand — event risk is high and hard to model.<br><br>
+    <strong>Reserve depletion.</strong> A producer with a falling reserve replacement ratio is liquidating; a high dividend yield may be a warning, not a gift.<br><br>
+    <strong>Regulatory &amp; transition risk.</strong> Environmental policy, carbon rules, and the long-term energy transition are structural headwinds specific to fossil fuels.<br><br>
+    <strong>The "renewables aren't here" trap.</strong> If your thesis is clean energy, XLE / GICS Energy will not give you that exposure — you need Materials, Industrials, or Utilities.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity in integrated majors or pure-play E&amp;Ps; the sector ETF <strong>XLE</strong> (or VDE) for broad exposure; MLP units for midstream income; and — for direct commodity exposure — oil and gas <strong>futures</strong> and commodity ETFs, though these carry their own roll-cost mechanics and pay no dividend. <strong>Example companies:</strong> integrated majors like ExxonMobil, Chevron, Shell, BP; large E&amp;Ps like ConocoPhillips; oilfield services like SLB (Schlumberger) and Halliburton; midstream names structured as MLPs. <strong>Types of firm to recognise:</strong> integrated major, independent E&amp;P, refiner, midstream/pipeline operator, and oilfield-services provider — each with a different sensitivity to the oil price.</p>
+
+    <p class="sources">Sources: <a href="https://www.britannica.com/money/energy-stocks">Britannica Money — Energy stocks</a>; <a href="https://mergersandinquisitions.com/oil-gas-modeling-101/">Mergers &amp; Inquisitions — Oil &amp; Gas Modeling</a>; <a href="https://www.investing.com/academy/analysis/how-to-evaluate-oil-and-gas-stocks/">Investing.com — Evaluating Oil &amp; Gas Stocks</a>; <a href="https://www.stout.com/en/insights/article/valuation-methodologies-oil-gas-industry">Stout — Valuation Methodologies in Oil &amp; Gas</a>; <a href="https://guides.loc.gov/commodities/energy-sector">Library of Congress — Energy Sector guide</a>; <a href="https://www.schwab.com/learn/story/stock-sector-outlook">Charles Schwab — Sector Outlook</a>.</p>
+  </div>
+
+  <!-- ============ MATERIALS SECTOR ============ -->
+  <div class="sector prose" id="materials">
+    <div class="sector-header">
+      <div class="sector-num">Sector 02 · GICS Materials</div>
+      <h2 class="sector-title">Materials</h2>
+      <div class="sector-ticker">Sector ETF: XLB (State Street) · VAW (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Materials is the sector that turns the earth into everything else. It covers the companies that discover, extract, and process raw inputs — metals, minerals, chemicals, construction materials, and packaging — that every other sector then builds on. This is what most people mean by "mining of raw materials," and it is the sector where the analysis is most physical: you are ultimately valuing rock in the ground, and the discipline for doing that is unlike anything in, say, software.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS Materials spans a wider range than its "mining" reputation suggests. Its main groupings are <strong>Metals &amp; Mining</strong> (gold, copper, iron ore, aluminium, diversified miners, and — importantly — steel), <strong>Chemicals</strong> (split between commodity/diversified chemicals and higher-margin specialty chemicals, plus fertilisers and agricultural chemicals), <strong>Construction Materials</strong> (cement, aggregates), and <strong>Containers &amp; Packaging</strong>. Note two things that surprise people: <strong>fertilisers sit here</strong>, not in an "agriculture" sector (there isn't one — see below), and <strong>chemicals</strong> is often the largest slice by value, so "Materials" is not a pure mining play.</p>
+
+    <div class="callout">
+      <div class="callout-title">Where "agriculture" actually lives</div>
+      <p style="margin:0;">There is no standalone Agriculture sector in GICS. The activity is split across the map: <strong>fertilisers &amp; agricultural chemicals</strong> sit in Materials; <strong>packaged foods, agricultural products, and farm commodities processing</strong> sit in Consumer Staples; and <strong>farm machinery</strong> sits in Industrials. If you want "agriculture exposure," you have to assemble it from three different sectors — a perfect illustration of why the classification map matters.</p>
+    </div>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Materials revenue comes from selling raw and processed inputs to the rest of the industrial economy — miners sell to smelters and manufacturers, chemical makers sell to virtually every downstream industry, packaging firms sell to consumer-goods companies. Because the end-products are largely undifferentiated commodities, these companies are mostly <strong>price-takers</strong>: they sell at the prevailing global price and compete on cost, not on brand. Cash flows out into heavy <strong>capital expenditure</strong> (mines and chemical plants are enormous, long-lived assets), <strong>dividends</strong>, and — as with energy — the constant need to replace depleting reserves.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Margin &amp; capital profile</span><br>Highly <strong>cyclical and capital-intensive</strong>, with earnings tightly linked to global growth and industrial production. Margins are driven by <strong>position on the cost curve</strong> — a low-cost producer stays profitable when prices fall and competitors bleed. Specialty chemicals earn higher, more stable margins than commodity miners because their products are differentiated and harder to substitute.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The useful mental split inside Materials is <strong>commodity</strong> versus <strong>specialty</strong>. Commodity players (iron-ore and copper miners, bulk chemical producers) live and die by the global price of their output and their own cost position; they are pure cyclicals. Specialty players (specialty chemicals, advanced materials) sell differentiated products into specific applications, command pricing power, and behave more like industrial manufacturers than pure commodity plays. Within mining itself, analysts further distinguish <strong>seniors/majors</strong> (producing mines, steady cash flow, lower risk), <strong>juniors</strong> (exploration-stage, high risk/high reward), and <strong>royalty/streaming companies</strong> (which finance miners in exchange for a cut of output — lower-risk, diversified exposure).</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Mining valuation is its own craft, built around the fact that a mine is a depleting asset with a finite life. The generic multiples still appear, but the sector-specific ones below are what separate someone who understands miners from someone guessing.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Materials (esp. mining)</div>
+      <div class="metric-row"><span class="metric-name">AISC (All-In Sustaining Cost)</span> — the total cost to produce one unit (e.g. an ounce of gold), including mine-site cash costs, sustaining capital, royalties, and corporate overhead. Defined by the World Gold Council (2013). <strong>The single most important cost metric</strong>: margin = metal price − AISC, and a company's rank on the industry <em>cost curve</em> determines who survives a downturn.</div>
+      <div class="metric-row"><span class="metric-name">P / NAV</span> — <span class="metric-formula">price ÷ net asset value</span>. NAV is the discounted present value of future cash flows from all a company's mines (reserves), net of debt and costs. The most stable and widely used mining valuation metric.</div>
+      <div class="metric-row"><span class="metric-name">EV / Resource</span> — enterprise value per unit of resource in the ground. A cruder metric used mainly for early-stage projects; ignores extraction cost, so not a good measure of economic value on its own.</div>
+      <div class="metric-row"><span class="metric-name">Reserves &amp; Resources</span> — the quantified metal in the ground, split by confidence level (proved/probable). Drives future revenue and ultimate value.</div>
+      <div class="metric-row"><span class="metric-name">Ore grade</span> — concentration of metal in the ore. Higher grade = lower cost per unit. A key differentiator between assets.</div>
+      <div class="metric-row"><span class="metric-name">Mine life</span> — how many years of production remain at current rates. Longer life supports a higher valuation.</div>
+      <div class="metric-row"><span class="metric-name">Jurisdiction risk</span> — political/regulatory risk of the country where the mine sits. A high-grade mine in an unstable jurisdiction is worth less than a modest one in a stable one.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Materials is <strong>strongly cyclical</strong> and typically a <strong>late-cycle</strong> performer alongside Energy — both do well when growth and inflation are running hot and commodity prices peak. It is highly sensitive to <strong>global industrial production</strong> and, in particular, to Chinese construction and manufacturing demand, which drives the bulk commodities (iron ore, copper). Precious-metals miners (gold, silver) are a partial exception: gold can behave defensively, rising in times of fear or when real interest rates fall, so a gold miner does not move like a copper miner even though both sit in Materials.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Materials securities</span><br>
+    <strong>Commodity price + cost curve together.</strong> A miner's fortune is metal price minus AISC. A low-cost producer can thrive at prices that bankrupt a high-cost one — always check where the company sits on the cost curve.<br><br>
+    <strong>China demand.</strong> For industrial metals, Chinese construction and manufacturing is the dominant swing factor; watch it more than domestic GDP.<br><br>
+    <strong>Not all "Materials" move together.</strong> Gold miners (defensive, fear-driven) behave differently from copper/iron-ore miners (pro-cyclical) and from specialty chemicals (industrial-like). Know which you own.<br><br>
+    <strong>Reserve depletion &amp; grade decline.</strong> Rising AISC can signal falling ore grades or ageing mines — a structural warning, not just a bad quarter.<br><br>
+    <strong>Jurisdiction &amp; regulation.</strong> Resource nationalism, permitting, tariffs, and supply-chain disruption are outsized risks in this sector.<br><br>
+    <strong>Leverage to the commodity.</strong> Miner equities are often a <em>leveraged</em> play on the underlying metal — they move more than the metal itself, in both directions.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity in diversified majors or pure-play miners; the sector ETF <strong>XLB</strong> (or VAW); specialised mining ETFs for precious or industrial metals; royalty/streaming companies for lower-risk exposure; and, for the underlying commodity itself, <strong>futures</strong> and physically-backed commodity ETFs. <strong>Example companies:</strong> diversified miners like BHP, Rio Tinto, Glencore, Vale; gold miners like Newmont and Barrick; chemical majors like BASF, Dow, Linde; and agricultural-chemical names like Nutrien. <strong>Types of firm to recognise:</strong> diversified major miner, single-commodity miner, junior explorer, royalty/streaming company, commodity chemical producer, specialty chemical producer, and packaging company — each with a different margin and risk profile.</p>
+
+    <p class="sources">Sources: <a href="https://www.investing.com/academy/analysis/how-to-analyze-mining-stocks/">Investing.com — Analyzing Mining Stocks</a>; <a href="https://selborneresearch.com/guides/mining/what-is-aisc/">Selborne Research — AISC explained</a>; <a href="https://www.srk.com/en/publications/cost-inputs-in-a-mining-valuation">SRK Consulting — Cost Inputs in Mining Valuation</a>; <a href="https://www.miningdoc.tech/2025/03/12/how-are-mining-companies-valued/">Mining Doc — How miners are valued</a>; <a href="https://www.schwab.com/learn/story/stock-sector-outlook">Charles Schwab — Sector Outlook</a>.</p>
+  </div>
+
+  <!-- ============ INDUSTRIALS SECTOR ============ -->
+  <div class="sector prose" id="industrials">
+    <div class="sector-header">
+      <div class="sector-num">Sector 03 · GICS Industrials</div>
+      <h2 class="sector-title">Industrials</h2>
+      <div class="sector-ticker">Sector ETF: XLI (State Street) · VIS (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Industrials is the sector that builds and moves things — the machinery, aircraft, railroads, trucks, and construction firms that keep the physical economy running, plus the "business services" that support them. It is the most internally diverse of the eleven sectors, spanning a jet-engine maker, a package-delivery giant, and a payroll-processing firm under one label. What ties them together is sensitivity to the pace of economic activity: when the economy builds, ships, and travels more, Industrials earns more.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS Industrials contains three broad groups. <strong>Capital Goods</strong> — aerospace &amp; defense, machinery, electrical equipment, construction &amp; engineering, building products. <strong>Transportation</strong> — airlines, railroads, trucking, air freight &amp; logistics, marine. And <strong>Commercial &amp; Professional Services</strong> — everything from waste management to staffing to data-driven business services. A useful way to cut the sector is by <strong>cycle length</strong>: "short-cycle" industrials (distributors, some machinery) respond quickly to the economy, while "long-cycle" industrials (aerospace, rail, large infrastructure) run on multi-year order books that lag the cycle.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Revenue comes from selling capital equipment and services to other businesses and governments — this is a largely <strong>B2B and B2G sector</strong>, not consumer-facing. Two customer types dominate the economics: <strong>commercial</strong> buyers (price-sensitive, cyclical) and <strong>government</strong> buyers (less price-sensitive, tied to budget cycles — defense contracts are far more lucrative and predictable precisely because governments prize a proven name over the lowest bid). Cash flows out into R&amp;D, capacity, and — for many industrials — the working capital tied up in long production cycles.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Margin &amp; capital profile</span><br>Defined by <strong>operating leverage</strong>: high fixed costs (factories, engineering) mean that once volume passes breakeven, incremental revenue drops disproportionately to the bottom line — and the reverse in a downturn. This makes earnings <strong>more volatile than revenue</strong>. Margins vary hugely by sub-sector: aftermarket parts and services (recurring, high-margin) versus original-equipment sales (lumpy, lower-margin).</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The most analytically important structure in Industrials is the <strong>tiered value chain</strong>, clearest in aerospace &amp; defense: <strong>prime contractors</strong> (Boeing, Lockheed) sit at the top, supplied by <strong>Tier 1/2/3</strong> component makers below. Where a company sits in the tier — and whether its content is <strong>sole-source</strong> (only supplier) or competed — largely determines its margin and pricing power. Another key distinction is <strong>original equipment (OE)</strong> versus <strong>aftermarket (MRO)</strong>: selling a jet engine is low-margin, but servicing it for decades afterwards can generate many times the original sale value at high margins. The aftermarket is where much of the sector's durable profit lives.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Because so many industrials work on long-term orders, the sector has its own forward-looking vocabulary built around the <strong>order book</strong>. These metrics tell you about revenue that hasn't happened yet.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Industrials</div>
+      <div class="metric-row"><span class="metric-name">Book-to-bill ratio</span> — <span class="metric-formula">new orders ÷ revenue</span>. Above 1.0 means orders are coming in faster than they're being fulfilled (growing demand, expanding backlog); below 1.0 means forward visibility is depleting. The single key momentum indicator for long-cycle names.</div>
+      <div class="metric-row"><span class="metric-name">Backlog</span> — the total value of booked-but-not-yet-delivered orders. For long-cycle industrials, <strong>the backlog IS the revenue model</strong>. A healthy backlog secures future revenue; an excessive one can signal capacity constraints.</div>
+      <div class="metric-row"><span class="metric-name">Backlog-to-revenue ratio</span> — how many years of revenue the backlog represents. Aircraft makers may run above 3 (years of orders); defense contractors 1–2, tied to government spending cycles.</div>
+      <div class="metric-row"><span class="metric-name">Operating leverage</span> — how much operating profit moves for a given change in revenue; high in this fixed-cost sector, which amplifies both up- and down-cycles.</div>
+      <div class="metric-row"><span class="metric-name">EV / EBITDA</span> — the primary comparable multiple; varies by sub-sector, with a premium for recurring, predictable revenue (services, aftermarket) over lumpy OE sales.</div>
+      <div class="metric-row"><span class="metric-name">Conversion rate</span> — the % of backlog that turns into revenue each period; higher for active production programs, lower/less predictable for development programs.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Industrials is a <strong>classic cyclical</strong> sector, and a key one to watch for reading the economy — it typically leads in the <strong>early-recovery</strong> phase, when businesses restart capital spending and rebuild inventory. But the sector is not monolithic: long-cycle aerospace and defense can hold up when short-cycle machinery is already rolling over, because their multi-year backlogs smooth out the cycle. Defense specifically behaves almost counter-cyclically relative to the economy, since it tracks government budgets and geopolitics rather than GDP.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Industrials securities</span><br>
+    <strong>Book-to-bill and backlog first.</strong> For long-cycle names these tell you about revenue not yet on the income statement. A book-to-bill dropping below 1.0 is an early warning.<br><br>
+    <strong>Operating leverage cuts both ways.</strong> High fixed costs magnify earnings in a boom and gut them in a slump — the stock can move far more than revenue.<br><br>
+    <strong>Know the cycle length.</strong> Short-cycle industrials turn with the economy now; long-cycle ones lag by years. Don't read one from the other.<br><br>
+    <strong>Commercial vs. government mix.</strong> Defense/government revenue is stickier and less price-sensitive; commercial is cyclical. The revenue mix changes the risk profile entirely.<br><br>
+    <strong>Aftermarket vs. OE.</strong> Recurring service revenue is worth more than one-off equipment sales — check where the profit really comes from.<br><br>
+    <strong>Input costs &amp; supply chains.</strong> Raw materials, labour, and logistics disruptions hit this sector's margins directly.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity across the very different sub-sectors; the sector ETF <strong>XLI</strong> (or VIS); or targeted aerospace/defense and transport ETFs. <strong>Example companies:</strong> aerospace/defense primes like Boeing, Lockheed Martin, RTX; diversified industrials like Honeywell, GE Aerospace, Caterpillar, Siemens; transport like Union Pacific (rail), UPS/FedEx (logistics), Delta (airlines); services like Waste Management. <strong>Types of firm to recognise:</strong> prime contractor, tiered component supplier, capital-equipment maker, transport/logistics operator, and business-services provider — short-cycle or long-cycle, commercial or government.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/industrials-investment-banking/backlog-book-to-bill-modeling">Industrials IB Guide — Backlog &amp; Book-to-Bill</a>; <a href="http://sellsidehandbook.com/industries/industrials/">Sell Side Handbook — Industrials</a>; <a href="https://wallstmastermind.com/aerospace-defense-investment-banking-guide/">Wall Street Mastermind — A&amp;D Valuation</a>; <a href="https://www.analystinterview.com/article/aerospace-and-defense-order-backlog-to-revenue-ratio-a-comprehensive-analysis">Analyst Interview — Backlog-to-Revenue</a>; <a href="https://www.schwab.com/learn/story/stock-sector-outlook">Charles Schwab — Sector Outlook</a>.</p>
+  </div>
+
+  <!-- ============ CONSUMER DISCRETIONARY SECTOR ============ -->
+  <div class="sector prose" id="discretionary">
+    <div class="sector-header">
+      <div class="sector-num">Sector 04 · GICS Consumer Discretionary</div>
+      <h2 class="sector-title">Consumer Discretionary</h2>
+      <div class="sector-ticker">Sector ETF: XLY (State Street) · VCR (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Consumer Discretionary is the sector of things people buy when they feel confident and can afford to — cars, holidays, restaurants, apparel, luxury goods, home improvement, and e-commerce. It is the mirror image of Consumer Staples, and the contrast between the two is one of the most useful lenses in all of sector analysis: discretionary is what consumers buy when times are good, staples is what they buy regardless. That makes this the most economically sensitive consumer sector — and one of the most cyclical sectors in the whole market.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS groups it into four: <strong>Automobiles &amp; Components</strong> (carmakers and parts — this is where Tesla sits), <strong>Consumer Durables &amp; Apparel</strong> (household durables, leisure products, textiles, luxury goods), <strong>Consumer Services</strong> (hotels, restaurants, leisure), and <strong>Retailing</strong> (specialty retail and, crucially, e-commerce — where Amazon sits). Be aware that the sector ETF (XLY) is extremely top-heavy: Amazon and Tesla alone can make up half the sector's weight, so "buying discretionary" often means buying those two more than anything else.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Revenue comes from <strong>discretionary household spending</strong> — the part of income left after necessities. That makes the sector's fortunes a direct function of <strong>employment, wages, consumer confidence, and interest rates</strong> (which drive financing for big-ticket items like cars and homes). When confidence is high, money flows in; when households retrench, discretionary purchases are the first to be cut or deferred. Cash flows back out into inventory, store networks or platforms, and — especially for brands — marketing to stay relevant.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Margin &amp; capital profile</span><br>Margins are <strong>diverse and efficiency-driven</strong> rather than brand-driven: luxury houses (LVMH, Hermès) run gross margins above 65%; mass retailers (Walmart, Target) 24–30%; restaurants from ~30% (full-service) to 60–70% (fast food). The common thread — margin protection comes from <strong>operational efficiency and volume leverage</strong>, not pricing power. Earnings are highly volatile: discretionary earnings can fall <strong>30–50%+</strong> in a recession.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The sector splits into <strong>goods</strong> (cars, apparel, durables — cyclical, inventory-heavy, exposed to fashion and product risk) and <strong>services</strong> (hotels, restaurants, leisure — cyclical but asset-light). Within it, quality varies enormously: a luxury brand with pricing power and a fast-food chain with defensive "trade-down" characteristics behave very differently from a fashion retailer at the mercy of changing trends. Brand relevance is a genuine risk factor here — a discretionary brand that loses its image can decline rapidly and sometimes irreversibly.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Retail and consumer analysis has its own operating metrics that sit alongside the standard multiples — they measure whether a store base or brand is genuinely growing, not just adding locations.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Consumer Discretionary</div>
+      <div class="metric-row"><span class="metric-name">Same-store sales (comps)</span> — revenue growth at stores open at least a year. Strips out the effect of new openings to show <strong>organic</strong> demand. The cleanest read on underlying health for any retailer.</div>
+      <div class="metric-row"><span class="metric-name">Inventory turnover</span> — <span class="metric-formula">COGS ÷ average inventory</span>. Higher = efficient inventory management. Critical because overstock leads to margin-crushing markdowns, especially in fast-moving fashion.</div>
+      <div class="metric-row"><span class="metric-name">Gross &amp; operating margin</span> — revenue minus COGS, then minus operating costs. Trends here reveal pricing power and operational efficiency in a fiercely competitive sector.</div>
+      <div class="metric-row"><span class="metric-name">Discretionary / Staples ratio</span> — the relative performance of XLY vs. XLP. When discretionary outperforms, the market is "risk-on"; when staples lead, it's turning defensive. One of the simplest market-mood indicators.</div>
+      <div class="metric-row"><span class="metric-name">P/E multiple</span> — discretionary typically trades at a <em>lower</em> P/E than staples in uncertain times, because its earnings are far less predictable.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>This is a textbook <strong>cyclical, early-cycle</strong> sector: it thrives in expansions and confidence-driven recoveries, and suffers first and hardest in downturns. It is highly sensitive to interest rates (via financing of cars and homes) and to anything affecting disposable income. Its relative performance against Consumer Staples is so reliable a signal of economic sentiment that traders watch the ratio as a market-health gauge in its own right.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Consumer Discretionary securities</span><br>
+    <strong>The consumer's wallet is the master variable.</strong> Employment, wages, confidence, and rates drive this sector. Watch consumer-confidence and real-income data closely.<br><br>
+    <strong>Concentration risk in the ETF.</strong> XLY is dominated by Amazon and Tesla — you may be buying a two-stock bet, not the sector. Consider equal-weight alternatives.<br><br>
+    <strong>Same-store sales over headline revenue.</strong> A retailer can grow revenue by opening stores while its existing base shrinks — comps reveal the truth.<br><br>
+    <strong>Inventory is a warning system.</strong> Rising inventory with slowing sales signals coming markdowns and margin pain.<br><br>
+    <strong>Brand and fashion risk.</strong> Discretionary brands live or die by relevance; a cooling brand can unwind fast.<br><br>
+    <strong>First in, first out of a downturn.</strong> This sector leads the market down and often leads it back up — timing relative to the cycle matters more here than almost anywhere.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity; the sector ETF <strong>XLY</strong> (or VCR), with equal-weight versions to dilute the Amazon/Tesla concentration. <strong>Example companies:</strong> Amazon (e-commerce), Tesla (autos), Home Depot &amp; Lowe's (home improvement), McDonald's &amp; Booking (services), Nike &amp; LVMH (apparel/luxury), Toyota &amp; Ford (autos). <strong>Types of firm to recognise:</strong> e-commerce/retailer, automaker, restaurant/QSR operator, hotel/leisure operator, apparel brand, and luxury house — cyclical throughout, but with very different margin and brand dynamics.</p>
+
+    <p class="sources">Sources: <a href="https://equityref.com/reference/sectors/consumer-discretionary-sector/">EquityRef — Consumer Discretionary</a>; <a href="https://gridoasis.com/guides/sector-analysis/consumer-sectors/">Grid Oasis — Consumer Sectors</a>; <a href="https://www.investing.com/academy/trading/how-to-evaluate-consumer-discretionary-stocks/">Investing.com — Evaluating Discretionary Stocks</a>; <a href="https://realinvestmentadvice.com/consumer-staples-vs.-discretionary">RIA — Staples vs Discretionary</a>.</p>
+  </div>
+
+  <!-- ============ CONSUMER STAPLES SECTOR ============ -->
+  <div class="sector prose" id="staples">
+    <div class="sector-header">
+      <div class="sector-num">Sector 05 · GICS Consumer Staples</div>
+      <h2 class="sector-title">Consumer Staples</h2>
+      <div class="sector-ticker">Sector ETF: XLP (State Street) · VDC (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Consumer Staples is the sector of things people buy no matter what — food, beverages, household products, personal care, and tobacco. Nestlé knows roughly how many jars of coffee it will sell next quarter regardless of the economy, and that predictability is the sector's defining investment characteristic. This is the archetypal <strong>defensive</strong> sector: boring by design, stable through recessions, and the place money hides when the outlook darkens. It is also where much of your "food and agriculture" interest actually lives in GICS terms.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS groups it into three: <strong>Food, Beverage &amp; Tobacco</strong> (packaged foods, soft and alcoholic drinks, tobacco, and agricultural products/commodity processing), <strong>Household &amp; Personal Products</strong> (cleaning products, cosmetics, personal care), and <strong>Consumer Staples Distribution &amp; Retail</strong> (supermarkets, drug retail, and — since the 2023 GICS revision — the big-box discounters like Walmart and Costco, moved here from Discretionary). This is the GICS home of the <strong>food side of agriculture</strong>; the fertiliser/agrochemical side sits in Materials, and farm machinery in Industrials.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Revenue comes from <strong>non-discretionary, repeat purchases</strong> — the regular, predictable buying of essentials. This creates highly stable cash flows that support <strong>consistent dividends</strong>, which is a big part of why income investors favour the sector. Cash flows back out heavily into <strong>advertising, distribution, and trade promotions</strong> — a branded-staples company spends enormously to defend shelf space and brand loyalty, which is precisely what protects its pricing power.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Margin &amp; capital profile</span><br>Branded staples run <strong>gross margins of 40–65%</strong> and operating margins of 15–25%, driven by <strong>pricing power</strong>, not volume — Coca-Cola's syrup costs pennies but sells for dollars. Operating margins are moderated by heavy marketing and distribution spend. The signature strength is <strong>inflation pass-through</strong>: in 2021–23, P&amp;G raised prices ~10% and lost only 1–2% of volume. Earnings fall only <strong>5–10%</strong> in recessions — a fraction of discretionary's decline.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The key internal split is <strong>branded manufacturers</strong> (Nestlé, P&amp;G, Coca-Cola — high margin, pricing power, brand moats) versus <strong>retailers/distributors</strong> (supermarkets, discounters — low margin, high volume, thin and efficiency-driven). The two have very different economics despite sharing a sector: a branded-goods maker lives on brand and pricing, a grocer lives on volume and logistics. Private-label competition is a structural pressure on the branded side, especially when consumers "trade down" in tough times.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Staples is analysed through the lens of stability and pricing power — the metrics are about how durable and defendable the cash flows are.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Consumer Staples</div>
+      <div class="metric-row"><span class="metric-name">Organic sales growth</span> — growth stripped of acquisitions and currency, split into <strong>price</strong> vs. <strong>volume</strong>. The price/volume mix is everything: growing on price (pricing power) is healthier than growing on volume alone.</div>
+      <div class="metric-row"><span class="metric-name">Gross margin &amp; pricing power</span> — the ability to raise prices at or above inflation without losing meaningful volume. The single most valuable competitive trait in the sector.</div>
+      <div class="metric-row"><span class="metric-name">Dividend yield &amp; payout ratio</span> — staples are income stocks; the sustainability and growth of the dividend is a core part of the thesis.</div>
+      <div class="metric-row"><span class="metric-name">P/E multiple</span> — staples typically command a <em>higher</em> P/E than discretionary in uncertain times, as investors pay up for earnings predictability.</div>
+      <div class="metric-row"><span class="metric-name">Volume vs. price</span> — in inflationary periods, watch whether volume holds as prices rise; volume loss signals consumers trading down to private label.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Staples is the <strong>defensive</strong> anchor: it outperforms in <strong>late-cycle and recessionary</strong> phases, when growth decelerates and investors rotate into predictable earnings. It underperforms in strong expansions, when money chases higher-growth cyclicals. Because its demand barely moves with the economy, it has <strong>low beta</strong> — it dampens portfolio swings. It is, however, somewhat rate-sensitive: as a dividend-heavy "bond proxy," staples can lag when interest rates rise and bonds offer competitive yields.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Consumer Staples securities</span><br>
+    <strong>Pricing power is the whole thesis.</strong> Track the price/volume split in organic growth — a company growing only on price while volume falls may be nearing its ceiling.<br><br>
+    <strong>Input-cost inflation.</strong> Commodity, packaging, and freight costs squeeze margins; the question is always whether the company can pass them on.<br><br>
+    <strong>Trade-down / private label.</strong> In downturns consumers switch to cheaper own-brand products — a volume risk for branded makers, a tailwind for discounters.<br><br>
+    <strong>Rate sensitivity.</strong> As dividend "bond proxies," staples can underperform when yields rise. Don't treat them as risk-free.<br><br>
+    <strong>Defensive, not growth.</strong> You buy staples for stability and income, not capital appreciation — expect underperformance in bull markets.<br><br>
+    <strong>Currency exposure.</strong> The big branded names are global; a strong home currency can dent reported earnings.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity, often held for dividends; the sector ETF <strong>XLP</strong> (or VDC); dividend-focused funds that lean heavily on staples. <strong>Example companies:</strong> branded makers like Nestlé, Procter &amp; Gamble, Coca-Cola, PepsiCo, Unilever; retailers/discounters like Walmart and Costco; tobacco like Philip Morris. <strong>Types of firm to recognise:</strong> branded food/beverage maker, household &amp; personal-care maker, tobacco company, supermarket, and discount retailer — defensive throughout, but branded (pricing-power) versus retail (volume) economics differ sharply.</p>
+
+    <p class="sources">Sources: <a href="https://gridoasis.com/guides/sector-analysis/consumer-sectors/">Grid Oasis — Consumer Sectors</a>; <a href="https://www.globalinvestments.net/investments/guides/consumer-staples-vs-discretionary">Global Investments — Staples vs Discretionary</a>; <a href="https://adamvangrover.github.io/craft/modules/primers/html/consumer_deep_dive.html">Consumer Primer — Deep Dive</a>; <a href="https://realinvestmentadvice.com/consumer-staples-vs.-discretionary">RIA — Staples vs Discretionary</a>.</p>
+  </div>
+
+
+  <!-- ============ HEALTH CARE SECTOR ============ -->
+  <div class="sector prose" id="healthcare">
+    <div class="sector-header">
+      <div class="sector-num">Sector 06 · GICS Health Care</div>
+      <h2 class="sector-title">Health Care</h2>
+      <div class="sector-ticker">Sector ETF: XLV (State Street) · VHT (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Health Care combines two things that rarely sit together: <strong>defensive stability</strong> and <strong>high-risk innovation</strong>. On one side are the drug and device giants and service providers whose demand barely moves with the economy — people get sick in booms and recessions alike. On the other are clinical-stage biotech companies whose entire value rests on binary trial outcomes. It is powered by a long-term demographic tailwind (ageing populations), and it is the sector where standard valuation tools break down most completely, because a pre-revenue biotech has no earnings to put a P/E on.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>The sector splits into two GICS groups. <strong>Pharmaceuticals, Biotechnology &amp; Life Sciences</strong> — the companies that discover and make drugs (big pharma, biotech, and the "picks-and-shovels" life-sciences tools and services firms). And <strong>Health Care Equipment &amp; Services</strong> — medical devices, hospitals, managed care/insurers, and distributors. The crucial point is that "health care" is not one business: a stable managed-care insurer, a device maker, and a speculative gene-therapy biotech have almost nothing in common analytically.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Money flows in from governments (Medicare, national health systems), private insurers, and patients — and critically, the <strong>United States is where the profit is</strong>, because US drug prices are the highest in the world and have historically subsidised global R&amp;D. It flows back out into two things above all: <strong>enormous R&amp;D</strong> (a single new drug can cost billions and take 10–15 years) and <strong>M&amp;A</strong>, as big pharma buys biotech to refill pipelines. That M&amp;A is not opportunistic — it is structural, driven by the patent cliff below.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 The patent cliff</span><br>A drug's profits are protected by patents; when they expire ("loss of exclusivity"), generics enter and revenue collapses — Pfizer's Lipitor lost over <strong>$10bn</strong> of revenue within two years. An estimated <strong>$200–400bn</strong> of industry revenue faces this cliff over the next few years (Keytruda, Eliquis, and ~200 drugs losing exclusivity). This is why biopharma M&amp;A exceeded <strong>$138bn</strong> in 2025 — pharma <em>must</em> buy replacement revenue.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The analytical spectrum runs from <strong>defensive</strong> to <strong>speculative</strong>. Managed-care insurers and large diversified pharma sit at the stable end — real earnings, dividends, predictable demand. Medical devices and life-sciences tools are quality-growth businesses. At the far end, <strong>clinical-stage biotech</strong> is effectively venture capital in public markets: most candidates fail, and the value is entirely in the pipeline. The greatest risk is the <strong>Phase II → Phase III transition</strong>, where a therapy must prove itself in large populations — the point where many drugs (and stock prices) die.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Health Care forces a split-brain approach: mature companies use adapted-standard tools, but pipeline-stage companies need a probability-based method found almost nowhere else in the market.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Health Care</div>
+      <div class="metric-row"><span class="metric-name">rNPV (risk-adjusted NPV)</span> — the gold standard for pipeline drugs. Projects a candidate's cash flows <em>assuming approval</em>, then probability-weights them by the cumulative chance of reaching market. It handles the binary "billions or zero" nature of a drug candidate explicitly.</div>
+      <div class="metric-row"><span class="metric-name">Sum-of-the-Parts (SOTP)</span> — for big pharma: value each marketed drug via its own DCF to patent expiry, value the pipeline via rNPV, add the base platform. Avoids the "terminal value problem" of assuming today's revenue lasts forever when 40% faces generics.</div>
+      <div class="metric-row"><span class="metric-name">Pipeline &amp; trial phase</span> — the number, stage, and probability-of-success of candidates. The core qualitative driver; Phase III assets are worth far more than Phase I.</div>
+      <div class="metric-row"><span class="metric-name">EV / Sales</span> — used for biotech where P/E is meaningless (negative or no earnings).</div>
+      <div class="metric-row"><span class="metric-name">Patent expiry / LOE schedule</span> — the calendar of when key drugs lose exclusivity; the single biggest revenue-risk map for any pharma.</div>
+      <div class="metric-row"><span class="metric-name">P/E (mature names)</span> — works for stable pharma, devices, and insurers, but is meaningless for pre-revenue biotech.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Health Care is broadly <strong>defensive</strong> — demand for medicine doesn't follow the business cycle — which makes it a late-cycle and recessionary outperformer alongside Staples and Utilities. But it carries risks the other defensives don't: <strong>political and regulatory risk</strong> is uniquely high, because drug pricing is a permanent political target (the US Inflation Reduction Act let Medicare negotiate drug prices for the first time). The biotech sub-sector is also interest-rate-sensitive and sentiment-driven, behaving more like a speculative growth asset than a defensive one.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Health Care securities</span><br>
+    <strong>Know which health care you own.</strong> A managed-care insurer, a device maker, and a clinical biotech are three completely different risk profiles under one sector label.<br><br>
+    <strong>Binary event risk in biotech.</strong> Trial readouts and FDA decisions can move a stock 50%+ in a day. Pre-revenue biotech is closer to venture capital than to equity investing.<br><br>
+    <strong>The patent cliff calendar.</strong> Map each major drug's loss-of-exclusivity date — that's where revenue falls off a shelf.<br><br>
+    <strong>Drug-pricing politics.</strong> Regulation and pricing reform (IRA, tariffs) are recurring, market-moving risks specific to this sector.<br><br>
+    <strong>P/E can mislead.</strong> For pipeline biotech, earnings multiples are meaningless — use rNPV and pipeline analysis instead.<br><br>
+    <strong>M&amp;A as a driver.</strong> Small biotechs can spike on acquisition; big pharma's need to buy pipeline is structural, not optional.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity across very different risk levels; the sector ETF <strong>XLV</strong> (or VHT); dedicated biotech ETFs (e.g. IBB, XBI) for the speculative sub-sector. <strong>Example companies:</strong> big pharma like Johnson &amp; Johnson, Pfizer, Merck, AstraZeneca, Novo Nordisk; biotech like Amgen, Vertex; devices like Medtronic; managed care like UnitedHealth. <strong>Types of firm to recognise:</strong> diversified pharma, clinical-stage biotech, medical-device maker, life-sciences tools/services, hospital/provider, and managed-care insurer — ranging from bond-like stability to venture-like risk.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/valuation-investment-banking/healthcare-pharma-valuation-pipeline-dcf-probability-npv">Healthcare Valuation — rNPV &amp; SOTP</a>; <a href="https://ibinterviewquestions.com/guides/healthcare-investment-banking/patent-cliffs-loss-of-exclusivity">Healthcare IB Guide — Patent Cliffs</a>; <a href="https://www.investing.com/academy/trading/how-to-evaluate-healthcare-stocks/">Investing.com — Evaluating Healthcare Stocks</a>; <a href="https://www.globalinvestments.net/investments/guides/healthcare-biotech-investment-guide">Global Investments — Healthcare &amp; Biotech</a>.</p>
+  </div>
+
+  <!-- ============ FINANCIALS SECTOR ============ -->
+  <div class="sector prose" id="financials">
+    <div class="sector-header">
+      <div class="sector-num">Sector 07 · GICS Financials</div>
+      <h2 class="sector-title">Financials</h2>
+      <div class="sector-ticker">Sector ETF: XLF (State Street) · VFH (Vanguard) · expense ratio ≈ 0.08%</div>
+    </div>
+
+    <p>Financials is the sector that moves money — banks, insurers, asset managers, exchanges, and payment companies. It is unlike every other sector in one fundamental way: for a bank, <strong>debt is not a financing choice, it is the raw material</strong>. Deposits are inputs, loans are outputs, and the balance sheet — not the income statement — is the thing you analyse. That single fact means the entire valuation toolkit is different: you don't value a bank the way you value a factory.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS Financials splits into <strong>Banks</strong> (deposit-taking lenders), <strong>Financial Services</strong> (diversified financials, capital-markets firms, exchanges, and — since the 2023 GICS revision — the big <strong>payment processors</strong> like Visa and Mastercard, moved here from Technology), and <strong>Insurance</strong> (life, property &amp; casualty, reinsurance). Each is a genuinely different business: a bank earns a lending spread, an insurer earns underwriting profit plus investment income on the "float," an exchange earns transaction fees.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>For banks, money comes in as <strong>deposits</strong> and other funding, and profit is the <strong>spread</strong> between what they earn on loans and pay on deposits. For insurers, it comes in as <strong>premiums</strong>, invested as float until claims are paid. For asset managers and exchanges, it's <strong>fees</strong>. The sector is the circulatory system of the economy: it channels savings into loans and investment, which is exactly why its health is so tied to the credit cycle and why regulators watch it so closely.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 The rate-sensitivity nuance</span><br>Financials have a <strong>mixed</strong> relationship with interest rates. Rising rates generally <em>widen</em> net interest margins (good for bank earnings) — but they can also <em>hurt</em> the value of banks' bond portfolios and slow loan demand. The 2023 US regional-bank failures were exactly this: rising rates crushed the value of long-dated bonds banks held. So "rates up = banks win" is too simple; it depends on the balance sheet.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The key sub-structures behave differently. <strong>Banks</strong> are cyclical and credit-sensitive — they thrive in expansions and suffer loan losses in recessions. <strong>Insurers</strong> are steadier, earning on underwriting discipline and investment income. <strong>Asset managers and exchanges</strong> are fee-based and tied to market levels and trading volumes. A useful international note: US banks structurally out-earn European ones (US top banks run ~15–17% ROE versus a European average near 10.7%), which is why US banks have long traded at higher valuations — though 2025 saw European banks re-rate sharply for the first time in 15 years.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Because the balance sheet is the anchor, Financials uses equity- and book-based metrics rather than the EV/EBITDA and margin tools used elsewhere. EV/EBITDA is essentially meaningless for a bank.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Financials (esp. banks)</div>
+      <div class="metric-row"><span class="metric-name">P / TBV (Price to Tangible Book Value)</span> — the primary bank multiple. Strips goodwill/intangibles (which carry no regulatory capital) from book value. A bank earning its cost of equity trades near <strong>1.0x</strong> TBV; above its cost of equity, at a premium.</div>
+      <div class="metric-row"><span class="metric-name">ROE / ROTCE</span> — return on equity / return on tangible common equity. ROTCE removes goodwill distortion and is <strong>the single most important profitability metric</strong>; it links directly to P/TBV. Healthy range ~10–15%+ (JPMorgan ~20%).</div>
+      <div class="metric-row"><span class="metric-name">NIM (Net Interest Margin)</span> — <span class="metric-formula">net interest income ÷ interest-earning assets</span>. The core measure of lending profitability; typically 2.5–3.5%.</div>
+      <div class="metric-row"><span class="metric-name">ROA</span> — net income ÷ assets; 1.0%+ is strong for a bank.</div>
+      <div class="metric-row"><span class="metric-name">Efficiency ratio</span> — costs as a % of revenue; lower is better (well-run banks below ~60%).</div>
+      <div class="metric-row"><span class="metric-name">Provisions for credit losses</span> — money set aside for expected bad loans; rises going into a downturn and directly hits earnings.</div>
+      <div class="metric-row"><span class="metric-name">Combined ratio (insurers)</span> — claims + expenses as a % of premiums; below 100% means the underwriting itself is profitable.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Financials — banks especially — are <strong>cyclical</strong> and often <strong>early-cycle</strong> leaders: they rally coming out of a recession as loan growth resumes, credit losses fade, and the yield curve steepens. They are highly geared to the <strong>credit cycle</strong> (loan losses spike in recessions) and to <strong>interest rates and the yield curve</strong> (banks borrow short and lend long, so a steep curve helps). This dual sensitivity — economy <em>and</em> rates — makes them a key sector for reading macro conditions.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Financials securities</span><br>
+    <strong>Use the right metrics.</strong> P/TBV and ROTCE, not EV/EBITDA. A bank trading below 1.0x tangible book is telling you the market doubts it earns its cost of equity.<br><br>
+    <strong>Rates cut both ways.</strong> Rising rates help margins but can hurt bond holdings and loan demand — check duration and deposit mix, don't assume "rates up = win."<br><br>
+    <strong>Credit cycle timing.</strong> Watch loan-loss provisions and the direction of the economy; bank earnings are cyclical and can turn fast.<br><br>
+    <strong>The yield curve.</strong> A steep curve is a tailwind for bank net interest income; a flat/inverted one is a headwind.<br><br>
+    <strong>Regulation and capital.</strong> Basel rules, stress tests, and capital requirements shape returns and dividends. Regulatory risk is ever-present.<br><br>
+    <strong>Book value can be misstated.</strong> Loan-loss provisions and held-to-maturity securities mean reported book may not reflect true economic value.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity; the sector ETF <strong>XLF</strong> (or VFH); regional-bank and insurance sub-sector ETFs. <strong>Example companies:</strong> banks like JPMorgan, Bank of America, UBS, HSBC; payment networks like Visa, Mastercard; insurers like Allianz, AIG, Chubb; asset managers like BlackRock; exchanges like CME. <strong>Types of firm to recognise:</strong> money-center bank, regional bank, P&amp;C insurer, life insurer, reinsurer, asset manager, exchange, and payment processor — each analysed with different metrics.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/fig-investment-banking/price-to-book-value-tangible-book-value">FIG IB Guide — P/TBV</a>; <a href="https://ibinterviewquestions.com/guides/fig-investment-banking/roe-rotce-roa-measuring-bank-profitability">FIG IB Guide — ROE/ROTCE/ROA</a>; <a href="https://banksift.org/valuation">BankSift — Bank Valuation</a>; <a href="https://eqvista.com/company-valuation/bank-valuation/">Eqvista — Bank Valuation</a>.</p>
+  </div>
+
+  <!-- ============ INFORMATION TECHNOLOGY SECTOR ============ -->
+  <div class="sector prose" id="tech">
+    <div class="sector-header">
+      <div class="sector-num">Sector 08 · GICS Information Technology</div>
+      <h2 class="sector-title">Information Technology</h2>
+      <div class="sector-ticker">Sector ETF: XLK (State Street) · VGT (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Information Technology is the growth engine of the modern market and its largest sector by weight. It spans software, hardware, and semiconductors — but note immediately what it does <em>not</em> contain: after the 2018 reshuffle, Alphabet and Meta moved to Communication Services, and Amazon sits in Consumer Discretionary. So "tech sector" and "big tech" are not the same thing, and buying XLK does not buy you the internet giants. The sector's defining features are high margins, high growth, and — crucially — high sensitivity to interest rates.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS groups it into three: <strong>Software &amp; Services</strong> (application and systems software, IT services), <strong>Technology Hardware &amp; Equipment</strong> (devices, networking, storage), and <strong>Semiconductors &amp; Semiconductor Equipment</strong> (chips and the machines that make them). These three have <em>very</em> different economics — a subscription-software firm and a cyclical chipmaker are almost opposites — so the sector must be analysed sub-sector by sub-sector.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Revenue increasingly comes from <strong>recurring subscriptions</strong> (software), high-volume product sales (hardware), and cyclical chip demand (semis). The prize of the software model is that once a customer is acquired, the marginal cost of serving them is tiny, so gross margins are enormous and cash flow compounds. Money flows back out into <strong>R&amp;D</strong> and — for semiconductors — <strong>staggering capital expenditure</strong> (a leading-edge chip fab costs tens of billions), which is why semis behave nothing like asset-light software.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Margin &amp; the two economics</span><br>Software/SaaS runs <strong>gross margins of 70–85%+</strong> (best-in-class above 85%) — the marginal cost of another subscription is near zero. Semiconductors, by contrast, are <strong>cyclical and capital-intensive</strong>, valued on normalised mid-cycle EBITDA. One sector, two opposite cost structures: asset-light software versus fab-heavy chips.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p><strong>Software/SaaS</strong> is the high-margin, recurring-revenue heart of the sector — valued on revenue and retention because many high-growth names have negative earnings. <strong>Semiconductors</strong> are the cyclical backbone: essential to everything, but boom-and-bust, capital-hungry, and now the epicentre of the AI build-out (Nvidia). <strong>Hardware</strong> sits in between — lower margins, more commoditised, but with recurring services layered on. The concentration is extreme: XLK is dominated by a handful of mega-caps (Nvidia, Apple, Microsoft, Broadcom), so the sector's fate rests heavily on a few names.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Because so many software firms run negative EBITDA and front-loaded investment, standard EV/EBITDA and DCF often fail. The sector built its own metric set around recurring revenue and the growth-vs-profit trade-off.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Information Technology</div>
+      <div class="metric-row"><span class="metric-name">ARR / MRR</span> — annual (or monthly) recurring revenue. The core top-line measure for subscription software; more meaningful than GAAP revenue for SaaS health.</div>
+      <div class="metric-row"><span class="metric-name">Rule of 40</span> — <span class="metric-formula">revenue growth % + profit (EBITDA/FCF) margin % ≥ 40</span>. The standard test of whether a software firm balances growth and profitability. Above 40 = healthy; the single best predictor of valuation premium.</div>
+      <div class="metric-row"><span class="metric-name">Net Revenue Retention (NRR)</span> — revenue from existing customers year-over-year. Above <strong>100%</strong> means customers spend more over time (expansion); above 120% is a strong signal.</div>
+      <div class="metric-row"><span class="metric-name">EV / Revenue (or EV/ARR)</span> — the primary SaaS multiple (typically ~3–14x, higher for fast growers), used where earnings are negative.</div>
+      <div class="metric-row"><span class="metric-name">LTV / CAC</span> — customer lifetime value ÷ acquisition cost. Minimum ~3:1 (ideally 5:1+) for a healthy unit economic model.</div>
+      <div class="metric-row"><span class="metric-name">Gross margin</span> — 70–85%+ for real software; a lower figure signals a business that won't scale as profitably.</div>
+      <div class="metric-row"><span class="metric-name">EV / EBITDA (normalised)</span> — used for cyclical semiconductors on mid-cycle earnings; gross margin and inventory turns are key there.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Technology is a <strong>growth / cyclical</strong> sector that typically leads in the <strong>expansion</strong> phase, when risk appetite is high. Its defining macro sensitivity is to <strong>interest rates</strong>: because so much of a tech company's value is in <em>future</em> cash flows, higher discount rates hit high-multiple tech hardest (a rate rise lowers the present value of distant profits more than near-term ones). This is why tech sells off sharply when rates rise and rallies when they fall. Semiconductors add their own product cycle on top of the economic one.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Information Technology securities</span><br>
+    <strong>Interest rates are the swing factor.</strong> High-multiple, long-duration tech is the most rate-sensitive equity there is. Watch the direction of rates as much as the companies.<br><br>
+    <strong>"Tech" ≠ "big tech."</strong> XLK excludes Alphabet, Meta (Comm. Services) and Amazon (Discretionary). Check holdings before assuming exposure.<br><br>
+    <strong>Extreme concentration.</strong> A few mega-caps dominate XLK; the ETF is effectively a bet on Nvidia/Apple/Microsoft.<br><br>
+    <strong>Use the right metric per sub-sector.</strong> Rule of 40 and EV/ARR for SaaS; normalised EV/EBITDA for cyclical semis. Don't apply a P/E to a loss-making growth name.<br><br>
+    <strong>Semiconductor cyclicality.</strong> Chips boom and bust on their own product cycle and inventory swings, independent of the broad economy.<br><br>
+    <strong>Valuation risk.</strong> High multiples price in high growth; any disappointment is punished severely.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity; the sector ETF <strong>XLK</strong> (or VGT); dedicated semiconductor (SMH, SOXX) and software ETFs for sub-sector exposure. <strong>Example companies:</strong> software like Microsoft, Oracle, Salesforce, Adobe, ServiceNow; semis like Nvidia, TSMC, Broadcom, ASML; hardware like Apple, Cisco. <strong>Types of firm to recognise:</strong> SaaS/application software, systems software, IT services, semiconductor designer, semiconductor-equipment maker, and hardware/devices — from asset-light recurring-revenue software to capital-heavy cyclical chips.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/valuation-investment-banking/technology-saas-valuation-revenue-multiples-arr-rule-of-40">Tech &amp; SaaS Valuation — Rule of 40, ARR</a>; <a href="https://ibinterviewquestions.com/guides/tmt-investment-banking/tmt-sub-sector-map">TMT IB Guide — Sub-Sector Map</a>; <a href="https://aventis-advisors.com/rule-of-40-in-saas-2026/">Aventis Advisors — Rule of 40 (2026)</a>; <a href="https://www.cloudzero.com/blog/rule-of-40/">CloudZero — Rule of 40</a>.</p>
+  </div>
+
+
+  <!-- ============ COMMUNICATION SERVICES SECTOR ============ -->
+  <div class="sector prose" id="comms">
+    <div class="sector-header">
+      <div class="sector-num">Sector 09 · GICS Communication Services</div>
+      <h2 class="sector-title">Communication Services</h2>
+      <div class="sector-ticker">Sector ETF: XLC (State Street) · VOX (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Communication Services is the newest and most internally split sector — created in the 2018 GICS reshuffle by combining old-school telecoms with the internet and media giants pulled out of Technology and Consumer Discretionary. The result is a sector with a split personality: stable, dividend-paying telecom utilities on one side, and high-growth digital advertising and entertainment platforms on the other. This is where Alphabet, Meta, and Netflix live — which is exactly why "buying tech" (XLK) misses them.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS splits it into two very different groups. <strong>Telecommunication Services</strong> — the traditional wireless and fixed-line carriers (Verizon, AT&amp;T, Deutsche Telekom): capital-intensive, mature, dividend-heavy, utility-like. And <strong>Media &amp; Entertainment</strong> — interactive media (Alphabet/Google, Meta), entertainment (Netflix, Disney), and interactive gaming: growth-oriented, advertising- and subscription-driven, asset-light. The two halves share a sector label but almost nothing else economically.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>The telecom half earns from <strong>subscription fees</strong> for connectivity — recurring, predictable, but low-growth. The media/internet half earns from <strong>digital advertising</strong> (Google, Meta) and <strong>content subscriptions</strong> (Netflix). Money flows back out very differently: telecoms sink enormous capital into networks (spectrum, 5G, fibre), while the platforms spend on R&amp;D, content, and user acquisition. The sector's overall weight and performance is dominated by the mega-cap platforms, not the carriers.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Two economics in one sector</span><br>The split is stark. <strong>Telecom</strong> — capital-intensive, high debt, mature, high dividend yields, low growth, valued like a utility. <strong>Internet platforms</strong> — asset-light, high-margin, advertising-driven, high growth, valued on EV/Revenue, EV/User, and take-rate. A single XLC purchase blends a bond-like carrier with a growth platform.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The analytical divide is <strong>connectivity vs. content/platforms</strong>. Telecoms are network-owning utilities — their moat is expensive infrastructure and their risk is capex intensity and price competition. Internet platforms are <strong>network-effect</strong> businesses — their moat is user scale and data, monetised through advertising. Traditional media (Disney) sits awkwardly between, disrupted by streaming economics. The sector is heavily concentrated: Alphabet and Meta alone can represent the large majority of XLC's weight, so the "sector" is effectively a duopoly bet with a telecom tail.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Because the two halves are so different, you apply different toolkits — utility-style metrics to telecom, platform metrics to the internet names.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Communication Services</div>
+      <div class="metric-row"><span class="metric-name">ARPU (Average Revenue Per User)</span> — revenue per subscriber. The core operating metric for both telecoms and subscription platforms; growth in ARPU signals pricing power.</div>
+      <div class="metric-row"><span class="metric-name">Subscriber growth &amp; churn</span> — net adds and the rate customers leave. Critical for both carriers and streaming; high churn erodes the subscription base.</div>
+      <div class="metric-row"><span class="metric-name">EV / Revenue, EV / User</span> — the platform multiples for advertising/internet names, where growth and monetisation matter more than current earnings.</div>
+      <div class="metric-row"><span class="metric-name">Take rate</span> — the % a platform keeps of the transactions it facilitates; a key monetisation measure for internet businesses.</div>
+      <div class="metric-row"><span class="metric-name">Dividend yield &amp; FCF (telecom)</span> — carriers are income stocks; dividend sustainability against heavy capex is the key question.</div>
+      <div class="metric-row"><span class="metric-name">Ad revenue growth</span> — for Google/Meta, digital-advertising trends are the dominant driver, and are themselves cyclical with the economy.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>The sector's cyclicality depends entirely on which half you look at. <strong>Telecom</strong> is defensive — people keep paying phone bills in a recession — with utility-like, rate-sensitive behaviour due to high dividends and debt. <strong>Internet/media</strong> is cyclical and growth-oriented: digital advertising rises and falls with corporate marketing budgets, so Google and Meta are exposed to the economic cycle and, like all growth names, to interest rates. The blended sector therefore behaves mostly like its mega-cap growth constituents.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Communication Services securities</span><br>
+    <strong>Know which half you're buying.</strong> XLC is dominated by Alphabet and Meta — it behaves like a growth/advertising bet, not like a telecom. The carriers are a small, defensive tail.<br><br>
+    <strong>Ad-cycle exposure.</strong> Digital advertising is cyclical; a slowdown in corporate ad spend hits the platform giants directly.<br><br>
+    <strong>Regulatory &amp; antitrust risk.</strong> Big tech platforms face ongoing antitrust and privacy scrutiny globally — a structural, headline-driven risk.<br><br>
+    <strong>Telecom = rate-sensitive income.</strong> The carriers trade like bond proxies: high yield, high debt, vulnerable when rates rise.<br><br>
+    <strong>Concentration.</strong> A two-stock duopoly drives the sector; the ETF is not a diversified "communications" play.<br><br>
+    <strong>Content-cost economics.</strong> For streaming/media, rising content spend and competition can erode margins even as subscribers grow.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity; the sector ETF <strong>XLC</strong> (or VOX); telecom-specific or communications ETFs for the income half. <strong>Example companies:</strong> internet/media like Alphabet (Google), Meta, Netflix, Disney; telecoms like Verizon, AT&amp;T, Deutsche Telekom, T-Mobile; gaming like Electronic Arts. <strong>Types of firm to recognise:</strong> internet/advertising platform, streaming/entertainment, interactive gaming, wireless carrier, and fixed-line/fibre telecom — spanning high-growth platform economics to defensive utility-like carriers.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/tmt-investment-banking/tmt-sub-sector-map">TMT IB Guide — Sub-Sector Map</a>; <a href="https://mercurypartners.net/financial-education/spot-the-sector/">Mercury Partners — Spot the Sector</a>; <a href="https://www.schwab.com/learn/story/stock-sector-outlook">Charles Schwab — Sector Outlook</a>; <a href="https://finzer.io/en/glossary/gics">Finzer — GICS 2018 reshuffle</a>.</p>
+  </div>
+
+  <!-- ============ UTILITIES SECTOR ============ -->
+  <div class="sector prose" id="utilities">
+    <div class="sector-header">
+      <div class="sector-num">Sector 10 · GICS Utilities</div>
+      <h2 class="sector-title">Utilities</h2>
+      <div class="sector-ticker">Sector ETF: XLU (State Street) · VPU (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Utilities is the most predictable and most heavily regulated sector in the market — the companies that deliver electricity, gas, and water. Their appeal is the flip side of their constraint: because a regulator effectively guarantees them a return on their infrastructure, their earnings are unusually stable and their dividends generous. That makes them the classic <strong>defensive "bond proxy"</strong> — and, for exactly the same reason, one of the most interest-rate-sensitive sectors there is.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS Utilities covers <strong>Electric Utilities</strong>, <strong>Gas Utilities</strong>, <strong>Water Utilities</strong>, <strong>Multi-Utilities</strong> (combined), and <strong>Independent Power &amp; Renewable Electricity Producers</strong> — which is, notably, where much <strong>renewable-energy generation</strong> sits (not in the "Energy" sector). The key structural distinction is <strong>regulated</strong> utilities (guaranteed returns, monopoly service areas) versus <strong>merchant/independent</strong> power producers (sell into competitive markets, more volatile).</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>For a regulated utility, revenue is set by a regulator through the <strong>rate base mechanism</strong>: the utility invests in infrastructure (the "rate base"), and the regulator lets it earn an approved rate of return on that investment, recovered through customer bills. This makes revenue remarkably predictable but also <em>capped</em>. Cash flows out into <strong>massive, continuous capital expenditure</strong> (grids, plants, pipes) funded largely by <strong>debt</strong> — utilities are among the most leveraged non-financial companies, which is central to their rate sensitivity.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 The rate-base engine &amp; rate sensitivity</span><br>A regulated utility grows earnings by growing its <strong>rate base</strong> — the more approved infrastructure it builds, the more it earns. But its high debt and bond-like dividend make it <strong>inversely correlated with interest rates</strong>: when Treasury yields rise, utility stocks typically fall, because their financing gets costlier and their ~3%+ dividend looks less attractive versus bonds. Utilities pay far higher yields than the market average — that yield <em>is</em> the investment case.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The critical variable is <strong>regulatory environment quality</strong>. A utility operating under a constructive regulator (predictable, allows fair returns and timely rate increases) is worth materially more than one in a hostile jurisdiction — this is why an otherwise similar utility can trade at very different multiples. The other differentiator is <strong>growth mix</strong>: a pure regulated utility grows slowly and steadily, while one with a renewable-development arm (NextEra's model) adds a growth component that earns a premium multiple. Merchant power producers, exposed to wholesale prices, are more volatile and less bond-like.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>Utilities are valued on earnings predictability and dividend sustainability, not on the EV/EBITDA framework used for competitive businesses.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Utilities</div>
+      <div class="metric-row"><span class="metric-name">Rate base &amp; rate-base growth</span> — the regulator-approved investment base on which the utility earns its return. <strong>Rate-base growth is the core driver of earnings growth</strong> for a regulated utility.</div>
+      <div class="metric-row"><span class="metric-name">EV / Rate base</span> — a utility-specific multiple, typically <strong>1.2–1.8x</strong> depending on regulatory quality and growth.</div>
+      <div class="metric-row"><span class="metric-name">Forward P/E</span> — large-cap utilities typically trade at <strong>16–22x</strong> forward earnings; premiums (NextEra ~22–23x) reflect higher growth and better regulation.</div>
+      <div class="metric-row"><span class="metric-name">Allowed ROE</span> — the return on equity the regulator permits on the rate base; a key determinant of profitability set by regulators, not the market.</div>
+      <div class="metric-row"><span class="metric-name">Dividend yield &amp; payout ratio</span> — utilities are income stocks; the size, safety, and growth of the dividend is central to the thesis.</div>
+      <div class="metric-row"><span class="metric-name">Dividend Discount Model (DDM)</span> — because cash flows and dividends are so predictable, DDM is a natural valuation method here (rarely usable elsewhere).</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Utilities are the archetypal <strong>defensive</strong> sector: demand for electricity and water barely moves with the economy, so earnings hold up through recessions, and the sector outperforms in <strong>late-cycle and downturn</strong> phases. It has <strong>low beta</strong> and dampens portfolio volatility. Its dominant risk factor is not the economy but <strong>interest rates</strong>: as a leveraged, high-yield "bond proxy," it is one of the most rate-sensitive sectors, underperforming sharply when yields rise even if the underlying business is unaffected.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Utilities securities</span><br>
+    <strong>Interest rates first.</strong> Utility prices move inversely to bond yields. Rising rates are the single biggest headwind, regardless of operating performance.<br><br>
+    <strong>Regulatory environment.</strong> The quality and constructiveness of the regulator is the biggest fundamental differentiator between two otherwise-similar utilities.<br><br>
+    <strong>Rate-base growth.</strong> This is the earnings-growth engine; watch approved capital plans and whether the regulator lets the utility recover costs.<br><br>
+    <strong>Debt load.</strong> Utilities are highly leveraged; rising financing costs squeeze them and can pressure the dividend.<br><br>
+    <strong>Dividend safety.</strong> The yield is the point — check the payout ratio and cash coverage for sustainability.<br><br>
+    <strong>The renewables angle.</strong> Much clean-power generation sits <em>here</em>, not in Energy — utilities with renewable-development arms can earn a growth premium.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock equity, held for income; the sector ETF <strong>XLU</strong> (or VPU); dividend and infrastructure funds that lean on utilities. <strong>Example companies:</strong> NextEra Energy, Duke Energy, Southern Company, Dominion (US); National Grid, Iberdrola, E.ON, RWE (Europe). <strong>Types of firm to recognise:</strong> regulated electric utility, gas utility, water utility, multi-utility, and independent/renewable power producer — from bond-like regulated monopolies to more volatile merchant generators.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/energy-investment-banking/utility-valuation-pe-rate-base-dividend-models">Energy IB Guide — Utility Valuation</a>; <a href="https://www.chase.com/personal/investments/learning-and-insights/article/what-to-consider-when-investing-in-utilities">Chase — Investing in Utilities</a>; <a href="https://www.schwab.com/learn/story/stock-sector-outlook">Charles Schwab — Sector Outlook</a>.</p>
+  </div>
+
+  <!-- ============ REAL ESTATE SECTOR ============ -->
+  <div class="sector prose" id="realestate">
+    <div class="sector-header">
+      <div class="sector-num">Sector 11 · GICS Real Estate</div>
+      <h2 class="sector-title">Real Estate</h2>
+      <div class="sector-ticker">Sector ETF: XLRE (State Street) · VNQ (Vanguard) · expense ratio ≈ 0.09%</div>
+    </div>
+
+    <p>Real Estate is the youngest GICS sector — carved out of Financials in 2016 — and it is dominated by <strong>REITs</strong> (Real Estate Investment Trusts): companies that own income-producing property and, in exchange for special tax treatment, must distribute nearly all their income as dividends. That structure makes Real Estate a high-yield, income-oriented sector with its own dedicated valuation language, and — like Utilities — one of the most interest-rate-sensitive corners of the market.</p>
+
+    <div class="layer-label">1 · Definition &amp; what falls under it</div>
+    <p>GICS Real Estate splits into <strong>Equity REITs</strong> (own and operate property) and <strong>Real Estate Management &amp; Development</strong> (services, developers). The REITs themselves span wildly different property types — each almost a mini-sector: residential, retail, office, industrial/logistics, healthcare, data centres, cell towers, and self-storage. These behave very differently: a data-centre REIT riding the AI boom has little in common with a struggling office REIT, despite sharing the sector.</p>
+
+    <div class="layer-label">2 · Where the money comes from &amp; where it flows</div>
+    <p>Revenue comes from <strong>rent</strong> — the cash tenants pay to occupy property. Because REITs must pay out almost all taxable income (typically 90%+) to keep their tax status, they distribute most of that rent as <strong>dividends</strong>, which is why the sector yields well above the market. Cash flows back out into property acquisition, development, and maintenance, and REITs typically fund growth with a mix of <strong>debt and new equity</strong> — making their cost of capital, and therefore interest rates, central to their economics.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Why depreciation makes net income useless here</span><br>Property carries huge non-cash <strong>depreciation</strong> charges that crush reported net income without reflecting real economics — buildings often appreciate. So P/E and EPS are misleading for REITs. The sector instead uses <strong>FFO</strong> and <strong>AFFO</strong>, which add depreciation back to reveal true cash generation. Like Utilities, REITs are highly rate-sensitive: in the 2022–23 hiking cycle, many REIT indices fell <strong>25–30%</strong>.</div>
+
+    <div class="layer-label">3 · The structure in detail</div>
+    <p>The property type is the single biggest driver of a REIT's fate. <strong>Industrial/logistics</strong> (warehouses) and <strong>data centres / cell towers</strong> have ridden e-commerce and digital-infrastructure tailwinds; <strong>residential</strong> is relatively stable; <strong>retail</strong> and especially <strong>office</strong> have faced structural headwinds from e-commerce and remote work. Beyond property type, the key variables are occupancy, lease length, tenant credit quality, and the spread between property yields (cap rates) and financing costs.</p>
+
+    <div class="layer-label">4 · How it is actually valued — sector-specific metrics</div>
+    <p>REIT analysis has arguably the most distinctive metric set of any sector, built entirely around cash flow and asset value rather than accounting earnings.</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Key metrics for Real Estate (REITs)</div>
+      <div class="metric-row"><span class="metric-name">FFO (Funds From Operations)</span> — <span class="metric-formula">net income + depreciation − gains on sales</span>. The REIT equivalent of earnings; removes the distortion of property depreciation. Use the standard NAREIT definition for fair comparison.</div>
+      <div class="metric-row"><span class="metric-name">AFFO (Adjusted FFO)</span> — <span class="metric-formula">FFO − maintenance capex − straight-line rent</span>. The closest measure of sustainable, distributable cash — the best gauge of dividend-paying ability. Analogous to free cash flow.</div>
+      <div class="metric-row"><span class="metric-name">P / FFO &amp; P / AFFO</span> — the REIT equivalents of the P/E ratio; how much you pay per dollar of cash flow.</div>
+      <div class="metric-row"><span class="metric-name">Cap rate</span> — <span class="metric-formula">net operating income ÷ property value</span>. The property yield. The most sensitive input in NAV — a 0.5% cap-rate move can swing a property's value ~9%.</div>
+      <div class="metric-row"><span class="metric-name">NAV (Net Asset Value)</span> — the market value of all properties minus debt. REITs trade at a premium or discount to NAV; the primary intrinsic-value measure.</div>
+      <div class="metric-row"><span class="metric-name">AFFO payout ratio</span> — dividends ÷ AFFO. <strong>70–80% is healthy</strong>; consistently near/above 100% is a red flag that the dividend may be funded by debt or asset sales.</div>
+      <div class="metric-row"><span class="metric-name">Occupancy &amp; lease terms</span> — how full the properties are and how long leases run; the operational backbone of rental income.</div>
+    </div>
+
+    <div class="layer-label">5 · Behaviour across the cycle</div>
+    <p>Real Estate is a <strong>hybrid</strong>: partly a yield-driven defensive (stable rental income, high dividends) and partly cyclical (property values and rents move with the economy). Its overwhelming macro sensitivity, though, is to <strong>interest rates</strong>, through three channels at once — rising rates lift cap rates (cutting property values and NAV), raise the cost of debt financing (compressing FFO), and make REIT dividend yields less competitive versus bonds. This triple exposure is why REITs, like utilities, sell off hard in rate-hiking cycles.</p>
+
+    <div class="layer-label">6 · The trading angle — what to watch</div>
+    <div class="watchout"><span class="wo-label">⚠ What to watch when trading Real Estate securities</span><br>
+    <strong>Interest rates hit through three channels.</strong> Cap rates, financing costs, and dividend competitiveness all move against REITs when rates rise — the sector's dominant risk.<br><br>
+    <strong>Use FFO/AFFO, never P/E.</strong> Net income is distorted by depreciation; the whole sector runs on FFO and AFFO. Applying a P/E here is a beginner's error.<br><br>
+    <strong>Property type is destiny.</strong> Data centres and logistics are different worlds from office and retail. Know exactly what the REIT owns.<br><br>
+    <strong>Check the AFFO payout ratio.</strong> A ratio near or above 100% warns the dividend may not be covered by real cash flow.<br><br>
+    <strong>Cap-rate sensitivity.</strong> Small cap-rate moves swing NAV materially; watch the spread between cap rates and financing costs.<br><br>
+    <strong>Tenant &amp; occupancy risk.</strong> Vacancies, lease expirations, and tenant credit quality drive rental income and dividend safety.</div>
+
+    <div class="layer-label">7 · Typical securities &amp; example companies</div>
+    <p><strong>How it's most commonly traded:</strong> single-stock REIT equity; the sector ETF <strong>XLRE</strong> (or VNQ); property-type-specific REIT ETFs (data centre, residential, industrial). <strong>Example companies:</strong> Prologis (logistics), American Tower &amp; Equinix (towers/data centres), Realty Income (retail net-lease), Public Storage (self-storage), Welltower (healthcare), Simon Property (malls). <strong>Types of firm to recognise:</strong> industrial/logistics REIT, data-centre/tower REIT, residential REIT, retail REIT, office REIT, healthcare REIT, and self-storage REIT — each a distinct property-cycle exposure, all rate-sensitive.</p>
+
+    <p class="sources">Sources: <a href="https://ibinterviewquestions.com/guides/valuation-investment-banking/real-estate-reit-valuation-nav-ffo-affo-cap-rates">REIT Valuation — NAV, FFO, AFFO, Cap Rates</a>; <a href="https://www.fe.training/free-resources/real-estate/reit-valuation-methods/">Financial Edge — REIT Valuation Methods</a>; <a href="https://realestatemarket.us.com/understanding-reit-metrics-a-guide-to-ffo-affo-and-dividend-coverage-deep-dive-into-key-reit-metrics-explain-funds-from-operations-ffo-adjusted-funds-from-operations-affo-and-dividend-coverage-ratio-s/">RealEstateMarket — REIT Metrics</a>; <a href="https://paperfree.com/en/magazine/accessing-a-real-estate-investment-trust-ffo-and-affo">Paperfree — FFO &amp; AFFO</a>.</p>
+  </div>
+
+
+  <!-- ============ CROSS-CUTTING: CYCLES & ROTATION ============ -->
+  <div class="section prose" id="rotation">
+    <div class="sector-header">
+      <div class="sector-num">Part Three · The Mechanics</div>
+      <h2 class="sector-title">Cycles &amp; sector rotation</h2>
+      <div class="sector-ticker">How the eleven sectors behave together across the economy</div>
+    </div>
+
+    <p>Having worked through the sectors one by one, the final step is to see how they behave <em>as a system</em>. Sectors do not move in lockstep — at any moment some are leading and others lagging, and the pattern is not random. It follows two great engines: the <strong>economic cycle</strong> and the <strong>direction of interest rates</strong>. Understanding these two forces turns a list of eleven sectors into a map you can actually navigate.</p>
+
+    <div class="layer-label">The core split: cyclical vs. defensive</div>
+    <p>The most important single distinction across all sectors is <strong>cyclical versus defensive</strong>. <strong>Cyclical</strong> sectors — Consumer Discretionary, Financials, Industrials, Materials, Energy, and to a large extent Technology — see their earnings rise and fall with the economy; they soar in expansions and suffer in downturns. <strong>Defensive</strong> sectors — Consumer Staples, Health Care, and Utilities — sell things people need regardless of conditions, so their earnings are stable; they lag in booms but hold up in recessions. Real Estate and Communication Services are hybrids, with both cyclical and defensive components. This one axis explains most of why sectors diverge.</p>
+
+    <div class="layer-label">The two independent engines</div>
+    <p>It is tempting to reduce everything to "growth good, recession bad," but there are actually <strong>two separate drivers</strong>, and they don't always point the same way. The first is the <strong>economic cycle</strong> (is growth accelerating or decelerating?). The second is the <strong>direction of interest rates</strong> (is monetary policy tightening or easing?). When they align, moves are powerful: in 2008, recession plus rate cuts sent money into defensives; in 2021, recovery plus low rates fuelled cyclicals and growth. When they conflict — as in 2022, when the economy was still growing but rates were rising fast — the picture gets complicated, and rate-sensitive sectors (Utilities, Real Estate, high-multiple Tech) can fall even in a growing economy. Always ask <em>both</em> questions.</p>
+
+    <div class="layer-label">The four phases of the cycle</div>
+    <p>The classic sector-rotation framework maps each phase of the business cycle to the sectors that have historically led. Treat it as a mental model, not a rigid playbook — real cycles are messier, can skip phases, and are distorted by policy. Since 1945 the US has seen about 12 cycles, averaging ~6 years (expansions ~5 years, recessions ~10 months).</p>
+
+    <div class="metrics-box">
+      <div class="mb-title">Sector leadership by cycle phase</div>
+      <div class="metric-row"><span class="metric-name">Early expansion (recovery)</span> — economy turning up, rates still low, central bank accommodative. Leaders: <strong>Financials</strong> (yield curve steepens, credit losses peak), <strong>Consumer Discretionary</strong> (pent-up demand releases), <strong>Industrials</strong> (restocking, capex resumes), <strong>Technology</strong> (delayed IT spending restarts). The cyclicals lead.</div>
+      <div class="metric-row"><span class="metric-name">Mid expansion (the sweet spot)</span> — solid growth, strong employment, contained inflation. The longest phase (often 3–5 years); the <strong>broadest range of sectors</strong> performs well, with Technology often leading on secular growth.</div>
+      <div class="metric-row"><span class="metric-name">Late cycle</span> — growth slows, inflation and rates rise, curve flattens. Leaders rotate to pricing-power and commodity plays: <strong>Energy</strong>, <strong>Materials</strong>, and the more defensive <strong>Health Care</strong> and <strong>Consumer Staples</strong> begin to attract money.</div>
+      <div class="metric-row"><span class="metric-name">Recession</span> — growth contracts, profits fall, risk appetite disappears. Leaders are the classic defensives: <strong>Utilities (XLU)</strong>, <strong>Consumer Staples (XLP)</strong>, <strong>Health Care (XLV)</strong> — stable revenues (people still pay for power, food, medicine).</div>
+    </div>
+
+    <div class="layer-label">The yield curve — the key leading indicator</div>
+    <p>If you watch one signal for cycle transitions, watch the <strong>yield curve</strong> — specifically the spread between the 10-year and 2-year Treasury yields. When the curve is <strong>steep</strong> (long rates well above short), markets expect growth and inflation — this favours <strong>cyclicals</strong>. When it <strong>flattens or inverts</strong> (short rates above long), it signals tightening policy that may tip the economy into recession — this favours <strong>defensives</strong>. The track record is striking: <strong>every US recession since 1955 has been preceded by a yield-curve inversion</strong>, though the lead time varies widely (6–24 months). Other useful leading indicators include the Conference Board's LEI, PMI/ISM manufacturing surveys, initial jobless claims, and credit spreads (widening spreads favour defensives).</p>
+
+    <div class="layer-label">Practical cautions</div>
+    <div class="watchout"><span class="wo-label">⚠ How sector rotation goes wrong</span><br>
+    <strong>Markets lead the data.</strong> Sectors get priced 6–9 months ahead of the economy. By the time a recession is officially declared, defensives have often already outperformed by 10–20%. Act on leading indicators, not lagging confirmations.<br><br>
+    <strong>Signals are ambiguous in real time.</strong> The 2019 curve inversion "predicted" a recession that only arrived via an unrelated shock (COVID) — meanwhile the S&amp;P rose ~29% in 2019. Even good indicators mislead.<br><br>
+    <strong>Don't over-concentrate.</strong> Cycle timing is imprecise and sector-specific risks (regulation, disruption) can overwhelm cycle effects. A common rule: cap any sector at ~2x its benchmark weight.<br><br>
+    <strong>Don't over-trade.</strong> Each rotation is a taxable event; frequent trading erodes returns. Practitioners typically rotate only 2–3 times a year.<br><br>
+    <strong>Mid-cycle slowdowns fake recessions.</strong> A temporary soft patch can look like the start of a downturn and trigger a premature defensive shift.</div>
+
+    <p class="sources">Sources: <a href="https://gridoasis.com/guides/sector-analysis/sector-rotation/">Grid Oasis — Sector Rotation &amp; the Cycle</a>; <a href="https://ryanoconnellfinance.com/sector-rotation/">Ryan O'Connell, CFA — Sector Rotation</a>; <a href="https://hedgetrace.com/learn/sector-rotation-strategy">HedgeTrace — Sector Rotation</a>; <a href="https://equicurious.com/learn/equities/global-and-sector-investing/sector-rotation-strategies-through-the-us-business-cycle">Equicurious — Rotation Through the Cycle</a>; <a href="https://www.fidelity.com/learning-center/trading-investing/markets-sectors/intro-sector-rotation-strats">Fidelity — Intro to Sector Rotation</a>.</p>
+  </div>
+
+  <!-- ============ CONCLUSION + MASTER TABLE ============ -->
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion · The whole map on one page</p>
+    <h3>Bringing it together</h3>
+    <p>The market's eleven sectors are not a flat list to memorise but a structured system. Two classification philosophies decide <em>where a company sits</em> (market-based GICS/ICB for investors, production-based NAICS/NACE for statisticians). Within the investor's GICS map, each sector has its own value chain, its own specialised valuation metrics, and its own place on the <strong>cyclical–defensive</strong> spectrum. And the whole set rotates across the economic cycle, driven by the twin engines of <strong>growth</strong> and <strong>interest rates</strong>. Master those layers and "which sector?" stops being trivia and becomes a genuine tool for building and managing a portfolio.</p>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>Sector (ETF)</th><th>Cyclical / Defensive</th><th>Main driver</th><th>Rate sensitivity</th><th>Signature metric</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Energy (XLE)</td><td>Cyclical (late)</td><td>Oil &amp; gas prices, OPEC</td><td>Low</td><td>EBITDAX, reserve replacement</td></tr>
+          <tr><td>Materials (XLB)</td><td>Cyclical (late)</td><td>Global growth, China, commodities</td><td>Low–moderate</td><td>AISC, P/NAV</td></tr>
+          <tr><td>Industrials (XLI)</td><td>Cyclical (early)</td><td>Capex, economic activity</td><td>Moderate</td><td>Book-to-bill, backlog</td></tr>
+          <tr><td>Cons. Discretionary (XLY)</td><td>Cyclical (early)</td><td>Consumer confidence, wages</td><td>Moderate–high</td><td>Same-store sales</td></tr>
+          <tr><td>Cons. Staples (XLP)</td><td>Defensive</td><td>Steady demand, pricing power</td><td>Moderate (bond proxy)</td><td>Organic growth (price/volume)</td></tr>
+          <tr><td>Health Care (XLV)</td><td>Defensive (+ biotech risk)</td><td>Demographics, pipelines, regulation</td><td>Low–moderate</td><td>rNPV, patent cliff</td></tr>
+          <tr><td>Financials (XLF)</td><td>Cyclical (early)</td><td>Credit cycle, rates, yield curve</td><td>High (mixed)</td><td>P/TBV, ROTCE, NIM</td></tr>
+          <tr><td>Info. Technology (XLK)</td><td>Growth / cyclical</td><td>Innovation, capex, AI</td><td>High</td><td>Rule of 40, ARR, NRR</td></tr>
+          <tr><td>Comm. Services (XLC)</td><td>Hybrid</td><td>Ad cycle (platforms) / income (telco)</td><td>Mixed</td><td>ARPU, EV/User</td></tr>
+          <tr><td>Utilities (XLU)</td><td>Defensive</td><td>Rate base, regulation</td><td>Very high (bond proxy)</td><td>EV/rate base, rate-base growth</td></tr>
+          <tr><td>Real Estate (XLRE)</td><td>Hybrid</td><td>Rents, property values, rates</td><td>Very high</td><td>FFO, AFFO, cap rate</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ KEY TAKEAWAYS ============ -->
+  <div class="section prose">
+    <p class="eyebrow">Key takeaways</p>
+    <h3>What to remember</h3>
+    <ul>
+      <li><strong>There is no single "sector" map.</strong> GICS and ICB classify by market/revenue for investors; NAICS and NACE classify by production process for statisticians. Same company, different box.</li>
+      <li><strong>GICS is the investor's standard:</strong> 11 sectors → 25 groups → 74 industries → 163 sub-industries, placed by primary revenue. It reviews annually (the 2018 Communication Services split moved Alphabet, Meta, Netflix).</li>
+      <li><strong>Check holdings, not names.</strong> Amazon is Consumer Discretionary, Alphabet/Meta are Communication Services, renewables and much of "agriculture" are scattered across other sectors. The label lies.</li>
+      <li><strong>Every sector has its own valuation language:</strong> EBITDAX (Energy), AISC/P-NAV (Materials), book-to-bill (Industrials), same-store sales (Discretionary), rNPV (Health Care), P/TBV &amp; ROTCE (Financials), Rule of 40 &amp; ARR (Tech), rate base (Utilities), FFO/AFFO (Real Estate). Using the wrong metric is a beginner's error.</li>
+      <li><strong>Cyclical vs. defensive is the master axis:</strong> cyclicals (Discretionary, Financials, Industrials, Materials, Energy, Tech) ride the economy; defensives (Staples, Health Care, Utilities) hold through downturns.</li>
+      <li><strong>Two engines drive rotation:</strong> the economic cycle <em>and</em> the direction of interest rates. When they conflict (e.g. 2022), rate-sensitive sectors can fall even in a growing economy.</li>
+      <li><strong>The yield curve is the key leading indicator:</strong> steep favours cyclicals, flat/inverted favours defensives. Every US recession since 1955 followed an inversion (6–24 month lead).</li>
+      <li><strong>Rotation is hard in practice:</strong> markets price 6–9 months ahead, signals mislead in real time, and over-trading/over-concentration destroy returns. Cap sector bets and rotate sparingly.</li>
+    </ul>
+  </div>
+
+  <!-- GLOSSARY (kompletní — napříč sektory) -->
+  <div class="section prose" id="glossary">
+    <p class="eyebrow">Reference</p>
+    <h3>Glossary</h3>
+    <p>The sector-specific vocabulary from across this reference, in one place.</p>
+
+    <h3 style="font-size:17px;opacity:0.7;">Classification</h3>
+    <dl class="glossary">
+      <dt>GICS / ICB</dt>
+      <dd>Market-based classification systems (by revenue/customer) used by investors. GICS: MSCI + S&amp;P; ICB: FTSE Russell.</dd>
+      <dt>NAICS / NACE</dt>
+      <dd>Production-based classification systems (by process) used by government statisticians. NAICS: North America; NACE: EU.</dd>
+      <dt>Sub-industry → industry → industry group → sector</dt>
+      <dd>The GICS hierarchy, from most specific to most general.</dd>
+    </dl>
+
+    <h3 style="font-size:17px;opacity:0.7;">Energy &amp; Materials</h3>
+    <dl class="glossary">
+      <dt>Upstream / Midstream / Downstream</dt>
+      <dd>The oil &amp; gas value chain: finding/extracting, transporting/storing, and refining/selling.</dd>
+      <dt>EBITDAX</dt>
+      <dd>EBITDA plus exploration expense; normalises for differing accounting so oil &amp; gas firms compare like-for-like.</dd>
+      <dt>Crack spread</dt>
+      <dd>A refiner's margin: the difference between refined-product prices and the crude feedstock used to make them.</dd>
+      <dt>Reserve Replacement Ratio</dt>
+      <dd>Reserves added ÷ reserves produced; above 100% means the producer is sustaining its resource base.</dd>
+      <dt>MLP (Master Limited Partnership)</dt>
+      <dd>A tax-advantaged, publicly traded partnership common in midstream energy; must distribute nearly all income, so analysed on yield.</dd>
+      <dt>PV-10</dt>
+      <dd>The present value of future cash flows from proved reserves, discounted at 10% — a standardised reserve-value measure.</dd>
+      <dt>AISC (All-In Sustaining Cost)</dt>
+      <dd>The total per-unit cost to keep a mine producing (cash costs + sustaining capital + royalties + overhead). Margin = metal price − AISC.</dd>
+      <dt>P / NAV</dt>
+      <dd>Price to net asset value; the primary mining valuation metric, where NAV is the discounted value of a company's reserves.</dd>
+      <dt>Cost curve</dt>
+      <dd>The ranking of producers by cost; low-cost producers survive downturns that bankrupt high-cost ones.</dd>
+    </dl>
+
+    <h3 style="font-size:17px;opacity:0.7;">Industrials &amp; Consumer</h3>
+    <dl class="glossary">
+      <dt>Book-to-bill ratio</dt>
+      <dd>New orders ÷ revenue. Above 1.0 signals growing demand and expanding backlog; below 1.0, depleting visibility.</dd>
+      <dt>Backlog</dt>
+      <dd>The value of booked-but-not-yet-delivered orders. For long-cycle industrials, the backlog is effectively the revenue model.</dd>
+      <dt>Operating leverage</dt>
+      <dd>How much operating profit moves for a given change in revenue; high in fixed-cost sectors, amplifying both up- and down-cycles.</dd>
+      <dt>Same-store sales (comps)</dt>
+      <dd>Revenue growth at stores open at least a year; strips out new openings to show organic demand.</dd>
+      <dt>Inventory turnover</dt>
+      <dd>COGS ÷ average inventory; higher means more efficient inventory management (fewer markdowns).</dd>
+      <dt>Pricing power</dt>
+      <dd>The ability to raise prices at or above inflation without losing meaningful volume; the key defensive trait of branded staples.</dd>
+      <dt>Discretionary / Staples ratio</dt>
+      <dd>Relative performance of the two consumer sectors; a simple gauge of market risk appetite (risk-on vs. defensive).</dd>
+    </dl>
+
+    <h3 style="font-size:17px;opacity:0.7;">Health Care, Financials &amp; Tech</h3>
+    <dl class="glossary">
+      <dt>rNPV (risk-adjusted NPV)</dt>
+      <dd>Projects a drug candidate's cash flows assuming approval, then probability-weights by the chance of reaching market. The standard pipeline-valuation method.</dd>
+      <dt>Patent cliff (Loss of Exclusivity)</dt>
+      <dd>When a drug's patent expires, generics enter and revenue collapses; drives structural pharma M&amp;A.</dd>
+      <dt>SOTP (Sum-of-the-Parts)</dt>
+      <dd>Valuing a company by adding up its separately-valued components; used for big pharma (each drug + pipeline + base).</dd>
+      <dt>P / TBV (Price to Tangible Book Value)</dt>
+      <dd>The primary bank valuation multiple; a bank earning its cost of equity trades near 1.0x.</dd>
+      <dt>ROE / ROTCE</dt>
+      <dd>Return on equity / on tangible common equity; ROTCE strips goodwill and is the key bank profitability metric.</dd>
+      <dt>NIM (Net Interest Margin)</dt>
+      <dd>Net interest income ÷ interest-earning assets; the core measure of a bank's lending profitability.</dd>
+      <dt>Combined ratio</dt>
+      <dd>For insurers: claims + expenses as a % of premiums; below 100% means underwriting is profitable.</dd>
+      <dt>ARR / MRR</dt>
+      <dd>Annual / monthly recurring revenue; the core top-line measure for subscription software.</dd>
+      <dt>Rule of 40</dt>
+      <dd>Revenue growth % + profit margin % should exceed 40; the standard SaaS growth-vs-profitability test.</dd>
+      <dt>NRR (Net Revenue Retention)</dt>
+      <dd>Revenue from existing customers year-over-year; above 100% means expansion.</dd>
+      <dt>LTV / CAC</dt>
+      <dd>Customer lifetime value ÷ acquisition cost; a healthy unit-economic model runs 3:1 or better.</dd>
+    </dl>
+
+    <h3 style="font-size:17px;opacity:0.7;">Communication, Utilities &amp; Real Estate</h3>
+    <dl class="glossary">
+      <dt>ARPU</dt>
+      <dd>Average revenue per user; the core operating metric for telecoms and subscription platforms.</dd>
+      <dt>Take rate</dt>
+      <dd>The % a platform keeps of the transactions it facilitates; a key internet-monetisation measure.</dd>
+      <dt>Rate base</dt>
+      <dd>A regulated utility's approved infrastructure investment, on which the regulator lets it earn a set return. Rate-base growth drives earnings growth.</dd>
+      <dt>Allowed ROE</dt>
+      <dd>The return on equity a regulator permits a utility to earn on its rate base.</dd>
+      <dt>DDM (Dividend Discount Model)</dt>
+      <dd>Valuing a stock as the present value of its future dividends; natural for predictable utilities.</dd>
+      <dt>FFO (Funds From Operations)</dt>
+      <dd>Net income + depreciation − gains on sales; the REIT equivalent of earnings, removing property-depreciation distortion.</dd>
+      <dt>AFFO (Adjusted FFO)</dt>
+      <dd>FFO minus maintenance capex; the best measure of a REIT's sustainable, distributable cash flow.</dd>
+      <dt>Cap rate</dt>
+      <dd>Net operating income ÷ property value; the property yield, and the most sensitive input in REIT NAV.</dd>
+      <dt>NAV (Net Asset Value)</dt>
+      <dd>Market value of all a REIT's properties minus debt; REITs trade at a premium or discount to it.</dd>
+    </dl>
+
+    <h3 style="font-size:17px;opacity:0.7;">Cross-cutting</h3>
+    <dl class="glossary">
+      <dt>Cyclical vs. defensive</dt>
+      <dd>Cyclical sectors' earnings rise and fall with the economy; defensive sectors' earnings stay stable regardless.</dd>
+      <dt>Sector rotation</dt>
+      <dd>Shifting capital between sectors based on the phase of the economic cycle.</dd>
+      <dt>Yield curve (10Y–2Y)</dt>
+      <dd>The spread between long and short Treasury yields; steep favours cyclicals, flat/inverted favours defensives. Every US recession since 1955 followed an inversion.</dd>
+      <dt>Bond proxy</dt>
+      <dd>A high-dividend, rate-sensitive stock (Utilities, REITs) that behaves like a bond — falling when yields rise.</dd>
+    </dl>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  VB Strategies · MSc Finance, University of Liechtenstein
+</footer>
+
+</body>
+</html>
