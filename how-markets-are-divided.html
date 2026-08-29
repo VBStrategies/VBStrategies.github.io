@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Financial Markets Are Divided — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.cut { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.cut-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.cut-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.cut-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.cut-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.dual { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; }
+.dual-col { flex: 1; min-width: 260px; border: 1px solid var(--line); border-radius: 8px; padding: 16px 20px; background: rgba(10,46,112,0.03); }
+.dual-col .dc-name { font-weight: 700; color: var(--navy); font-size: 19px; margin-bottom: 8px; }
+.dual-col ul { margin: 0 0 0 18px; }
+.dual-col li { font-size: 17px; margin-bottom: 6px; }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="investments.html" class="nav-link">On Investments</a>
+    <a href="blog.html" class="nav-link active">Blog</a>
+    <a href="about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>How Financial Markets Are Divided</h1>
+    <p class="section-sub">The independent axes along which we slice the market — and why one trade belongs to all of them at once</p>
+    <p class="article-lead">"The financial market" is not one place. It can be cut several independent ways, and each cut answers a different question: how long until it matures? Where is the security born? Where does it trade? When does it settle? This reference works through every major division — and shows that these are not competing definitions but stacked layers, so a single trade sits at the intersection of all of them.</p>
+    <p class="article-meta">Part 1 of a series: (1) how the market is divided → (2) the instruments → (3) valuation. The instruments themselves are the next article.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#objective">Objective</a></li>
+      <li><a href="#maturity">Cut 1 — Money market vs. capital market</a></li>
+      <li><a href="#issuance">Cut 2 — Primary vs. secondary market</a></li>
+      <li><a href="#venue">Cut 3 — Exchange-traded vs. OTC</a></li>
+      <li><a href="#instrument">Cut 4 — By instrument type (debt / equity / derivatives)</a></li>
+      <li><a href="#settlement">Cut 5 — Spot vs. forward market</a></li>
+      <li><a href="#access">Cut 6 — Public vs. private markets</a></li>
+      <li><a href="#geography">Cut 7 — Domestic vs. euromarkets</a></li>
+      <li><a href="#layers">The big idea: the cuts are layers, not alternatives</a></li>
+      <li><a href="#conclusion">Conclusion &amp; master table</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ol>
+  </div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>People say "the financial market" as if it were a single arena, but the phrase hides a structure. The market is divided along <strong>several independent axes at once</strong>, and each axis was drawn to answer a different practical question. One axis asks how long the money is committed; another asks whether a security is being created or merely changing hands; another asks where and how the deal is struck. None of these cuts replaces the others — they are layered.</p>
+    <p>This article works through all seven major divisions, each in depth, and then makes the point that ties them together: because the cuts are independent, any single real-world trade belongs to <em>all</em> of them simultaneously. Once you can locate a trade on every axis, "the market" stops being a vague blob and becomes a precise coordinate system — which is exactly the map you need before turning, in the next article, to the individual instruments that trade within it.</p>
+  </div>
+
+  <!-- CUT 1 -->
+  <div class="cut prose" id="maturity">
+    <div class="cut-header">
+      <div class="cut-num">Cut 1 · By maturity</div>
+      <h2 class="cut-title">Money market vs. capital market</h2>
+      <div class="cut-sub">The most fundamental division: how long is the money committed?</div>
+    </div>
+    <p>The most basic way to split the financial market is by the <strong>maturity</strong> of what is traded — the length of time until the borrowed money must be returned. This single line separates the short-term plumbing of the financial system from its long-term financing engine, and almost everything else follows from it.</p>
+
+    <div class="dual">
+      <div class="dual-col"><div class="dc-name">Money market — short-term</div><ul>
+        <li>Maturity <strong>under 1 year</strong> (overnight to a year)</li>
+        <li>Serves short-term liquidity needs</li>
+        <li>Highly liquid, low risk, low return</li>
+        <li>Often informal / OTC, loosely organised</li>
+        <li>Also called the "cash" or "discount" market</li>
+      </ul></div>
+      <div class="dual-col"><div class="dc-name">Capital market — long-term</div><ul>
+        <li>Maturity <strong>over 1 year</strong> (or no fixed maturity)</li>
+        <li>Funds long-term projects and growth</li>
+        <li>Lower liquidity, higher risk, higher return</li>
+        <li>More organised, formal, exchange-based</li>
+        <li>Subdivides into primary + secondary (Cut 2)</li>
+      </ul></div>
+    </div>
+
+    <div class="layer-label">What trades in each</div>
+    <p>The <strong>money market</strong> deals in short-term debt instruments: Treasury bills (T-bills, sold at a discount and maturing at face value), commercial paper (short-term corporate IOUs), certificates of deposit (CDs, time deposits from banks), bankers' acceptances, and repurchase agreements (repos — essentially short-term collateralised loans). The <strong>capital market</strong> deals in long-term securities: equities (shares), bonds and debentures, and preference shares — the instruments through which companies and governments raise durable financing.</p>
+
+    <div class="layer-label">Who operates there and why the risk differs</div>
+    <p>Both markets draw banks, institutions, corporations, and investors, but the risk profiles diverge sharply. Because money-market instruments mature quickly and have little price volatility, they are prized for <strong>capital preservation</strong> — this is where a treasurer parks cash for a few weeks. The capital market, committing money for years, carries more risk but offers the return needed to justify it; this is where wealth is built over time. In short: the money market is where you keep money safe and liquid; the capital market is where you put it to work.</p>
+
+    <p class="sources">Sources: <a href="https://www.sofi.com/learn/content/money-market-vs-capital-market/">SoFi — Money vs Capital Market</a>; <a href="https://study.com/academy/lesson/capital-money-market-products-types-examples.html">Study.com — Capital vs Money Market</a>; <a href="https://www.bajajfinserv.in/investments/money-market-vs-capital-market">Bajaj Finserv — Money vs Capital Market</a>; <a href="https://www.theknowledgeacademy.com/blog/money-market-vs-capital-market/">Knowledge Academy</a>.</p>
+  </div>
+
+  <!-- CUT 2 -->
+  <div class="cut prose" id="issuance">
+    <div class="cut-header">
+      <div class="cut-num">Cut 2 · By stage of life</div>
+      <h2 class="cut-title">Primary vs. secondary market</h2>
+      <div class="cut-sub">Where a security is born vs. where it changes hands afterwards</div>
+    </div>
+    <p>The capital market is itself split by <strong>where a security is in its life</strong>. The primary market is the delivery room; the secondary market is everywhere the security goes for the rest of its life. Confusing the two is one of the most common beginner errors, and the distinction turns on a single question: does the issuer receive the money, or not?</p>
+
+    <div class="dual">
+      <div class="dual-col"><div class="dc-name">Primary market — creation</div><ul>
+        <li>Where a security is <strong>issued for the first time</strong></li>
+        <li>IPOs, follow-ons (FPO), bond auctions</li>
+        <li>Money flows <strong>from investors to the issuer</strong></li>
+        <li>The issuer raises fresh capital here</li>
+      </ul></div>
+      <div class="dual-col"><div class="dc-name">Secondary market — trading</div><ul>
+        <li>Where <strong>existing securities trade between investors</strong></li>
+        <li>Stock exchanges (NYSE, LSE), bond markets</li>
+        <li>Money flows <strong>between investors</strong>, not to the issuer</li>
+        <li>Provides price discovery and liquidity</li>
+      </ul></div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Why the secondary market makes the primary market possible</div>
+      <p style="margin:0;">It is tempting to think the primary market is the "important" one because that's where companies actually raise money. But almost no one would buy a newly-issued security if they could never sell it. The <strong>secondary market's liquidity is what gives the primary market its value</strong> — the ability to exit later is precisely what makes investors willing to commit at issuance. The two are inseparable: the secondary market doesn't fund companies directly, but without it the primary market would barely function.</p>
+    </div>
+
+    <p class="sources">Sources: <a href="https://www.sofi.com/learn/content/money-market-vs-capital-market/">SoFi</a>; <a href="https://study.com/academy/lesson/capital-money-market-products-types-examples.html">Study.com</a>; <a href="https://www.marketfeed.com/read/en/money-market-vs-capital-market">marketfeed — Primary vs Secondary</a>.</p>
+  </div>
+
+  <!-- CUT 3 -->
+  <div class="cut prose" id="venue">
+    <div class="cut-header">
+      <div class="cut-num">Cut 3 · By venue</div>
+      <h2 class="cut-title">Exchange-traded vs. over-the-counter (OTC)</h2>
+      <div class="cut-sub">Where a trade physically happens — and who you're exposed to if it goes wrong</div>
+    </div>
+    <p>Every trade in finance happens in one of two places: on an <strong>organised exchange</strong> or <strong>over-the-counter</strong> (directly between two parties). This sounds technical, but it is one of the most important structural facts in all of markets, because where a trade happens determines how it is priced, how easily you can exit, how much the regulator can see, and — critically — <strong>who you are exposed to if the other side defaults</strong>.</p>
+
+    <div class="dual">
+      <div class="dual-col"><div class="dc-name">Exchange-traded</div><ul>
+        <li><strong>Standardised</strong> contracts</li>
+        <li>Central <strong>clearing house</strong> guarantees the trade</li>
+        <li>Counterparty risk absorbed by the clearing house</li>
+        <li>High liquidity, publicly reported, tightly regulated</li>
+        <li>Less customisation</li>
+      </ul></div>
+      <div class="dual-col"><div class="dc-name">Over-the-counter (OTC)</div><ul>
+        <li><strong>Customised</strong>, negotiated bilaterally</li>
+        <li>No clearing house standing behind the trade (historically)</li>
+        <li><strong>Counterparty risk</strong> borne directly by the parties</li>
+        <li>Can be less liquid, less transparent, lighter regulation</li>
+        <li>Maximum flexibility on size, date, terms</li>
+      </ul></div>
+    </div>
+
+    <div class="layer-label">The clearing house — the key mechanism</div>
+    <p>The single most important difference is the <strong>clearing house</strong> (central counterparty, or CCP). On an exchange, the CCP steps into the middle of every trade — becoming the buyer to every seller and the seller to every buyer — so that if one side defaults, the trade is still honoured. This dramatically reduces counterparty credit risk. In an OTC trade there is (traditionally) no such backstop: if your swap counterparty fails, you may simply not get paid what you're owed.</p>
+
+    <div class="layer-label">Why OTC exists at all</div>
+    <p>Given that risk, why does anyone trade OTC? <strong>Flexibility.</strong> A corporation hedging a very specific exposure — a loan maturing on an odd date, a currency with no liquid futures contract, a commodity of a particular grade — can get a bespoke OTC contract that an exchange's standardised menu could never provide. This is why the vast majority of the world's interest-rate swaps, currency forwards, and credit default swaps trade OTC. As of 2014 the OTC derivatives market stood at roughly <strong>$630 trillion</strong> in notional value.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 The post-2008 reform</span><br>The 2008 crisis exposed how dangerous unbacked OTC counterparty risk could be. The response — the US <strong>Dodd-Frank Act</strong>, Europe's <strong>EMIR</strong> — forced a large share of standardised OTC derivatives into <strong>mandatory central clearing</strong>, with margin rules for the rest. The line between "exchange" and "OTC" has blurred: many OTC trades are now centrally cleared too.</div>
+
+    <div class="watchout"><span class="wo-label">⚠ A common misconception</span><br>
+    <strong>"Exchange-traded means risk-free."</strong> It doesn't. The clearing house dramatically reduces <em>counterparty</em> risk — the risk the other side defaults — but it does nothing about <em>market</em> risk. An exchange-traded future can still lose you a fortune if the price moves against you. Clearing protects you from the other party failing, not from being wrong.</div>
+
+    <p class="sources">Sources: <a href="https://riskhub.org/blogs/exchange-markets-vs-otc-markets">Risk Hub — Exchange vs OTC (FRM)</a>; <a href="https://www.fow.com/insights/exchange-versus-otc-derivative-trading">FOW — Exchange vs OTC Derivatives</a>; <a href="https://www.bankofengland.co.uk/-/media/boe/files/quarterly-bulletin/2015/over-the-counter-derivatives-central-clearing-and-financial-stability.pdf">Bank of England — OTC &amp; Central Clearing</a>; <a href="https://viewpoint.pwc.com/dt/us/en/pwc/accounting_guides/derivatives_and_hedg/derivatives_and_hedg_US/chapter_1_introducti_US/13_derivative_catego_US.html">PwC — Derivative Categories</a>.</p>
+  </div>
+
+  <!-- CUT 4 -->
+  <div class="cut prose" id="instrument">
+    <div class="cut-header">
+      <div class="cut-num">Cut 4 · By instrument type</div>
+      <h2 class="cut-title">Debt vs. equity vs. derivatives</h2>
+      <div class="cut-sub">The bridge to the next article — what is actually being traded</div>
+    </div>
+    <p>A different way to divide the market is by the <strong>nature of the instrument</strong> itself — the kind of claim it represents. This is the cut that leads directly into the next article (which covers each instrument in depth), so here it is only a map of the categories.</p>
+
+    <div class="layer-label">The four families</div>
+    <p><strong>Debt instruments</strong> represent a <em>lending</em> relationship: the holder is a creditor owed a defined stream of interest and the return of principal, with priority over owners if the issuer fails. Bonds, loans, and all the money-market instruments live here. <strong>Equity instruments</strong> represent <em>ownership</em>: the holder has a residual claim on profits and assets (paid only after creditors), usually with voting rights and unlimited upside. Shares live here. <strong>Derivatives</strong> represent a claim whose value is <em>derived</em> from an underlying asset or reference price — forwards, futures, options, and swaps; they are used to hedge or to speculate. <strong>Hybrids</strong> deliberately blend categories — convertible bonds (debt that can turn into equity) and preference shares (equity that behaves like debt) sit between the pure types.</p>
+
+    <div class="callout">
+      <div class="callout-title">This is the map for Article 2</div>
+      <p style="margin:0;">Each of these families — and the specific instruments inside them, from bills and bonds through common and preferred shares to forwards, futures, options and swaps — gets a full, in-depth treatment in the next article. Here the point is only that "instrument type" is one of the axes along which the market is organised.</p>
+    </div>
+
+    <p class="sources">Sources: <a href="https://www.marketfeed.com/read/en/money-market-vs-capital-market">marketfeed — Instruments</a>; <a href="https://study.com/academy/lesson/capital-money-market-products-types-examples.html">Study.com — Instrument Types</a>.</p>
+  </div>
+
+  <!-- CUT 5 -->
+  <div class="cut prose" id="settlement">
+    <div class="cut-header">
+      <div class="cut-num">Cut 5 · By timing of settlement</div>
+      <h2 class="cut-title">Spot vs. forward market</h2>
+      <div class="cut-sub">Buy-and-own-now vs. agree-now, settle-later</div>
+    </div>
+    <p>Markets also divide by <strong>when the transaction actually settles</strong>. On the spot market you buy and own immediately; on the forward market you agree today to transact at a set price on a future date. The distinction underlies the whole world of derivatives, but it is a separate organising axis in its own right.</p>
+
+    <div class="dual">
+      <div class="dual-col"><div class="dc-name">Spot (cash) market</div><ul>
+        <li>Immediate settlement (or T+1 / T+2)</li>
+        <li>Trade at the current market price (the "spot" price)</li>
+        <li>You buy it, you own it, now</li>
+        <li>The market for buying an asset outright</li>
+      </ul></div>
+      <div class="dual-col"><div class="dc-name">Forward / futures market</div><ul>
+        <li>Agree today, settle at a <strong>future date</strong></li>
+        <li>Price fixed now for later delivery</li>
+        <li>Used to hedge future needs or to speculate</li>
+        <li>The realm of forwards and futures contracts</li>
+      </ul></div>
+    </div>
+
+    <p>The forward market lets a wheat farmer lock in a selling price months before harvest, or an airline fix its fuel cost in advance — transferring the risk of price moves to someone willing to bear it. Whether that forward agreement is a bespoke bilateral deal or a standardised contract determines whether it is an OTC forward or an exchange-traded future, which is exactly where this cut meets Cut 3.</p>
+
+    <p class="sources">Sources: <a href="https://www.tickertape.in/blog/exchange-traded-derivatives-vs-over-the-counter-otc-derivatives/">Tickertape — Forwards, Futures &amp; Settlement</a>; <a href="https://corporatefinanceinstitute.com/resources/career-map/sell-side/capital-markets/over-the-counter-otc">CFI — OTC &amp; Spot</a>.</p>
+  </div>
+
+  <!-- CUT 6 -->
+  <div class="cut prose" id="access">
+    <div class="cut-header">
+      <div class="cut-num">Cut 6 · By access</div>
+      <h2 class="cut-title">Public vs. private markets</h2>
+      <div class="cut-sub">Who is allowed in, and how much daylight there is</div>
+    </div>
+    <p>Another axis divides the market by <strong>who can participate and how regulated it is</strong>. Public markets are open and transparent; private markets are gated and opaque. This is the cut that connects to the buy-side world of private equity and venture capital.</p>
+
+    <div class="dual">
+      <div class="dual-col"><div class="dc-name">Public markets</div><ul>
+        <li>Listed securities, open to the general public</li>
+        <li>Heavily regulated: disclosure, prospectus, reporting</li>
+        <li>Liquid — easy to buy and sell</li>
+        <li>Stock and bond exchanges</li>
+      </ul></div>
+      <div class="dual-col"><div class="dc-name">Private markets</div><ul>
+        <li>Unlisted, restricted to accredited/institutional investors</li>
+        <li>Light regulation, limited disclosure</li>
+        <li>Illiquid — hard to exit, long holding periods</li>
+        <li>Private equity, venture capital, private debt, pre-IPO</li>
+      </ul></div>
+    </div>
+
+    <p>The trade-off is transparency and liquidity versus access and potential return. Public markets let anyone buy a share of Apple with full financial disclosure and instant liquidity. Private markets are where a venture fund backs a startup years before any IPO — higher potential return, but locked up, illiquid, and open only to a narrow set of qualified investors. The recent secular trend has been companies <em>staying private longer</em>, which has pushed more of the value creation into the private market and out of reach of ordinary public investors.</p>
+
+    <p class="sources">Sources: <a href="https://www.globalinvestments.net/investments/guides/eurobond-international-bond-guide">Global Investments — Public &amp; Private Markets</a>; <a href="https://corporatefinanceinstitute.com/resources/career-map/sell-side/capital-markets/over-the-counter-otc">CFI — Market Access</a>.</p>
+  </div>
+
+  <!-- CUT 7 -->
+  <div class="cut prose" id="geography">
+    <div class="cut-header">
+      <div class="cut-num">Cut 7 · By jurisdiction</div>
+      <h2 class="cut-title">Domestic vs. euromarkets (offshore)</h2>
+      <div class="cut-sub">Where a security lives relative to the regulation of its own currency</div>
+    </div>
+    <p>The final axis divides the market by <strong>jurisdiction</strong> — whether an instrument is issued and traded inside the home country of its currency, or offshore, outside that country's regulatory reach. This is home to one of the most misunderstood terms in all of finance.</p>
+
+    <div class="callout">
+      <div class="callout-title">"Euro-" does NOT mean Europe (or the euro)</div>
+      <p style="margin:0;">The prefix "Euro-" here has nothing to do with the continent or the currency. A <strong>Eurocurrency</strong> is simply a deposit of a currency held <em>outside</em> the country that issues it. A <strong>Eurodollar</strong> is a US-dollar deposit held outside the United States — and dollar deposits in Hong Kong or Tokyo are Eurodollars just as much as those in London. The term is about being <em>offshore</em>, not European.</p>
+    </div>
+
+    <div class="layer-label">Eurocurrency and Eurobonds</div>
+    <p>The <strong>Eurocurrency market</strong> is the offshore money market — short-term deposits and loans in a currency outside its home jurisdiction. The Eurodollar dominates, accounting for roughly 65–70% of all Eurocurrency activity. The <strong>Eurobond</strong> is its long-term cousin: a bond issued offshore, in a currency other than that of the country where it's sold, distributed internationally through a syndicate of banks. A US-dollar Eurobond is a "Eurodollar bond"; a sterling one a "Eurosterling bond."</p>
+
+    <div class="layer-label">Why issuers use it</div>
+    <p>Eurobonds are typically <strong>bearer securities</strong>, usually pay interest <strong>gross of withholding tax</strong>, and — issued under exemptions like the US Reg S — avoid the full domestic registration and disclosure burden, allowing faster, cheaper execution. Crucially, the market connects issuers to a genuinely <strong>international investor base</strong> — European insurers, Asian central banks, Gulf sovereign wealth funds, UK pension funds — which diversifies funding and can lower the cost of capital. The market emerged in the 1960s, when US capital-flow restrictions pushed dollar financing offshore; its centre is London, with settlement through Euroclear or Clearstream, and maturities typically 5–30 years.</p>
+
+    <p class="sources">Sources: <a href="https://www.globalinvestments.net/investments/guides/eurobond-international-bond-guide">Global Investments — Eurobond Guide</a>; <a href="https://www.sciencedirect.com/topics/economics-econometrics-and-finance/eurobond">ScienceDirect — Eurobond</a>; <a href="https://www.hsbc.com.tr/en/investment-products/fixed-income-securities/eurobond">HSBC — Eurobond</a>; <a href="https://www.bauer.uh.edu/rsusmel/7386/ln12.pdf">U. Houston — International Bond Markets</a>.</p>
+  </div>
+
+  <!-- THE BIG IDEA -->
+  <div class="cut prose" id="layers">
+    <div class="cut-header">
+      <div class="cut-num">The synthesis</div>
+      <h2 class="cut-title">The cuts are layers, not alternatives</h2>
+      <div class="cut-sub">Why one trade belongs to all of them at once</div>
+    </div>
+    <p>The most important idea in this article is that these seven divisions are <strong>not competing definitions but independent axes</strong>. A trade is never "either primary or exchange-traded" — it has a position on <em>every</em> axis simultaneously. Locating a trade means giving its coordinate on each one.</p>
+
+    <div class="callout">
+      <div class="callout-title">Worked example — buying an Apple share on the NYSE</div>
+      <p style="margin:0;">That single trade is, all at once: <strong>capital market</strong> (a share is a long-term instrument) · <strong>secondary</strong> (you're buying from another investor, not from Apple) · <strong>exchange-traded</strong> (it clears through the NYSE) · <strong>equity</strong> (an ownership claim) · <strong>spot</strong> (it settles now, at today's price) · <strong>public</strong> (a listed, disclosed security) · and, for a US investor, <strong>domestic</strong>. Seven axes, one trade — a full coordinate.</p>
+    </div>
+
+    <p>Contrast that with a corporation entering an <strong>interest-rate swap with a bank</strong>: that trade is <strong>OTC</strong> (negotiated bilaterally), <strong>forward-settling</strong> (cash flows exchanged over future dates), a <strong>derivative</strong>, <strong>private</strong>, and potentially <strong>cross-border</strong>. Same market, completely different coordinate. Once you think in coordinates rather than categories, "which market is this?" becomes a precise, answerable question — and the vague blob resolves into structure.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion · The whole map on one page</p>
+    <h3>Bringing it together</h3>
+    <p>The financial market is a single space cut by several independent blades. Maturity separates the money market from the capital market; stage of life separates primary from secondary; venue separates exchange from OTC; the instrument itself separates debt, equity, and derivatives; timing separates spot from forward; access separates public from private; and jurisdiction separates domestic from the offshore euromarkets. Learn the blades, and any security or trade can be placed precisely — which is the groundwork for understanding the instruments themselves, next.</p>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>Cut</th><th>Divides by</th><th>Two sides</th><th>Typical content</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Money vs. capital</td><td>Maturity</td><td>&lt;1yr / &gt;1yr</td><td>T-bills, CP, repo / stocks, bonds</td></tr>
+          <tr><td>Primary vs. secondary</td><td>Stage of life</td><td>Issued / traded</td><td>IPOs, auctions / exchange trading</td></tr>
+          <tr><td>Exchange vs. OTC</td><td>Venue</td><td>Cleared / bilateral</td><td>Futures, listed shares / swaps, forwards</td></tr>
+          <tr><td>Debt vs. equity vs. deriv.</td><td>Instrument type</td><td>Claim type</td><td>Bonds / shares / options, swaps</td></tr>
+          <tr><td>Spot vs. forward</td><td>Settlement timing</td><td>Now / later</td><td>Cash equities / futures, forwards</td></tr>
+          <tr><td>Public vs. private</td><td>Access</td><td>Open / gated</td><td>Listed securities / PE, VC, private debt</td></tr>
+          <tr><td>Domestic vs. euromarket</td><td>Jurisdiction</td><td>Onshore / offshore</td><td>Local issues / Eurobonds, Eurodollars</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- KEY TAKEAWAYS -->
+  <div class="section prose">
+    <p class="eyebrow">Key takeaways</p>
+    <h3>What to remember</h3>
+    <ul>
+      <li><strong>The market is cut along independent axes,</strong> not one master division. Each answers a different question.</li>
+      <li><strong>Maturity is the most basic cut:</strong> money market (&lt;1 year, liquid, safe) vs. capital market (&gt;1 year, riskier, higher return).</li>
+      <li><strong>Primary creates, secondary trades</strong> — and the secondary market's liquidity is what makes the primary market work at all.</li>
+      <li><strong>Exchange vs. OTC is about the clearing house:</strong> exchanges reduce counterparty risk via central clearing; OTC offers flexibility but bears counterparty risk. Exchange-traded ≠ risk-free (market risk remains).</li>
+      <li><strong>Instrument type</strong> (debt / equity / derivatives / hybrids) is the axis that leads into the next article.</li>
+      <li><strong>Spot settles now, forward settles later</strong> — the basis of the whole derivatives world.</li>
+      <li><strong>Public vs. private</strong> trades transparency and liquidity against access and return; companies staying private longer has moved value off the public market.</li>
+      <li><strong>"Euro-" means offshore, not Europe:</strong> a Eurodollar is a dollar held outside the US; a Eurobond is issued outside its currency's home jurisdiction.</li>
+      <li><strong>The cuts are layers:</strong> one trade has a coordinate on every axis at once. Think in coordinates, not categories.</li>
+    </ul>
+  </div>
+
+  <!-- GLOSSARY -->
+  <div class="section prose" id="glossary">
+    <p class="eyebrow">Reference</p>
+    <h3>Glossary</h3>
+    <dl class="glossary">
+      <dt>Money market</dt>
+      <dd>The market for short-term debt (maturity under one year); highly liquid, low-risk. T-bills, commercial paper, CDs, repos.</dd>
+      <dt>Capital market</dt>
+      <dd>The market for long-term securities (maturity over one year, or none); stocks and bonds. Splits into primary and secondary.</dd>
+      <dt>Primary market</dt>
+      <dd>Where a security is issued for the first time (IPO, bond auction); the issuer receives the money.</dd>
+      <dt>Secondary market</dt>
+      <dd>Where existing securities trade between investors (e.g. NYSE); provides liquidity and price discovery, but the issuer gets nothing.</dd>
+      <dt>Exchange-traded</dt>
+      <dd>Standardised contracts traded on an organised exchange and guaranteed by a central clearing house.</dd>
+      <dt>OTC (over-the-counter)</dt>
+      <dd>Customised contracts negotiated bilaterally between two parties, historically without a clearing house.</dd>
+      <dt>Clearing house (CCP)</dt>
+      <dd>A central counterparty that becomes buyer to every seller and seller to every buyer, guaranteeing trades and reducing counterparty risk.</dd>
+      <dt>Counterparty risk</dt>
+      <dd>The risk that the other party to a trade defaults before fulfilling its obligation.</dd>
+      <dt>Spot market</dt>
+      <dd>Where assets trade for immediate settlement at the current (spot) price.</dd>
+      <dt>Forward / futures market</dt>
+      <dd>Where parties agree today to transact at a set price on a future date (forward = OTC/bespoke, future = exchange-traded/standardised).</dd>
+      <dt>Public market</dt>
+      <dd>Listed, regulated, liquid securities open to the general public.</dd>
+      <dt>Private market</dt>
+      <dd>Unlisted, lightly regulated, illiquid markets restricted to accredited/institutional investors (PE, VC, private debt).</dd>
+      <dt>Eurocurrency</dt>
+      <dd>A deposit of a currency held outside its home country (e.g. a Eurodollar = USD held outside the US). "Euro-" means offshore, not Europe.</dd>
+      <dt>Eurobond</dt>
+      <dd>A bond issued offshore, in a currency other than that of the country where it is sold, distributed internationally; usually a bearer security paying gross interest.</dd>
+      <dt>Bearer security</dt>
+      <dd>A security owned by whoever holds it, with no registered owner on record.</dd>
+      <dt>T-bill / Commercial paper / CD / Repo</dt>
+      <dd>Core money-market instruments: short-term government debt / short-term corporate debt / bank time deposit / short-term collateralised loan.</dd>
+    </dl>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  VB Strategies · MSc Finance, University of Liechtenstein
+</footer>
+
+</body>
+</html>
