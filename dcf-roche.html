@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — DCF Valuation: Roche Holding AG</title>
+  <meta name="description" content="A discounted cash flow valuation of Roche Holding AG (SIX: ROP), built from the 2023–2025 annual and finance reports, with the full Excel model to download.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Page-specific additions, built on the variables in style.css */
+    .article p { font-size: 20px; margin-bottom: 16px; text-align: justify; }
+    .article h2 { font-size: 25px; font-weight: 700; color: var(--navy); margin: 44px 0 12px; }
+    .article h3 { margin: 26px 0 8px; }
+    .article ul { margin: 0 0 16px 26px; font-size: 20px; }
+    .article li { margin-bottom: 6px; }
+    .meta { font-size: 17px; font-style: italic; opacity: 0.75; margin-bottom: 28px; }
+    .kicker { font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.7; margin-bottom: 6px; }
+    .callout { border-left: 3px solid var(--navy); background: rgba(10,46,112,0.04); padding: 14px 20px; margin: 22px 0; border-radius: 0 8px 8px 0; }
+    .callout p { margin-bottom: 0; }
+    .stats { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 26px; }
+    .stat { flex: 1; min-width: 150px; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+    .stat-value { font-size: 28px; font-weight: 700; color: var(--navy); line-height: 1.2; }
+    .stat-label { font-size: 15px; opacity: 0.75; }
+    .table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 18px; }
+    th { text-align: left; color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--navy); padding: 6px 10px; }
+    td { border-bottom: 1px solid var(--line-soft); padding: 6px 10px; }
+    td.num, th.num { text-align: right; font-variant-numeric: lining-nums tabular-nums; }
+    tr.strong td { font-weight: 700; color: var(--navy); }
+    figure { margin: 24px 0 30px; }
+    figure svg { width: 100%; height: auto; display: block; }
+    figcaption { font-size: 16px; font-style: italic; opacity: 0.75; margin-top: 6px; }
+    .downloads { display: flex; flex-wrap: wrap; gap: 12px; margin: 18px 0; }
+    .btn { display: inline-block; text-decoration: none; font-size: 18px; font-weight: 600; padding: 10px 20px; border-radius: 8px; border: 1px solid var(--navy); color: var(--navy); transition: background 0.15s, color 0.15s; }
+    .btn:hover { background: var(--navy); color: #fff; }
+    .btn.primary { background: var(--navy); color: #fff; }
+    .btn.primary:hover { opacity: 0.9; }
+    .pdf-frame { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: 8px; margin-top: 10px; }
+    .note { font-size: 16px; opacity: 0.75; font-style: italic; }
+    .back { font-size: 18px; text-decoration: none; color: var(--navy); }
+    .back:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      .article p, .article ul { font-size: 18px; text-align: left; }
+      table { font-size: 15px; }
+      .pdf-frame { height: 420px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand-link" href="../index.html"><span class="brand">VB Strategies</span></a>
+    <nav class="nav">
+      <a class="nav-link" href="../index.html">Home</a>
+      <a class="nav-link active" href="../investments.html">On Investments</a>
+      <a class="nav-link" href="../blog.html">Blog</a>
+      <a class="nav-link" href="../about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container article">
+
+    <a class="back" href="../investments.html">← On Investments</a>
+
+    <section class="section" style="margin-top:24px;">
+      <div class="kicker">DCF valuation · Healthcare · Switzerland</div>
+      <h1>Roche Holding AG (SIX: ROP) — a DCF, and what it taught me about valuation</h1>
+      <p class="meta">Valuation date 2 September 2026 · CHF · Built from Roche's 2023–2025 Annual and Finance Reports · Model and PDF available to download below</p>
+
+      <div class="stats">
+        <div class="stat"><div class="stat-value">CHF 422</div><div class="stat-label">Implied value per share, base case (midpoint)</div></div>
+        <div class="stat"><div class="stat-value">CHF 357</div><div class="stat-label">Share price used</div></div>
+        <div class="stat"><div class="stat-value">279 – 538</div><div class="stat-label">Bear to bull range, CHF per share</div></div>
+        <div class="stat"><div class="stat-value">6.3%</div><div class="stat-label">WACC</div></div>
+      </div>
+    </section>
+
+    <!-- 1. PERSONAL NOTE -->
+    <section class="section">
+      <h2>The power of AI — and a few honest words first</h2>
+      <p>This is the second model I have published here, and the first one where I worked with AI as a genuine co-pilot from start to finish. I gave it Roche's last three annual reports and finance reports and the specification a sell-side analyst would work to: a scenario switch, a three-statement history, a five-year forecast, a WACC build, two terminal-value methods, sensitivity grids and a football field. Every number in the workbook is a live formula that traces back to the reports, so you can click any cell and follow the chain.</p>
+      <p>What surprised me was not the speed, although building in an afternoon what would normally take a week is remarkable. It was how much of the real work was still mine. The AI extracted the statements, but I had to decide which figures to trust. It proposed assumptions, but I had to understand why a terminal growth rate of 1.5% is defensible for a Swiss franc business and why a local beta of 0.35 understates the risk of a global pharma company. When something did not balance, I had to know where to look. AI made the mechanical part fast; it made the thinking part more important, not less.</p>
+      <div class="callout">
+        <p>The lesson I keep coming back to: a tool that builds models in hours raises the value of knowing what a model can and cannot tell you.</p>
+      </div>
+    </section>
+
+    <!-- 2. WHY ROCHE -->
+    <section class="section">
+      <h2>Why Roche</h2>
+      <p>The reason was simple. Moving to this corner of Europe, right on the Swiss border, I wanted to understand the companies that shape the economy around me, and I wanted to start with one of the biggest. Roche is one of the largest companies in Switzerland and one of the heaviest weights in the Swiss Market Index. When a company employs <strong>112,774 people worldwide</strong>, of whom <strong>17,752 work in Switzerland</strong> (about 15.7% of the workforce), its financial health matters well beyond its shareholders. I wanted to look under the hood myself.</p>
+      <p class="note">Source: Roche Annual Report 2025, workforce data (headcount at 31 December 2025), p. 124.</p>
+
+      <h3>The company in brief</h3>
+      <p>Founded in Basel in 1896, Roche is today one of the world's largest pharmaceutical companies and the global leader in in-vitro diagnostics. It runs two divisions. <strong>Pharmaceuticals</strong> (CHF 47.7 billion of sales in 2025, around 78% of the group) is focused on oncology, immunology, neuroscience, ophthalmology and haemophilia, and includes the wholly owned US biotech Genentech and a 61.1% stake in the Tokyo-listed Chugai. <strong>Diagnostics</strong> (CHF 13.8 billion) sells the instruments, tests and reagents that hospitals and laboratories use every day.</p>
+      <p>In 2025 the group generated <strong>CHF 61.5 billion</strong> in sales and <strong>CHF 21.8 billion</strong> in core operating profit, and spent <strong>CHF 12.2 billion</strong> on core research and development, roughly a fifth of its sales. Its growth currently comes from newer medicines such as Ocrevus (multiple sclerosis), Vabysmo (eye diseases), Hemlibra (haemophilia A), Phesgo (breast cancer) and Xolair (food allergies), which together offset declining sales of older drugs that have lost patent protection. The shares trade as bearer shares (RO) and as non-voting equity securities (ROP), the more liquid line and the one I valued.</p>
+      <p class="note">Source: Roche Annual Report 2025 and Finance Report 2025.</p>
+    </section>
+
+    <!-- 3. SECTOR -->
+    <section class="section">
+      <h2>The sector: pharmaceuticals and diagnostics</h2>
+      <p>Top-down fundamental analysis moves from the economy to the industry and only then to the company. The industry stage matters because it decides which questions the company analysis has to answer. For Roche, five features of the sector drive almost everything in the model.</p>
+      <ul>
+        <li><strong>Defensive demand.</strong> People do not stop treating cancer in a recession. Demand for medicines and diagnostic tests is largely independent of the economic cycle, which is why healthcare stocks tend to have low betas and behave defensively in a portfolio.</li>
+        <li><strong>High barriers to entry.</strong> Bringing a drug to market takes over a decade of research, clinical trials and regulatory approval. That keeps the industry concentrated among a small group of global players and supports high margins; Roche's adjusted EBITDA margin was close to 39% in 2025.</li>
+        <li><strong>The patent cliff.</strong> The flip side of patent protection is that it expires. When it does, generics and biosimilars arrive and sales of a blockbuster can fall sharply within a few years. A pharma company is therefore always racing to replace its own best sellers, and the quality of its pipeline is the single biggest long-term value driver.</li>
+        <li><strong>Pricing pressure.</strong> Governments are the industry's biggest customers and they are pushing back on prices: drug price negotiation in the US, reference pricing in Europe, and volume-based procurement in China, which hit Roche's diagnostics sales there in 2025.</li>
+        <li><strong>Diagnostics as a recurring-revenue business.</strong> Diagnostics works on an installed-base model: the analysers are placed in laboratories, and the recurring revenue comes from the tests and reagents that run on them. It grows more slowly than pharma but is steadier.</li>
+      </ul>
+      <p>For a valuation, this means three things: stable cash flows support a long-dated DCF, but the terminal value hides a patent-cliff risk, and pricing policy is the swing factor between the bull and bear cases.</p>
+    </section>
+
+    <!-- 4. VALUATION -->
+    <section class="section">
+      <h2>The valuation</h2>
+      <h3>How the model works</h3>
+      <p>The model forecasts five years (2026–2030) of unlevered free cash flow: revenue built up from the two divisions, an adjusted EBITDA margin, taxes, capital expenditure and working capital driven by receivable, inventory and payable days. Those cash flows are discounted at the weighted average cost of capital using a mid-year convention, and the value beyond 2030 is captured with two terminal-value methods, a perpetuity growth rate and an exit EBITDA multiple. The enterprise value is then bridged to equity value by deducting debt, leases, the net pension deficit and minority interests.</p>
+
+      <h3>Key base-case assumptions</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Driver</th><th class="num">Base case</th><th>Anchor</th></tr>
+          <tr><td>Pharmaceuticals sales growth</td><td class="num">3.0–4.5% p.a.</td><td>2026 guidance: mid-single-digit growth at constant currency</td></tr>
+          <tr><td>Diagnostics sales growth</td><td class="num">1.5–3.5% p.a.</td><td>China pricing drag fading</td></tr>
+          <tr><td>Adjusted EBITDA margin</td><td class="num">39.2% → 40.4%</td><td>36.4% / 37.7% / 38.7% in 2023–25</td></tr>
+          <tr><td>Capex, % of revenue</td><td class="num">8.5%</td><td>7.7–9.1% historically</td></tr>
+          <tr><td>Tax rate</td><td class="num">19.0%</td><td>Core rate 18.6% in 2025; higher Basel rate from 2026</td></tr>
+          <tr><td>WACC</td><td class="num">6.3%</td><td>CAPM: 1.0% risk-free, 6.5% ERP, relevered beta 0.88</td></tr>
+          <tr><td>Terminal growth / exit multiple</td><td class="num">1.5% / 12.0x</td><td>Below nominal CHF growth / peer range</td></tr>
+        </table>
+      </div>
+
+      <h3>Results</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>CHF millions</th><th class="num">Perpetuity growth</th><th class="num">Exit multiple</th></tr>
+          <tr><td>Enterprise value</td><td class="num">377,816</td><td class="num">347,231</td></tr>
+          <tr><td>Net adjustments (debt, leases, pension, minorities)</td><td class="num">(23,952)</td><td class="num">(23,952)</td></tr>
+          <tr><td>Equity value</td><td class="num">353,864</td><td class="num">323,279</td></tr>
+          <tr class="strong"><td>Implied value per share (CHF)</td><td class="num">440.68</td><td class="num">402.59</td></tr>
+          <tr><td>Versus share price of CHF 357.00</td><td class="num">+23.4%</td><td class="num">+12.8%</td></tr>
+          <tr><td>Terminal value as % of enterprise value</td><td class="num">82.7%</td><td class="num">81.2%</td></tr>
+        </table>
+      </div>
+      <p>Taking the midpoint of the two methods, the base case implies <strong>CHF 422 per share, about 18% above the share price I used</strong>. Switching scenarios moves the answer from CHF 279 in the bear case to CHF 538 in the bull case. The discount rate is held constant across scenarios, so the range reflects operating outcomes rather than a different view on risk.</p>
+
+      <figure>
+        <svg viewBox="-40 0 740 260" role="img" aria-label="Football field chart of Roche valuation ranges in CHF per share">
+          <style>
+            .ff-lbl { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; fill: #000; }
+            .ff-tick { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; fill: #0a2e70; opacity: .8; }
+            .ff-val { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; fill: #0a2e70; }
+          </style>
+          <!-- grid -->
+          <g stroke="rgba(10,46,112,0.12)" stroke-width="1">
+            <line x1="215.5" y1="20" x2="215.5" y2="215"/><line x1="306.4" y1="20" x2="306.4" y2="215"/>
+            <line x1="397.3" y1="20" x2="397.3" y2="215"/><line x1="488.2" y1="20" x2="488.2" y2="215"/>
+            <line x1="579.1" y1="20" x2="579.1" y2="215"/><line x1="670" y1="20" x2="670" y2="215"/>
+          </g>
+          <text class="ff-tick" x="215.5" y="235" text-anchor="middle">250</text>
+          <text class="ff-tick" x="306.4" y="235" text-anchor="middle">300</text>
+          <text class="ff-tick" x="397.3" y="235" text-anchor="middle">350</text>
+          <text class="ff-tick" x="488.2" y="235" text-anchor="middle">400</text>
+          <text class="ff-tick" x="579.1" y="235" text-anchor="middle">450</text>
+          <text class="ff-tick" x="670" y="235" text-anchor="middle">500</text>
+          <!-- bars -->
+          <text class="ff-lbl" x="160" y="50" text-anchor="end">52-week trading range</text>
+          <rect x="222.7" y="34" width="221.5" height="24" rx="3" fill="#9fb2d1"/>
+          <text class="ff-val" x="222.7" y="72" text-anchor="middle">254</text><text class="ff-val" x="444.2" y="72" text-anchor="middle">376</text>
+
+          <text class="ff-lbl" x="160" y="98" text-anchor="end">Trading comps (EV/EBITDA)</text>
+          <rect x="317.5" y="82" width="174.5" height="24" rx="3" fill="#5f7fb0"/>
+          <text class="ff-val" x="317.5" y="120" text-anchor="middle">306</text><text class="ff-val" x="492" y="120" text-anchor="middle">402</text>
+
+          <text class="ff-lbl" x="160" y="146" text-anchor="end">DCF – exit multiple</text>
+          <rect x="459.5" y="130" width="67.6" height="24" rx="3" fill="#2a4f8f"/>
+          <text class="ff-val" x="459.5" y="168" text-anchor="middle">384</text><text class="ff-val" x="527.1" y="168" text-anchor="middle">421</text>
+
+          <text class="ff-lbl" x="160" y="194" text-anchor="end">DCF – perpetuity growth</text>
+          <rect x="487.3" y="178" width="167.2" height="24" rx="3" fill="#0a2e70"/>
+          <text class="ff-val" x="487.3" y="216" text-anchor="middle">400</text><text class="ff-val" x="654.5" y="216" text-anchor="middle">492</text>
+
+          <!-- current price -->
+          <line x1="410" y1="20" x2="410" y2="215" stroke="#b8860b" stroke-width="2" stroke-dasharray="5 4"/>
+          <text class="ff-val" x="410" y="14" text-anchor="middle" style="fill:#b8860b;font-weight:700">Price CHF 357</text>
+        </svg>
+        <figcaption>Valuation football field, CHF per share. DCF ranges flex WACC by ±0.25pp and terminal growth / exit multiple by one step around the base case; comps apply an assumed 10.5–13.5x EV/EBITDA range.</figcaption>
+      </figure>
+
+      <h3>What I would challenge in my own model</h3>
+      <ul>
+        <li><strong>The terminal value does most of the work.</strong> Over 80% of the enterprise value sits beyond 2030. That is normal for a DCF, but it means the answer is largely a judgement on long-run growth and the patent cliff, not on the next five years.</li>
+        <li><strong>Minority interests are deducted at book value.</strong> Chugai is listed and its market value is far above book, so deducting the 38.9% minority stake at market value would lower the implied price materially. This is the biggest upward bias in the model.</li>
+        <li><strong>The discount rate is low.</strong> A 6.3% WACC reflects Swiss franc interest rates and a defensive business. Small changes in it move the value a lot, as the sensitivity grids show.</li>
+        <li><strong>Market inputs are approximate.</strong> The share price is the nearest dated close I could verify around the valuation date, and the comps range is an assumption rather than a full peer study.</li>
+      </ul>
+    </section>
+
+    <!-- 5. THE LESSON -->
+    <section class="section">
+      <h2>What the Financial Markets lecture changed</h2>
+      <p>In the very next Financial Markets class, we went through equity valuation, and it reframed everything. A model can be technically perfect and still answer only part of the question. In practice, an investor rarely asks "what is this one stock worth?" in isolation. The question is how this stock fits into a portfolio.</p>
+      <p>That changes how valuation is used. A DCF is one lens. Trading comparables, dividend discount models and precedent transactions are others, and each has its blind spots. Used together, they give a range rather than a single "right" number, which is exactly what the football field above shows. The price target becomes an input into a portfolio decision, not the decision itself.</p>
+      <p>And then everything started to connect across my courses. The beta that sits in my WACC tab, the one I used to calculate Roche's cost of equity through CAPM, is the same beta that describes how Roche moves with the market in a portfolio. Diversification removes company-specific risk, so what an investor is actually paid for is systematic risk. Once a stock sits in a portfolio, measurement becomes much more systematic: you can see its contribution to overall risk, manage the portfolio's exposure to the market, and decide whether a defensive, low-beta name like Roche earns its place for the return it offers or for the stability it brings.</p>
+      <div class="callout">
+        <p>It is nice that my model works. The funny part is that the deeper you go, the more the single-stock answer becomes one piece of a portfolio question. That is where I want to take this next.</p>
+      </div>
+    </section>
+
+    <!-- 6. FILES -->
+    <section class="section">
+      <h2>The model</h2>
+      <p>The full workbook has eight tabs: Cover, Assumptions (with a Base / Bull / Bear switch), Historicals, Operating Model, WACC, DCF, Sensitivity and Charts. Blue figures are inputs from the reports or my assumptions, black are calculations, and green are links between tabs. Every source is noted next to its input.</p>
+      <div class="downloads">
+        <a class="btn primary" href="../files/Roche_DCF_Model.xlsx" download>Download Excel model (.xlsx)</a>
+        <a class="btn" href="../files/Roche_DCF_Model.pdf" target="_blank" rel="noopener">Open PDF version</a>
+      </div>
+      <iframe class="pdf-frame" src="../files/Roche_DCF_Model.pdf#view=FitH" title="Roche DCF model (PDF)"></iframe>
+      <p class="note">If the preview does not load on your device, use the PDF button above. Sources: Roche Annual Reports and Finance Reports 2023, 2024 and 2025 (roche.com/investors).</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+
+</body>
+</html>
