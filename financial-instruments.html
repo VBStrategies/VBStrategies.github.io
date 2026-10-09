@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Instruments — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="investments.html" class="nav-link">On Investments</a>
+    <a href="blog.html" class="nav-link active">Blog</a>
+    <a href="about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Financial Instruments</h1>
+    <p class="section-sub">What actually trades in the markets — from bills to options — organised by the capital-structure ladder</p>
+    <p class="article-lead">The previous article mapped how the market is divided; this one works through the instruments that live inside it. Every instrument is a claim of some kind, and the single thread running through all of them is <strong>seniority</strong> — who gets paid first when things go wrong. Learn that ladder and the whole zoo of instruments, from a Treasury bill to a convertible bond to a put option, falls into order.</p>
+    <p class="article-meta">Part 2 of a series: (1) how the market is divided → (2) the instruments → (3) valuation. Valuation is the next article.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#objective">Objective &amp; the capital-structure ladder</a></li>
+      <li><a href="#moneymarket">1 — Money-market instruments</a></li>
+      <li><a href="#bonds">2 — Bonds (fixed income)</a></li>
+      <li><a href="#credit">3 — Loans &amp; credit</a></li>
+      <li><a href="#equity">4 — Equity: common vs. preferred</a></li>
+      <li><a href="#hybrids">5 — Hybrids</a></li>
+      <li><a href="#funds">6 — Funds (mutual, ETF)</a></li>
+      <li><a href="#derivatives">7 — Derivatives</a></li>
+      <li><a href="#fx">8 — Currencies (FX)</a></li>
+      <li><a href="#commodities">9 — Commodities</a></li>
+      <li><a href="#conclusion">Conclusion &amp; master table</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+    </ol>
+  </div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>Having mapped the market's structure, we now turn to what actually changes hands within it. There are a great many financial instruments, and a beginner meets them as a bewildering list — bills, notes, bonds, loans, shares, options, swaps. The goal here is to replace that list with a <strong>structure</strong>. Almost every instrument is either a form of <em>lending</em> (debt), a form of <em>ownership</em> (equity), a <em>blend</em> of the two (hybrid), or a <em>contract deriving its value from something else</em> (a derivative) — and the debt-to-equity instruments line up on a single ladder of seniority.</p>
+
+    <div class="callout">
+      <div class="callout-title">The capital-structure ladder — the spine of this whole article</div>
+      <p style="margin:0 0 10px;">When a company is healthy, these distinctions feel abstract. When it fails, they are everything: they decide, in strict order, who gets paid from whatever value remains. Higher on the ladder means safer and lower-yielding; lower means riskier and higher-yielding. This one picture ties bonds, loans, preferred shares, and common shares together.</p>
+    </div>
+
+    <div class="ladder">
+      <div class="rung r1"><span class="r-name">1 · Senior secured debt</span> — first-lien loans, revolving credit. Backed by collateral, paid first. Safest, lowest return.</div>
+      <div class="rung r2"><span class="r-name">2 · Senior unsecured debt</span> — second-lien loans, senior bonds. No collateral, but still ahead of most.</div>
+      <div class="rung r3"><span class="r-name">3 · Subordinated / junior debt</span> — high-yield bonds, mezzanine. Paid after senior debt; higher risk and yield.</div>
+      <div class="rung r4"><span class="r-name">4 · Preferred equity</span> — preferred shares. Paid after all debt, before common. A debt-equity hybrid.</div>
+      <div class="rung r5"><span class="r-name">5 · Common equity</span> — common shares. The residual claim — paid last, unlimited upside, first to be wiped out.</div>
+    </div>
+
+    <p>Keep this ladder in mind throughout. As each instrument appears, its place on the ladder tells you most of what you need to know about its risk and return before you learn a single other detail. Derivatives, funds, currencies, and commodities sit outside the ladder — they are contracts or wrappers rather than claims on a single company — but even they are best understood by contrast with it.</p>
+  </div>
+
+  <!-- INSTRUMENT 1: MONEY MARKET -->
+  <div class="inst prose" id="moneymarket">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 01 · Debt · Short-term</div>
+      <h2 class="inst-title">Money-market instruments</h2>
+      <div class="inst-sub">The short-term, high-safety plumbing of the financial system</div>
+    </div>
+
+    <p>Money-market instruments are the shortest and safest form of debt — short-term IOUs that mature in under a year and are prized above all for <strong>liquidity and capital preservation</strong>. This is where governments, banks, and corporations manage day-to-day cash: parking a surplus for a few weeks, or borrowing to bridge a short gap. Returns are low because risk is low; the whole point is safety and access, not yield.</p>
+
+    <div class="layer-label">How they work — the discount mechanism</div>
+    <p>Many money-market instruments don't pay a traditional interest coupon. Instead they are sold on a <strong>discount basis</strong>: you buy below face value and receive the full face value at maturity, and the difference is your return. Buy a Treasury bill for $980 and collect $1,000 thirteen weeks later — the $20 is your interest, expressed as an annualised yield. This mechanism is simple, transparent, and suited to very short holding periods.</p>
+
+    <div class="layer-label">The main instruments</div>
+    <p><strong>Treasury bills (T-bills)</strong> are short-term government debt — effectively free of default risk, highly liquid, auctioned regularly (e.g. 13- and 26-week bills). Central banks buy and sell them to implement monetary policy, which makes them the anchor of the entire money market. <strong>Commercial paper</strong> is the corporate equivalent: short-term, <em>unsecured</em> debt issued by large, creditworthy companies to fund immediate needs like payroll or inventory — higher-yielding than T-bills precisely because it is unsecured. <strong>Certificates of deposit (CDs)</strong> are time deposits at a bank paying a fixed rate; a negotiable CD can be sold on the secondary market before maturity. <strong>Repurchase agreements (repos)</strong> are the market's short-term collateralised loan: one party sells a security and agrees to buy it back shortly at a slightly higher price — the difference is effectively interest, and the security is the collateral. <strong>Bankers' acceptances</strong> are short-term trade IOUs guaranteed by a bank, widely used in international trade to create trust between parties who don't know each other.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Scale &amp; role</span><br>Money markets are enormous and systemically vital — in the US they account for roughly <strong>one-third of all credit</strong>. Maturities run from overnight to one year, and the market is mostly <strong>OTC and wholesale</strong> (large institutional tickets), benchmarked historically to LIBOR and now to rates like SOFR.</div>
+
+    <div class="layer-label">Where it sits on the ladder</div>
+    <p>These are debt instruments, so they sit near the top of the seniority ladder — and T-bills, backed by a government, sit above any corporate claim entirely. This is why a money-market fund is treated as a near-cash holding: the combination of short maturity, high credit quality, and seniority makes price movements tiny.</p>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Safe is not risk-free.</strong> Commercial paper is unsecured — in a crisis (2008), the commercial-paper market froze and even "safe" money-market funds came under stress. Credit quality of the issuer still matters.<br><br>
+    <strong>Yield ≈ compensation for the tiny risk taken.</strong> If a money-market instrument offers a notably higher yield, ask what extra risk you're being paid for.<br><br>
+    <strong>Reinvestment risk.</strong> Because maturities are so short, you're constantly rolling over at whatever the new (possibly lower) rate is.</div>
+
+    <p class="sources">Sources: <a href="https://corporatefinanceinstitute.com/resources/fixed-income/what-is-money-market/">CFI — Money Market</a>; <a href="https://www.imf.org/external/pubs/ft/fandd/2012/06/basics.htm">IMF F&amp;D — What Are Money Markets?</a>; <a href="https://www.sciencedirect.com/topics/economics-econometrics-and-finance/money-market-instruments">ScienceDirect — Money Market Instruments</a>; <a href="https://www.financialprofessionals.org/glossary/money-markets">AFP — Money Markets</a>.</p>
+  </div>
+
+  <!-- INSTRUMENT 2: BONDS -->
+  <div class="inst prose" id="bonds">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 02 · Debt · Long-term</div>
+      <h2 class="inst-title">Bonds (fixed income)</h2>
+      <div class="inst-sub">A tradable loan: lend now, collect coupons, get your principal back at maturity</div>
+    </div>
+
+    <p>A bond is the fundamental long-term debt instrument — essentially a <strong>tradable loan</strong>. An investor lends a fixed sum to an issuer (a government or company); in return the issuer pays periodic interest and promises to return the principal on a set future date. Because the payment stream is defined in advance, bonds are called <strong>fixed income</strong>, and because a bondholder is a creditor, they rank above all equity on the capital-structure ladder.</p>
+
+    <div class="layer-label">The anatomy of a bond</div>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">Face / par value</span> — the amount repaid at maturity (typically $1,000, quoted on a base of 100). Not the same as the price.</div>
+      <div class="f-row"><span class="f-name">Coupon rate</span> — the annual interest, as a % of face value. A 5% coupon on $1,000 pays $50 a year.</div>
+      <div class="f-row"><span class="f-name">Maturity</span> — the date the principal is repaid and payments stop. Ranges from months to 100 years.</div>
+      <div class="f-row"><span class="f-name">Price</span> — what the bond trades at, quoted as a % of par. "98" means 98% of face = $980 (a discount); above 100 is a premium.</div>
+      <div class="f-row"><span class="f-name">Yield to maturity (YTM)</span> — the total annualised return if held to maturity, accounting for price, coupons, and time. The key comparison metric.</div>
+      <div class="f-row"><span class="f-name">Indenture</span> — the legal contract setting out all the bond's terms and protections.</div>
+    </div>
+
+    <div class="layer-label">The one relationship you must internalise</div>
+    <div class="callout">
+      <div class="callout-title">Bond prices move inversely to interest rates</div>
+      <p style="margin:0;">This is the single most important fact in fixed income. If you hold a bond paying a 5% coupon and market rates rise to 7%, no one will pay full price for your 5% bond when they can buy a new one at 7% — so your bond's <strong>price falls</strong> until its yield matches the market. Conversely, when rates fall, existing higher-coupon bonds become more valuable and their <strong>prices rise</strong>. Rates up, prices down; rates down, prices up. How <em>much</em> the price moves for a given rate change is called <strong>duration</strong> — the subject of the valuation article.</p>
+    </div>
+
+    <div class="layer-label">The main types</div>
+    <p>By issuer and structure: <strong>Government bonds</strong> — in the US, split by maturity into bills (under 1 year), notes (2–10 years), and bonds (20–30 years); generally the safest, with Treasuries the global benchmark. <strong>Municipal bonds</strong> — issued by cities and states, often tax-advantaged. <strong>Corporate bonds</strong> — issued by companies, higher-yielding, ranked by credit rating from investment-grade down to high-yield ("junk"). <strong>STRIPS</strong> — Treasuries with their coupons "stripped" off, so the principal and each coupon trade separately as zero-coupon instruments (bought at a discount, no interim payments). <strong>Floating-rate notes (FRNs)</strong> — bonds whose coupon resets with market rates rather than staying fixed.</p>
+
+    <div class="layer-label">A key issuer option: callable bonds</div>
+    <p>Some bonds are <strong>callable</strong> — the issuer can repay them early, after an initial protected period. Issuers call bonds when it suits <em>them</em>, which is typically when rates have fallen and they can refinance more cheaply — exactly when the investor would have preferred to keep the higher coupon. A callable bond therefore carries extra risk for the investor and usually offers a higher yield to compensate.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Why investors hold bonds</span><br>Four roles: <strong>income</strong> (predictable coupons), <strong>capital preservation</strong> (principal returned at maturity, especially with governments), <strong>diversification</strong> (bonds often move differently from equities, lowering portfolio volatility), and <strong>market signalling</strong> (bond yields reveal the market's expectations for rates and growth).</div>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Interest-rate risk.</strong> Rising rates push bond prices down; the longer the maturity/duration, the bigger the hit.<br><br>
+    <strong>Credit risk.</strong> The issuer can default. This is what separates a Treasury from a high-yield corporate — and what the credit rating measures.<br><br>
+    <strong>Call risk.</strong> A callable bond can be taken away just when its high coupon is most valuable to you.<br><br>
+    <strong>Inflation risk.</strong> Fixed coupons lose real value if inflation rises — a fixed 4% is poor if inflation runs at 6%.<br><br>
+    <strong>Price ≠ par.</strong> A bond trading at a premium or discount changes your real return (YTM), which is not the same as the coupon rate.</div>
+
+    <p class="sources">Sources: <a href="https://www.raymondjames.com/wealth-management/advice-products-and-services/investment-solutions/fixed-income/bond-basics">Raymond James — Bond Basics</a>; <a href="https://corporatefinanceinstitute.com/resources/fixed-income/bonds/">CFI — Bonds</a>; <a href="https://www.britannica.com/money/bond-market-basics">Britannica Money — Bond Market Basics</a>; <a href="https://investor.vanguard.com/investor-resources-education/understanding-investment-types/what-is-a-bond">Vanguard — What Is a Bond</a>.</p>
+  </div>
+
+
+  <!-- INSTRUMENT 3: LOANS & CREDIT -->
+  <div class="inst prose" id="credit">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 03 · Debt · Private</div>
+      <h2 class="inst-title">Loans &amp; credit</h2>
+      <div class="inst-sub">The most senior debt of all — private, negotiated, and first in line</div>
+    </div>
+
+    <p>Loans are debt too, but of a different character from bonds. A bond is a security sold to many investors in a public market; a loan is a <strong>privately negotiated</strong> agreement, historically between a company and a bank (or a group of them). Crucially, loans usually sit at the very <strong>top of the capital-structure ladder</strong> — they are the most senior claim, the first to be repaid, and often secured by collateral. Where a bondholder lends at arm's length, a lender negotiates terms directly and holds more control.</p>
+
+    <div class="layer-label">The two core loan structures</div>
+    <p>A <strong>term loan</strong> is a lump sum borrowed and repaid over a set schedule. It splits into "Term Loan A" (amortising, typically held by banks) and "Term Loan B" (bullet repayment, held by institutional investors like credit funds and CLOs). A <strong>revolving credit facility ("revolver")</strong> works like a corporate credit card: the company draws down and repays as needed, up to a limit, paying a fee on the undrawn portion. The revolver is typically the <em>first</em> debt repaid and the most senior of all.</p>
+
+    <div class="layer-label">Seniority within debt — the lien structure</div>
+    <p>Not all debt is equal, and the ordering within the debt layers is precise. <strong>First-lien</strong> debt has the first claim on the borrower's collateral — the safest position, lowest yield. <strong>Second-lien</strong> debt sits behind it, with a claim only on what's left after first-lien is satisfied — riskier, higher yield. Below that comes unsecured and subordinated debt. A key rule of thumb: <strong>loans are almost always senior to bonds</strong> from the same company, structured deliberately so loans are repaid first in a bankruptcy.</p>
+
+    <div class="layer-label">Leveraged loans — the private-equity fuel</div>
+    <p>A <strong>leveraged loan</strong> is a loan to a below-investment-grade (riskier, more indebted) company — typically to finance a leveraged buyout, acquisition, or refinancing. Despite the "risky borrower" label, the <em>loan itself</em> is relatively well-protected: it is senior, secured by collateral, and sits at the top of the structure, making it the safest slice of a risky company's debt. Leveraged loans are <strong>floating-rate</strong> (priced as a spread over a benchmark like SOFR), which makes them attractive when rates rise — unlike fixed-rate bonds, their income goes up with rates.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Syndication — how billion-dollar loans get funded</span><br>No single bank lends billions alone. In <strong>syndication</strong>, a lead ("arranger") bank underwrites the full amount, then sells portions to a group of other banks and institutional investors. This spreads the risk and is how large financings actually get done. The institutional slices (Term Loan B) are bought by <strong>CLOs, credit funds, and insurers</strong> — and increasingly by <strong>private credit</strong> funds lending directly, outside the banking system entirely.</div>
+
+    <div class="layer-label">Covenants — the lender's controls</div>
+    <p>Loans come with <strong>covenants</strong> — contractual rules protecting the lender. <strong>Maintenance covenants</strong> must be met continuously (e.g. keep debt/EBITDA below a limit, tested quarterly); breaching one is an event of default. <strong>Incurrence covenants</strong> only bite when the borrower takes a specific action (like taking on more debt). Since the 2010s, many institutional loans have become <strong>"covenant-lite"</strong> — lacking maintenance covenants — which gives borrowers more room but leaves lenders less protected, a structural risk worth watching.</p>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Seniority is the whole point.</strong> A leveraged loan to a shaky company can still be safe <em>because</em> it's first-lien secured — but check where in the lien structure you actually sit.<br><br>
+    <strong>Floating rate cuts both ways.</strong> Income rises with rates, but so does the borrower's interest burden — which can push a weak borrower toward default.<br><br>
+    <strong>Cov-lite = less early warning.</strong> Without maintenance covenants, problems surface later, when there's less value left to recover.<br><br>
+    <strong>Liquidity.</strong> Syndicated loans have a secondary market, but private-credit loans generally do not — you may be locked in.</div>
+
+    <p class="sources">Sources: <a href="https://www.wallstreetprep.com/knowledge/ultimate-guide-to-debt-leveraged-finance/">Wall Street Prep — Leveraged Finance</a>; <a href="https://ryanoconnellfinance.com/leveraged-finance-high-yield/">Ryan O'Connell, CFA — Leveraged Finance</a>; <a href="https://pitchbook.com/leveraged-commentary-data/leveraged-loan-primer">PitchBook — Leveraged Loan Primer</a>; <a href="https://www.corvidpartners.com/field-guide/corporate-credit/leveraged-loans">Corvid Partners — Leveraged Loans</a>.</p>
+  </div>
+
+  <!-- INSTRUMENT 4: EQUITY -->
+  <div class="inst prose" id="equity">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 04 · Equity · Ownership</div>
+      <h2 class="inst-title">Equity: common vs. preferred shares</h2>
+      <div class="inst-sub">Ownership, not lending — the residual claim, and its quieter cousin</div>
+    </div>
+
+    <p>Equity is fundamentally different from everything above it. A bondholder or lender is a <em>creditor</em> — owed a defined sum. A shareholder is an <em>owner</em> — entitled to whatever is left after everyone else is paid. This is the <strong>residual claim</strong>: unlimited upside if the company thrives, but last in line if it fails. Within equity, though, there are two quite different instruments — common and preferred shares — and the difference between them is one of the most common things beginners find confusing.</p>
+
+    <div class="layer-label">Common stock — ownership in full</div>
+    <p><strong>Common stock</strong> is what most people mean by "a share." It carries three defining features. First, <strong>voting rights</strong> — typically one vote per share, used to elect the board of directors and approve major decisions; this is the owner's voice in how the company is run. Second, a <strong>residual claim</strong> — common shareholders are paid last, after creditors <em>and</em> preferred shareholders, receiving whatever assets remain in a liquidation (often nothing). Third, <strong>variable dividends</strong> — payments are not guaranteed; they rise, fall, or stop entirely with the company's fortunes. In exchange for bearing the most risk, common holders capture the most <strong>upside</strong>: when a company grows, the value of its common shares can rise without limit.</p>
+
+    <div class="layer-label">Preferred stock — equity that behaves like a bond</div>
+    <p><strong>Preferred stock</strong> is a hybrid, and the cleanest way to understand it is as "equity that acts like a bond." Preferred shareholders usually give up the vote, but in return they get financial priority. Their <strong>dividends are fixed</strong> and must be paid <em>before</em> any dividend to common shareholders. In a liquidation, they rank <em>ahead</em> of common shareholders (though still behind all debt). And their return is essentially <strong>capped</strong> — like a bond's coupon — at the preferred dividend, without the unlimited upside of common. Because of this fixed, priority income, preferred shares suit income-focused, more risk-averse investors, while common suits those seeking growth and willing to bear volatility.</p>
+
+    <div class="callout">
+      <div class="callout-title">Common vs. preferred — the difference in one view</div>
+      <p style="margin:0;"><strong>Common:</strong> votes · variable/uncertain dividend · paid last · unlimited upside · higher volatility · for growth.<br>
+      <strong>Preferred:</strong> usually no vote · fixed priority dividend · paid before common (after debt) · capped return · lower volatility · for income.<br><br>
+      The mental shortcut: <strong>common is pure ownership; preferred is a bond-like claim wearing an equity label.</strong> This is exactly why preferred sits on rung 4 of the ladder — above common, below all debt.</p>
+    </div>
+
+    <div class="layer-label">Varieties of preferred</div>
+    <p>Preferred shares come in flavours worth knowing. <strong>Cumulative</strong> preferred accumulates any missed dividends — the company must pay all arrears before common holders see a cent; <strong>non-cumulative</strong> does not. <strong>Convertible</strong> preferred can be exchanged for a set number of common shares, giving some of the upside. And in venture capital, <strong>liquidation preferences</strong> are central: a "1x" preference returns the investor their money first before common holders share the rest; a "2x" returns double. <em>Participating</em> preferred takes its preference <em>and</em> then shares in the remainder; <em>non-participating</em> takes the greater of the two. These terms decide who actually gets what when a startup is sold.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Where equity sits on the ladder</span><br>Both types are below all debt, but <strong>preferred (rung 4) ranks above common (rung 5)</strong>. The full waterfall in a liquidation: secured lenders → unsecured/senior bondholders → subordinated debt → <strong>preferred shareholders</strong> → <strong>common shareholders</strong>. Equity holders only receive anything once every creditor is fully paid — which is why equity is the highest-risk, highest-expected-return part of the structure.</div>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Common = last in line.</strong> In a bankruptcy, common shareholders are usually wiped out entirely. The upside is unlimited, but so is the risk to your capital.<br><br>
+    <strong>Preferred is rate-sensitive.</strong> Because it behaves like a fixed-income instrument, preferred stock's price falls when interest rates rise — much like a bond.<br><br>
+    <strong>Preferred's upside is capped.</strong> You get the fixed dividend and priority, but you don't share in the company's growth the way common holders do.<br><br>
+    <strong>Voting matters in control fights.</strong> Common's vote is worth little day-to-day but decisive in takeovers, proxy battles, and board elections.<br><br>
+    <strong>"Preferred" ≠ "better."</strong> It's a different risk/return profile, not a superior one — safer income, less growth.</div>
+
+    <p class="sources">Sources: <a href="https://www.chase.com/personal/investments/learning-and-insights/article/common-stock-vs-preferred-stock-whats-the-difference">Chase — Common vs Preferred</a>; <a href="https://www.delawareinc.com/general-corporation/preferred-stock-vs-common-stock/">Harvard Business Services — Common vs Preferred</a>; <a href="https://content.one.lumenlearning.com/financialaccounting/chapter/common-and-preferred-stock/">Lumen — Common &amp; Preferred Stock</a>; <a href="https://www.diffen.com/difference/Common_Stock_vs_Preferred_Stock">Diffen — Common vs Preferred (liquidation preferences)</a>.</p>
+  </div>
+
+
+  <!-- INSTRUMENT 5: HYBRIDS -->
+  <div class="inst prose" id="hybrids">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 05 · Between debt &amp; equity</div>
+      <h2 class="inst-title">Hybrids</h2>
+      <div class="inst-sub">Instruments that deliberately sit between the rungs of the ladder</div>
+    </div>
+
+    <p>Not every instrument is cleanly debt or equity. <strong>Hybrids</strong> are designed to blend features of both, sitting between the rungs of the capital-structure ladder — offering some of the safety of debt with some of the upside of equity, or vice versa. They exist because issuers and investors sometimes want a risk/return profile that neither pure debt nor pure equity provides. Two matter most: convertible bonds and (already met) preferred shares.</p>
+
+    <div class="layer-label">Convertible bonds — debt with an equity option</div>
+    <p>A <strong>convertible bond</strong> is a corporate bond that the holder can convert into a predetermined number of the company's common shares. It starts life as debt — paying a coupon, ranking above equity — but carries an embedded <em>option</em> to become equity if the share price rises enough. The appeal is asymmetric: if the company does well, the holder converts and captures the stock's upside; if it does poorly, the holder keeps collecting the coupon and gets principal back at maturity, with the downside protection of a bond. In exchange for that attractive combination, convertibles pay a <strong>lower coupon</strong> than an ordinary bond from the same issuer — the investor gives up some yield to buy the conversion option.</p>
+
+    <div class="callout">
+      <div class="callout-title">Why companies issue convertibles</div>
+      <p style="margin:0;">Convertibles let a company borrow at a lower interest rate than straight debt (because the conversion option is valuable to buyers), while deferring the dilution of issuing shares directly. They are especially popular with younger, high-growth companies that want cheap financing now and expect their share price to rise. The trade-off: if the stock soars and holders convert, existing shareholders are diluted after all.</p>
+    </div>
+
+    <div class="layer-label">Mezzanine — the gap-filler in deals</div>
+    <p><strong>Mezzanine financing</strong> sits between senior debt and equity in a company's funding structure — subordinated debt that often comes with equity "kickers" (warrants or options to buy shares). It is riskier than senior debt, so it carries a high interest rate, and it is common in leveraged buyouts and growth financings where a company needs more capital than senior lenders will provide but the owners don't want to give up pure equity. On the ladder, mezzanine sits below senior and second-lien debt but above preferred and common equity.</p>
+
+    <div class="layer-label">Preferred shares, revisited</div>
+    <p>The other great hybrid — <strong>preferred stock</strong> — was covered in the equity section, but it belongs conceptually here too: it is legally equity, but economically behaves like a bond (fixed priority dividend, capped return, rate-sensitive price). Together, convertibles, mezzanine, and preferred form a continuous bridge across the gap between pure lending and pure ownership.</p>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Convertibles are two instruments in one.</strong> You're holding a bond <em>and</em> a stock option — value both. The bond floor protects you; the option gives upside.<br><br>
+    <strong>Lower coupon is the price of the option.</strong> Don't compare a convertible's yield to a straight bond's without accounting for the conversion right you're buying.<br><br>
+    <strong>Dilution risk for shareholders.</strong> If you own the common stock, outstanding convertibles are potential future shares that can dilute you.<br><br>
+    <strong>Mezzanine is high-risk debt.</strong> Its high yield reflects its subordinated position — in a default, it's paid only after all senior debt.<br><br>
+    <strong>Hybrids are complex.</strong> Their blended nature makes them harder to value and sometimes less liquid than pure debt or equity.</div>
+
+    <p class="sources">Sources: <a href="https://corporatefinanceinstitute.com/resources/fixed-income/convertible-bond/">CFI — Convertible Bonds</a>; <a href="https://content.one.lumenlearning.com/financialaccounting/chapter/common-and-preferred-stock/">Lumen — Hybrid Securities</a>; <a href="https://pitchbook.com/leveraged-commentary-data/leveraged-loan-primer">PitchBook — Mezzanine &amp; Capital Structure</a>; <a href="https://www.wallstreetprep.com/knowledge/ultimate-guide-to-debt-leveraged-finance/">Wall Street Prep — Capital Structure</a>.</p>
+  </div>
+
+  <!-- INSTRUMENT 6: FUNDS -->
+  <div class="inst prose" id="funds">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 06 · Wrappers</div>
+      <h2 class="inst-title">Funds (mutual funds &amp; ETFs)</h2>
+      <div class="inst-sub">Not a new claim, but a basket — pooled access to many instruments at once</div>
+    </div>
+
+    <p>Funds are different in kind from everything so far. A bond or a share is a direct claim on a single issuer; a <strong>fund is a wrapper</strong> that pools many investors' money to buy a basket of underlying instruments. You don't buy a new type of claim — you buy a slice of a professionally-assembled portfolio. Funds exist to solve two problems for ordinary investors: <strong>diversification</strong> (owning hundreds of securities at once, impossible to assemble individually with small sums) and <strong>access to professional management</strong>.</p>
+
+    <div class="layer-label">The active vs. passive divide</div>
+    <p>The deepest distinction among funds is the strategy. An <strong>actively managed</strong> fund hires managers who research securities and try to <em>beat</em> the market — charging higher fees for that effort. A <strong>passively managed</strong> (index) fund simply <em>tracks</em> an index like the S&amp;P 500, holding whatever the index holds, with no stock-picking — which makes it far cheaper. The long-running debate: most active managers fail to beat their benchmark after fees over time, which is why low-cost passive funds have captured enormous market share. This is the same active/passive split that defines the asset-management industry.</p>
+
+    <div class="layer-label">Mutual funds vs. ETFs — the structural difference</div>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">Mutual fund</span> — priced <strong>once per day</strong> after market close at its net asset value (NAV). You buy/sell directly with the fund company at that day's NAV. Often actively managed; can have minimums and sales loads.</div>
+      <div class="f-row"><span class="f-name">ETF (exchange-traded fund)</span> — trades <strong>on an exchange all day like a stock</strong>, with a live price. Usually passive/index, lower fees, and publishes its holdings daily (high transparency). More flexible and tax-efficient for most investors.</div>
+      <div class="f-row"><span class="f-name">ETN (exchange-traded note)</span> — looks like an ETF but is actually a <strong>debt obligation of a bank</strong>, not a basket of assets. It carries the issuer's credit risk — if the bank fails, you can lose out even if the tracked index did fine.</div>
+      <div class="f-row"><span class="f-name">ETP (exchange-traded product)</span> — the umbrella term covering ETFs, ETNs, and commodity pools.</div>
+    </div>
+
+    <div class="quant-note"><span class="quant-label">📊 Why the structure matters</span><br>The headline difference is <strong>intraday trading</strong>: an ETF can be bought and sold any moment the market is open, at a known price; a mutual fund settles once daily at NAV. Combined with generally lower fees, daily transparency, and tax efficiency, this is why ETFs have grown so fast. But an <strong>ETN is not a fund at all</strong> — it's a bank's IOU, so it adds issuer credit risk that a true ETF does not have.</div>
+
+    <div class="layer-label">Where funds sit on the ladder</div>
+    <p>A fund has no place of its own on the seniority ladder — its risk is simply the <em>blended</em> risk of whatever it holds. A government-bond fund is near the top; an emerging-market equity fund is near the bottom; a balanced fund sits in between. The wrapper doesn't change the seniority of the underlying claims; it just packages them.</p>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Fees compound.</strong> A 1% annual fee sounds small but erodes decades of returns dramatically. For index exposure, the cheapest fund tracking the same index usually wins.<br><br>
+    <strong>Active rarely beats passive after fees.</strong> Paying up for active management is paying for a result most managers don't deliver over the long run.<br><br>
+    <strong>ETN ≠ ETF.</strong> An ETN carries bank credit risk. Check whether a product is a genuine fund (holds assets) or a note (an IOU).<br><br>
+    <strong>Know what's inside.</strong> A fund's risk is its holdings' risk. "Diversified" doesn't mean safe if everything it holds is correlated.<br><br>
+    <strong>Tracking error.</strong> An index fund won't perfectly match its index — fees and mechanics create small gaps.</div>
+
+    <p class="sources">Sources: <a href="https://www.invesco.com/us/en/insights/mutual-funds-vs-etfs.html">Invesco — Mutual Funds vs ETFs</a>; <a href="https://www.finra.org/investors/investing/investment-products/exchange-traded-products">FINRA — Exchange-Traded Products</a>; <a href="https://www.nerdwallet.com/article/investing/etf-vs-mutual-fund">NerdWallet — ETF vs Mutual Fund</a>.</p>
+  </div>
+
+
+  <!-- INSTRUMENT 7: DERIVATIVES -->
+  <div class="inst prose" id="derivatives">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 07 · Contracts · Derived value</div>
+      <h2 class="inst-title">Derivatives</h2>
+      <div class="inst-sub">Contracts whose value comes from something else — the tools of hedging and leverage</div>
+    </div>
+
+    <p>Derivatives are a different species entirely. A share or a bond is a claim with value of its own; a <strong>derivative has no intrinsic value</strong> — its worth is <em>derived</em> from an underlying asset or reference price (a stock, a commodity, an interest rate, a currency). A derivative is a <strong>contract</strong> about that underlying, and it exists for three purposes: to <strong>hedge</strong> (transfer unwanted risk to someone willing to bear it), to <strong>speculate</strong> (bet on a price move with leverage), and to <strong>arbitrage</strong> (exploit pricing gaps). There are four fundamental types.</p>
+
+    <div class="layer-label">Forwards — the simplest derivative</div>
+    <p>A <strong>forward</strong> is a private, customised agreement between two parties to buy or sell an asset at a set price on a future date. Both sides are <em>obligated</em> to transact. A wheat farmer and a bakery might agree today on a price for grain to be delivered after harvest — locking in certainty for both, whatever the market does later. Because forwards are bespoke and traded OTC, they carry <strong>counterparty risk</strong> (the other side might not honour it) and can be illiquid.</p>
+
+    <div class="layer-label">Futures — the standardised forward</div>
+    <p>A <strong>future</strong> is a forward made standardised and exchange-traded. The contract size, quality, and dates are fixed by the exchange, and a <strong>clearing house</strong> stands behind every trade — virtually eliminating counterparty risk. Futures are marked to market <em>daily</em>: gains and losses are settled each day through a margin account, rather than all at once at expiry. This makes them highly liquid and transparent, which is why an airline hedging jet fuel or a fund speculating on oil uses futures rather than forwards. Like forwards, <strong>both parties are obligated</strong> to fulfil the contract.</p>
+
+    <div class="layer-label">Options — the right, not the obligation</div>
+    <p><strong>Options</strong> are where derivatives get their asymmetry. An option gives the holder the <em>right, but not the obligation</em>, to buy or sell the underlying at a set price (the <strong>strike</strong>) before or at expiry. This one-sided nature is the whole point.</p>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">Call option</span> — the right to <strong>buy</strong> at the strike. You buy a call when you expect the price to <em>rise</em>. Maximum loss is the premium paid; upside is theoretically unlimited.</div>
+      <div class="f-row"><span class="f-name">Put option</span> — the right to <strong>sell</strong> at the strike. You buy a put when you expect the price to <em>fall</em>, or to insure a holding against a drop.</div>
+      <div class="f-row"><span class="f-name">Premium</span> — the price paid for the option. For the <em>buyer</em>, this is the maximum possible loss. For the <em>writer</em> (seller), the premium is the maximum gain — but the potential loss can be large or unlimited.</div>
+      <div class="f-row"><span class="f-name">Strike price</span> — the fixed price at which the option can be exercised.</div>
+      <div class="f-row"><span class="f-name">American vs. European</span> — American options can be exercised any time before expiry; European only at expiry.</div>
+      <div class="f-row"><span class="f-name">In / at / out of the money</span> — whether exercising now would be profitable (in), break-even (at), or unprofitable (out).</div>
+    </div>
+    <p>The asymmetry is what makes options so useful: a call buyer risks only the premium but captures unlimited upside — a leveraged bet with a capped, known downside. Options are often <strong>cash-settled</strong> (the difference is paid in cash) rather than resulting in physical delivery of the underlying.</p>
+
+    <div class="layer-label">Swaps — exchanging cash-flow streams</div>
+    <p>A <strong>swap</strong> is an agreement between two parties to exchange streams of cash flows over time. The most common is the <strong>interest-rate swap</strong>: one party pays a fixed rate and receives a floating rate, while the other does the reverse. A company with floating-rate debt that fears rising rates can swap into fixed, gaining certainty; a bank with fixed-rate mortgage income can swap into floating to match its funding. Other swaps exchange currencies (currency swaps), credit risk (credit default swaps), or commodity exposures. Swaps are overwhelmingly <strong>OTC</strong> and bespoke, which is why they dominate the OTC derivatives market.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Leverage — the double edge</span><br>Derivatives let you control a large exposure for a small upfront outlay (a premium or margin). That <strong>leverage</strong> magnifies both gains and losses: a small move in the underlying can produce an outsized percentage return — or wipe out your stake. This is what makes derivatives powerful for hedging and dangerous for undisciplined speculation. The underlying notional controlled can be many times the cash committed.</div>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Obligation vs. right.</strong> Forwards and futures <em>obligate</em> both sides; options give the buyer a <em>right</em>. This distinction changes the entire risk profile.<br><br>
+    <strong>Writing options is dangerous.</strong> Selling (writing) a call can expose you to unlimited loss for a small premium. Buyers risk only the premium; writers can risk far more.<br><br>
+    <strong>Leverage cuts both ways.</strong> The same small outlay that magnifies gains magnifies losses — position sizing is everything.<br><br>
+    <strong>Counterparty risk in OTC.</strong> Forwards and swaps depend on the other side honouring the deal; futures largely remove this via clearing.<br><br>
+    <strong>Hedging vs. speculating.</strong> The same instrument can reduce risk (hedging an exposure you have) or create it (a naked bet). Know which you're doing.<br><br>
+    <strong>Time decay (options).</strong> An option loses value as expiry approaches, all else equal — you can be right on direction and still lose if you're too early.</div>
+
+    <p class="sources">Sources: <a href="https://library.fiveable.me/introduction-finance-mathematics-statistics/unit-10">Fiveable — Derivatives</a>; <a href="https://www.finra.org/investors/investing/investment-products/options">FINRA — Options</a>; <a href="https://www.hedgestar.com/">HedgeStar — Hedging with Derivatives</a>; <a href="https://capitalcitytraining.com/insights/derivatives-forwards-futures-options-swaps/">Capital City Training — Forwards, Futures, Options, Swaps</a>.</p>
+  </div>
+
+  <!-- INSTRUMENT 8: FX -->
+  <div class="inst prose" id="fx">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 08 · Currencies</div>
+      <h2 class="inst-title">Currencies (FX)</h2>
+      <div class="inst-sub">The largest market on earth — trading one currency against another</div>
+    </div>
+
+    <p>The foreign-exchange (FX) market is the <strong>largest and most liquid market in the world</strong>, trading currencies against one another around the clock. Unlike a stock, a currency has no issuer paying you a return — you profit (or lose) purely from the <em>exchange rate</em> moving. FX is traded in <strong>pairs</strong> (EUR/USD, GBP/CHF), because the price of one currency is always expressed in terms of another. It serves two very different crowds: businesses managing real cross-border cash flows, and speculators betting on rate moves.</p>
+
+    <div class="layer-label">Spot and forward FX</div>
+    <p><strong>Spot FX</strong> is the immediate exchange of one currency for another at the current rate — what happens when you convert money at a bank. <strong>Forward FX</strong> is the single most important tool for <em>hedging currency risk</em>: a company that will receive a foreign-currency payment in three months can lock in today's rate with a forward, removing the uncertainty of where the exchange rate will be. A UK exporter selling to a US buyer, with costs in pounds but revenue in dollars, uses FX forwards so a falling dollar doesn't erase its profit. Beyond these, <strong>currency swaps, FX futures, and FX options</strong> provide more tailored ways to manage currency exposure.</p>
+
+    <div class="quant-note"><span class="quant-label">📊 Why FX matters even if you never trade it</span><br>Any international investment carries <strong>currency risk</strong> on top of the asset's own risk. A Czech investor buying US stocks is exposed to both the stock <em>and</em> the USD/CZK rate — the shares can rise while a falling dollar wipes out the gain in koruna terms. This is why global investors constantly decide whether to <strong>hedge</strong> their currency exposure, and FX instruments are how they do it.</div>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Currency risk is a separate layer.</strong> On any foreign asset, the exchange rate is a second bet stacked on the first. It can help or hurt independently of the asset.<br><br>
+    <strong>FX is driven by macro, not fundamentals.</strong> Interest-rate differentials, central-bank policy, and capital flows move currencies — not earnings or dividends.<br><br>
+    <strong>High leverage is standard.</strong> Retail FX is often traded with extreme leverage, which makes it one of the fastest ways to lose capital.<br><br>
+    <strong>Hedging has a cost.</strong> Forwards remove uncertainty but at a price (the forward points); perfect certainty is never free.<br><br>
+    <strong>Pairs are relative.</strong> You are never long a currency in isolation — always long one and short another.</div>
+
+    <p class="sources">Sources: <a href="https://www.hedgestar.com/">HedgeStar — FX Hedging</a>; <a href="https://www.kotaksecurities.com/investing-guide/currency/">Kotak Securities — Currency Market</a>; <a href="https://capitalcitytraining.com/insights/derivatives-forwards-futures-options-swaps/">Capital City Training — FX Derivatives</a>.</p>
+  </div>
+
+  <!-- INSTRUMENT 9: COMMODITIES -->
+  <div class="inst prose" id="commodities">
+    <div class="inst-header">
+      <div class="inst-num">Instrument 09 · Physical assets</div>
+      <h2 class="inst-title">Commodities</h2>
+      <div class="inst-sub">Physical goods — and why how you hold them matters as much as the price</div>
+    </div>
+
+    <p>Commodities are raw physical goods — gold, silver, oil, natural gas, agricultural products, industrial metals — traded on regulated commodity exchanges. They are the oldest form of trading, and they appeal to investors for two reasons: <strong>diversification</strong> (they often move differently from stocks and bonds) and as an <strong>inflation hedge</strong> (real assets tend to hold value when money loses it). But commodities hide a trap that catches many beginners: <em>how</em> you gain exposure can matter as much as the commodity's price itself.</p>
+
+    <div class="layer-label">Spot vs. futures exposure</div>
+    <p>You can get commodity exposure two fundamentally different ways. The <strong>spot</strong> approach means owning the physical thing (gold bars) or a fund that holds it — your return tracks the actual price closely. The <strong>futures</strong> approach means holding derivative contracts on the future price, which most commodity funds use because storing oil or wheat is impractical. The catch is that futures-based exposure must <strong>"roll"</strong> expiring contracts into new ones, and that rolling has a cost or benefit depending on the shape of the futures curve.</p>
+
+    <div class="callout">
+      <div class="callout-title">Contango — the hidden drag on futures-based funds</div>
+      <p style="margin:0;">When longer-dated futures cost <em>more</em> than near-dated ones (a state called <strong>contango</strong>), a futures-based fund sells low and buys high every time it rolls — bleeding value even if the spot price is flat. The opposite (longer-dated cheaper) is <strong>backwardation</strong>, which helps. The effect is large: in some years a <strong>physically-backed gold fund can return many times what a broad futures-based commodity fund does</strong>, despite both being "commodity exposure." The structure of the product partly determines your return — a direct echo of the spot-vs-forward distinction from the first article.</p>
+    </div>
+
+    <div class="layer-label">How investors actually access commodities</div>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">Physically-backed ETF</span> — holds the actual commodity (gold, silver). Tracks spot closely, no roll cost. Best for precious metals (e.g. GLD for gold, SLV for silver).</div>
+      <div class="f-row"><span class="f-name">Futures-based ETF</span> — holds futures contracts and rolls them (e.g. USO for oil, UNG for gas). Exposed to contango/backwardation — the roll can help or hurt.</div>
+      <div class="f-row"><span class="f-name">Producer-equity ETF</span> — holds shares of mining/energy companies. Behaves more like equity than the commodity itself (adds company and market risk).</div>
+      <div class="f-row"><span class="f-name">Direct futures / physical</span> — buying the contracts or the metal outright; involves margin, rolling, or storage and logistics.</div>
+    </div>
+
+    <div class="watchout"><span class="wo-label">⚠ What to watch</span><br>
+    <strong>Structure can dominate price.</strong> With futures-based funds, contango can erode returns badly even when the commodity rises. Check how a fund gets its exposure.<br><br>
+    <strong>Physically-backed tracks spot; futures-based may not.</strong> For a pure bet on gold, a physical fund avoids the roll problem.<br><br>
+    <strong>Producer equities aren't the commodity.</strong> A gold-miner ETF carries company and equity-market risk on top of the gold price.<br><br>
+    <strong>High volatility.</strong> Commodities swing hard on supply shocks, weather, and geopolitics — most guidance caps them at a small share of a portfolio (≈5–10%).<br><br>
+    <strong>No income.</strong> Commodities pay no coupon or dividend; your entire return depends on price (and roll).</div>
+
+    <p class="sources">Sources: <a href="https://www.nerdwallet.com/article/investing/how-to-invest-in-commodities">NerdWallet — How to Invest in Commodities</a>; <a href="https://www.schwab.com/learn/story/ways-to-access-commodities-markets">Charles Schwab — Accessing Commodity Markets</a>; <a href="https://www.finra.org/investors/insights/commodity-futures">FINRA — Commodity Futures</a>; <a href="https://www.invesco.com/us/en/insights/commodities-investing.html">Invesco — Commodities Investing</a>.</p>
+  </div>
+
+  <!-- CONCLUSION + MASTER TABLE -->
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion · The whole map on one page</p>
+    <h3>Bringing it together</h3>
+    <p>Every instrument in this article is one of four things: a form of <strong>lending</strong> (money-market instruments, bonds, loans), a form of <strong>ownership</strong> (common and preferred shares), a <strong>blend</strong> (hybrids), or a <strong>contract deriving value from something else</strong> (derivatives, and the FX and commodity exposures built from them) — with <strong>funds</strong> as wrappers over any of these. The thread tying the claims together is the capital-structure ladder: the higher an instrument sits, the safer and lower-yielding; the lower, the riskier and higher-yielding. Master the ladder and the trade-off it encodes, and you can place any new instrument you meet — which is exactly the foundation the next article builds on to ask what each is actually <em>worth</em>.</p>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th>Instrument</th><th>Family</th><th>Risk / return</th><th>Where it trades</th><th>Ladder position</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Money-market</td><td>Debt (short)</td><td>Lowest / lowest</td><td>OTC, wholesale</td><td>Top (senior)</td></tr>
+          <tr><td>Bonds</td><td>Debt (long)</td><td>Low–moderate</td><td>Exchange &amp; OTC</td><td>Senior (varies by rank)</td></tr>
+          <tr><td>Loans &amp; credit</td><td>Debt (private)</td><td>Low (if senior secured)</td><td>Private / syndicated</td><td>Most senior</td></tr>
+          <tr><td>Common stock</td><td>Equity</td><td>High / unlimited upside</td><td>Exchange</td><td>Bottom (residual)</td></tr>
+          <tr><td>Preferred stock</td><td>Hybrid</td><td>Moderate (bond-like)</td><td>Exchange</td><td>Above common, below debt</td></tr>
+          <tr><td>Convertibles / mezzanine</td><td>Hybrid</td><td>Moderate</td><td>OTC &amp; exchange</td><td>Between debt &amp; equity</td></tr>
+          <tr><td>Funds (mutual/ETF)</td><td>Wrapper</td><td>= blended holdings</td><td>ETF: exchange / MF: NAV</td><td>N/A (packages claims)</td></tr>
+          <tr><td>Derivatives</td><td>Contract</td><td>Leveraged (variable)</td><td>Exchange (futures) / OTC (forwards, swaps)</td><td>N/A (contract on underlying)</td></tr>
+          <tr><td>Currencies (FX)</td><td>Contract / cash</td><td>Macro-driven, leveraged</td><td>OTC (largest market)</td><td>N/A</td></tr>
+          <tr><td>Commodities</td><td>Physical</td><td>High, no income</td><td>Exchange (spot &amp; futures)</td><td>N/A</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- KEY TAKEAWAYS -->
+  <div class="section prose">
+    <p class="eyebrow">Key takeaways</p>
+    <h3>What to remember</h3>
+    <ul>
+      <li><strong>Everything is lending, ownership, a blend, or a contract.</strong> Debt (money-market, bonds, loans), equity (common, preferred), hybrids (convertibles, mezzanine), derivatives — with funds as wrappers over any of them.</li>
+      <li><strong>The capital-structure ladder is the key:</strong> senior secured debt → senior unsecured → subordinated → preferred → common. Higher = safer, lower-yielding; lower = riskier, higher-yielding.</li>
+      <li><strong>Money-market = short &amp; safe; bonds = a tradable loan</strong> whose price moves inversely to interest rates; <strong>loans = the most senior debt</strong>, often floating-rate and secured.</li>
+      <li><strong>Common vs. preferred:</strong> votes + growth + residual (last) claim vs. no vote + fixed priority dividend + capped return. Preferred is a bond wearing an equity label.</li>
+      <li><strong>Hybrids bridge the gap</strong> — convertibles are a bond plus an equity option; mezzanine is high-yield subordinated debt with equity kickers.</li>
+      <li><strong>Funds are wrappers, not new claims:</strong> active vs. passive is the key split, ETFs trade intraday while mutual funds price once at NAV, and an ETN is a bank IOU — not a fund.</li>
+      <li><strong>Derivatives derive value from an underlying:</strong> forwards/futures obligate both sides; options give the buyer a right (call = buy, put = sell) for a premium. Leverage magnifies both ways.</li>
+      <li><strong>FX adds a separate currency-risk layer</strong> on any foreign asset; forwards are the main hedging tool. It's the largest market, driven by macro not fundamentals.</li>
+      <li><strong>With commodities, structure can matter as much as price:</strong> futures-based funds suffer contango, physically-backed funds track spot. They pay no income and are volatile.</li>
+    </ul>
+  </div>
+
+  <!-- GLOSSARY (placeholder - poroste) -->
+  <div class="section prose" id="glossary">
+    <p class="eyebrow">Reference</p>
+    <h3>Glossary</h3>
+    <p style="opacity:0.7;font-style:italic;">Pojmy napříč všemi devíti skupinami nástrojů.</p>
+    <dl class="glossary">
+      <dt>Capital-structure ladder / seniority</dt>
+      <dd>The strict order in which claims are paid if a company fails: senior secured debt → senior unsecured → subordinated debt → preferred equity → common equity. Higher = safer, lower-yielding.</dd>
+      <dt>Discount basis</dt>
+      <dd>Selling an instrument below face value and redeeming at full face value; the difference is the return (used for T-bills, commercial paper).</dd>
+      <dt>T-bill / Commercial paper / CD / Repo / Bankers' acceptance</dt>
+      <dd>Core money-market instruments: short-term government debt / unsecured short-term corporate debt / bank time deposit / short-term collateralised loan / bank-guaranteed trade IOU.</dd>
+      <dt>Face (par) value</dt>
+      <dd>The amount a bond repays at maturity; also the base for the coupon. Quoted on a base of 100.</dd>
+      <dt>Coupon</dt>
+      <dd>The annual interest a bond pays, as a percentage of face value.</dd>
+      <dt>Yield to maturity (YTM)</dt>
+      <dd>The total annualised return on a bond if held to maturity, accounting for price, coupons and time.</dd>
+      <dt>Duration</dt>
+      <dd>The sensitivity of a bond's price to a change in interest rates (covered in the valuation article).</dd>
+      <dt>Callable bond</dt>
+      <dd>A bond the issuer can repay early — usually when rates fall — carrying extra risk (and higher yield) for the investor.</dd>
+      <dt>STRIPS / FRN</dt>
+      <dd>A Treasury split into separately-traded zero-coupon pieces / a bond whose coupon floats with market rates.</dd>
+      <dt>Term loan / Revolver</dt>
+      <dd>A lump sum borrowed and repaid on schedule / a flexible credit line drawn and repaid as needed (the most senior debt).</dd>
+      <dt>First-lien / Second-lien</dt>
+      <dd>The ordering of claims on collateral: first-lien is paid first from the collateral (safest, lowest yield); second-lien ranks behind it.</dd>
+      <dt>Leveraged loan</dt>
+      <dd>A senior, secured, floating-rate loan to a below-investment-grade company; the safest slice of a risky borrower's debt.</dd>
+      <dt>Syndication</dt>
+      <dd>A lead bank underwrites a large loan then sells portions to other lenders and institutional investors, spreading the risk.</dd>
+      <dt>Covenant / Covenant-lite</dt>
+      <dd>Contractual rules protecting lenders (maintenance = tested continuously, incurrence = only on a specific action); cov-lite loans lack maintenance covenants.</dd>
+      <dt>Common stock</dt>
+      <dd>Full ownership: voting rights, a residual (last-in-line) claim, variable dividends, and unlimited upside. The highest-risk part of the structure.</dd>
+      <dt>Preferred stock</dt>
+      <dd>A debt-equity hybrid: usually no vote, a fixed priority dividend, paid before common (after all debt), with a capped return.</dd>
+      <dt>Residual claim</dt>
+      <dd>The equity holder's entitlement to whatever is left after all creditors are paid — unlimited upside, but last in line.</dd>
+      <dt>Cumulative preferred</dt>
+      <dd>Preferred whose missed dividends accumulate and must be paid in full before any common dividend.</dd>
+      <dt>Liquidation preference</dt>
+      <dd>In venture capital, the multiple (1x, 2x) a preferred investor gets back before common holders share the rest; participating preferred also shares in the remainder.</dd>
+      <dt>Convertible bond</dt>
+      <dd>A bond the holder can convert into a set number of common shares; pays a lower coupon in exchange for that upside option. Debt with an embedded equity option.</dd>
+      <dt>Mezzanine</dt>
+      <dd>Subordinated debt sitting between senior debt and equity, often with equity "kickers" (warrants); high yield, high risk, common in buyouts.</dd>
+      <dt>Hybrid security</dt>
+      <dd>An instrument blending debt and equity features (convertibles, preferred, mezzanine), sitting between the rungs of the capital-structure ladder.</dd>
+      <dt>Fund (wrapper)</dt>
+      <dd>A pooled vehicle that buys a basket of underlying instruments; its risk is the blended risk of its holdings, not a new claim type.</dd>
+      <dt>Active vs. passive</dt>
+      <dd>Active funds pick securities to beat the market (higher fees); passive (index) funds track an index cheaply. Most active managers lag after fees.</dd>
+      <dt>Mutual fund</dt>
+      <dd>A fund priced once daily at NAV, bought/sold with the fund company; often actively managed.</dd>
+      <dt>ETF (exchange-traded fund)</dt>
+      <dd>A fund that trades on an exchange all day like a stock, usually passive, low-fee, and transparent.</dd>
+      <dt>ETN (exchange-traded note)</dt>
+      <dd>A bank's debt obligation that tracks an index — not a basket of assets, so it carries the issuer's credit risk.</dd>
+      <dt>NAV (net asset value)</dt>
+      <dd>The per-share value of a fund's holdings; the price at which a mutual fund transacts once per day.</dd>
+      <dt>Derivative</dt>
+      <dd>A contract whose value is derived from an underlying asset or price; used to hedge, speculate, or arbitrage. Has no intrinsic value of its own.</dd>
+      <dt>Forward / Future</dt>
+      <dd>An agreement to transact at a set price on a future date; forward = bespoke/OTC (counterparty risk), future = standardised/exchange-traded/cleared. Both parties are obligated.</dd>
+      <dt>Call / Put option</dt>
+      <dd>The right (not obligation) to buy (call) or sell (put) at a strike price. Bought to bet on a rise (call) or fall (put), or to insure a holding.</dd>
+      <dt>Premium (option)</dt>
+      <dd>The price paid for an option — the buyer's maximum loss and the writer's maximum gain.</dd>
+      <dt>Strike price</dt>
+      <dd>The fixed price at which an option can be exercised.</dd>
+      <dt>Swap</dt>
+      <dd>An agreement to exchange streams of cash flows (e.g. fixed-for-floating interest). Mostly OTC; the backbone of the OTC derivatives market.</dd>
+      <dt>Leverage</dt>
+      <dd>Controlling a large exposure with a small outlay; magnifies both gains and losses.</dd>
+      <dt>Spot / Forward FX</dt>
+      <dd>Immediate currency exchange at the current rate / an agreement to exchange currency later at a rate locked in now (the main currency-hedging tool).</dd>
+      <dt>Currency risk</dt>
+      <dd>The exchange-rate exposure on any foreign asset — a second bet stacked on the asset's own return.</dd>
+      <dt>Contango / Backwardation</dt>
+      <dd>Futures curve shapes: contango (later contracts dearer) erodes futures-fund returns on each roll; backwardation (later cheaper) helps.</dd>
+      <dt>Physically-backed vs. futures-based</dt>
+      <dd>Two ways a commodity fund gets exposure: holding the actual asset (tracks spot) vs. holding and rolling futures (exposed to contango).</dd>
+    </dl>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  VB Strategies · MSc Finance, University of Liechtenstein
+</footer>
+
+</body>
+</html>
