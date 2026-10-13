@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Project journal</title>
+  <meta name="description" content="A running log of the VB Europe Strategic project: decisions, lessons and changes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../investments/europe-strategic/strategy.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand-link" href="../../index.html"><span class="brand">VB Strategies</span></a>
+    <nav class="nav">
+      <a class="nav-link" href="../../index.html">Home</a>
+      <a class="nav-link active" href="../../investments.html">On Investments</a>
+      <a class="nav-link" href="../../blog.html">Blog</a>
+      <a class="nav-link" href="../../about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <nav class="subnav" aria-label="Project sections"><a href="../../investments.html">Overview</a><a href="journal.html" class="on">Journal</a><a href="statute.html">Statute</a><a href="research.html">Research</a><a href="portfolio.html">Portfolio</a><a href="reports.html">Reports</a></nav>
+    <section class="section">
+      <div class="kicker">VB Europe Strategic</div>
+      <h1>Project journal</h1>
+      <p class="section-sub">A running log of the project: what I decided, what I learned, what I changed and why. Grouped by project stage, newest first.</p>
+
+      <div class="j-filters" role="group" aria-label="Filter entries">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="strategy">Strategy</button>
+        <button data-filter="statute">Statute</button>
+        <button data-filter="research">Research</button>
+        <button data-filter="learning">Learning</button>
+      </div>
+
+      <!-- ===== STAGE 1: DESIGN (add new stages above this one) ===== -->
+      <div class="j-stage">
+        <div class="j-stage-head"><h2>Stage 1 · Design</h2><span>October 2026 –</span></div>
+
+        <!-- ===== ENTRY 13 October 2026 ===== -->
+        <details class="entry2" id="2026-10-13" data-tags="statute learning" open>
+          <summary>
+            <span class="e-meta">13 October 2026<span class="tag">Statute</span><span class="tag">Learning</span></span>
+            <span class="e-title">Statute v1.0: from first draft to rules</span>
+            <span class="e-sum">What changed from the first draft and why, how fundamental and statistical methods fit together, and the honest caveats.</span>
+            <span class="e-arrow">›</span>
+          </summary>
+          <div class="e-body">
+            <p>The first draft of the statute was a list of my own ideas. Turning it into rules meant cutting the personal parts, replacing some limits with method and moving everything that is not policy here.</p>
+            <h3>What changed, and why</h3>
+            <div class="table-wrap"><table>
+              <tr><th>Item</th><th>First draft</th><th>Statute v1.0</th><th>Why</th></tr>
+              <tr><td>Weighting</td><td>Equal weight</td><td>Statistical optimisation, equal weight as baseline</td><td>Apply the portfolio theory from class</td></tr>
+              <tr><td>Number of positions</td><td>15–25</td><td>No fixed number</td><td>Optimisation can handle more names</td></tr>
+              <tr><td>Pillar limits</td><td>Max 30% per pillar, defence max 20%</td><td>Min 10% per component, no maximum</td><td>Room for conviction, while keeping spread</td></tr>
+              <tr><td>Beta</td><td>Range 0.8–1.2</td><td>No limit, reported only</td><td>Higher risk accepted when searching for new growth drivers</td></tr>
+              <tr><td>Minimum market cap</td><td>€1 billion</td><td>€250 million</td><td>Future leaders are often small today</td></tr>
+              <tr><td>Price falls</td><td>No stop-loss</td><td>−20%, or −15 pp vs. benchmark, triggers a review</td><td>Force a review without automatic selling</td></tr>
+              <tr><td>Buying above fair value</td><td>Not allowed</td><td>Allowed with a separate written thesis</td><td>Some cases justify it, but they must be argued</td></tr>
+              <tr><td>Measurement</td><td>Monthly, six metrics</td><td>Quarterly, three groups</td><td>Keep it manageable</td></tr>
+              <tr><td>Personal motivation, data sources</td><td>In the statute</td><td>Moved to this journal</td><td>A statute is policy, not a story or a tool list</td></tr>
+            </table></div>
+            <h3>Fundamental or statistical? Both.</h3>
+            <p>At school we learn mostly the statistical approach to portfolio management. My plan was fundamental analysis. The answer is to combine them in a funnel: Europe, then sectors, then companies with real added value, which is the fundamental part. Then the weights come from statistics.</p>
+            <p>The idea came from a discussion with my teacher. Don't buy 40 selected companies equally. Measure how they move together. If ten of them behave the same way, statistics tells you to cut their combined weight and give room to the companies that balance the risk.</p>
+            <div class="callout"><p>The link between both worlds is the Black–Litterman model: my valuations become "views" that adjust the market's implied returns, and the optimiser turns them into weights.</p></div>
+            <h3>Under consideration, not in the statute</h3>
+            <ul>
+              <li><strong>Currency hedging with derivatives.</strong> Holdings in CHF, SEK or NOK add currency risk to a EUR portfolio. A currency forward fixes today's exchange rate for a future date; its cost or gain comes from the interest rate difference between the two currencies. I don't know this well enough yet, so it stays out of version 1.0.</li>
+              <li><strong>Country and policy monitoring.</strong> A regular note on national and EU politics that affect holdings: elections, defence budgets, energy and industrial policy. Whether it belongs in the quarterly report or in the risk process is still open.</li>
+              <li><strong>Tools.</strong> Excel for valuation, R (RStudio) for statistics, OpenBB as an open-source terminal, plus free data: company reports, Yahoo Finance, Koyfin, Damodaran's datasets, the ECB data portal.</li>
+            </ul>
+            <h3>Honest caveats</h3>
+            <ul>
+              <li><strong>A backtest cannot fully test stock picking.</strong> I cannot re-create, without hindsight, the valuations I would have made five years ago. The backtest fairly tests the universe rules and the weighting method; stock picking is tested only in the live stages.</li>
+              <li><strong>Survivorship bias.</strong> A historical universe must include companies that later failed or were delisted, or the results look better than they were.</li>
+              <li><strong>Optimisers amplify estimation errors.</strong> Mean-variance optimisation tends to put large weights on the assets whose returns are most overestimated. Shrinkage, constraints and the equal-weight baseline are the defence.</li>
+              <li><strong>Small caps cost more to trade.</strong> Thinner trading and wider spreads can make real results worse than the backtest assumes.</li>
+            </ul>
+            <p><a href="statute.html">Read the statute →</a></p>
+          </div>
+        </details>
+
+        <!-- ===== ENTRY 9 October 2026 ===== -->
+        <details class="entry2" id="2026-10-09" data-tags="strategy">
+          <summary>
+            <span class="e-meta">9 October 2026<span class="tag">Strategy</span></span>
+            <span class="e-title">Why a strategy, not a stock</span>
+            <span class="e-sum">How the Roche model led to a portfolio, why Europe, how the pillars were chosen and why the UK is out.</span>
+            <span class="e-arrow">›</span>
+          </summary>
+          <div class="e-body">
+            <p>The Roche DCF showed me that a single valuation means little until you know what it is compared against and what role it plays in a portfolio. So instead of the next model, I started with the frame that every future model will plug into.</p>
+            <p><strong>Why now.</strong> I am starting my master's and want to turn what I learn into practice, to see how the world of asset management really works. I also simply enjoy it.</p>
+            <p><strong>Why Europe.</strong> Europe, once a shaper of the world economy, is now sometimes called dead. I want to find the right firms to invest in and so support its growth. The Draghi report and NATO's 5% commitment turn that ambition into concrete spending, and someone has to supply it.</p>
+            <p><strong>How the pillars were chosen.</strong> By asking what Europe must build for itself: security, energy, technology, industry and health. Private equity was added as a sixth component to reach companies that are not yet listed. Defence has no sub-sector exclusions, and healthcare counts as a growth pillar, not a defensive add-on.</p>
+            <p><strong>The UK is out.</strong> I decided to leave the UK out of the universe, so the benchmark is MSCI Europe ex UK instead of the STOXX Europe 600, which carries a large UK weight.</p>
+            <p><strong>In three years</strong> I want to know where every step led: where I made mistakes and where I succeeded. This journal exists for exactly that.</p>
+          </div>
+        </details>
+
+        <!-- ===== ENTRY 7 October 2026 ===== -->
+        <details class="entry2" id="2026-10-07" data-tags="research">
+          <summary>
+            <span class="e-meta">7 October 2026<span class="tag">Research</span></span>
+            <span class="e-title">Roche DCF: the first building block</span>
+            <span class="e-sum">A five-year DCF of Roche, base case CHF 422 per share, and the lesson that a valuation is one input, not the decision.</span>
+            <span class="e-arrow">›</span>
+          </summary>
+          <div class="e-body">
+            <p>A five-year DCF of Roche Holding AG, built from its 2023–2025 reports with AI as a co-pilot. Base case CHF 422 per share. More important than the number was the lesson from the next Financial Markets class: a valuation is one input into a portfolio decision, not the decision itself.</p>
+            <p><a href="../dcf-roche/">Read the Roche write-up and download the model →</a></p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+  </main>
+  <script>
+    // Tag filter: shows entries whose data-tags contain the chosen tag; hides empty stages.
+    document.querySelectorAll('.j-filters button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var f = btn.dataset.filter;
+        document.querySelectorAll('.j-filters button').forEach(function (b) { b.classList.toggle('active', b === btn); });
+        document.querySelectorAll('.entry2').forEach(function (e) {
+          var tags = (e.dataset.tags || '').split(' ');
+          e.style.display = (f === 'all' || tags.indexOf(f) !== -1) ? '' : 'none';
+        });
+        document.querySelectorAll('.j-stage').forEach(function (s) {
+          var any = Array.prototype.some.call(s.querySelectorAll('.entry2'), function (e) { return e.style.display !== 'none'; });
+          s.style.display = any ? '' : 'none';
+        });
+      });
+    });
+    // Open an entry when the page is reached with its #date in the address.
+    if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t && t.tagName === 'DETAILS') { t.open = true; t.scrollIntoView(); } }
+  </script>
+  <footer class="site-footer">
+    Illustrative research, not investment advice. VB Europe Strategic is a model portfolio published for education, not a fund.
+  </footer>
+
+</body>
+</html>
