@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Sum of the parts</title>
+  <meta name="description" content="Sum-of-the-parts valuation: valuing each segment separately, central costs, the conglomerate discount and its catalysts, and a worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>Sum of the parts</h1>
+    <p class="lead">Values a diversified group as the sum of its businesses, each priced as if it stood alone. The difference between that sum and the market price is the conglomerate discount.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Conglomerates, groups with listed stakes</div>
+      <div><b>Main inputs</b>Segment profits, peer multiples per segment</div>
+      <div><b>Effort</b>Moderate: one peer set per segment</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#versions">Versions</a> · <a href="#segments">Segment data</a> · <a href="#central">Central costs</a> · <a href="#discount">Conglomerate discount</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>Some companies are really several businesses under one roof. A group that makes defence electronics, industrial machinery and offers maintenance services cannot be priced sensibly with one multiple: each part grows at a different rate, carries different risk and would be valued differently by the market on its own.</p>
+    <div class="formula">Enterprise value = Σ Value of each segment − Capitalised central costs&nbsp;&nbsp;→&nbsp;&nbsp;− Net debt and other claims = Equity value</div>
+    <p>Sum of the parts values each segment separately and adds them up. It answers a specific question: what would the group be worth if each business were valued as a stand-alone company? The gap between that number and the market price is the conglomerate discount.</p>
+
+    <h2 id="versions">2 · The versions</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Version</th><th>How each part is valued</th><th>Use for</th></tr>
+      <tr><td>By multiples</td><td>Each segment at the multiple of its own pure-play peers</td><td>The standard approach; quick, market-based</td></tr>
+      <tr><td>By segment DCF</td><td>A separate cash flow forecast and cost of capital for each segment</td><td>Large segments with very different risk or growth</td></tr>
+      <tr><td>Mixed</td><td>Listed stakes at market price, operating segments at multiples or DCF, real estate at appraised value</td><td>Holdings and groups with financial investments</td></tr>
+      <tr><td>Break-up value</td><td>As mixed, minus taxes and costs of actually separating the businesses</td><td>Testing whether a spin-off or sale creates value</td></tr>
+    </table></div>
+
+    <h2 id="segments">3 · Getting the segment numbers</h2>
+    <p>Under IFRS 8, listed companies report results for their operating segments as management sees them. Segment reports usually give revenue and an operating profit measure (EBIT, EBITDA or an adjusted version), often assets and capital expenditure. They rarely give a full cash flow statement, which is why segment multiples are more common than segment DCFs.</p>
+    <ul>
+      <li><strong>Check the profit measure:</strong> segment profit is often before central costs, sometimes before some depreciation. Use the same measure as the peer multiple.</li>
+      <li><strong>Internal sales:</strong> eliminate sales between segments, or revenue is counted twice.</li>
+      <li><strong>Minorities:</strong> if a segment is not fully owned, deduct the minority share of its value.</li>
+      <li><strong>Peers per segment:</strong> choose pure-play peers for each segment, following the <a href="comparables.html#peers">comparables rules</a>.</li>
+    </ul>
+
+    <h2 id="central">4 · Central costs and other claims</h2>
+    <p>Head office, group IT and listing costs belong to no segment, but they are real and permanent. They must be valued too: multiply the annual central cost by a blended multiple, or discount it as a perpetuity. Leaving them out is the most common way to overstate a sum of the parts.</p>
+    <p>The bridge from enterprise to equity value is the same as for any company: net debt including leases, pensions, minorities and associates. Associates and financial stakes are added at their own value, at market price if listed.</p>
+
+    <h2 id="discount">5 · The conglomerate discount</h2>
+    <p>Diversified groups often trade below their sum of the parts. Berger and Ofek (1995) measured an average loss of value of 13–15% for diversified US companies compared with portfolios of focused firms. Typical explanations:</p>
+    <ul>
+      <li>Capital is moved from strong segments to weak ones instead of being returned to shareholders.</li>
+      <li>Central costs and management attention are spread thinly.</li>
+      <li>Investors who want one of the businesses must buy all of them, and analysts covering one sector find the group hard to follow.</li>
+    </ul>
+    <p>A discount is not automatically an opportunity. It closes only with a catalyst: a spin-off, a sale of a segment, a new management focused on capital allocation, or activist pressure. Without one, the discount can persist for years.</p>
+
+    <h2 id="example">6 · Worked example</h2>
+    <p>Suppose Nordwerk AG reports three segments with total EBITDA of €400m, the same as on the <a href="comparables.html#example">comparables page</a>, plus €20m of central costs. Each segment is valued at the median multiple of its own fictional pure-play peers.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Segment</th><th class="num">EBITDA</th><th class="num">EV/EBITDA</th><th class="num">Value</th></tr>
+      <tr><td>Defence electronics</td><td class="num">€150m</td><td class="num">13.0x</td><td class="num">€1,950m</td></tr>
+      <tr><td>Industrial machinery</td><td class="num">€180m</td><td class="num">8.5x</td><td class="num">€1,530m</td></tr>
+      <tr><td>Services</td><td class="num">€90m</td><td class="num">10.0x</td><td class="num">€900m</td></tr>
+      <tr><td>Central costs</td><td class="num">(€20m)</td><td class="num">9.0x</td><td class="num">(€180m)</td></tr>
+      <tr class="hl"><td>Enterprise value</td><td class="num">€400m</td><td class="num">10.5x</td><td class="num">€4,200m</td></tr>
+    </table></div>
+    <div class="table-wrap"><table>
+      <tr><td>Enterprise value</td><td class="num">€4,200m</td></tr>
+      <tr><td>− Net debt including leases</td><td class="num">(€600m)</td></tr>
+      <tr><td>= Equity value</td><td class="num">€3,600m</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="num">€36.00</td></tr>
+    </table></div>
+    <p>The sum of the parts lands at €36.00, almost exactly the comparables value of €35.80, because the blended multiple of 10.5x is close to the group peer median. The parts tell a different story than the total, though: almost half the value comes from defence electronics, which earns 38% of EBITDA. If defence electronics were valued at the group multiple of 10.5x instead of 13x, the value would drop by about €3.75 per share.</p>
+    <p>If the share traded at €31, the implied conglomerate discount would be 1 − 31 ÷ 36 ≈ 14%, in the range Berger and Ofek found. Applying a 13–15% discount gives €30.60–31.30 as a "no catalyst" value.</p>
+    <div class="callout">The useful output of a sum of the parts is rarely the total. It is the answer to: which segment carries the value, and what would have to happen for the market to see it?</div>
+
+    <h2 id="when">7 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>The group has segments in clearly different industries; there are listed stakes or real estate; a spin-off, sale or activist campaign is possible.</div>
+      <div class="no"><b>Misleads when</b>Central costs and synergies are ignored; segment profits are flattered by internal transfer prices; the parts cannot realistically be separated.</div>
+    </div>
+
+    <h2 id="mistakes">8 · Common mistakes</h2>
+    <ul>
+      <li>Forgetting to value central costs.</li>
+      <li>Using peak multiples for the best segment and ignoring that it would trade lower on its own.</li>
+      <li>Counting internal sales twice.</li>
+      <li>Ignoring taxes and separation costs in a break-up scenario.</li>
+      <li>Assuming the conglomerate discount will close without naming a catalyst.</li>
+    </ul>
+
+    <h2 id="strategy">9 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> sum of the parts is the primary model for diversified groups, which are common in European industry and defence, where defence divisions sit inside broader industrial companies. It is also how holdings are cross-checked against their <a href="nav.html">net asset value</a>.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>J. Rosenbaum, J. Pearl, <em>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</em>, 3rd ed., Wiley, 2022, ch. 1: comparable companies analysis, applied per segment.</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 16: cross holdings and other non-operating assets; ch. 25: acquisitions and break-up value. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: valuing multibusiness companies.</li>
+      <li>P. G. Berger, E. Ofek, "Diversification's Effect on Firm Value", <em>Journal of Financial Economics</em> 37(1), 1995.</li>
+    </ul>
+
+    <div class="pagenav"><a href="apv.html">← APV</a><a href="nav.html">NAV →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

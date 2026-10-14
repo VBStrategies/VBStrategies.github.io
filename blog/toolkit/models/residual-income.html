@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Residual income</title>
+  <meta name="description" content="The residual income model: book value plus excess returns, clean surplus, the versions with fade and persistence, economic profit and EVA, and a worked example for a bank.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>Residual income</h1>
+    <p class="lead">Values equity as book value plus the present value of the returns above the cost of equity. It gives the same answer as the dividend model, but recognises the value much earlier.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Banks, insurers, firms with no dividends</div>
+      <div><b>Main inputs</b>Book value, ROE, cost of equity, fade</div>
+      <div><b>Effort</b>Moderate: needs clean accounting</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#surplus">Clean surplus</a> · <a href="#versions">Versions</a> · <a href="#economic">Economic profit</a> · <a href="#adjust">Accounting adjustments</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>The residual income model starts from the balance sheet. A shareholder has already put book value into the company; the question is how much more than that the company will earn. Profit only creates value if it exceeds what shareholders could earn elsewhere at the same risk, the cost of equity. The excess is residual income.</p>
+    <div class="formula">Residual income<sub>t</sub> = Net income<sub>t</sub> − Cost of equity × Book value<sub>t−1</sub> = (ROE<sub>t</sub> − Cost of equity) × Book value<sub>t−1</sub></div>
+    <div class="formula">Value of equity = Book value<sub>0</sub> + Σ Residual income<sub>t</sub> ÷ (1 + Cost of equity)<sup>t</sup></div>
+    <p>A company that earns exactly its cost of equity is worth its book value. One that earns more is worth more, one that earns less is worth less, however large its profits look.</p>
+
+    <h2 id="surplus">2 · Why it gives the same answer as dividends</h2>
+    <p>The model rests on the <strong>clean surplus relation</strong>: book value changes only through earnings and dividends.</p>
+    <div class="formula">Book value<sub>t</sub> = Book value<sub>t−1</sub> + Net income<sub>t</sub> − Dividends<sub>t</sub></div>
+    <p>When this holds, residual income valuation is a rearrangement of the dividend discount model, and the two always give the same value. Ohlson (1995) set out this link formally. The difference is timing: the residual income model recognises value through book value today and excess returns soon after, while the dividend model leaves most of the value in a distant terminal value.</p>
+    <p>In practice clean surplus is often broken. Items booked in other comprehensive income (currency translation, pension remeasurements, some changes in fair value) change book value without passing through net income. They must be added back or forecast, or the model drifts away from the dividend value.</p>
+
+    <h2 id="versions">3 · The versions: how long excess returns last</h2>
+    <p>The versions differ in what happens to residual income after the explicit forecast, which is the key judgement in the model:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Version</th><th>Assumption after year T</th><th>Formula</th></tr>
+      <tr><td>Single-stage</td><td>Constant ROE and growth from today</td><td>P/B = 1 + (ROE − r) ÷ (r − g)</td></tr>
+      <tr><td>Multistage, stable residual income</td><td>Residual income keeps growing at g after year T</td><td>TV<sub>T</sub> = RI<sub>T+1</sub> ÷ (r − g)</td></tr>
+      <tr><td>Multistage with fade</td><td>Residual income declines each year by a persistence factor ω between 0 and 1</td><td>TV<sub>T</sub> = RI<sub>T+1</sub> ÷ (1 + r − ω)</td></tr>
+      <tr><td>Competitive equilibrium</td><td>ROE falls to the cost of equity after year T</td><td>TV<sub>T</sub> = 0</td></tr>
+    </table></div>
+    <p>The persistence factor comes from the CFA Institute curriculum. A value close to 1 suits companies with lasting advantages; a value close to 0 suits companies whose high returns will be competed away quickly. Competitive pressure is the normal case, so assuming that residual income grows forever needs a reason.</p>
+
+    <h2 id="economic">4 · The enterprise version: economic profit and EVA</h2>
+    <div class="formula">Economic profit<sub>t</sub> = (ROIC<sub>t</sub> − WACC) × Invested capital<sub>t−1</sub></div>
+    <div class="formula">Enterprise value = Invested capital<sub>0</sub> + Σ Economic profit<sub>t</sub> ÷ (1 + WACC)<sup>t</sup></div>
+    <p>The same idea at the level of the whole firm. McKinsey calls it the economic profit model and treats it as equivalent to the enterprise DCF; Stern Stewart's EVA is a branded version with specific accounting adjustments. It is useful for operating companies because it shows each year whether growth is creating value: growth only adds value when ROIC exceeds WACC.</p>
+
+    <h2 id="adjust">5 · Accounting adjustments</h2>
+    <ul>
+      <li><strong>Other comprehensive income:</strong> forecast it, or the clean surplus relation fails.</li>
+      <li><strong>Goodwill and intangibles:</strong> acquired goodwill raises book value and lowers ROE; internally built brands and research are not on the balance sheet at all and make ROE look too high.</li>
+      <li><strong>Buybacks:</strong> reduce book value; ROE rises without any change in the business.</li>
+      <li><strong>Banks and insurers:</strong> use tangible book value, and check that loan loss provisions and reserves are neither too low nor too generous.</li>
+      <li><strong>One-off items:</strong> remove them from the ROE used for forecasting.</li>
+    </ul>
+
+    <h2 id="example">6 · Worked example</h2>
+    <p>Alpenbank, the fictional bank from the <a href="ddm.html#example">dividend discount page</a>: book value €40, ROE 11% for five years and 10% after, payout 50% then 70%, cost of equity 9%, stable growth 3%.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Year</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th></tr>
+      <tr><td>Book value at start</td><td class="num">40.00</td><td class="num">42.20</td><td class="num">44.52</td><td class="num">46.97</td><td class="num">49.55</td><td class="num">52.28</td></tr>
+      <tr><td>ROE − cost of equity</td><td class="num">2.0%</td><td class="num">2.0%</td><td class="num">2.0%</td><td class="num">2.0%</td><td class="num">2.0%</td><td class="num">1.0%</td></tr>
+      <tr><td>Residual income</td><td class="num">0.80</td><td class="num">0.84</td><td class="num">0.89</td><td class="num">0.94</td><td class="num">0.99</td><td class="num">0.52</td></tr>
+    </table></div>
+    <div class="table-wrap"><table>
+      <tr><th></th><th class="num">Value</th><th class="num">Share of total</th></tr>
+      <tr><td>Book value today</td><td class="num">€40.00</td><td class="num">81%</td></tr>
+      <tr><td>Present value of residual income, years 1–5</td><td class="num">€3.44</td><td class="num">7%</td></tr>
+      <tr><td>Terminal value: €0.52 ÷ (9% − 3%) = €8.71, present value</td><td class="num">€5.66</td><td class="num">12%</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="num">€49.10</td><td class="num">100%</td></tr>
+    </table></div>
+    <p>The value is identical to the dividend model, to the cent. But here only 12% of it sits in the terminal value, against 81% in the dividend model. That is the practical advantage of residual income: the answer depends less on the most uncertain part of the forecast.</p>
+    <h3>How the terminal assumption changes the result</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Assumption after year 5</th><th class="num">Value per share</th></tr>
+      <tr><td>Residual income keeps growing at 3%</td><td class="num">€49.10</td></tr>
+      <tr><td>Residual income fades, persistence ω = 0.6</td><td class="num">€44.13</td></tr>
+      <tr><td>ROE falls to the cost of equity after year 5</td><td class="num">€43.44</td></tr>
+    </table></div>
+    <div class="callout">For a bank, the question is not how much it earns but by how much and for how long its ROE will beat the cost of equity. The range €43–49 is the price of that uncertainty.</div>
+
+    <h2 id="when">7 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Banks and insurers; companies with no dividends or negative free cash flow but positive, transparent earnings; when the terminal value would otherwise dominate.</div>
+      <div class="no"><b>Misleads when</b>Book value is far from economic value (brands, software, research); accounting is aggressive; large items bypass the income statement.</div>
+    </div>
+
+    <h2 id="mistakes">8 · Common mistakes</h2>
+    <ul>
+      <li>Ignoring other comprehensive income, so the result no longer reconciles with dividends.</li>
+      <li>Assuming excess returns last forever without a reason.</li>
+      <li>Using book value after a large buyback or write-off without adjustment.</li>
+      <li>Mixing the equity version (ROE, cost of equity) with the enterprise version (ROIC, WACC).</li>
+      <li>Using end-of-year book value instead of the opening value to compute the capital charge.</li>
+    </ul>
+
+    <h2 id="strategy">9 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> residual income is the primary model for any bank or insurer, with the dividend model and price/book against ROE as cross-checks. Its enterprise version, economic profit, is used for operating companies to test whether forecast growth really creates value.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 21: valuing financial service firms; ch. 32: value enhancement, economic value added. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>J. Pinto, E. Henry, T. Robinson, J. Stowe, S. Wilcox, <em>Equity Asset Valuation</em>, 4th ed., CFA Institute Investment Series, Wiley, 2020: residual income valuation, including the persistence factor.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: the economic profit model and its equivalence with enterprise DCF.</li>
+      <li>J. A. Ohlson, "Earnings, Book Values, and Dividends in Equity Valuation", <em>Contemporary Accounting Research</em> 11(2), 1995.</li>
+    </ul>
+
+    <div class="pagenav"><a href="ddm.html">← Dividend discount</a><a href="apv.html">APV →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

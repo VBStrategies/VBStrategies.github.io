@@ -35,7 +35,7 @@
 
     <nav class="toc">
       <b>On this page</b>
-      <a href="#idea">The idea</a> · <a href="#formula">The formula</a> · <a href="#debt">The role of debt</a> · <a href="#vs">FCFE or FCFF?</a> · <a href="#dividends">FCFE and dividends</a> · <a href="#terminal">Terminal value</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+      <a href="#idea">The idea</a> · <a href="#formula">The formula</a> · <a href="#debt">The role of debt</a> · <a href="#vs">FCFE or FCFF?</a> · <a href="#dividends">FCFE and dividends</a> · <a href="#terminal">Terminal value</a> · <a href="#stages">Growth stages</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
     </nav>
 
     <h2 id="idea">1 · The idea</h2>
@@ -78,7 +78,24 @@
     <div class="formula">Terminal value of equity<sub>n</sub> = FCFE<sub>n+1</sub> ÷ (Cost of equity − stable growth)</div>
     <p>The same rules apply as for FCFF: stable growth no higher than long-run nominal growth, reinvestment consistent with growth, and in the terminal period a cost of equity that reflects a mature firm with a sustainable debt ratio. Net borrowing in the terminal period should simply keep debt growing at the stable growth rate.</p>
 
-    <h2 id="example">7 · Worked example</h2>
+    <h2 id="stages">7 · One, two or three growth stages</h2>
+    <p>Damodaran presents the FCFE model, like the dividend discount and FCFF models, in versions that differ only in how growth is expected to change over time. The question is not which formula is better, but which growth pattern fits the company.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Version</th><th>Growth pattern</th><th>Fits</th></tr>
+      <tr><td>Stable growth (one stage)</td><td>Grows at a constant rate, no higher than the economy, from today</td><td>Mature companies whose reinvestment and risk are already at long-run levels</td></tr>
+      <tr><td>Two-stage</td><td>A period of higher growth for a set number of years, then stable growth</td><td>Companies with a clear, time-limited advantage, such as a patent, a contract backlog or a market position that will be competed away</td></tr>
+      <tr><td>Three-stage (Damodaran's "E-model")</td><td>High growth, then a transition in which growth declines gradually, then stable growth</td><td>Companies growing very fast today, where an abrupt drop to stable growth would be unrealistic</td></tr>
+    </table></div>
+    <div class="formula">Two-stage: Equity value = Σ<sub>t=1..n</sub> FCFE<sub>t</sub> ÷ (1 + r<sub>e,hg</sub>)<sup>t</sup> + [FCFE<sub>n+1</sub> ÷ (r<sub>e,st</sub> − g<sub>st</sub>)] ÷ (1 + r<sub>e,hg</sub>)<sup>n</sup></div>
+    <p>The point Damodaran stresses is that the move to stable growth must change more than the growth rate. When growth slows, the other inputs should move with it:</p>
+    <ul>
+      <li><strong>Risk:</strong> the beta, and so the cost of equity, moves towards that of a mature company, close to 1. That is why the formula above uses a high-growth cost of equity r<sub>e,hg</sub> and a stable one r<sub>e,st</sub>.</li>
+      <li><strong>Reinvestment:</strong> capital expenditure falls closer to depreciation, and reinvestment drops to what stable growth requires (growth ÷ return on equity).</li>
+      <li><strong>Debt:</strong> the debt ratio can rise towards the industry average as cash flows become more predictable.</li>
+    </ul>
+    <p>A model in which growth falls to 3% but reinvestment stays at high-growth levels undervalues the company; one in which reinvestment falls but growth stays high overvalues it. The <a href="dcf-fcff.html#stages">FCFF page</a> uses the same three versions, and its five-year forecast is in effect a two-stage model, and the example below is the one-stage version.</p>
+
+    <h2 id="example">8 · Worked example</h2>
     <p>The same fictional <strong>Nordwerk AG</strong> as on the <a href="../inputs.html#example">inputs page</a>, in stable growth of 3%: EBIT €300m, tax 25%, gross debt including leases €780m at 4%, cash €180m, net reinvestment €50m, cost of equity 8.26%, 100m shares. Debt grows with the business, so it rises by 3% a year.</p>
     <h3>Step 1: from EBIT to FCFE (€m)</h3>
     <div class="table-wrap"><table>
@@ -104,32 +121,33 @@
     <p>The FCFF route on the inputs page gave <strong>€35.90</strong> per share; FCFE gives <strong>€36.10</strong>, a difference of under 1%. The small gap comes from the capital structure: the WACC used equity worth €3,580m to set its weights, while the FCFE model produces €3,607m. Repeating both calculations until the values used for the weights equal the values produced, a few iterations, brings the two methods together at about €35.70–36.10.</p>
     <div class="callout">When FCFE and FCFF disagree by more than a few percent, the cause is almost always an inconsistent debt assumption: different leverage in the cost of equity, the WACC and the borrowing forecast.</div>
 
-    <h2 id="when">8 · When to use it, and when it misleads</h2>
+    <h2 id="when">9 · When to use it, and when it misleads</h2>
     <div class="two">
       <div class="yes"><b>Use when</b>Leverage is stable or follows a clear target; valuing banks and insurers; valuing a minority stake where the payout policy matters.</div>
       <div class="no"><b>Misleads when</b>Borrowing is forecast to rise sharply; debt is about to be restructured; FCFE is negative for years and the model hides how the gap is financed.</div>
     </div>
 
-    <h2 id="mistakes">9 · Common mistakes</h2>
+    <h2 id="mistakes">10 · Common mistakes</h2>
     <ul>
       <li>Discounting FCFE at the WACC.</li>
       <li>Forecasting large net borrowing every year without the matching interest and repayments.</li>
+      <li>Dropping to stable growth while keeping high-growth reinvestment or a high-growth beta, or the reverse.</li>
       <li>Using a cost of equity based on today's leverage while the forecast changes it.</li>
       <li>Including interest income on cash in net income and then adding the cash again.</li>
       <li>Treating FCFE as what will be paid out, when the company may retain it.</li>
     </ul>
 
-    <h2 id="strategy">10 · Where it fits in the strategy</h2>
+    <h2 id="strategy">11 · Where it fits in the strategy</h2>
     <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> FCFE is the cross-check to FCFF for companies with stable leverage, and a primary model for any bank or insurer in the universe, alongside residual income. A large gap between the two DCF routes is treated as a sign to revisit the debt assumptions before the result is used.</p>
 
     <h2 id="sources">Sources</h2>
     <ul>
-      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 14: free cash flow to equity discount models; ch. 21: valuing financial services firms. Examples and spreadsheets on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 14: free cash flow to equity discount models, including the stable growth, two-stage and three-stage (E-model) versions; ch. 21: valuing financial services firms. Examples and spreadsheets on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
       <li>J. Pinto, E. Henry, T. Robinson, J. Stowe, S. Wilcox, <em>Equity Asset Valuation</em>, 4th ed., CFA Institute Investment Series, Wiley, 2020: free cash flow valuation.</li>
       <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: alternatives to enterprise DCF, including the equity cash flow approach.</li>
     </ul>
 
-    <div class="pagenav"><a href="dcf-fcff.html">← DCF – FCFF</a><span class="side-note">Next: Dividend discount (coming soon)</span></div>
+    <div class="pagenav"><a href="dcf-fcff.html">← DCF – FCFF</a><a href="ddm.html">Dividend discount →</a></div>
   </main>
 
   <footer class="site-footer">
