@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — DCF: free cash flow to the firm</title>
+  <meta name="description" content="How to build a discounted cash flow valuation on free cash flow to the firm: forecast structure, the stages of growth, terminal value, the bridge to equity, sensitivity analysis and a full worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>DCF: free cash flow to the firm</h1>
+    <p class="lead">Values the whole business as the present value of the cash it will generate for all its capital providers, discounted at the weighted average cost of capital. It is the core intrinsic valuation model for most non-financial companies.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Operating companies with forecastable cash flows</div>
+      <div><b>Main inputs</b>Revenue, margins, reinvestment, WACC, terminal growth</div>
+      <div><b>Effort</b>Days: a full three-statement forecast</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#formula">The formula</a> · <a href="#structure">Structure of the forecast</a> · <a href="#drivers">Forecasting the drivers</a> · <a href="#stages">Stages of growth</a> · <a href="#terminal">Terminal value</a> · <a href="#bridge">To value per share</a> · <a href="#sensitivity">Sensitivity and scenarios</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>A business is worth the cash it will produce over its life, adjusted for when that cash arrives and how risky it is. A discounted cash flow model makes this literal: forecast the cash, discount it back to today, add it up.</p>
+    <p>The firm-level version, FCFF, values the operating business before any financing decisions. It looks at the cash available to lenders and shareholders together, discounts it at their blended required return, the WACC, and only at the end subtracts what belongs to lenders. Because it separates the business from how it is financed, it is the preferred form for most companies, especially when debt levels change over time.</p>
+    <p>Its strength is that it forces every assumption into the open. Its weakness is the same: the result is only as good as those assumptions, and small changes in a few of them can move the answer a lot.</p>
+
+    <h2 id="formula">2 · The formula</h2>
+    <div class="formula">Enterprise value = Σ<sub>t=1..n</sub> FCFF<sub>t</sub> ÷ (1 + WACC)<sup>t</sup> + [FCFF<sub>n+1</sub> ÷ (WACC − g)] ÷ (1 + WACC)<sup>n</sup></div>
+    <p>The first part is the value of the explicit forecast; the second is the terminal value, the value of all cash flows after year n assuming stable growth g. The definitions of FCFF, WACC and stable growth are explained on the <a href="../inputs.html">inputs page</a>.</p>
+
+    <h2 id="structure">3 · Structure of the forecast</h2>
+    <p>A DCF is not a single calculation but a chain of linked forecasts. The usual order:</p>
+    <ol>
+      <li><strong>Revenue:</strong> market growth, market share, price and volume, segment by segment where the company reports segments.</li>
+      <li><strong>Operating margin:</strong> from today's level towards a sustainable level, considering competition and scale.</li>
+      <li><strong>Taxes:</strong> effective rate in the near term, moving to the marginal rate.</li>
+      <li><strong>Reinvestment:</strong> capital expenditure net of depreciation, plus the change in working capital, plus acquisitions if they are part of the strategy.</li>
+      <li><strong>FCFF:</strong> after-tax operating income minus reinvestment.</li>
+      <li><strong>Discount rate:</strong> WACC, possibly changing over time as the company matures or its debt changes.</li>
+      <li><strong>Terminal value</strong> and <strong>bridge to equity</strong>.</li>
+    </ol>
+    <p>Practitioners build this inside a three-statement model, where the income statement, balance sheet and cash flow statement are forecast together and must balance. The balance sheet check catches many errors that a stand-alone cash flow forecast would hide.</p>
+
+    <h2 id="drivers">4 · Forecasting the drivers</h2>
+    <h3>Revenue</h3>
+    <p>Start from what drives demand, not from last year's growth rate. For a defence supplier that might be government budgets and order backlog; for a cable maker, grid investment plans; for a chip equipment maker, the capital spending cycle of chip manufacturers. Top-down (market size × share) and bottom-up (units × price) approaches should give similar answers.</p>
+    <h3>Margins</h3>
+    <p>Margins usually revert over time: unusually high margins attract competitors, unusually low ones lead to restructuring or exit. A forecast where margins rise steadily for ten years should have a clear reason, such as scale economies or a protected market position.</p>
+    <h3>Reinvestment</h3>
+    <p>The link between growth and reinvestment is the discipline at the heart of the model. Two common ways to forecast it:</p>
+    <ul>
+      <li><strong>Reinvestment rate = growth ÷ return on invested capital.</strong> Grounded in fundamentals, and makes the cost of growth explicit.</li>
+      <li><strong>Sales-to-capital ratio.</strong> Each additional euro of revenue needs a certain amount of new capital, based on the company's history or its industry. Damodaran uses this approach in his own valuations.</li>
+    </ul>
+
+    <h2 id="stages">5 · Stages of growth</h2>
+    <p>Few companies can be valued with a single growth rate. Models usually have stages:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Model</th><th>Structure</th><th>Use for</th></tr>
+      <tr><td>Stable growth (one stage)</td><td>Growth constant from today</td><td>Mature companies growing at about the rate of the economy</td></tr>
+      <tr><td>Two-stage</td><td>High growth for n years, then stable</td><td>Companies with a clear advantage that will fade</td></tr>
+      <tr><td>Three-stage</td><td>High growth, a transition period, then stable</td><td>Growth companies; avoids an abrupt drop in growth</td></tr>
+    </table></div>
+    <p>The length of the high-growth period should reflect how long the company's competitive advantage can last. Five to ten years is typical; beyond that, forecasts become guesses.</p>
+
+    <h2 id="terminal">6 · Terminal value</h2>
+    <p>The terminal value usually accounts for 60–80% of the result, so it deserves the most scrutiny. Three questions to ask:</p>
+    <ul>
+      <li><strong>Is the growth rate sustainable?</strong> It should not exceed long-run nominal growth of the economy, approximated by the risk-free rate.</li>
+      <li><strong>Does reinvestment match growth?</strong> Terminal reinvestment rate = stable growth ÷ terminal return on capital.</li>
+      <li><strong>What return on capital is assumed?</strong> If it equals the WACC, growth adds no value. If it stays well above the WACC forever, the model assumes a permanent competitive advantage. Most companies end somewhere between.</li>
+    </ul>
+    <p>A useful cross-check is to convert the terminal value into an implied exit multiple, terminal value ÷ final-year EBITDA, and compare it with today's trading multiples. A large gap is not necessarily wrong, but it needs an explanation.</p>
+
+    <h2 id="bridge">7 · From enterprise value to value per share</h2>
+    <div class="formula">Equity value = Enterprise value − Debt − Lease liabilities − Minority interests − Preferred shares + Cash + Non-operating assets</div>
+    <p>Divide by diluted shares. The same bridge applies to every method on the football field; using a different bridge in different methods makes their results incomparable.</p>
+
+    <h2 id="sensitivity">8 · Sensitivity and scenarios</h2>
+    <p>A DCF should never be presented as one number. Three standard tools:</p>
+    <ul>
+      <li><strong>Sensitivity tables:</strong> the value per share for a grid of WACC and terminal growth, or margin and growth. They show which assumptions the result depends on most.</li>
+      <li><strong>Scenarios:</strong> base, bull and bear cases where several related assumptions move together, for example higher growth with higher reinvestment.</li>
+      <li><strong>Reverse DCF:</strong> instead of computing a value, ask what growth or margin the current share price implies. If the market already prices in very optimistic assumptions, the upside is limited however good the story.</li>
+    </ul>
+
+    <h2 id="example">9 · Worked example</h2>
+    <p>The same fictional <strong>Nordwerk AG</strong> as on the <a href="../inputs.html#example">inputs</a> and <a href="comparables.html#example">comparables</a> pages: revenue €2,350m, EBIT margin 12.8%, tax 25%, WACC 7.3%, net debt €600m, 100m shares, return on invested capital 13.5%. This time with a proper forecast: growth of 6% fading to 3% over five years, then stable growth of 2.5%. In the terminal period, the return on new capital is assumed to fall to 10% as competitors catch up.</p>
+    <h3>Explicit forecast (€m)</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Year</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th></tr>
+      <tr><td>Revenue growth</td><td class="num">6.0%</td><td class="num">6.0%</td><td class="num">5.0%</td><td class="num">4.0%</td><td class="num">3.0%</td></tr>
+      <tr><td>Revenue</td><td class="num">2,491</td><td class="num">2,640</td><td class="num">2,772</td><td class="num">2,883</td><td class="num">2,970</td></tr>
+      <tr><td>EBIT (12.8%)</td><td class="num">318</td><td class="num">337</td><td class="num">354</td><td class="num">368</td><td class="num">379</td></tr>
+      <tr><td>NOPAT (after 25% tax)</td><td class="num">238</td><td class="num">253</td><td class="num">265</td><td class="num">276</td><td class="num">284</td></tr>
+      <tr><td>Reinvestment rate (g ÷ 13.5%)</td><td class="num">44.4%</td><td class="num">44.4%</td><td class="num">37.0%</td><td class="num">29.6%</td><td class="num">22.2%</td></tr>
+      <tr><td>Reinvestment</td><td class="num">(106)</td><td class="num">(112)</td><td class="num">(98)</td><td class="num">(82)</td><td class="num">(63)</td></tr>
+      <tr class="hl"><td>FCFF</td><td class="num">132</td><td class="num">140</td><td class="num">167</td><td class="num">194</td><td class="num">221</td></tr>
+      <tr><td>Discount factor (mid-year, 7.3%)</td><td class="num">0.965</td><td class="num">0.900</td><td class="num">0.838</td><td class="num">0.781</td><td class="num">0.728</td></tr>
+      <tr><td>Present value</td><td class="num">128</td><td class="num">126</td><td class="num">140</td><td class="num">152</td><td class="num">161</td></tr>
+    </table></div>
+    <p>Note that free cash flow in year 1 (€132m) is lower than the €175m used in the simple stable-growth example: growing at 6% instead of 3% requires almost twice as much reinvestment. Faster growth costs cash today.</p>
+    <h3>Terminal value</h3>
+    <div class="table-wrap"><table>
+      <tr><td>NOPAT year 6 (+2.5%)</td><td class="num">€291m</td></tr>
+      <tr><td>Reinvestment rate (2.5% ÷ 10%)</td><td class="num">25%</td></tr>
+      <tr><td>FCFF year 6</td><td class="num">€219m</td></tr>
+      <tr><td>Terminal value at end of year 5: €219m ÷ (7.3% − 2.5%)</td><td class="num">€4,554m</td></tr>
+      <tr><td>Present value (÷ 1.073<sup>5</sup>)</td><td class="num">€3,202m</td></tr>
+    </table></div>
+    <h3>Enterprise value to value per share</h3>
+    <div class="table-wrap"><table>
+      <tr><td>Present value of explicit forecast</td><td class="num">€707m</td></tr>
+      <tr><td>Present value of terminal value</td><td class="num">€3,202m</td></tr>
+      <tr class="hl"><td>Enterprise value</td><td class="num">€3,909m</td></tr>
+      <tr><td>Less net debt including leases</td><td class="num">(€600m)</td></tr>
+      <tr><td>Equity value</td><td class="num">€3,309m</td></tr>
+      <tr class="hl"><td>Value per share (÷ 100m)</td><td class="num">€33.10</td></tr>
+    </table></div>
+    <p>Three observations. The terminal value is 82% of enterprise value, typical for a DCF. The implied exit multiple is 9.0x year-5 EBITDA, below the 10.45x median of today's peers, so the DCF is more conservative than the market. And the main reason is the assumption that returns on new capital fall to 10%: if Nordwerk could keep earning 13.5% forever, the value would be €35.90; if returns fell all the way to the WACC, €29.10.</p>
+    <h3>Sensitivity: value per share</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Terminal growth →</th><th class="num">2.0%</th><th class="num">2.5%</th><th class="num">3.0%</th></tr>
+      <tr><td>WACC 6.8%</td><td class="num">€36.00</td><td class="num">€37.80</td><td class="num">€40.00</td></tr>
+      <tr><td>WACC 7.3%</td><td class="num">€31.90</td><td class="num">€33.10</td><td class="num">€34.60</td></tr>
+      <tr><td>WACC 7.8%</td><td class="num">€28.50</td><td class="num">€29.30</td><td class="num">€30.30</td></tr>
+    </table></div>
+    <div class="callout">Result: a DCF range of roughly €28.50–40.00 per share around a base case of €33.10. Compared with comparables (€32–39) and transactions (€41–46), the DCF says the market prices Nordwerk's peers a little more optimistically than its fundamentals justify, and a takeover would need synergies to make sense.</div>
+
+    <h2 id="when">10 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Cash flows are positive or will clearly become positive; the business can be forecast with reasonable confidence; you want a value independent of market mood.</div>
+      <div class="no"><b>Misleads when</b>The terminal value dominates and rests on one growth assumption; the forecast is extrapolated history rather than reasoned; the company is a bank or insurer, where debt is raw material rather than financing.</div>
+    </div>
+
+    <h2 id="mistakes">11 · Common mistakes</h2>
+    <ul>
+      <li>High revenue growth with flat or falling reinvestment.</li>
+      <li>Margins that expand every year without a reason.</li>
+      <li>A terminal growth rate above long-run nominal growth.</li>
+      <li>Terminal reinvestment that does not match terminal growth.</li>
+      <li>Discounting FCFF at the cost of equity.</li>
+      <li>Using today's WACC for a company whose debt will change sharply, where APV is more suitable.</li>
+      <li>Presenting a single value instead of a range and the scenarios behind it.</li>
+      <li>Falling in love with the model: a DCF can justify almost any price, so its assumptions must be challenged, not defended.</li>
+    </ul>
+
+    <h2 id="strategy">12 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> the FCFF DCF is the primary model for most companies in the five sector pillars: defence, energy, technology, industry and established healthcare. Its upside to intrinsic value feeds directly into the Black-Litterman views that set portfolio weights. Banks, holdings and drug pipelines use the models designed for them.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 12 and 15: terminal value, and valuing a firm with free cash flow to the firm and APV models. Spreadsheets and examples on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014, ch. 4–6: valuation from the cash flow statement, pro forma financial statement modeling and a full case model.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: the enterprise discounted cash flow model and continuing value.</li>
+    </ul>
+
+    <div class="pagenav"><a href="transactions.html">← Precedent transactions</a><span class="side-note">Next: DCF – FCFE (coming soon)</span></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>
