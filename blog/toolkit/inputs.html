@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Valuation inputs</title>
+  <meta name="description" content="The inputs behind every intrinsic valuation: free cash flow, the cost of capital, growth and terminal value, with a worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../blog.html">Blog</a> / <a href="index.html">Toolkit</a> / Start here</div>
+    <div class="kicker">Foundations · Intrinsic value</div>
+    <h1>Valuation inputs</h1>
+    <p class="lead">Every intrinsic valuation, whatever the model, is built from the same four inputs: the cash flows a business generates, the rate at which they are discounted, how fast they grow, and what the business is worth beyond the forecast. Getting these right matters far more than the choice of model.</p>
+    <div class="factbar">
+      <div><b>Used by</b>DCF (FCFF, FCFE), DDM, APV, residual income</div>
+      <div><b>Main sources</b>Annual reports, bond yields, market data</div>
+      <div><b>Key risk</b>Inconsistent assumptions between inputs</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#map">The four inputs</a> · <a href="#cashflow">Cash flows</a> · <a href="#rate">The discount rate</a> · <a href="#growth">Growth</a> · <a href="#terminal">Terminal value</a> · <a href="#bridge">From firm to share value</a> · <a href="#consistency">Consistency rules</a> · <a href="#example">Worked example</a> · <a href="#mistakes">Common mistakes</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="map">1 · The four inputs</h2>
+    <div class="formula">Value = Σ Cash flow<sub>t</sub> ÷ (1 + discount rate)<sup>t</sup> + Terminal value ÷ (1 + discount rate)<sup>n</sup></div>
+    <div class="table-wrap"><table>
+      <tr><th>Input</th><th>The question it answers</th><th>Where it comes from</th></tr>
+      <tr><td>Cash flows</td><td>How much cash does the business generate after reinvesting to grow?</td><td>Financial statements, forecasts</td></tr>
+      <tr><td>Discount rate</td><td>What return do investors require for the risk taken?</td><td>Risk-free rate, equity risk premium, beta, cost of debt</td></tr>
+      <tr><td>Growth</td><td>How fast will cash flows rise, and what does it cost to grow?</td><td>History, analysts, fundamentals</td></tr>
+      <tr><td>Terminal value</td><td>What is the business worth after the explicit forecast?</td><td>Stable growth assumptions or an exit multiple</td></tr>
+    </table></div>
+    <p>The inputs depend on each other. Higher growth requires more reinvestment, which lowers today's cash flow. Higher debt lowers the cost of capital but raises the risk borne by shareholders. Most valuation errors come not from one wrong number but from inputs that contradict each other.</p>
+
+    <h2 id="cashflow">2 · Cash flows</h2>
+    <h3>Free cash flow to the firm (FCFF)</h3>
+    <div class="formula">FCFF = EBIT × (1 − tax rate) + Depreciation and amortisation − Capital expenditure − Increase in net working capital</div>
+    <p>FCFF is the cash available to all capital providers, debt and equity, after the business has paid its taxes and reinvested to maintain and grow its operations. It is discounted at the weighted average cost of capital (WACC) and gives the value of the whole business.</p>
+    <h3>Free cash flow to equity (FCFE)</h3>
+    <div class="formula">FCFE = FCFF − Interest × (1 − tax rate) + Net new borrowing</div>
+    <p>FCFE is what remains for shareholders after debt holders have been paid and new debt raised. It is discounted at the cost of equity and gives the value of equity directly. It is useful for banks and for companies with stable debt; for most others, FCFF is easier because it does not require forecasting the debt schedule.</p>
+    <h3>Getting from the reported numbers to the right ones</h3>
+    <ul>
+      <li><strong>Operating profit, not net profit.</strong> Start from EBIT and apply a tax rate to it, so financing choices do not distort the operating picture.</li>
+      <li><strong>Tax rate.</strong> The effective rate the company actually pays for the near term; the marginal statutory rate in the long run, as tax advantages tend to fade.</li>
+      <li><strong>Leases.</strong> Under IFRS 16 lease costs sit below EBITDA. Treat lease liabilities as debt, consistently in cash flows and in the debt deducted later.</li>
+      <li><strong>One-off items.</strong> Remove restructuring charges, impairments and disposal gains, unless they recur so often that they are really part of the business.</li>
+      <li><strong>Research and development.</strong> Accounting treats it as an expense; economically it is an investment. Damodaran capitalises R&amp;D for research-heavy firms, which raises both operating income and invested capital.</li>
+      <li><strong>Share-based compensation.</strong> A real cost to shareholders. Do not add it back as if it were non-cash.</li>
+      <li><strong>Cyclical firms.</strong> Use normalised, mid-cycle margins, not the latest year, or the valuation will swing with the cycle.</li>
+    </ul>
+
+    <h2 id="rate">3 · The discount rate</h2>
+    <div class="formula">WACC = E ÷ (D + E) × Cost of equity + D ÷ (D + E) × Cost of debt × (1 − tax rate)</div>
+    <h3>Risk-free rate</h3>
+    <p>The yield on a long-term government bond in the same currency as the cash flows, for euro cash flows typically a German government bond. Currency consistency is essential: discounting euro cash flows at a US Treasury yield mixes two different inflation rates. If the government itself carries default risk, Damodaran deducts a default spread from its yield to get a truly risk-free rate.</p>
+    <h3>Equity risk premium</h3>
+    <p>The extra return investors demand for holding equities rather than risk-free bonds. There are two ways to estimate it:</p>
+    <ul>
+      <li><strong>Historical premium:</strong> the average past excess return of stocks over bonds. Simple, but sensitive to the period chosen and backward-looking.</li>
+      <li><strong>Implied premium:</strong> the premium that equates today's index level with expected future cash flows to shareholders. Forward-looking; Damodaran publishes an updated estimate on his website each month.</li>
+    </ul>
+    <p>For companies with significant operations in riskier countries, a country risk premium is added, weighted by where the company earns its revenue rather than where it is listed.</p>
+    <h3>Beta</h3>
+    <p>Beta measures how much a stock moves with the market and is the only risk the CAPM rewards. There are two ways to estimate it:</p>
+    <ul>
+      <li><strong>Regression beta:</strong> regress the stock's returns on index returns, typically over two to five years of weekly or monthly data. Easy to obtain, but noisy: standard errors are large, and the result depends on the index and period chosen.</li>
+      <li><strong>Bottom-up beta:</strong> take the average unlevered beta of companies in the same business, then relever it to the target's own debt level. More stable and reflects the business the company is actually in. Damodaran publishes unlevered betas by industry and region.</li>
+    </ul>
+    <div class="formula">Levered beta = Unlevered beta × [1 + (1 − tax rate) × D ÷ E]</div>
+    <h3>Cost of debt</h3>
+    <p>The rate at which the company could borrow today, not the coupon on old debt. Use the yield on its traded bonds if they exist; otherwise estimate a synthetic rating from the interest coverage ratio and add the corresponding default spread to the risk-free rate.</p>
+    <h3>Weights</h3>
+    <p>Use market values, or a target capital structure the company is moving towards, not book values. Book equity often bears little relation to what shareholders' claim is worth.</p>
+
+    <h2 id="growth">4 · Growth</h2>
+    <p>There are three sources for a growth estimate, and good valuations reconcile them:</p>
+    <ul>
+      <li><strong>History:</strong> past growth in revenue and earnings. Informative, but past growth rates are only weakly related to future ones.</li>
+      <li><strong>Analysts and management:</strong> consensus forecasts and company guidance. Useful for the next two or three years, less so beyond.</li>
+      <li><strong>Fundamentals:</strong> growth must be paid for with reinvestment, and its size depends on the return earned on that reinvestment.</li>
+    </ul>
+    <div class="formula">Growth in operating income = Reinvestment rate × Return on invested capital<br><span class="side-note">Growth in net income = Retention ratio × Return on equity</span></div>
+    <p>This link is the most important discipline in a valuation. A forecast of high growth with low reinvestment implicitly assumes an extraordinary return on capital. And growth only creates value when the return on invested capital exceeds the cost of capital: growing a business that earns less than its WACC destroys value.</p>
+
+    <h2 id="terminal">5 · Terminal value</h2>
+    <p>No forecast can run forever, so a valuation ends with a terminal value that captures everything after the explicit forecast period. It is usually the largest part of the result, often 60–80% of enterprise value.</p>
+    <h3>Perpetuity growth method</h3>
+    <div class="formula">Terminal value<sub>n</sub> = FCFF<sub>n+1</sub> ÷ (WACC − stable growth)</div>
+    <ul>
+      <li><strong>Stable growth cannot exceed the growth of the economy</strong> in the long run; in practice it should not exceed the risk-free rate, which approximates long-run nominal growth.</li>
+      <li><strong>Reinvestment must match growth.</strong> In the terminal year, reinvestment rate = stable growth ÷ return on capital. Keeping today's high reinvestment or dropping it to zero both produce inconsistent values.</li>
+      <li><strong>Risk converges.</strong> A mature firm's beta tends towards 1 and its cost of capital towards that of an average company.</li>
+    </ul>
+    <h3>Exit multiple method</h3>
+    <p>Terminal value = final-year EBITDA × an EV/EBITDA multiple. Popular in banking practice and easy to explain, but it turns part of a DCF into a relative valuation: the result inherits today's market multiples. Using both methods and checking the growth rate implied by the exit multiple is good practice.</p>
+    <h3>Mid-year convention</h3>
+    <p>Cash flows arrive through the year, not on 31 December. Discounting each year's cash flow by half a year less is a small but standard correction.</p>
+
+    <h2 id="bridge">6 · From firm value to value per share</h2>
+    <div class="formula">Equity value = Enterprise value − Debt − Lease liabilities − Minority interests − Preferred shares + Cash + Non-operating assets</div>
+    <p>Then divide by diluted shares, including options and convertible securities. The same bridge appears in the <a href="models/comparables.html#build">comparables page</a>, and it must be identical across methods for their results to be comparable.</p>
+
+    <h2 id="consistency">7 · Consistency rules</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Rule</th><th>Why</th></tr>
+      <tr><td>FCFF at WACC, FCFE at cost of equity</td><td>Cash flow and discount rate must belong to the same claimants</td></tr>
+      <tr><td>Nominal cash flows at nominal rates, in the same currency</td><td>Mixing inflation assumptions creates or destroys value from nothing</td></tr>
+      <tr><td>Growth matches reinvestment and return on capital</td><td>Growth is not free</td></tr>
+      <tr><td>Stable growth ≤ risk-free rate</td><td>No company outgrows the economy forever</td></tr>
+      <tr><td>Debt treated identically in cash flows, WACC and the equity bridge</td><td>Otherwise leases or minorities are counted twice or not at all</td></tr>
+    </table></div>
+
+    <h2 id="example">8 · Worked example</h2>
+    <p>The same fictional company as on the <a href="models/comparables.html#example">comparables page</a>, <strong>Nordwerk AG</strong>: EBITDA €400m, depreciation €100m, so EBIT €300m; tax rate 25%; capital expenditure €130m; working capital rises by €20m a year; debt including leases €780m, net debt €600m; 100m shares.</p>
+    <h3>Step 1: free cash flow to the firm</h3>
+    <div class="table-wrap"><table>
+      <tr><td>EBIT × (1 − 25%)</td><td class="num">€225m</td></tr>
+      <tr><td>+ Depreciation</td><td class="num">€100m</td></tr>
+      <tr><td>− Capital expenditure</td><td class="num">(€130m)</td></tr>
+      <tr><td>− Increase in working capital</td><td class="num">(€20m)</td></tr>
+      <tr class="hl"><td>FCFF</td><td class="num">€175m</td></tr>
+    </table></div>
+    <h3>Step 2: cost of capital</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th class="num">Value</th><th>Basis</th></tr>
+      <tr><td>Risk-free rate</td><td class="num">2.5%</td><td>Long-term euro government bond (illustrative)</td></tr>
+      <tr><td>Equity risk premium</td><td class="num">5.5%</td><td>Illustrative implied premium for Europe</td></tr>
+      <tr><td>Unlevered beta</td><td class="num">0.90</td><td>Average of industrial peers</td></tr>
+      <tr><td>D/E at market value</td><td class="num">0.22</td><td>€780m debt ÷ €3,580m equity</td></tr>
+      <tr><td>Levered beta</td><td class="num">1.05</td><td>0.90 × [1 + 0.75 × 0.22]</td></tr>
+      <tr><td>Cost of equity</td><td class="num">8.3%</td><td>2.5% + 1.05 × 5.5%</td></tr>
+      <tr><td>After-tax cost of debt</td><td class="num">3.0%</td><td>4.0% × (1 − 25%)</td></tr>
+      <tr class="hl"><td>WACC</td><td class="num">7.3%</td><td>82% equity, 18% debt</td></tr>
+    </table></div>
+    <h3>Step 3: growth from fundamentals</h3>
+    <p>Net reinvestment is capex minus depreciation plus the working capital increase: €130m − €100m + €20m = €50m, or 22% of after-tax operating income. With a return on invested capital of 13.5%, sustainable growth is 22% × 13.5% ≈ <strong>3.0%</strong>.</p>
+    <h3>Step 4: a quick stable-growth value</h3>
+    <p>Treating Nordwerk as already in stable growth: enterprise value = €175m × 1.03 ÷ (7.3% − 3.0%) ≈ <strong>€4,190m</strong>. Less €600m net debt gives €3,590m of equity, or <strong>€35.90 per share</strong>, close to the comparables result of €35.80. Agreement like this is a sign that the market prices the peers on similar fundamentals.</p>
+    <h3>Step 5: how sensitive is it?</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Value per share</th><th class="num">WACC 6.5%</th><th class="num">WACC 7.3%</th><th class="num">WACC 8.0%</th></tr>
+      <tr><td>Growth 2.0%</td><td class="num">€33.70</td><td class="num">€27.70</td><td class="num">€23.80</td></tr>
+      <tr><td>Growth 3.0%</td><td class="num">€45.50</td><td class="num">€35.90</td><td class="num">€30.10</td></tr>
+    </table></div>
+    <div class="callout">Moving WACC by less than one percentage point and growth by one point changes the value by more than half. This is why inputs deserve more time than the model, and why results should always be shown as a range.</div>
+
+    <h2 id="mistakes">9 · Common mistakes</h2>
+    <ul>
+      <li>Discounting FCFF at the cost of equity, or FCFE at the WACC.</li>
+      <li>Using a risk-free rate in a different currency from the cash flows.</li>
+      <li>Taking a regression beta at face value without looking at its standard error.</li>
+      <li>Weighting debt and equity at book values.</li>
+      <li>Forecasting high growth with little reinvestment.</li>
+      <li>A stable growth rate above long-run nominal growth of the economy.</li>
+      <li>Treating leases as debt in the bridge but as an operating cost in cash flows, or the reverse.</li>
+      <li>Presenting one number instead of a range.</li>
+    </ul>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 7–12: riskless rates and risk premiums, risk parameters and costs of financing, earnings, cash flows, growth and terminal value. Implied equity risk premiums and industry betas on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014, ch. 2–5: free cash flows, computing the WACC and pro forma models.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: return on invested capital, growth and the cost of capital.</li>
+    </ul>
+
+    <div class="pagenav"><a href="index.html">← Toolkit</a><a href="models/comparables.html">Trading comparables →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>
