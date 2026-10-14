@@ -35,7 +35,7 @@
 
     <nav class="toc">
       <b>On this page</b>
-      <a href="#idea">The idea</a> · <a href="#formula">Formula and the two families</a> · <a href="#peers">Choosing peers</a> · <a href="#build">Building the multiples</a> · <a href="#which">Which multiple</a> · <a href="#drivers">What drives a multiple</a> · <a href="#adjust">Adjusting for differences</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+      <a href="#idea">The idea</a> · <a href="#formula">Formula and the two families</a> · <a href="#peers">Choosing peers</a> · <a href="#build">Building the multiples</a> · <a href="#which">Which multiple</a> · <a href="#drivers">What drives a multiple</a> · <a href="#catalogue">The multiples one by one</a> · <a href="#adjust">Adjusting for differences</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
     </nav>
 
     <h2 id="idea">1 · The idea</h2>
@@ -112,7 +112,100 @@
     </table></div>
     <p>This is the most useful idea on this page. A peer trading at a higher multiple is not "expensive" by default; it may simply have higher growth, higher returns or lower risk. A target only deserves the same multiple as its peers if it is similar on the companion variable. Comparables and DCF are therefore not rival methods but two views of the same economics.</p>
 
-    <h2 id="adjust">7 · Adjusting for differences</h2>
+    <h2 id="catalogue">7 · The multiples one by one</h2>
+    <p>Each multiple below follows the same template: what it measures, its value in a stable-growth model, the companion variable it is most sensitive to, where it works and where it misleads. The formulas are Damodaran's derivations from discounted cash flow models in their simplest, stable-growth form; g is the stable growth rate. They are not meant to be used to value a company directly, but to show what a multiple silently assumes.</p>
+    <h3>Price/earnings (P/E)</h3>
+    <div class="formula">Trailing P/E = Payout ratio × (1 + g) ÷ (Cost of equity − g)  ·  Forward P/E = Payout ratio ÷ (Cost of equity − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> what investors pay for one euro of net profit</li>
+      <li><strong>Companion variable:</strong> expected growth, then risk (cost of equity) and payout</li>
+      <li><strong>Use for:</strong> profitable, stable companies with similar leverage and tax rates</li>
+      <li><strong>Trap:</strong> net income is after interest, so leverage, tax and one-off items all move it; meaningless when earnings are negative or close to zero</li>
+    </ul>
+    <h3>PEG ratio</h3>
+    <div class="formula">PEG = P/E ÷ Expected growth in %</div>
+    <ul>
+      <li><strong>Measures:</strong> P/E per unit of growth, an attempt to compare companies growing at different speeds</li>
+      <li><strong>Companion variable:</strong> risk: two companies with the same PEG are not equally cheap if one is riskier</li>
+      <li><strong>Use for:</strong> a quick screen among growth companies in the same sector</li>
+      <li><strong>Trap:</strong> assumes P/E rises in proportion to growth, which it does not; low-growth companies look expensive on PEG almost automatically</li>
+    </ul>
+    <h3>Price/book (P/B)</h3>
+    <div class="formula">P/B = (ROE − g) ÷ (Cost of equity − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> price relative to the accounting value of equity</li>
+      <li><strong>Companion variable:</strong> return on equity; a company earning exactly its cost of equity should trade at 1× book</li>
+      <li><strong>Use for:</strong> banks and insurers, where assets are marked close to market value</li>
+      <li><strong>Trap:</strong> book value says little for companies whose main assets are brands, software or people; buybacks and write-offs shrink book value and inflate P/B</li>
+    </ul>
+    <h3>Price/sales (P/S)</h3>
+    <div class="formula">P/S = Net margin × Payout ratio × (1 + g) ÷ (Cost of equity − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> equity value per euro of revenue</li>
+      <li><strong>Companion variable:</strong> net profit margin</li>
+      <li><strong>Use for:</strong> rarely the best choice; mixes an equity numerator with a revenue that belongs to all capital providers</li>
+      <li><strong>Trap:</strong> a highly indebted company looks cheap; prefer EV/Sales</li>
+    </ul>
+    <h3>EV/Sales</h3>
+    <div class="formula">EV/Sales = After-tax operating margin × (1 − Reinvestment rate) × (1 + g) ÷ (WACC − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> enterprise value per euro of revenue</li>
+      <li><strong>Companion variable:</strong> operating margin</li>
+      <li><strong>Use for:</strong> loss-making or young companies, and cyclical companies at the bottom of the cycle when profits are depressed</li>
+      <li><strong>Trap:</strong> equal revenue can mean very different profits; only meaningful next to a view on where margins will settle</li>
+    </ul>
+    <h3>EV/EBITDA</h3>
+    <div class="formula">EV/EBITDA = [EBIT × (1 − t) ÷ EBITDA] × (1 − Reinvestment rate) × (1 + g) ÷ (WACC − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> enterprise value per euro of operating cash profit before depreciation</li>
+      <li><strong>Companion variable:</strong> reinvestment needs: a company that must spend most of its EBITDA on new equipment deserves a lower multiple; tax rate and depreciation share matter too</li>
+      <li><strong>Use for:</strong> industrials, defence, infrastructure, telecoms; the most widely used multiple in practice</li>
+      <li><strong>Trap:</strong> EBITDA is not cash flow: it ignores capital expenditure, working capital and tax; leases must be treated the same way in EV and EBITDA</li>
+    </ul>
+    <h3>EV/EBIT</h3>
+    <div class="formula">EV/EBIT = (1 − t) × (1 − Reinvestment rate) × (1 + g) ÷ (WACC − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> enterprise value per euro of operating profit after depreciation</li>
+      <li><strong>Companion variable:</strong> reinvestment rate, or equivalently return on invested capital at a given growth</li>
+      <li><strong>Use for:</strong> comparing companies with different asset intensity, since depreciation is deducted</li>
+      <li><strong>Trap:</strong> amortisation of acquired intangibles depresses EBIT for serial acquirers; some analysts use EBITA for this reason</li>
+    </ul>
+    <h3>EV/invested capital</h3>
+    <div class="formula">EV/Invested capital = (ROIC − g) × (1 + g) ÷ (WACC − g)</div>
+    <ul>
+      <li><strong>Measures:</strong> enterprise value relative to the capital put into the business, the enterprise-value counterpart of P/B</li>
+      <li><strong>Companion variable:</strong> return on invested capital; above 1× only if ROIC exceeds WACC</li>
+      <li><strong>Use for:</strong> capital-intensive businesses and checking whether a high multiple is backed by high returns</li>
+      <li><strong>Trap:</strong> invested capital is an accounting number; old assets and goodwill make it hard to compare</li>
+    </ul>
+    <h3>Yields: dividend, earnings, free cash flow</h3>
+    <div class="formula">Dividend yield = Cost of equity − g  ·  FCFF/EV = WACC − g  (forward, stable growth)</div>
+    <ul>
+      <li><strong>Measures:</strong> the inverse of a multiple: cash or profit received per euro invested</li>
+      <li><strong>Companion variable:</strong> growth: a low yield is justified only by higher expected growth or lower risk</li>
+      <li><strong>Use for:</strong> stable payers, utilities, real estate, and comparing equities with bond yields</li>
+      <li><strong>Trap:</strong> a very high yield often signals that the market expects the payout or the cash flow to fall</li>
+    </ul>
+    <h3>Sector-specific multiples</h3>
+    <div class="formula">for example EV/subscriber, EV/annual recurring revenue, price/assets under management, EV/reserves</div>
+    <ul>
+      <li><strong>Measures:</strong> value per unit of an operating driver the sector watches</li>
+      <li><strong>Companion variable:</strong> how much profit each unit eventually produces, which the multiple itself does not show</li>
+      <li><strong>Use for:</strong> sectors where accounting profit lags the business, such as young software or telecoms</li>
+      <li><strong>Trap:</strong> hard to link to cash flows; Damodaran points out that during the dot-com boom multiples such as value per subscriber were used to justify very high prices</li>
+    </ul>
+    <h3>The same economics: Nordwerk's own multiples</h3>
+    <p>Applying the formulas to the stable-growth Nordwerk AG from the <a href="../inputs.html#example">inputs page</a> (EBITDA €400m, EBIT €300m, tax 25%, reinvestment rate 22%, ROIC 13.5%, WACC 7.3%, cost of equity 8.26%, growth 3%) gives the multiples its fundamentals justify:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Multiple</th><th class="num">Justified by fundamentals</th><th class="num">Peer median</th></tr>
+      <tr><td>EV/EBITDA</td><td class="num">10.5x</td><td class="num">10.45x</td></tr>
+      <tr><td>EV/EBIT</td><td class="num">14.0x</td><td class="num">n/a</td></tr>
+      <tr><td>EV/invested capital</td><td class="num">2.5x</td><td class="num">n/a</td></tr>
+      <tr><td>P/E (trailing, operating equity only)</td><td class="num">17.0x</td><td class="num">15.5x</td></tr>
+    </table></div>
+    <p>The fundamental EV/EBITDA matches the peer median almost exactly, which is why the comparables and DCF values agree. The fundamental P/E is higher than the peers' 15.5x, which explains why applying the peer P/E in step 3 of the worked example below gives a lower value: the peer multiple does not fit Nordwerk's financing.</p>
+
+    <h2 id="adjust">8 · Adjusting for differences</h2>
     <p>Real peers are never identical. There are four ways to deal with the differences, from simplest to most rigorous:</p>
     <ul>
       <li><strong>Judgement within the range.</strong> Place the target in the upper or lower part of the peer range depending on whether its growth, margins or risk are better or worse than the median peer. Simple, but the argument must be written down.</li>
@@ -122,7 +215,7 @@
     </ul>
     <p>One more adjustment concerns <strong>control</strong>. Trading comparables price small, minority stakes in companies. An acquirer buying the whole company usually pays a control premium, which is why precedent transactions typically show higher multiples than trading comparables.</p>
 
-    <h2 id="example">8 · Worked example</h2>
+    <h2 id="example">9 · Worked example</h2>
     <p>A fictional industrial company, <strong>Nordwerk AG</strong>: EBITDA of €400m, net income of €202m, 100m diluted shares, debt of €700m, lease liabilities of €80m and cash of €180m, so net debt including leases is €600m. Expected growth is 6% a year, in line with peers.</p>
     <h3>Step 1: the peer table</h3>
     <div class="table-wrap"><table>
@@ -151,13 +244,13 @@
     <p>Dropping Peer F changes the median EV/EBITDA from 10.45x to 10.1x and the value per share to €34.40. Dropping Peer A instead moves it to 10.8x and €37.20. The result is reasonably robust, but the exercise shows how much a single peer can move the answer.</p>
     <div class="callout">Result: a comparables range of roughly €32–39 per share on EV/EBITDA, centred around €35, with the P/E route at the lower end because of Nordwerk's debt. On a football field this becomes one bar, to be set against the DCF and other methods.</div>
 
-    <h2 id="when">9 · When to use it, and when it misleads</h2>
+    <h2 id="when">10 · When to use it, and when it misleads</h2>
     <div class="two">
       <div class="yes"><b>Use when</b>Several genuinely comparable listed peers exist; you need a market check on a DCF; you need a quick first estimate before building a full model; the market for the sector is liquid and well followed.</div>
       <div class="no"><b>Misleads when</b>The whole sector is over- or undervalued (you inherit the market's mistake); peers differ in growth, leverage or accounting; the target has no real peers; earnings are temporarily depressed or inflated.</div>
     </div>
 
-    <h2 id="mistakes">10 · Common mistakes</h2>
+    <h2 id="mistakes">11 · Common mistakes</h2>
     <ul>
       <li>Mixing enterprise value and equity measures in one multiple.</li>
       <li>Comparing trailing multiples for some peers with forward multiples for others.</li>
@@ -168,7 +261,7 @@
       <li>Treating the result as a point estimate instead of a range.</li>
     </ul>
 
-    <h2 id="strategy">11 · Where it fits in the strategy</h2>
+    <h2 id="strategy">12 · Where it fits in the strategy</h2>
     <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a>, comparables are the standard cross-check for every company, never the only method:</p>
     <ul>
       <li><strong>Security and defence, industry and infrastructure, energy:</strong> EV/EBITDA against European peers, alongside a DCF.</li>
