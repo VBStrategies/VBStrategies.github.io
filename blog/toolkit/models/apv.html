@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Adjusted present value (APV)</title>
+  <meta name="description" content="The adjusted present value model: unlevered value, tax shields under different debt policies, expected distress costs, APV versus WACC, and a worked recapitalisation example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>Adjusted present value (APV)</h1>
+    <p class="lead">Values the business as if it had no debt, then adds the tax savings from debt and subtracts the expected cost of financial distress. The right model when the amount of debt is going to change.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Changing leverage: LBOs, recapitalisations</div>
+      <div><b>Main inputs</b>FCFF, unlevered beta, debt plan, default risk</div>
+      <div><b>Effort</b>Moderate: one extra step per debt effect</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#unlevered">Unlevered value</a> · <a href="#shields">Tax shields</a> · <a href="#distress">Distress costs</a> · <a href="#vswacc">APV or WACC?</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>The adjusted present value model, introduced by Stewart Myers in 1974, values a company in two steps. First, as if it had no debt at all. Then it adds what debt changes: the tax saved on interest and the expected cost of getting into financial trouble.</p>
+    <div class="formula">APV = Unlevered firm value + PV of interest tax shields − PV of expected distress costs</div>
+    <p>The WACC folds the effect of debt into the discount rate. APV keeps it separate and visible, which makes it the better tool whenever the amount of debt is going to change.</p>
+
+    <h2 id="unlevered">2 · Step 1: the unlevered firm</h2>
+    <div class="formula">Unlevered value = Σ FCFF<sub>t</sub> ÷ (1 + k<sub>u</sub>)<sup>t</sup> + Terminal value ÷ (1 + k<sub>u</sub>)<sup>n</sup>&nbsp;&nbsp;·&nbsp;&nbsp;k<sub>u</sub> = Risk-free rate + Unlevered beta × Equity risk premium</div>
+    <p>The cash flows are the same FCFF as in the <a href="dcf-fcff.html">FCFF model</a>. Only the discount rate changes: the unlevered cost of equity, which reflects business risk alone. The unlevered beta comes from peers, exactly as on the <a href="../inputs.html#rate">inputs page</a>.</p>
+
+    <h2 id="shields">3 · Step 2: the tax shields</h2>
+    <p>Interest is tax-deductible, so each euro of interest saves the tax rate in taxes. The value of those savings depends on how risky they are, which depends on how debt will behave:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Debt policy</th><th>PV of tax shields</th><th>Discount rate</th><th>Used in</th></tr>
+      <tr><td>Permanent, fixed debt</td><td>Tax rate × Debt</td><td>Cost of debt</td><td>Damodaran’s standard APV; Modigliani and Miller</td></tr>
+      <tr><td>Debt grows with the firm (fixed debt ratio)</td><td>Tax rate × Interest ÷ (k<sub>u</sub> − g)</td><td>Unlevered cost of equity</td><td>Koller et al.; the WACC also assumes this</td></tr>
+      <tr><td>Scheduled debt (repaid on a plan)</td><td>Each year’s tax saving discounted</td><td>Cost of debt</td><td>Leveraged buyouts, project finance</td></tr>
+    </table></div>
+    <p>The tax shield only exists if the company has taxable profit to deduct the interest from. A company with losses gains nothing from debt.</p>
+
+    <h2 id="distress">4 · Step 3: expected distress costs</h2>
+    <div class="formula">Expected distress cost = Probability of default × Cost of distress (as % of unlevered value) × Unlevered value</div>
+    <p>More debt raises the chance that the company cannot pay. Distress has direct costs (lawyers, advisers) and larger indirect ones: customers, suppliers and employees leave, and investment is cut. Andrade and Kaplan (1998) estimated the costs of financial distress at 10–20% of firm value in a sample of highly leveraged transactions. The probability of default can be read from the default rates of the credit rating the company would have at the new level of debt.</p>
+    <p>This term is what makes APV more than a tax calculation: without it, more debt would always look better.</p>
+
+    <h2 id="vswacc">5 · APV or WACC?</h2>
+    <p>With consistent assumptions both give the same value. They differ in what is convenient:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Situation</th><th>WACC</th><th>APV</th></tr>
+      <tr><td>Debt ratio stable over time</td><td>Simple and standard</td><td>Works, but no advantage</td></tr>
+      <tr><td>Debt changes a lot (LBO, recapitalisation, repayment plan)</td><td>The WACC changes every year and must be recomputed</td><td>Natural: tax shields follow the debt schedule</td></tr>
+      <tr><td>Question about the effect of debt itself</td><td>Hidden in the discount rate</td><td>Visible as a separate line</td></tr>
+    </table></div>
+
+    <h2 id="example">6 · Worked example</h2>
+    <p>Nordwerk AG from the <a href="../inputs.html#example">inputs page</a> in stable growth: FCFF €175m growing at 3%, unlevered beta 0.90, risk-free rate 2.5%, equity risk premium 5.5%, tax 25%, debt including leases €780m, cash €180m, 100m shares.</p>
+    <h3>Today's capital structure</h3>
+    <div class="table-wrap"><table>
+      <tr><td>Unlevered cost of equity: 2.5% + 0.90 × 5.5%</td><td class="num">7.45%</td></tr>
+      <tr><td>Unlevered value: €175m × 1.03 ÷ (7.45% − 3.0%)</td><td class="num">€4,051m</td></tr>
+      <tr><td>+ Tax shields, permanent debt: 25% × €780m</td><td class="num">€195m</td></tr>
+      <tr><td>− Expected distress cost: 2% × 20% × €4,051m</td><td class="num">(€16m)</td></tr>
+      <tr><td>= Enterprise value (APV)</td><td class="num">€4,229m</td></tr>
+      <tr><td>− Net debt</td><td class="num">(€600m)</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="num">€36.30</td></tr>
+    </table></div>
+    <p>The WACC route gave €35.90. The gap of about 1% comes from the tax shield assumption: treating debt as permanent gives €195m, while letting debt grow with the firm and discounting the shields at the unlevered rate gives €181m. The default probability of 2% is illustrative.</p>
+    <h3>A leveraged recapitalisation</h3>
+    <p>Suppose Nordwerk borrows another €800m and uses it to buy back shares at €36. Debt rises to €1,580m, interest cover falls from about 9.6x to about 3.5x (assuming the interest rate rises from 4% to 5.5%), and the default probability is assumed to rise to 8%.</p>
+    <div class="table-wrap"><table>
+      <tr><th></th><th class="num">Today</th><th class="num">After recapitalisation</th></tr>
+      <tr><td>Unlevered value</td><td class="num">€4,051m</td><td class="num">€4,051m</td></tr>
+      <tr><td>+ Tax shields (25% × debt)</td><td class="num">€195m</td><td class="num">€395m</td></tr>
+      <tr><td>− Expected distress cost</td><td class="num">(€16m)</td><td class="num">(€65m)</td></tr>
+      <tr><td>= Enterprise value</td><td class="num">€4,229m</td><td class="num">€4,381m</td></tr>
+      <tr><td>− Net debt</td><td class="num">(€600m)</td><td class="num">(€1,400m)</td></tr>
+      <tr><td>Shares outstanding</td><td class="num">100.0m</td><td class="num">77.8m</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="num">€36.30</td><td class="num">€38.30</td></tr>
+    </table></div>
+    <p>The remaining shareholders gain about €2 per share, because the extra tax saving outweighs the extra expected distress cost at these assumptions. At a higher default probability or higher distress costs, the gain shrinks and turns negative; that trade-off is how Damodaran searches for a company’s optimal debt level. In practice the share price would react when the plan is announced, so part of the gain goes to the shareholders who sell in the buyback.</p>
+    <div class="callout">APV makes visible what the WACC hides: how much of the value comes from the business and how much from the way it is financed.</div>
+
+    <h2 id="when">7 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Debt will change substantially: leveraged buyouts, recapitalisations, companies paying down acquisition debt; valuing the effect of a financing decision.</div>
+      <div class="no"><b>Misleads when</b>Distress costs are ignored, so more debt always adds value; tax shields are counted although the company pays little tax; the default probability does not rise with debt.</div>
+    </div>
+
+    <h2 id="mistakes">8 · Common mistakes</h2>
+    <ul>
+      <li>Leaving out expected distress costs.</li>
+      <li>Discounting FCFF at the levered cost of equity or the WACC instead of the unlevered rate.</li>
+      <li>Valuing tax shields on debt the company will not actually have, or without enough taxable profit.</li>
+      <li>Mixing debt policies: permanent debt for the shields, but a debt ratio that grows with the firm elsewhere.</li>
+      <li>Treating the result of a recapitalisation as free money, without asking who captures it.</li>
+    </ul>
+
+    <h2 id="strategy">9 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> APV is used for companies whose leverage is about to change: holdings paying down acquisition debt, companies announcing large buybacks financed with debt, and businesses owned or targeted by private equity. It also links directly to the <a href="lbo.html">LBO analysis</a>.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 15: firm valuation, cost of capital and APV approaches. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>S. C. Myers, "Interactions of Corporate Financing and Investment Decisions: Implications for Capital Budgeting", <em>Journal of Finance</em> 29(1), 1974.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: adjusted present value and the valuation of tax shields.</li>
+      <li>G. Andrade, S. N. Kaplan, "How Costly Is Financial (Not Economic) Distress? Evidence from Highly Leveraged Transactions that Became Distressed", <em>Journal of Finance</em> 53(5), 1998.</li>
+    </ul>
+
+    <div class="pagenav"><a href="residual-income.html">← Residual income</a><a href="sotp.html">Sum of the parts →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Football field</title>
+  <meta name="description" content="The football field: bringing every valuation method onto one chart, reading where they agree, combining them into a fair value range, scenarios and the implied return.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../blog.html">Blog</a> / <a href="index.html">Toolkit</a></div>
+    <div class="kicker">Toolkit · Synthesis</div>
+    <h1>Football field</h1>
+    <p class="lead">Brings every valuation of a company onto one chart, on the same scale and against the share price. It shows where the methods agree, where they do not, and why.</p>
+    <div class="factbar">
+      <div><b>Purpose</b>Compare all methods on one scale</div>
+      <div><b>Inputs</b>The ranges from every model page</div>
+      <div><b>Output</b>A fair value range and an implied return</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#rules">Building it</a> · <a href="#chart">The chart</a> · <a href="#reading">Reading it</a> · <a href="#range">From bars to a range</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>Every model on this site answers a slightly different question, and each gives a range rather than a number. The football field puts all of them on one chart: one horizontal bar per method, all on the same scale of value per share, with the share price drawn across them. It is named after the look of the chart, and it is the standard way investment banks and analysts present a valuation.</p>
+    <p>The chart does not produce a value by itself. Its purpose is to show where the methods agree, where they disagree, and where the share price sits relative to both.</p>
+
+    <h2 id="rules">2 · Rules for building it</h2>
+    <ul>
+      <li><strong>One basis:</strong> the same valuation date, the same diluted share count and the same net debt in every bar.</li>
+      <li><strong>Ranges, not points:</strong> each bar spans the method's reasonable range, for example the 25th to 75th percentile of peers, or a sensitivity grid of WACC and growth. Mark the base case inside it.</li>
+      <li><strong>Label the type:</strong> separate the primary method, the cross-checks and the scenarios (such as a takeover) that are not values of a minority share today.</li>
+      <li><strong>Show what was rejected:</strong> a method that does not fit, with the reason, is more honest than leaving it out.</li>
+      <li><strong>Draw the price:</strong> the current share price, and often the 52-week range.</li>
+    </ul>
+
+    <h2 id="chart">3 · Nordwerk AG on one page</h2>
+    <p>All the worked examples in this toolkit used the same fictional company, Nordwerk AG, so they can now be compared. Assume the share trades at <strong>€31.00</strong>.</p>
+    <div class="ff" role="img" aria-label="Football field of Nordwerk AG valuations per share, from about 24 to 46 euros, against a share price of 31 euros">
+      <div class="ff-row"><div class="ff-label"><a href="models/dcf-fcff.html#sensitivity">DCF – FCFF</a><small>WACC 6.8–7.8%, growth 2–3%</small></div><div class="ff-track"><span class="ff-bar " style="left:28.33%;width:38.34%"></span><span class="ff-mid" style="left:43.67%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€28.50–40.00</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/dcf-fcfe.html#example">Stable-growth DCF</a><small>FCFF, FCFE and APV</small></div><div class="ff-track"><span class="ff-bar " style="left:53.0%;width:1.33%"></span><span class="ff-mid" style="left:53.67%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€35.90–36.30</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/comparables.html#example">Comparables, EV/EBITDA</a><small>25th–75th percentile</small></div><div class="ff-track"><span class="ff-bar cross" style="left:39.0%;width:25.33%"></span><span class="ff-mid" style="left:52.67%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€31.70–39.30</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/comparables.html#example">Comparables, P/E</a><small>25th–75th percentile</small></div><div class="ff-track"><span class="ff-bar cross" style="left:31.67%;width:17.00%"></span><span class="ff-mid" style="left:37.67%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€29.50–34.60</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/sotp.html#example">Sum of the parts</a><small>15% discount to none</small></div><div class="ff-track"><span class="ff-bar cross" style="left:35.33%;width:18.00%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€30.60–36.00</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/lbo.html#example">LBO floor</a><small>Sponsor IRR 20–15%</small></div><div class="ff-track"><span class="ff-bar cross" style="left:26.0%;width:11.00%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€27.80–31.10</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/transactions.html#example">Precedent transactions</a><small>Takeover scenario</small></div><div class="ff-track"><span class="ff-bar scen" style="left:70.67%;width:16.00%"></span><span class="ff-mid" style="left:78.67%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€41.20–46.00</div></div>
+      <div class="ff-row"><div class="ff-label"><a href="models/ddm.html#example">Dividend discount</a><small>60% payout; not used</small></div><div class="ff-track"><span class="ff-bar off" style="left:11.5%;width:1.67%"></span><span class="ff-price" style="left:36.67%"></span></div><div class="ff-val">€23.70</div></div>
+      <div class="ff-row ff-axis"><div></div><div class="ff-track"><span style="left:0.0%">€20</span><span class=minor style="left:16.67%">€25</span><span style="left:33.33%">€30</span><span class=minor style="left:50.0%">€35</span><span style="left:66.67%">€40</span><span class=minor style="left:83.33%">€45</span><span style="left:100.0%">€50</span></div><div></div></div>
+    </div>
+    <div class="ff-legend"><span><i style="background:var(--navy)"></i>Primary</span><span><i style="background:rgba(10,46,112,.5)"></i>Cross-check</span><span><i style="background:repeating-linear-gradient(45deg,rgba(10,46,112,.55) 0 4px,rgba(10,46,112,.22) 4px 8px)"></i>Scenario</span><span><i style="background:#b9b9b9"></i>Not used</span><span><i style="background:#c9a227"></i>Median or base case</span><span><i style="border-left:2px dashed #c62828;border-radius:0;width:2px"></i>Share price €31.00</span></div>
+    <p>Each label links to the worked example it comes from.</p>
+
+    <h2 id="reading">4 · What the chart says</h2>
+    <ul>
+      <li><strong>The intrinsic and market methods overlap at €33–37.</strong> The DCF base case (€33.10), the stable-growth DCFs (€35.90–36.30), the EV/EBITDA median (€35.80) and the sum of the parts (€36.00) cluster together. Agreement between independent methods is the strongest signal the chart can give.</li>
+      <li><strong>P/E sits lower, for a known reason:</strong> Nordwerk's debt, explained on the <a href="models/comparables.html#example">comparables page</a>. A disagreement that is understood is not a problem.</li>
+      <li><strong>The share price is near the bottom of the range,</strong> close to the LBO floor and to the sum of the parts with a full conglomerate discount. The market is pricing Nordwerk as if the discount will persist and no buyer will appear.</li>
+      <li><strong>The takeover bar is far to the right.</strong> It is not a value for a minority shareholder today but a scenario with a probability.</li>
+      <li><strong>The dividend model is shown but not used,</strong> because Nordwerk pays out much less than its free cash flow to equity.</li>
+    </ul>
+
+    <h2 id="range">5 · From bars to one fair value range</h2>
+    <p>There is no formula for combining the methods. The weights are a judgement, and the judgement should be written down. For Nordwerk, a stable industrial company with good peers:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Method</th><th class="num">Weight</th><th class="num">Value per share</th></tr>
+      <tr><td>DCF – FCFF, five-year forecast</td><td class="num">50%</td><td class="num">€33.10</td></tr>
+      <tr><td>Comparables, EV/EBITDA median</td><td class="num">25%</td><td class="num">€35.80</td></tr>
+      <tr><td>Sum of the parts</td><td class="num">15%</td><td class="num">€36.00</td></tr>
+      <tr><td>Stable-growth DCF (FCFE)</td><td class="num">10%</td><td class="num">€36.10</td></tr>
+      <tr class="hl"><td>Weighted central value</td><td class="num">100%</td><td class="num">€34.50</td></tr>
+    </table></div>
+    <p>Together with the overlap of the bars, this gives a fair value range of about <strong>€33–37</strong> with a central value of <strong>€34.50</strong>, 11% above the share price.</p>
+    <h3>Adding the takeover scenario</h3>
+    <p>If there is, say, a 20% chance that Nordwerk receives a bid at the transaction median of €43.60 within a reasonable time, the probability-weighted value is 0.8 × €34.50 + 0.2 × €43.60 ≈ <strong>€36.30</strong>. The probability is the assumption that matters; it should be argued from the sector (is it consolidating?) and the shareholder structure (is there a controlling owner who would sell?).</p>
+    <h3>Turning it around: the return the price implies</h3>
+    <p>At €31.00 and with Nordwerk's stable-growth free cash flow to equity, the price implies a return of about 9.2% a year (€180m ÷ (€3,100m − €180m) + 3%), against a cost of equity of 8.26%. This reverse DCF says the same thing as the chart: the share is moderately cheap if the cash flow forecast is right, but not by a margin that would survive a large error in it.</p>
+    <div class="callout">The football field is the end of the valuation and the start of the investment decision: how large is the gap to fair value, how confident is the range, and what would close the gap?</div>
+
+    <h2 id="mistakes">6 · Common mistakes</h2>
+    <ul>
+      <li>Averaging all bars with equal weights, including methods that do not fit the company.</li>
+      <li>Putting the takeover value next to minority values as if it were the same kind of number.</li>
+      <li>Bars on different share counts, dates or net debt.</li>
+      <li>Ranges so wide that the chart cannot be wrong, or so narrow that they hide the real uncertainty.</li>
+      <li>Leaving out the method that gives an inconvenient answer.</li>
+    </ul>
+
+    <h2 id="strategy">7 · Where it fits in the strategy</h2>
+    <p>In <a href="../../investments/europe-strategic/statute.html">VB Europe Strategic</a> every company that enters the portfolio gets a football field. The central value and the width of the range feed the next step, <a href="portfolio.html">portfolio construction</a>: the gap between price and fair value becomes an expected return, and the width of the range becomes the confidence in it.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>J. Rosenbaum, J. Pearl, <em>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</em>, 3rd ed., Wiley, 2022: the valuation summary and football field, combining comparable companies, precedent transactions, DCF and LBO analysis.</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 2: approaches to valuation and how to reconcile them. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: triangulating DCF results with multiples.</li>
+    </ul>
+
+    <div class="pagenav"><a href="models/real-options.html">← Real options</a><a href="portfolio.html">Portfolio construction →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

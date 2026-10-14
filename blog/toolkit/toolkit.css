@@ -54,3 +54,22 @@ tr.hl td{font-weight:700;color:var(--navy);border-top:1.5px solid var(--navy)}
 .toc a{color:var(--navy);text-decoration:none} .toc a:hover{text-decoration:underline}
 h2[id]{scroll-margin-top:90px}
 .prose h3{margin:16px 0 6px;font-size:19px}
+/* football field */
+.ff{margin:10px 0 8px}
+.ff-row{display:grid;grid-template-columns:210px 1fr 120px;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid var(--line-soft)}
+.ff-label{font-size:15.5px;line-height:1.25}
+.ff-label small{display:block;font-size:13px;opacity:.7}
+.ff-track{position:relative;height:24px}
+.ff-bar{position:absolute;top:4px;height:16px;border-radius:3px;background:var(--navy)}
+.ff-bar.cross{background:rgba(10,46,112,.5)}
+.ff-bar.scen{background:repeating-linear-gradient(45deg,rgba(10,46,112,.55) 0 4px,rgba(10,46,112,.22) 4px 8px)}
+.ff-bar.off{background:#b9b9b9}
+.ff-mid{position:absolute;top:2px;width:3px;height:20px;background:#c9a227;border-radius:1px}
+.ff-price{position:absolute;top:-4px;bottom:-4px;border-left:2px dashed #c62828}
+.ff-val{font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+.ff-axis .ff-track{height:18px;font-size:13px;opacity:.75}
+.ff-axis .ff-track span{position:absolute;transform:translateX(-50%)}
+.ff-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;margin:6px 0 12px}
+.ff-legend i{display:inline-block;width:18px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+@media (max-width:700px){.ff-row{grid-template-columns:105px 1fr 78px;gap:6px}.ff-label{font-size:13.5px}.ff-label small{display:none}.ff-val{font-size:12.5px}}
+@media (max-width:700px){.ff-axis .ff-track span.minor{display:none}}

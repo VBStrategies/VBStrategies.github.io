@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Real options</title>
+  <meta name="description" content="Real options valuation: the option to delay, expand and abandon, translating business decisions into option inputs, Black-Scholes and binomial trees, and a worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Special cases</div>
+    <div class="kicker">Model · Special cases</div>
+    <h1>Real options</h1>
+    <p class="lead">Values the flexibility to wait, expand or stop a project, using the tools of option pricing. It explains why some investments with a negative NPV today are still worth having.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Patents, licences, staged projects</div>
+      <div><b>Main inputs</b>Project value, investment, time, volatility</div>
+      <div><b>Effort</b>Moderate; volatility is the hard part</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#types">Types</a> · <a href="#mapping">From finance to business</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>A DCF assumes that a company decides today and then follows the plan whatever happens. In reality management can wait, expand when things go well, or stop when they go badly. That flexibility has value, because it lets the company capture the upside while limiting the downside, exactly like a financial option.</p>
+    <p>A real option is the right, but not the obligation, to take a business decision in the future. Real options valuation borrows the tools of option pricing to put a number on it.</p>
+
+    <h2 id="types">2 · Types of real options</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Option</th><th>The right</th><th>Like a</th><th>Typical case</th></tr>
+      <tr><td>Option to delay</td><td>Wait before investing until more is known</td><td>Call</td><td>Patents, licences, undeveloped land or reserves</td></tr>
+      <tr><td>Option to expand</td><td>Invest more if the first stage succeeds</td><td>Call</td><td>Market entry, platform investments, new plants</td></tr>
+      <tr><td>Option to abandon</td><td>Stop and recover a salvage value</td><td>Put</td><td>Projects with resaleable assets</td></tr>
+      <tr><td>Staging</td><td>Invest in steps, each one a decision</td><td>Compound call</td><td>Drug development, mining, R&amp;D</td></tr>
+      <tr><td>Option to switch</td><td>Change inputs, outputs or production</td><td>Call or put</td><td>Flexible plants, energy assets</td></tr>
+    </table></div>
+
+    <h2 id="mapping">3 · Translating the inputs</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Financial option</th><th>Real option</th></tr>
+      <tr><td>Price of the underlying asset (S)</td><td>Present value of the project’s cash flows</td></tr>
+      <tr><td>Strike price (K)</td><td>Investment required to exercise</td></tr>
+      <tr><td>Time to expiry (T)</td><td>How long the opportunity remains open: patent life, licence term, before a competitor moves</td></tr>
+      <tr><td>Volatility (σ)</td><td>Uncertainty in the project value: from simulations, the volatility of comparable companies, or the variance of past project outcomes</td></tr>
+      <tr><td>Risk-free rate (r)</td><td>Government bond yield for the period</td></tr>
+      <tr><td>Dividend yield (y)</td><td>Cash flows lost by waiting; the cost of delay</td></tr>
+    </table></div>
+    <div class="formula">Call value = S × e<sup>−yT</sup> × N(d<sub>1</sub>) − K × e<sup>−rT</sup> × N(d<sub>2</sub>)&nbsp;&nbsp;·&nbsp;&nbsp;d<sub>1</sub> = [ln(S/K) + (r − y + σ²/2)T] ÷ σ√T,&nbsp; d<sub>2</sub> = d<sub>1</sub> − σ√T</div>
+    <p>Black–Scholes gives a closed formula; a binomial tree, which lets the project value move up or down at each step, is more flexible and easier to explain, and handles early exercise.</p>
+
+    <h2 id="example">4 · Worked example</h2>
+    <p>Nordwerk AG can build a second defence electronics line, but only makes sense if European defence orders keep rising. Today the expected cash flows of the line are worth €500m and building it would cost €600m.</p>
+    <div class="formula">Static NPV = €500m − €600m = <strong>−€100m</strong> → reject</div>
+    <p>But Nordwerk does not have to decide today. It can wait up to three years, until order books are clearer, and build only if the line is then worth more than it costs. With volatility of the project value of 35%, a risk-free rate of 2.5% and no cash lost by waiting:</p>
+    <div class="table-wrap"><table>
+      <tr><td>d<sub>1</sub> = [ln(500/600) + (2.5% + 0.35²/2) × 3] ÷ (0.35 × √3)</td><td class="num">0.126</td></tr>
+      <tr><td>d<sub>2</sub> = 0.126 − 0.35 × √3</td><td class="num">−0.480</td></tr>
+      <tr><td>N(d<sub>1</sub>), N(d<sub>2</sub>)</td><td class="num">0.550, 0.316</td></tr>
+      <tr class="hl"><td>Option value = 500 × 0.550 − 600 × e<sup>−0.075</sup> × 0.316</td><td class="num">€99m</td></tr>
+    </table></div>
+    <p>A three-step binomial tree with the same inputs gives €103m. The project the DCF rejected is worth about €100m as an option, or about €1 per Nordwerk share. The value depends strongly on volatility: at 25% it is €65m, at 45% €133m.</p>
+    <p>If a competitor could take the market while Nordwerk waits, the cost of delay would be added as a dividend yield, and the option would be worth less. That is the main practical limit of the option to delay.</p>
+    <div class="callout">The lesson is not the exact number but the logic: an investment that looks negative today can be worth having the right to make, as long as the uncertainty is real and the right does not expire quickly.</div>
+
+    <h2 id="when">5 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>The company has a clear, exclusive right (a patent, licence, reserves, land); the decision really can wait; uncertainty will be resolved over time.</div>
+      <div class="no"><b>Misleads when</b>It is used to justify any high price as "optionality"; the option is not exclusive; volatility is guessed; the option is already in the DCF forecast and is counted twice.</div>
+    </div>
+
+    <h2 id="mistakes">6 · Common mistakes</h2>
+    <ul>
+      <li>Calling every strategic hope a real option.</li>
+      <li>Using the volatility of the share price as the volatility of a single project.</li>
+      <li>Ignoring the cost of delay and competitors' ability to move first.</li>
+      <li>Adding option value to a DCF that already assumes the expansion happens.</li>
+      <li>Forgetting that the Black–Scholes assumptions (a traded underlying, continuous trading) hold only loosely for real assets.</li>
+    </ul>
+
+    <h2 id="strategy">7 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> real options are a cross-check, not a primary model. They are used for companies with exclusive rights to uncertain opportunities, such as drug patents, defence programmes that may be extended, or energy and resource licences, and to ask whether a gap between the DCF value and the market price could be explained by flexibility the DCF ignores.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 5: option pricing theory and models; ch. 28: the option to delay; ch. 29: the options to expand and abandon. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>F. Black, M. Scholes, "The Pricing of Options and Corporate Liabilities", <em>Journal of Political Economy</em> 81(3), 1973.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: flexibility and real options.</li>
+    </ul>
+
+    <div class="pagenav"><a href="lbo.html">← LBO</a><a href="../football-field.html">Football field →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

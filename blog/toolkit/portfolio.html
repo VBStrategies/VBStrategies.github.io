@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Portfolio construction</title>
+  <meta name="description" content="From valuations to portfolio weights: Markowitz mean-variance optimisation, why it breaks, constraints, Ledoit-Wolf covariance shrinkage and the Black-Litterman model, with a worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../blog.html">Blog</a> / <a href="index.html">Toolkit</a></div>
+    <div class="kicker">Toolkit · From valuations to a portfolio</div>
+    <h1>Portfolio construction</h1>
+    <p class="lead">Turns valuations into portfolio weights: from the classic Markowitz model, through the repairs it needs in practice, to the Black–Litterman model that blends market weights with your own views.</p>
+    <div class="factbar">
+      <div><b>Purpose</b>From expected returns to weights</div>
+      <div><b>Inputs</b>Views, volatilities, correlations, constraints</div>
+      <div><b>Effort</b>High: needs code (R or Python)</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#bridge">From valuations to weights</a> · <a href="#markowitz">Markowitz</a> · <a href="#problem">Why it breaks</a> · <a href="#constraints">Constraints</a> · <a href="#covariance">Covariance</a> · <a href="#bl">Black–Litterman</a> · <a href="#example">Worked example</a> · <a href="#risk">Risk budgets</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="bridge">1 · From valuations to weights</h2>
+    <p>Valuation tells you which companies are attractive. It does not tell you how much of each to hold. A portfolio of the five most undervalued shares, bought in equal amounts, can still be badly built: they may all depend on the same risk, or the most attractive one may also be the most uncertain.</p>
+    <p>Portfolio construction turns valuations into weights. It needs three inputs for every holding or pillar: an <strong>expected return</strong> (from the gap between price and fair value, as on the <a href="football-field.html#range">football field</a>), a <strong>risk</strong> (volatility) and how holdings <strong>move together</strong> (correlations). This page follows the path from the classic Markowitz model to the Black–Litterman model that is used in practice.</p>
+
+    <h2 id="markowitz">2 · Mean-variance optimisation (Markowitz)</h2>
+    <p>Harry Markowitz showed in 1952 that what matters is not the risk of each holding on its own but its contribution to the risk of the whole portfolio. Holdings that do not move together reduce risk without reducing return: diversification.</p>
+    <div class="formula">Portfolio return = Σ w<sub>i</sub> × μ<sub>i</sub>&nbsp;&nbsp;·&nbsp;&nbsp;Portfolio variance = Σ Σ w<sub>i</sub> × w<sub>j</sub> × σ<sub>ij</sub> = w' Σ w</div>
+    <ul>
+      <li><strong>Efficient frontier:</strong> the portfolios with the highest expected return for each level of risk.</li>
+      <li><strong>Minimum-variance portfolio:</strong> the least risky combination, w = Σ<sup>−1</sup>1 ÷ (1' Σ<sup>−1</sup>1). It needs no expected returns at all.</li>
+      <li><strong>Tangency portfolio:</strong> the highest return per unit of risk (Sharpe ratio), w ∝ Σ<sup>−1</sup>(μ − r<sub>f</sub>).</li>
+    </ul>
+
+    <h2 id="problem">3 · Why raw Markowitz breaks in practice</h2>
+    <p>The optimiser treats its inputs as exact. They are not: expected returns in particular are estimated with large errors. Michaud (1989) called mean-variance optimisation an "error maximiser", because it puts the most weight on the assets whose expected returns are most overestimated. The symptoms are extreme weights, large short positions and portfolios that change completely when one input moves slightly. The worked example below shows all three.</p>
+    <p>There are three standard repairs, used together: <strong>constraints</strong> on the weights, a better <strong>covariance estimate</strong>, and better <strong>expected returns</strong> through Black–Litterman.</p>
+
+    <h2 id="constraints">4 · Repair 1: constraints</h2>
+    <p>Constraints rule out the solutions that no investor would accept: no short sales, minimum and maximum weights per holding, sector or country limits. They cost a little expected Sharpe ratio on paper, and in exchange make the portfolio robust to estimation error. Benninga shows how to compute efficient portfolios without short sales, which can no longer be done with a formula and needs a numerical solver.</p>
+
+    <h2 id="covariance">5 · Repair 2: a better covariance matrix</h2>
+    <p>The sample covariance matrix from historical returns is noisy when the number of assets is large relative to the number of observations. With 40 shares and five years of monthly data, there are 820 variances and covariances to estimate from 60 observations each. The result is unstable, and the optimiser exploits its errors.</p>
+    <div class="formula">Shrunk covariance = δ × Target + (1 − δ) × Sample covariance</div>
+    <p>Ledoit and Wolf (2004) proposed shrinking the sample matrix towards a simple, structured target, such as a matrix in which all pairs have the same correlation, with the intensity δ chosen to minimise the expected estimation error. Their estimator is now standard and is available in most statistical software, for example in R and in Python's scikit-learn.</p>
+
+    <h2 id="bl">6 · Repair 3: Black–Litterman</h2>
+    <p>Black and Litterman (1992) solved the problem of expected returns by not starting from them. They start from the market: if the benchmark is held by investors in equilibrium, its weights imply a set of expected returns. The investor's own views are then blended in, each with a stated confidence.</p>
+    <div class="formula">Implied equilibrium returns: Π = δ × Σ × w<sub>market</sub></div>
+    <div class="formula">Combined returns: μ<sub>BL</sub> = [(τΣ)<sup>−1</sup> + P'Ω<sup>−1</sup>P]<sup>−1</sup> × [(τΣ)<sup>−1</sup>Π + P'Ω<sup>−1</sup>Q]</div>
+    <ul>
+      <li><strong>δ</strong> is the market's risk aversion, <strong>τ</strong> scales the uncertainty of the equilibrium, both small and often set by convention.</li>
+      <li><strong>P</strong> says which assets a view is about, <strong>Q</strong> what the view is (for example "defence will beat industry by 3% a year"), and <strong>Ω</strong> how uncertain it is.</li>
+      <li>Without views, the model returns the benchmark weights. With views, it tilts only the assets the views concern, and only as far as the confidence justifies.</li>
+    </ul>
+    <p>This is why the model suits a valuation-driven investor: the valuations become the views, and the confidence in each view comes from how wide and how consistent its football field is. Benninga's chapter on Black–Litterman works through the model in a spreadsheet.</p>
+
+    <h2 id="example">7 · Worked example</h2>
+    <p>Five pillars of a European equity portfolio, with illustrative inputs (the private equity sleeve is left out for simplicity). Risk-free rate 2.5%.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Pillar</th><th class="num">Expected return</th><th class="num">Volatility</th></tr>
+      <tr><td>Security &amp; defence</td><td class="num">10.0%</td><td class="num">22%</td></tr>
+      <tr><td>Industry &amp; infrastructure</td><td class="num">7.0%</td><td class="num">18%</td></tr>
+      <tr><td>Energy</td><td class="num">8.5%</td><td class="num">24%</td></tr>
+      <tr><td>Technology &amp; chips</td><td class="num">11.0%</td><td class="num">28%</td></tr>
+      <tr><td>Health &amp; life sciences</td><td class="num">7.5%</td><td class="num">16%</td></tr>
+    </table></div>
+    <p>Correlations between pillars range from 0.25 to 0.60. The weights that each approach produces:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Pillar</th><th class="num">Equal</th><th class="num">Markowitz</th><th class="num">Long-only</th><th class="num">Long-only, ≥ 10% each</th><th class="num">Black–Litterman</th></tr>
+      <tr><td>Security &amp; defence</td><td class="num">20%</td><td class="num">38.7%</td><td class="num">32.6%</td><td class="num">29.9%</td><td class="num">34.7%</td></tr>
+      <tr><td>Industry &amp; infrastructure</td><td class="num">20%</td><td class="num">−20.3%</td><td class="num">0.0%</td><td class="num">10.0%</td><td class="num">15.3%</td></tr>
+      <tr><td>Energy</td><td class="num">20%</td><td class="num">18.5%</td><td class="num">13.9%</td><td class="num">11.6%</td><td class="num">15.0%</td></tr>
+      <tr><td>Technology &amp; chips</td><td class="num">20%</td><td class="num">18.0%</td><td class="num">12.9%</td><td class="num">10.8%</td><td class="num">20.0%</td></tr>
+      <tr><td>Health &amp; life sciences</td><td class="num">20%</td><td class="num">45.2%</td><td class="num">40.6%</td><td class="num">37.8%</td><td class="num">15.0%</td></tr>
+      <tr><td>Sharpe ratio (on these inputs)</td><td class="num">0.40</td><td class="num">0.43</td><td class="num">0.43</td><td class="num">0.42</td><td class="num">–</td></tr>
+    </table></div>
+    <h3>What the columns show</h3>
+    <ul>
+      <li><strong>Markowitz</strong> shorts industry by 20% and puts 45% in health, the least volatile pillar. If the expected return of technology is raised by just one percentage point, its weight jumps from 18% to 26% and the industry short grows to 26%. That instability is the "error maximiser" at work.</li>
+      <li><strong>Long-only</strong> removes the short and sets industry to zero. With a <strong>10% minimum</strong> for every pillar, as the statute requires, the portfolio becomes reasonable at a cost of only 0.01 in Sharpe ratio on paper.</li>
+      <li><strong>Black–Litterman</strong> starts from benchmark weights (20/30/15/20/15) and adds one view: security and defence will beat industry by 3% a year, held with the same confidence as the equilibrium. The implied return gap between the two widens from 0.3% to 1.6%, and only those two weights move: defence up from 20% to 34.7%, industry down from 30% to 15.3%. The other pillars stay at their benchmark weights, because there is no view on them.</li>
+    </ul>
+    <h3>Does shrinkage help?</h3>
+    <p>In a simulation, 60 months of returns were drawn 1,000 times from the true covariance matrix and the minimum-variance portfolio was estimated each time. Portfolios built on the sample matrix had on average 3.6% more risk than the true optimum, those built on the Ledoit–Wolf matrix 3.0%. With only five pillars the gain is small; it grows with the number of assets, which is exactly the case Ledoit and Wolf designed it for.</p>
+    <div class="callout">The practical sequence: valuations become views, Black–Litterman turns views into expected returns, a shrunk covariance matrix measures risk, and constraints keep the result sensible.</div>
+
+    <h2 id="risk">8 · Checking the result: risk contributions</h2>
+    <div class="formula">Risk contribution of holding i = w<sub>i</sub> × (Σw)<sub>i</sub> ÷ Portfolio variance</div>
+    <p>Weights do not show where the risk comes from. A pillar with 20% of the capital can carry 35% of the risk if it is volatile and correlated with the rest. The risk contributions add up to 100% and are the last check before a portfolio is accepted: no single pillar should dominate the risk unless that is a deliberate decision.</p>
+
+    <h2 id="mistakes">9 · Common mistakes</h2>
+    <ul>
+      <li>Feeding historical average returns into an optimiser as expected returns.</li>
+      <li>Trusting an unconstrained optimiser's weights.</li>
+      <li>Estimating a large covariance matrix from a short history without shrinkage.</li>
+      <li>Stating views in Black–Litterman with more confidence than the valuation supports.</li>
+      <li>Rebalancing to the optimiser's output every month, so that trading costs eat the expected gain.</li>
+    </ul>
+
+    <h2 id="strategy">10 · Where it fits in the strategy</h2>
+    <p><a href="../../investments/europe-strategic/statute.html">VB Europe Strategic</a> already fixes the outer layer: five pillars and a private equity sleeve, each with at least 10% of the portfolio. The plan for the layer inside it follows this page: Black–Litterman with benchmark (MSCI Europe ex UK) weights as the starting point and the football-field valuations as views, and a Ledoit–Wolf covariance matrix for risk. It will be tested in R during the backtest phase, and written into the statute only once it has passed.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>H. Markowitz, "Portfolio Selection", <em>Journal of Finance</em> 7(1), 1952.</li>
+      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014, ch. 8–13: portfolio models, efficient portfolios, the variance-covariance matrix, efficient portfolios without short sales and the Black–Litterman approach.</li>
+      <li>R. O. Michaud, "The Markowitz Optimization Enigma: Is 'Optimized' Optimal?", <em>Financial Analysts Journal</em> 45(1), 1989.</li>
+      <li>O. Ledoit, M. Wolf, "Honey, I Shrunk the Sample Covariance Matrix", <em>Journal of Portfolio Management</em> 30(4), 2004.</li>
+      <li>F. Black, R. Litterman, "Global Portfolio Optimization", <em>Financial Analysts Journal</em> 48(5), 1992.</li>
+      <li>G. He, R. Litterman, "The Intuition Behind Black-Litterman Model Portfolios", Goldman Sachs Investment Management Research, 1999.</li>
+    </ul>
+
+    <div class="pagenav"><a href="football-field.html">← Football field</a><span class="side-note">End of the toolkit</span></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

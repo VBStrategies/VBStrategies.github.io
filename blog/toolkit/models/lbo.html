@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Leveraged buyout (LBO)</title>
+  <meta name="description" content="Leveraged buyout analysis: how sponsors create returns, the financing structure, a five-year LBO model with debt schedule, IRR and MOIC, and the maximum price a sponsor could pay.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Special cases</div>
+    <div class="kicker">Model · Special cases</div>
+    <h1>Leveraged buyout (LBO)</h1>
+    <p class="lead">Estimates the highest price a private equity buyer could pay and still earn its target return. Not a measure of intrinsic value, but often a floor under the share price.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Stable cash generators, PE targets</div>
+      <div><b>Main inputs</b>Entry price, debt, cash flows, exit multiple</div>
+      <div><b>Effort</b>Moderate: circular debt schedule</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#mechanics">How it works</a> · <a href="#structure">Structure</a> · <a href="#steps">Building the model</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>A leveraged buyout is the purchase of a company by a financial sponsor, typically a private equity fund, financed largely with debt that the company itself will repay from its cash flows. An LBO analysis asks one question: <em>what is the highest price a sponsor could pay and still earn its target return?</em></p>
+    <p>That makes it a different kind of valuation. It does not estimate what the company is worth to a long-term owner, but what one specific type of buyer could afford. Because private equity funds are active, well-financed buyers, that number often acts as a floor under the share price of companies that fit their profile.</p>
+
+    <h2 id="mechanics">2 · How an LBO creates returns</h2>
+    <div class="formula">Sponsor equity = Purchase price + Fees − Debt raised&nbsp;&nbsp;·&nbsp;&nbsp;Return = Equity at exit ÷ Equity at entry</div>
+    <p>The sponsor earns its return from three sources, which every LBO model should separate:</p>
+    <ul>
+      <li><strong>Growth in EBITDA:</strong> from revenue growth and better margins.</li>
+      <li><strong>Debt paydown:</strong> cash flow repays debt, so a larger share of the enterprise value belongs to the equity at exit.</li>
+      <li><strong>Multiple change:</strong> selling at a higher EV/EBITDA than the purchase multiple. This is the least controllable source; a prudent model assumes the exit multiple is no higher than the entry multiple.</li>
+    </ul>
+    <p>Two return measures are used: the multiple of invested capital (MOIC, equity out ÷ equity in) and the internal rate of return (IRR), which also accounts for time.</p>
+
+    <h2 id="structure">3 · The financing structure</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Layer</th><th>Typical features</th><th>Claim in default</th></tr>
+      <tr><td>Senior secured loans</td><td>Lowest cost; amortising or bullet; covenants</td><td>First</td></tr>
+      <tr><td>High-yield bonds or second-lien loans</td><td>Higher cost; longer maturity; fewer covenants</td><td>Second</td></tr>
+      <tr><td>Mezzanine or payment-in-kind debt</td><td>Interest often added to principal instead of paid</td><td>Third</td></tr>
+      <tr><td>Sponsor equity</td><td>The residual claim, earns the return</td><td>Last</td></tr>
+    </table></div>
+    <p>How much debt a company can carry depends on how stable its cash flows are, its interest cover and the state of the credit market. The amount of debt is the main reason LBO values move with credit conditions: cheaper and more available debt lets sponsors pay more.</p>
+
+    <h2 id="steps">4 · Building the model, step by step</h2>
+    <ol>
+      <li><strong>Entry:</strong> purchase price (EV/EBITDA × EBITDA), fees, debt raised, sponsor equity.</li>
+      <li><strong>Projection:</strong> EBITDA, interest, tax, capital expenditure, working capital, usually for five years.</li>
+      <li><strong>Debt schedule:</strong> cash after interest and tax repays debt (a "cash sweep"); interest is computed on the outstanding balance.</li>
+      <li><strong>Exit:</strong> exit multiple × final EBITDA − remaining debt = equity at exit.</li>
+      <li><strong>Returns:</strong> MOIC and IRR; then solve backwards for the entry price that gives the target IRR.</li>
+    </ol>
+
+    <h2 id="example">5 · Worked example</h2>
+    <p>A sponsor considers buying Nordwerk AG (EBITDA €400m, net debt €600m, 100m shares) at 11.0x EBITDA. It raises debt of 5.0x EBITDA at 7%, pays 2% fees, and plans to sell after five years at the trading comparables median of 10.45x. EBITDA grows 4% a year; capital expenditure and working capital grow with it.</p>
+    <div class="table-wrap"><table>
+      <tr><td>Purchase price: 11.0 × €400m</td><td class="num">€4,400m</td></tr>
+      <tr><td>+ Fees (2%)</td><td class="num">€88m</td></tr>
+      <tr><td>− Debt raised: 5.0 × €400m</td><td class="num">(€2,000m)</td></tr>
+      <tr class="hl"><td>= Sponsor equity</td><td class="num">€2,488m</td></tr>
+    </table></div>
+    <div class="table-wrap"><table>
+      <tr><th>€m</th><th class="num">Year 1</th><th class="num">Year 2</th><th class="num">Year 3</th><th class="num">Year 4</th><th class="num">Year 5</th></tr>
+      <tr><td>EBITDA</td><td class="num">416.0</td><td class="num">432.6</td><td class="num">449.9</td><td class="num">467.9</td><td class="num">486.7</td></tr>
+      <tr><td>− Interest (7% of opening debt)</td><td class="num">(140.0)</td><td class="num">(134.6)</td><td class="num">(128.4)</td><td class="num">(121.4)</td><td class="num">(113.4)</td></tr>
+      <tr><td>− Tax (25% of EBIT − interest)</td><td class="num">(43.0)</td><td class="num">(47.5)</td><td class="num">(52.3)</td><td class="num">(57.4)</td><td class="num">(62.9)</td></tr>
+      <tr><td>− Capital expenditure</td><td class="num">(135.2)</td><td class="num">(140.6)</td><td class="num">(146.2)</td><td class="num">(152.1)</td><td class="num">(158.2)</td></tr>
+      <tr><td>− Increase in working capital</td><td class="num">(20.8)</td><td class="num">(21.6)</td><td class="num">(22.5)</td><td class="num">(23.4)</td><td class="num">(24.3)</td></tr>
+      <tr><td>= Cash available to repay debt</td><td class="num">77.0</td><td class="num">88.3</td><td class="num">100.5</td><td class="num">113.7</td><td class="num">127.8</td></tr>
+      <tr><td>Debt at year end</td><td class="num">1,923.0</td><td class="num">1,834.7</td><td class="num">1,734.1</td><td class="num">1,620.5</td><td class="num">1,492.6</td></tr>
+    </table></div>
+    <div class="table-wrap"><table>
+      <tr><td>Exit value: 10.45 × €486.7m</td><td class="num">€5,086m</td></tr>
+      <tr><td>− Remaining debt</td><td class="num">(€1,493m)</td></tr>
+      <tr><td>= Equity at exit</td><td class="num">€3,593m</td></tr>
+      <tr><td>MOIC</td><td class="num">1.44x</td></tr>
+      <tr class="hl"><td>IRR</td><td class="num">7.6%</td></tr>
+    </table></div>
+    <p>Of the €1,105m gain, EBITDA growth contributes about €953m and debt paydown €507m, while the lower exit multiple costs €268m and fees €88m. A 7.6% IRR is far below what a sponsor needs, so at 11.0x the deal does not work. With an exit at 12x the IRR would rise to 11.8%; at 9x it would fall to 3.0%.</p>
+    <h3>Solving for the price a sponsor could pay</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Target IRR (illustrative)</th><th class="num">Maximum entry EV/EBITDA</th><th class="num">Price per Nordwerk share</th></tr>
+      <tr><td>15%</td><td class="num">9.3x</td><td class="num">€31.10</td></tr>
+      <tr><td>20%</td><td class="num">8.4x</td><td class="num">€27.80</td></tr>
+    </table></div>
+    <p>With the same debt and exit assumptions, a sponsor targeting 15–20% could pay about €28–31 per share, below the intrinsic and trading values of €33–36. For Nordwerk, the LBO is therefore not a likely exit but a floor: if the share fell well below €28, the company would start to look interesting to private equity.</p>
+    <div class="callout">The LBO value depends heavily on credit conditions. When debt is cheap and plentiful, the floor rises; when credit tightens, it falls, regardless of the company itself.</div>
+
+    <h2 id="when">6 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>The company has stable cash flows, low debt and could be a private equity target; estimating a valuation floor; judging whether a takeover bid from a sponsor is plausible.</div>
+      <div class="no"><b>Misleads when</b>The company has volatile cash flows or high capital needs, so it could not carry much debt; credit markets are closed; it is read as the intrinsic value.</div>
+    </div>
+
+    <h2 id="mistakes">7 · Common mistakes</h2>
+    <ul>
+      <li>Assuming an exit multiple above the entry multiple without a reason.</li>
+      <li>Ignoring fees and the cost of debt arrangement.</li>
+      <li>Forgetting that interest depends on the debt balance, which depends on the cash flow: the model is circular and must be solved.</li>
+      <li>Leverage that leaves interest cover too thin to survive a downturn.</li>
+      <li>Treating the LBO price as what the company is worth, rather than what one buyer could pay.</li>
+    </ul>
+
+    <h2 id="strategy">8 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> the LBO analysis has two uses. It sets a floor for holdings with stable cash flows and low debt, and it is the key to understanding the private equity sleeve: listed private equity firms earn their returns from exactly these three sources, so their results can be read through this model.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>J. Rosenbaum, J. Pearl, <em>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</em>, 3rd ed., Wiley, 2022, ch. 4–5: leveraged buyouts and LBO analysis.</li>
+      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014: financial statement modeling and debt schedules.</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 25: acquisitions and takeovers, including leveraged buyouts. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: value creation in leveraged transactions.</li>
+    </ul>
+
+    <div class="pagenav"><a href="rnpv.html">← rNPV</a><a href="real-options.html">Real options →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

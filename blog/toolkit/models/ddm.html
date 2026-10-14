@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Dividend discount model</title>
+  <meta name="description" content="The dividend discount model in all its versions: Gordon growth, two-stage, H-model and three-stage, with buybacks, a worked example and the common mistakes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>Dividend discount model</h1>
+    <p class="lead">Values a share as the present value of the dividends it will pay. The simplest DCF model, and the right one when dividends reflect what the company can afford to pay.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Banks, insurers, utilities, stable payers</div>
+      <div><b>Main inputs</b>Dividends, payout ratio, ROE, cost of equity</div>
+      <div><b>Effort</b>Low: no debt or capex forecast</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#versions">The four versions</a> · <a href="#gordon">Gordon growth</a> · <a href="#twostage">Two-stage</a> · <a href="#hmodel">H-model</a> · <a href="#threestage">Three-stage</a> · <a href="#buybacks">Buybacks</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>The dividend discount model is the oldest and simplest of the discounted cash flow models. A minority shareholder who never sells receives only one thing from the company: dividends. The value of a share is therefore the present value of all expected future dividends, discounted at the cost of equity.</p>
+    <div class="formula">Value per share = Σ DPS<sub>t</sub> ÷ (1 + cost of equity)<sup>t</sup></div>
+    <p>Selling the share does not change this. The buyer pays a price that again reflects the dividends after that date, so in the end the value always comes back to dividends. The model is simple because it needs no forecast of debt, capital expenditure or working capital, only of what the company pays out.</p>
+
+    <h2 id="versions">2 · The four versions</h2>
+    <p>As with the <a href="dcf-fcfe.html#stages">FCFE model</a>, the versions differ only in how growth is expected to change over time:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Version</th><th>Growth pattern</th><th>Fits</th></tr>
+      <tr><td>Gordon growth (one stage)</td><td>Constant growth from today</td><td>Mature companies with a stable payout: utilities, some banks, consumer staples</td></tr>
+      <tr><td>Two-stage</td><td>Higher growth for n years, then stable</td><td>Companies whose growth and payout will change once, at a predictable point</td></tr>
+      <tr><td>H-model</td><td>Growth falls in a straight line from a high to a stable rate</td><td>Companies already growing above the economy, where growth fades gradually</td></tr>
+      <tr><td>Three-stage</td><td>High growth, a transition, then stable</td><td>The most flexible version; payout, growth and risk can all change in the transition</td></tr>
+    </table></div>
+
+    <h2 id="gordon">3 · Gordon growth model</h2>
+    <div class="formula">Value per share = DPS<sub>1</sub> ÷ (Cost of equity − g)</div>
+    <p>Named after Myron Gordon, it is the formula behind every terminal value on this site. Three conditions must hold:</p>
+    <ul>
+      <li><strong>Growth below the cost of equity,</strong> otherwise the formula gives a negative or infinite value.</li>
+      <li><strong>Growth no higher than the long-run nominal growth of the economy.</strong> A company cannot grow faster than the economy forever without eventually becoming the economy.</li>
+      <li><strong>A payout consistent with growth.</strong> Growth comes from retained earnings: g = (1 − payout ratio) × ROE. A company that pays out everything cannot also grow, unless it borrows or issues shares.</li>
+    </ul>
+    <p>Dividing both sides by earnings gives the fundamental P/E: P/E = payout × (1 + g) ÷ (cost of equity − g). The <a href="comparables.html#catalogue">comparables page</a> uses exactly this link.</p>
+
+    <h2 id="twostage">4 · Two-stage model</h2>
+    <div class="formula">Value = Σ<sub>t=1..n</sub> DPS<sub>t</sub> ÷ (1 + r<sub>hg</sub>)<sup>t</sup> + [DPS<sub>n+1</sub> ÷ (r<sub>st</sub> − g<sub>st</sub>)] ÷ (1 + r<sub>hg</sub>)<sup>n</sup></div>
+    <p>During high growth the company retains more and pays out less. When growth falls to the stable rate, Damodaran stresses that the payout ratio must rise to the level stable growth allows: payout<sub>stable</sub> = 1 − g<sub>stable</sub> ÷ ROE<sub>stable</sub>. Keeping the high-growth payout in the stable period is one of the most common errors and undervalues the company. The cost of equity should also move towards that of a mature firm.</p>
+
+    <h2 id="hmodel">5 · H-model</h2>
+    <div class="formula">Value = DPS<sub>0</sub> × (1 + g<sub>L</sub>) ÷ (r − g<sub>L</sub>) + DPS<sub>0</sub> × H × (g<sub>S</sub> − g<sub>L</sub>) ÷ (r − g<sub>L</sub>)</div>
+    <p>Fuller and Hsia's H-model assumes growth starts at a high rate g<sub>S</sub> and declines in a straight line to the stable rate g<sub>L</sub> over 2H years; H is half the length of the decline. The first term is the Gordon value at stable growth, the second is the value of the extra growth. It is an approximation, but a close one when the period is not too long.</p>
+    <p><strong>Example:</strong> a dividend of €2.00, growth fading from 8% to 3% over ten years (H = 5), cost of equity 9%. Stable value: 2.00 × 1.03 ÷ 6% = €34.33. Extra growth: 2.00 × 5 × 5% ÷ 6% = €8.33. Value ≈ <strong>€42.67</strong>. The model keeps the payout ratio constant, so it fits companies whose payout is already high.</p>
+
+    <h2 id="threestage">6 · Three-stage model</h2>
+    <div class="formula">Value = PV of dividends in high growth + PV of dividends in transition + PV of terminal value</div>
+    <p>The most general version. During the transition growth falls, the payout ratio rises and the cost of equity moves towards a mature level, each year a little. It needs the most inputs and therefore offers the most room for inconsistency; it is worth using only when a company is genuinely far from its stable state today.</p>
+
+    <h2 id="buybacks">7 · Dividends, buybacks and what to discount</h2>
+    <p>Many European companies now return a large part of their cash through share buybacks. A pure dividend model ignores this cash and undervalues them. There are two common fixes:</p>
+    <ul>
+      <li><strong>Augmented dividends:</strong> discount dividends plus buybacks. Because buybacks are irregular, Damodaran suggests averaging them over several years.</li>
+      <li><strong>Per-share effect:</strong> keep only dividends, but let dividends per share grow faster because the number of shares falls.</li>
+    </ul>
+    <p>If buybacks and dividends together are close to free cash flow to equity, the augmented dividend model converges to the <a href="dcf-fcfe.html#dividends">FCFE model</a>.</p>
+
+    <h2 id="example">8 · Worked example</h2>
+    <h3>Case 1: Nordwerk AG, where the model does not fit</h3>
+    <p>Nordwerk AG from the <a href="dcf-fcfe.html#example">FCFE page</a> earns €2.02 per share and pays out 60%, a dividend of €1.21. In stable growth of 3% and a cost of equity of 8.26%:</p>
+    <div class="formula">Value = €1.21 × 1.03 ÷ (8.26% − 3.0%) = <strong>€23.70</strong></div>
+    <p>This is a third below the FCFE value of €36.10. The reason: Nordwerk could pay out 87% of its earnings (its FCFE) without changing its debt policy or cutting investment, but pays only 60%. The remaining cash builds up on the balance sheet, and the dividend model gives it no value. Either the cash is eventually paid out, and the dividend model is too low, or management wastes it, and the FCFE value is too high. Which one is the investment question.</p>
+    <h3>Case 2: Alpenbank, a fictional bank where it fits</h3>
+    <p>Book value €40 per share, return on equity 11% for five years with a 50% payout, so growth is (1 − 50%) × 11% = 5.5%. From year 6, ROE falls to 10% and growth to 3%, so the stable payout must rise to 1 − 3% ÷ 10% = 70%. Cost of equity 9%.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Year</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th></tr>
+      <tr><td>Book value at start</td><td class="num">40.00</td><td class="num">42.20</td><td class="num">44.52</td><td class="num">46.97</td><td class="num">49.55</td><td class="num">52.28</td></tr>
+      <tr><td>ROE</td><td class="num">11%</td><td class="num">11%</td><td class="num">11%</td><td class="num">11%</td><td class="num">11%</td><td class="num">10%</td></tr>
+      <tr><td>Earnings per share</td><td class="num">4.40</td><td class="num">4.64</td><td class="num">4.90</td><td class="num">5.17</td><td class="num">5.45</td><td class="num">5.23</td></tr>
+      <tr><td>Payout</td><td class="num">50%</td><td class="num">50%</td><td class="num">50%</td><td class="num">50%</td><td class="num">50%</td><td class="num">70%</td></tr>
+      <tr><td>Dividend per share</td><td class="num">2.20</td><td class="num">2.32</td><td class="num">2.45</td><td class="num">2.58</td><td class="num">2.73</td><td class="num">3.66</td></tr>
+    </table></div>
+    <div class="table-wrap"><table>
+      <tr><td>Present value of dividends, years 1–5</td><td class="num">€9.46</td></tr>
+      <tr><td>Terminal value in year 5: €3.66 ÷ (9% − 3%)</td><td class="num">€60.99</td></tr>
+      <tr><td>Present value of terminal value</td><td class="num">€39.64</td></tr>
+      <tr><td>Value per share</td><td class="num">€49.10</td></tr>
+      <tr><td>Implied price/book</td><td class="num">1.23x</td></tr>
+    </table></div>
+    <p>The same bank is valued with the <a href="residual-income.html#example">residual income model</a>, which gives exactly the same €49.10 but with most of the value recognised much earlier.</p>
+    <div class="callout">Earnings fall slightly in year 6 because ROE drops, yet the dividend rises because the payout must go up. Getting this transition right matters more than the exact growth rate.</div>
+
+    <h2 id="when">9 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Dividends track earning power: banks, insurers, utilities and other stable payers; minority stakes where the investor cannot change the payout.</div>
+      <div class="no"><b>Misleads when</b>The company pays out much less than it could, returns cash through buybacks, pays no dividend at all, or pays dividends it cannot afford.</div>
+    </div>
+
+    <h2 id="mistakes">10 · Common mistakes</h2>
+    <ul>
+      <li>Keeping the high-growth payout ratio in the stable period.</li>
+      <li>Stable growth above the long-run growth of the economy, or close to the cost of equity.</li>
+      <li>Ignoring buybacks when they are a large part of what shareholders receive.</li>
+      <li>Using the model for a company that hoards cash, then calling it overvalued.</li>
+      <li>Growth inconsistent with payout and ROE.</li>
+    </ul>
+
+    <h2 id="strategy">11 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> the dividend model is a cross-check for banks and insurers, next to residual income, and for stable payers among utilities and infrastructure. For industrial companies it is mainly used the way case 1 shows: to measure how much of the intrinsic value depends on cash the company does not pay out.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 13: dividend discount models, including the Gordon growth, two-stage, H-model and three-stage versions. Spreadsheets on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>J. Pinto, E. Henry, T. Robinson, J. Stowe, S. Wilcox, <em>Equity Asset Valuation</em>, 4th ed., CFA Institute Investment Series, Wiley, 2020: discounted dividend valuation.</li>
+      <li>M. J. Gordon, <em>The Investment, Financing, and Valuation of the Corporation</em>, Irwin, 1962.</li>
+      <li>R. J. Fuller, C.-C. Hsia, "A Simplified Common Stock Valuation Model", <em>Financial Analysts Journal</em> 40(5), 1984: the H-model.</li>
+    </ul>
+
+    <div class="pagenav"><a href="dcf-fcfe.html">← DCF – FCFE</a><a href="residual-income.html">Residual income →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

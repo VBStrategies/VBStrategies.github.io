@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Risk-adjusted NPV (rNPV)</title>
+  <meta name="description" content="Risk-adjusted NPV for drug pipelines: clinical success probabilities by phase, building the model, the discount rate, real options, and a worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>Risk-adjusted NPV (rNPV)</h1>
+    <p class="lead">Values a drug candidate by weighting each future cash flow with the probability that the drug survives to that point. The standard model for pharmaceutical and biotech pipelines.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Drug pipelines, staged R&amp;D projects</div>
+      <div><b>Main inputs</b>Phase probabilities, timeline, peak sales</div>
+      <div><b>Effort</b>Moderate per asset</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#odds">Success probabilities</a> · <a href="#build">Building the model</a> · <a href="#options">rNPV and options</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>A drug in clinical trials is a series of bets. Most candidates fail, and when one fails its future sales simply never happen. A standard NPV of the success case overvalues the drug enormously; raising the discount rate to compensate is crude and mixes two different kinds of risk.</p>
+    <p>The risk-adjusted NPV (rNPV) keeps them apart. Each future cash flow is multiplied by the probability that the drug will still be alive at that point, and then discounted at a normal cost of capital.</p>
+    <div class="formula">rNPV = Σ Probability of reaching year t × Cash flow<sub>t</sub> ÷ (1 + r)<sup>t</sup></div>
+
+    <h2 id="odds">2 · The probabilities</h2>
+    <p>The most widely cited source is the BIO, Informa Pharma Intelligence and QLS study of clinical development success rates for 2011–2020, covering 12,728 phase transitions:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Transition</th><th class="num">Success rate</th><th class="num">Chance of approval from this phase</th></tr>
+      <tr><td>Phase I → Phase II</td><td class="num">52.0%</td><td class="num">7.9%</td></tr>
+      <tr><td>Phase II → Phase III</td><td class="num">28.9%</td><td class="num">15.1%</td></tr>
+      <tr><td>Phase III → filing (NDA/BLA)</td><td class="num">57.8%</td><td class="num">52.4%</td></tr>
+      <tr><td>Filing → approval</td><td class="num">90.6%</td><td class="num">90.6%</td></tr>
+    </table></div>
+    <p>Phase II is the hardest step: fewer than three in ten candidates pass it. A drug entering Phase II has about a 15% chance of reaching the market (28.9% × 57.8% × 90.6%). The study also shows large differences by disease area and drug type, so averages should be replaced by the relevant category when it is known.</p>
+
+    <h2 id="build">3 · Building the model</h2>
+    <ul>
+      <li><strong>Timeline:</strong> the remaining phases, their length and cost, filing and launch year.</li>
+      <li><strong>Sales curve:</strong> patients, price and market share; a ramp-up over several years to peak sales, then a decline when the patent expires and generics or biosimilars enter.</li>
+      <li><strong>Margins:</strong> production cost, sales and marketing, royalties to licensors, tax.</li>
+      <li><strong>Probabilities:</strong> each cost is weighted by the chance of reaching the phase in which it is spent; each sales year by the overall chance of approval.</li>
+      <li><strong>Discount rate:</strong> a normal cost of capital for an established company in the sector, because the clinical risk is already in the probabilities. Using a 30–40% venture capital rate on top double counts it.</li>
+    </ul>
+    <p>A company with several candidates is valued as the sum of the rNPVs of its pipeline, plus marketed products at a normal DCF, minus central research and overhead costs. This is a <a href="sotp.html">sum of the parts</a> in which every part has its own probability.</p>
+
+    <h2 id="options">4 · rNPV and real options</h2>
+    <p>rNPV treats each phase as a yes-or-no outcome, but management also has choices: stop the programme after weak Phase II data, expand into a second indication, license it out. Those choices are options, and they add value that rNPV ignores. The <a href="real-options.html">real options page</a> shows how to value them; in practice rNPV is the standard, and options are used to argue about what it leaves out.</p>
+
+    <h2 id="example">5 · Worked example</h2>
+    <p>A fictional biotech, <strong>Helvion Bio</strong>, has one candidate entering Phase II. Assumptions: Phase II costs €30m a year for two years, Phase III €80m a year for three years, filing €10m in year 6, launch in year 7, peak sales €800m from year 11, patent expiry after year 16, operating margin 45%, tax 20%, cost of capital 9%.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Cash flows (present value)</th><th class="num">Probability</th><th class="num">Unrisked</th><th class="num">Risked</th></tr>
+      <tr><td>Years 1–2: Phase II costs</td><td class="num">100%</td><td class="num">(€53m)</td><td class="num">(€53m)</td></tr>
+      <tr><td>Years 3–5: Phase III costs</td><td class="num">28.9%</td><td class="num">(€170m)</td><td class="num">(€49m)</td></tr>
+      <tr><td>Year 6: filing</td><td class="num">16.7%</td><td class="num">(€6m)</td><td class="num">(€1m)</td></tr>
+      <tr><td>Years 7–18: profits after tax</td><td class="num">15.1%</td><td class="num">€842m</td><td class="num">€127m</td></tr>
+      <tr class="hl"><td>Total</td><td class="num"></td><td class="num">€613m</td><td class="num">€24m</td></tr>
+    </table></div>
+    <p>The success case is worth €613m; the risk-adjusted value is only €24m. Almost the whole difference is the 85% chance that the drug fails. And the value is not stable: if Phase II succeeds, the value at the end of year 2 jumps to about <strong>€317m</strong>, because the chance of approval rises from 15% to 52%. If it fails, the asset is worth nothing.</p>
+    <div class="callout">This is why biotech shares move by large amounts on trial results. The rNPV is not the value the company will have; it is the average of two very different outcomes.</div>
+
+    <h2 id="when">6 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Valuing drug candidates and pipelines; licensing deals; any project that passes through stages where it can fail.</div>
+      <div class="no"><b>Misleads when</b>Industry averages are used for a candidate with clearly better or worse odds; peak sales are optimistic; the discount rate is raised on top of the probabilities.</div>
+    </div>
+
+    <h2 id="mistakes">7 · Common mistakes</h2>
+    <ul>
+      <li>Double counting risk: probabilities and a venture capital discount rate together.</li>
+      <li>Weighting costs with the overall probability of approval instead of the probability of reaching each phase.</li>
+      <li>Forgetting patent expiry and the fall in sales afterwards.</li>
+      <li>Using the all-disease average when the specific disease area has very different odds.</li>
+      <li>Presenting rNPV as the likely outcome, when the real outcome is either much higher or zero.</li>
+    </ul>
+
+    <h2 id="strategy">8 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> rNPV is used in the health and life sciences pillar, together with a DCF for marketed products. For large pharmaceutical groups the pipeline is valued as a sum of rNPVs and added to the value of the existing business; for small biotechs, where one trial can decide everything, position sizing matters as much as the valuation.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>D. Thomas, D. Chancellor, A. Micklus, S. LaFever, M. Hay, S. Chaudhuri, R. Bowden, A. W. Lo, <a href="https://go.bio.org/rs/490-EHZ-999/images/ClinicalDevelopmentSuccessRates2011_2020.pdf"><em>Clinical Development Success Rates and Contributing Factors 2011–2020</em></a>, BIO, Informa Pharma Intelligence and QLS, February 2021.</li>
+      <li>J. J. Stewart, P. N. Allison, R. S. Johnson, "Putting a Price on Biotechnology", <em>Nature Biotechnology</em> 19, 2001.</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 28: the option to delay, applied to patents. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+    </ul>
+
+    <div class="pagenav"><a href="nav.html">← NAV</a><a href="lbo.html">LBO →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>

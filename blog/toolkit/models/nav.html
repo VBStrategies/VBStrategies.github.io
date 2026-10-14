@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Net asset value (NAV)</title>
+  <meta name="description" content="Net asset value for holdings, listed private equity and real estate: valuing each asset class, adjusted NAV, EPRA measures, holding costs, the discount to NAV and a worked example.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>Net asset value (NAV)</h1>
+    <p class="lead">Values a company as the sum of what its assets are worth, less everything that is owed or leaks away. The standard model for holdings, listed private equity and real estate companies.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Holdings, listed private equity, real estate</div>
+      <div><b>Main inputs</b>Asset values, debt, holding costs, leakage</div>
+      <div><b>Effort</b>Low to high: depends on private holdings</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#assets">Valuing the assets</a> · <a href="#versions">Versions</a> · <a href="#leakage">Holding costs and leakage</a> · <a href="#discount">Discount to NAV</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>For some companies the business <em>is</em> a portfolio of assets: an investment holding, a listed private equity firm, a real estate company. Their value is best measured by adding up what the assets are worth and subtracting what is owed. The result is the net asset value, NAV.</p>
+    <div class="formula">NAV = Market or fair value of assets − Debt − Other liabilities − Capitalised holding costs − Tax and carried interest leakage</div>
+    <p>The share price is then compared with NAV per share. Most holdings and listed private equity firms trade at a discount to NAV; a few trade at a premium.</p>
+
+    <h2 id="assets">2 · Valuing each kind of asset</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Asset</th><th>How it is valued</th><th>Watch out for</th></tr>
+      <tr><td>Listed stakes</td><td>Market price × number of shares</td><td>Reliable; check whether a large stake could be sold at that price</td></tr>
+      <tr><td>Unlisted (private) companies</td><td>Fair value under the IPEV Valuation Guidelines: usually multiples of comparable listed companies or recent transactions, sometimes DCF</td><td>Marks are estimates, updated quarterly or less often, and react to markets with a lag</td></tr>
+      <tr><td>Real estate</td><td>Independent appraisals, based on rents and yields</td><td>Appraisal yields can lag market yields when interest rates move</td></tr>
+      <tr><td>Cash and debt</td><td>Book value; debt at market value if very different</td><td>Include off-balance sheet commitments</td></tr>
+    </table></div>
+
+    <h2 id="versions">3 · The versions of NAV</h2>
+    <ul>
+      <li><strong>Reported NAV:</strong> what the company publishes. For private equity firms, the sum of the fund or portfolio marks.</li>
+      <li><strong>Adjusted NAV:</strong> the analyst's own version, re-marking unlisted holdings with current peer multiples and deducting costs the reported figure leaves out.</li>
+      <li><strong>Real estate (EPRA):</strong> since 2020 the European Public Real Estate Association recommends three measures: Net Reinstatement Value (NRV, the cost of rebuilding the company), Net Tangible Assets (NTA, the going concern view, the most widely used) and Net Disposal Value (NDV, as if the assets were sold, after taxes and with debt at fair value).</li>
+      <li><strong>Look-through NAV:</strong> for holdings of holdings, value each layer through to the operating assets.</li>
+    </ul>
+
+    <h2 id="leakage">4 · Holding costs, tax and carried interest</h2>
+    <p>Three items separate the value of the assets from what shareholders actually own:</p>
+    <ul>
+      <li><strong>Holding costs.</strong> Management, staff and listing costs continue for as long as the company exists. Capitalised as a perpetuity, annual costs of 0.5–1% of assets can be worth a large share of NAV.</li>
+      <li><strong>Taxes on sale.</strong> If assets were sold, capital gains tax may be due. Whether to deduct it depends on whether a sale is realistic.</li>
+      <li><strong>Carried interest and fees.</strong> In listed private equity, a share of the gains goes to managers, not shareholders.</li>
+    </ul>
+
+    <h2 id="discount">5 · The discount or premium to NAV</h2>
+    <div class="formula">Discount to NAV = 1 − Share price ÷ NAV per share</div>
+    <p>A discount is the market's way of deducting what the reported NAV leaves out or overstates. The usual reasons: holding costs, doubts about private marks, poor capital allocation, illiquidity, a controlling shareholder and lack of catalysts. A premium appears when investors expect the manager to keep creating value beyond the current assets. As with the conglomerate discount, a gap closes only with a catalyst: buybacks below NAV, asset sales that prove the marks, simplification or a wind-down.</p>
+
+    <h2 id="example">6 · Worked example</h2>
+    <p>A fictional listed investment company, <strong>Alpina Capital</strong>, with 50m shares trading at €44:</p>
+    <div class="table-wrap"><table>
+      <tr><th></th><th class="num">Reported marks</th><th class="num">Private marks −15%</th></tr>
+      <tr><td>Listed stakes at market price</td><td class="num">€1,200m</td><td class="num">€1,200m</td></tr>
+      <tr><td>Private holdings</td><td class="num">€2,000m</td><td class="num">€1,700m</td></tr>
+      <tr><td>Cash</td><td class="num">€300m</td><td class="num">€300m</td></tr>
+      <tr><td>− Debt</td><td class="num">(€400m)</td><td class="num">(€400m)</td></tr>
+      <tr><td>− Holding costs: €20m a year ÷ 8%</td><td class="num">(€250m)</td><td class="num">(€250m)</td></tr>
+      <tr><td>− Carried interest and taxes on gains</td><td class="num">(€100m)</td><td class="num">(€100m)</td></tr>
+      <tr><td>NAV</td><td class="num">€2,750m</td><td class="num">€2,450m</td></tr>
+      <tr><td>NAV per share</td><td class="num">€55.00</td><td class="num">€49.00</td></tr>
+      <tr><td>Discount at €44</td><td class="num">20%</td><td class="num">10%</td></tr>
+    </table></div>
+    <p>Without holding costs and carried interest, a quick NAV would be €3,100m or €62 per share, and the share would look 29% cheap. After them, the discount is 20%. If the private marks are 15% too high, a realistic risk when listed peers have fallen and the marks have not followed yet, the discount shrinks to 10%. The headline discount was mostly explained.</p>
+    <div class="callout">The first question about a discount to NAV is not "is it cheap?" but "which part of the NAV is the market not believing, and is it right?"</div>
+
+    <h2 id="when">7 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>The company's value lies in identifiable assets: holdings, listed private equity, real estate, closed-end funds, companies in run-off or liquidation.</div>
+      <div class="no"><b>Misleads when</b>Value comes from future activity, such as new funds a private equity manager will raise; private marks are stale; costs and leakage are left out.</div>
+    </div>
+
+    <h2 id="mistakes">8 · Common mistakes</h2>
+    <ul>
+      <li>Ignoring holding costs, which are permanent.</li>
+      <li>Accepting private marks without comparing them with current listed peer multiples.</li>
+      <li>Treating every discount as an opportunity, without a catalyst.</li>
+      <li>Valuing a private equity manager (which earns fees) the same way as a private equity fund (which owns assets).</li>
+      <li>Double counting: adding a listed stake at market value and also its dividends in a cash flow model.</li>
+    </ul>
+
+    <h2 id="strategy">9 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> NAV is the primary model for the private equity sleeve and for investment holdings. Every NAV is adjusted for holding costs and carried interest, and private marks are tested against listed peers before a discount is called an opportunity.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 16: cross holdings; ch. 26: valuing real estate. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>International Private Equity and Venture Capital Valuation (IPEV) Board, <em>IPEV Valuation Guidelines</em>: fair value of unlisted investments.</li>
+      <li>European Public Real Estate Association (EPRA), <em>Best Practices Recommendations</em>: the NRV, NTA and NDV measures.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: valuing companies with financial assets and non-operating items.</li>
+    </ul>
+
+    <div class="pagenav"><a href="sotp.html">← Sum of the parts</a><a href="rnpv.html">rNPV →</a></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>
