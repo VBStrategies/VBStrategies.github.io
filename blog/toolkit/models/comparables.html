@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VB Strategies — Trading comparables</title>
-  <meta name="description" content="How to value a company with trading comparables: choosing peers, choosing the multiple, and applying it, with a worked example.">
+  <meta name="description" content="A complete guide to valuing a company with trading comparables: peer selection, building the multiples, the fundamentals behind them, adjustments, a worked example and the common mistakes.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -26,80 +26,163 @@
     <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Relative valuation</div>
     <div class="kicker">Model · Relative valuation</div>
     <h1>Trading comparables</h1>
-    <p class="lead">Values a company by what the market pays for similar listed companies, scaled by a common measure such as EBITDA or earnings.</p>
+    <p class="lead">Values a company by what the market pays for similar listed companies, scaled by a common measure such as EBITDA or earnings. It is the most widely used valuation method in practice, and the easiest to use badly.</p>
     <div class="factbar">
       <div><b>Best for</b>Mature firms with many listed peers</div>
       <div><b>Main inputs</b>Peer prices, net debt, EBITDA, earnings, book value</div>
       <div><b>Effort</b>Hours, not days</div>
     </div>
 
-    <h2>1 · The formula</h2>
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#formula">Formula and the two families</a> · <a href="#peers">Choosing peers</a> · <a href="#build">Building the multiples</a> · <a href="#which">Which multiple</a> · <a href="#drivers">What drives a multiple</a> · <a href="#adjust">Adjusting for differences</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>Comparables rest on a simple principle: similar assets should sell for similar prices. If the market values a group of listed engineering companies at around ten times their EBITDA, a similar engineering company should be worth roughly the same multiple of its own EBITDA.</p>
+    <p>The method does not ask what a company is worth in absolute terms. It asks what it is worth <em>relative to how the market prices its peers today</em>. That is both its strength and its weakness. It is grounded in real prices that investors are paying, but it inherits whatever mood the market is in. If the whole sector is overpriced, comparables will tell you the target is fairly valued at an inflated price.</p>
+    <p>Practitioners therefore treat comparables as a market check on intrinsic value, not a replacement for it. Investment bankers routinely present them alongside a DCF, precedent transactions and, where relevant, an LBO analysis, and look for the range where the methods agree.</p>
+
+    <h2 id="formula">2 · The formula and the two families</h2>
     <div class="formula">Value of target = Peer multiple × Target's metric<br><span class="side-note">for example: Enterprise value = median peer EV/EBITDA × target EBITDA</span></div>
-    <p>A multiple standardises price so companies of different size can be compared. There are two families, and they must never be mixed:</p>
+    <p>A multiple standardises price so that companies of different size can be compared. There are two families, and the numerator and denominator must always belong to the same one:</p>
     <div class="table-wrap"><table>
       <tr><th>Family</th><th>Numerator</th><th>Pairs with</th><th>Examples</th></tr>
-      <tr><td>Enterprise value multiples</td><td>Enterprise value (equity + net debt + leases + minorities)</td><td>Metrics before interest, available to all capital providers</td><td>EV/EBITDA, EV/EBIT, EV/Sales</td></tr>
-      <tr><td>Equity multiples</td><td>Market capitalisation</td><td>Metrics after interest, available to shareholders only</td><td>P/E, P/B, dividend yield</td></tr>
+      <tr><td>Enterprise value multiples</td><td>Enterprise value: the claim of all capital providers</td><td>Metrics before interest, belonging to debt and equity holders alike</td><td>EV/EBITDA, EV/EBIT, EV/Sales, EV/invested capital</td></tr>
+      <tr><td>Equity multiples</td><td>Market capitalisation: the claim of shareholders only</td><td>Metrics after interest, belonging to shareholders alone</td><td>P/E, P/B, price/cash flow, dividend yield</td></tr>
     </table></div>
-    <p>Mixing them, for example dividing enterprise value by net income, gives a number that means nothing: the numerator includes debt holders, the denominator does not.</p>
+    <p>Mixing them breaks the logic. Enterprise value divided by net income compares the value of debt and equity with a profit that has already paid the debt holders. A highly indebted company would look cheap for no real reason.</p>
+    <p>Enterprise value multiples are usually preferred when peers have different levels of debt, because they look at the business before financing choices. Equity multiples are natural for banks and insurers, where debt is part of the operating business rather than a financing decision.</p>
 
-    <h2>2 · Step by step</h2>
+    <h2 id="peers">3 · Choosing peers</h2>
+    <p>Peer selection matters more than any calculation that follows. A perfect formula applied to the wrong peers gives a precise wrong answer.</p>
+    <p>A good peer is similar in what actually determines value: how the company makes money, how fast it grows, how risky it is and how much it must reinvest. The usual order of criteria:</p>
     <ol>
-      <li><strong>Choose 5–10 peers.</strong> Same business model first, then similar growth, risk and size. Geography matters less than business model: a European and a US maker of the same product are often better peers than two European firms in different businesses.</li>
-      <li><strong>Choose the multiple that fits the business</strong> (table below).</li>
-      <li><strong>Compute every peer's multiple on the same basis.</strong> Same period (trailing twelve months or next year's forecast), same accounting treatment, same currency.</li>
-      <li><strong>Describe the distribution.</strong> Use the median, not the average, and look at the range. One extreme value can move an average a lot and a median hardly at all.</li>
-      <li><strong>Explain the differences.</strong> A peer with a higher multiple usually has higher growth, lower risk or higher margins. If the target differs on those, its multiple should differ too.</li>
-      <li><strong>Apply to the target and bridge to equity.</strong> Enterprise value minus net debt, leases and minorities gives equity value; divide by diluted shares for a value per share.</li>
+      <li><strong>Business model and end markets.</strong> Same products or services, sold to the same kinds of customers.</li>
+      <li><strong>Growth profile.</strong> A company growing at 15% a year should not be priced off peers growing at 3%.</li>
+      <li><strong>Profitability.</strong> Operating margins and returns on capital in a similar range.</li>
+      <li><strong>Risk.</strong> Similar cyclicality, customer concentration and, for equity multiples, similar leverage.</li>
+      <li><strong>Size and liquidity.</strong> Very small companies often trade at a discount for liquidity and higher risk.</li>
+      <li><strong>Geography and listing.</strong> Matters less than business model, but country risk, tax and accounting standards can differ.</li>
     </ol>
+    <p><strong>How many?</strong> Typically five to ten. Fewer makes the median fragile; more usually means the definition of "similar" has been stretched. If only two or three true peers exist, it is better to say so and rely more on intrinsic value.</p>
+    <p><strong>Where to find them:</strong> the competitors named in the target's annual report, the holdings of sector and thematic ETFs, industry classifications such as GICS, and screeners filtering by sector, region and size.</p>
+    <div class="callout">A useful test: if you cannot explain in one sentence why a company is a peer, it probably is not one.</div>
 
-    <h3 style="margin-top:18px">Which multiple for which business</h3>
+    <h2 id="build">4 · Building the multiples correctly</h2>
+    <p>Most errors in comparables are not in the choice of multiple but in how the numbers behind it are assembled. Every peer must be measured the same way.</p>
+    <h3>Enterprise value</h3>
+    <div class="formula">EV = Market capitalisation (diluted) + Debt + Lease liabilities + Minority interests + Preferred shares − Cash and liquid investments − Non-operating assets</div>
+    <ul>
+      <li><strong>Diluted shares.</strong> Include options and convertibles that are in the money. The treasury stock method assumes option proceeds are used to buy back shares: additional shares = options × (1 − strike ÷ share price).</li>
+      <li><strong>Leases.</strong> Under IFRS 16, lease liabilities sit on the balance sheet and lease costs are excluded from EBITDA. If EBITDA excludes lease costs, enterprise value must include lease liabilities, and the reverse.</li>
+      <li><strong>Minority interests.</strong> If the company consolidates a subsidiary it does not fully own, EBITDA includes 100% of that subsidiary, so enterprise value must include the minority's share.</li>
+      <li><strong>Associates and non-operating assets.</strong> Stakes accounted for by the equity method are not in EBITDA, so their value is deducted from enterprise value.</li>
+    </ul>
+    <h3>The metric</h3>
+    <ul>
+      <li><strong>Same period.</strong> Either last twelve months (LTM) for all peers, or next year's forecast for all. Forward multiples are more common for investment decisions because price reflects expectations.</li>
+      <li><strong>LTM calculation.</strong> LTM = last full year + current year-to-date − prior year same period.</li>
+      <li><strong>Calendarisation.</strong> If a peer's financial year ends in March, convert to a calendar year: calendar year = (3/12) × FY ending March this year + (9/12) × FY ending March next year.</li>
+      <li><strong>Clean the numbers.</strong> Remove one-off items such as restructuring charges, impairments or disposal gains, and do it the same way for every company.</li>
+      <li><strong>Same currency.</strong> Convert price and metric at consistent rates, or use multiples, which are currency-neutral as long as numerator and denominator share a currency.</li>
+    </ul>
+
+    <h2 id="which">5 · Which multiple for which business</h2>
     <div class="table-wrap"><table>
-      <tr><th>Multiple</th><th>Use for</th><th>Driven mainly by</th></tr>
-      <tr><td>EV/EBITDA</td><td>Industrials, defence, most capital-intensive firms</td><td>Reinvestment needs, tax rate, risk, growth</td></tr>
-      <tr><td>EV/EBIT</td><td>Firms with very different depreciation</td><td>As above, after the cost of replacing assets</td></tr>
-      <tr><td>P/E</td><td>Stable, profitable firms with similar debt</td><td>Growth, payout ratio, risk</td></tr>
-      <tr><td>P/B</td><td>Banks and insurers</td><td>Return on equity versus cost of equity</td></tr>
-      <tr><td>EV/Sales</td><td>Loss-making or early-stage firms</td><td>Operating margin the firm can reach</td></tr>
+      <tr><th>Multiple</th><th>Use for</th><th>Avoid when</th></tr>
+      <tr><td>EV/EBITDA</td><td>Industrials, defence, most capital-intensive firms</td><td>Depreciation differs a lot between peers; leases treated differently</td></tr>
+      <tr><td>EV/EBIT (or EBITA)</td><td>Firms whose asset intensity differs</td><td>Large acquisition-related amortisation distorts EBIT</td></tr>
+      <tr><td>P/E</td><td>Stable, profitable firms with similar leverage and tax</td><td>Earnings are negative, volatile or full of one-offs</td></tr>
+      <tr><td>P/B</td><td>Banks and insurers</td><td>Book value does not reflect the real assets (software, brands)</td></tr>
+      <tr><td>EV/Sales</td><td>Loss-making or early-stage firms</td><td>Margins differ: equal sales can hide very different profits</td></tr>
+      <tr><td>Price/NAV</td><td>Holdings, listed private equity, real estate</td><td>NAV is stale or based on optimistic marks</td></tr>
+      <tr><td>Sector-specific</td><td>EV/ARR in software, P/AUM in asset management, EV/production capacity in commodities</td><td>Used without checking that the unit really drives value</td></tr>
     </table></div>
-    <div class="callout">Every multiple hides a discounted cash flow model. The third column lists its "companion variable": a peer can only deserve a higher multiple if it is better on that driver. This is why comparables and DCF are two views of the same thing, not rival methods.</div>
+    <p>Using two or three multiples is common. When they point in the same direction, confidence rises. When they diverge, the divergence usually reveals something about debt, tax or margins that is worth understanding.</p>
 
-    <h2>3 · When to use it, and when it misleads</h2>
+    <h2 id="drivers">6 · What drives a multiple</h2>
+    <p>Every multiple is a compressed discounted cash flow model. Rearranging a simple constant-growth model shows which fundamentals each multiple depends on. Damodaran calls the most important of these the "companion variable": the one fundamental a multiple is most sensitive to.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Multiple</th><th>Derived from a constant-growth model</th><th>Companion variable</th></tr>
+      <tr><td>P/E (forward)</td><td>payout ratio ÷ (cost of equity − growth)</td><td>Expected growth</td></tr>
+      <tr><td>P/B</td><td>(ROE − growth) ÷ (cost of equity − growth)</td><td>Return on equity</td></tr>
+      <tr><td>EV/Sales</td><td>after-tax operating margin × (1 − reinvestment rate) ÷ (WACC − growth)</td><td>Operating margin</td></tr>
+      <tr><td>EV/EBITDA</td><td>Rises with lower tax, lower reinvestment needs, lower WACC, higher growth</td><td>Reinvestment needs</td></tr>
+    </table></div>
+    <p>This is the most useful idea on this page. A peer trading at a higher multiple is not "expensive" by default; it may simply have higher growth, higher returns or lower risk. A target only deserves the same multiple as its peers if it is similar on the companion variable. Comparables and DCF are therefore not rival methods but two views of the same economics.</p>
+
+    <h2 id="adjust">7 · Adjusting for differences</h2>
+    <p>Real peers are never identical. There are four ways to deal with the differences, from simplest to most rigorous:</p>
+    <ul>
+      <li><strong>Judgement within the range.</strong> Place the target in the upper or lower part of the peer range depending on whether its growth, margins or risk are better or worse than the median peer. Simple, but the argument must be written down.</li>
+      <li><strong>Narrower peer group.</strong> Keep only the peers closest on the companion variable. Fewer peers, but more comparable ones.</li>
+      <li><strong>Growth-adjusted multiples.</strong> The PEG ratio divides P/E by expected growth in percent. It corrects for growth crudely, assuming the relationship is linear, which it is not.</li>
+      <li><strong>Sector regression.</strong> Regress the multiple on its drivers across all companies in the sector, for example EV/EBITDA on expected growth and margin. The regression gives a "fair" multiple for any combination of fundamentals, which can be applied to the target. This is Damodaran's preferred approach when enough companies are available.</li>
+    </ul>
+    <p>One more adjustment concerns <strong>control</strong>. Trading comparables price small, minority stakes in companies. An acquirer buying the whole company usually pays a control premium, which is why precedent transactions typically show higher multiples than trading comparables.</p>
+
+    <h2 id="example">8 · Worked example</h2>
+    <p>A fictional industrial company, <strong>Nordwerk AG</strong>: EBITDA of €400m, net income of €220m, 100m diluted shares, debt of €700m, lease liabilities of €80m and cash of €180m, so net debt including leases is €600m. Expected growth is 6% a year, in line with peers.</p>
+    <h3>Step 1: the peer table</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Peer (fictional)</th><th class="num">EV/EBITDA</th><th class="num">P/E</th><th class="num">EBITDA margin</th><th>Note</th></tr>
+      <tr><td>Peer A</td><td class="num">8.5x</td><td class="num">13.0x</td><td class="num">14%</td><td>Slower growth</td></tr>
+      <tr><td>Peer B</td><td class="num">9.2x</td><td class="num">14.5x</td><td class="num">16%</td><td></td></tr>
+      <tr><td>Peer C</td><td class="num">10.1x</td><td class="num">15.0x</td><td class="num">17%</td><td></td></tr>
+      <tr><td>Peer D</td><td class="num">10.8x</td><td class="num">16.0x</td><td class="num">18%</td><td></td></tr>
+      <tr><td>Peer E</td><td class="num">11.5x</td><td class="num">17.5x</td><td class="num">21%</td><td>Higher margins</td></tr>
+      <tr><td>Peer F</td><td class="num">14.0x</td><td class="num">24.0x</td><td class="num">19%</td><td>Takeover speculation: outlier</td></tr>
+      <tr class="hl"><td>Median</td><td class="num">10.45x</td><td class="num">15.5x</td><td class="num">17.5%</td><td>Average: 10.7x and 16.7x</td></tr>
+    </table></div>
+    <p>The median ignores Peer F, whose price includes a possible takeover premium. The average would be pulled up by it. Nordwerk's own EBITDA margin is 17%, close to the median, so there is no obvious reason to place it far from the middle of the range.</p>
+    <h3>Step 2: apply the multiples</h3>
+    <div class="table-wrap"><table>
+      <tr><th></th><th class="num">Low (25th pct.)</th><th class="num">Median</th><th class="num">High (75th pct.)</th></tr>
+      <tr><td>EV/EBITDA multiple</td><td class="num">9.4x</td><td class="num">10.45x</td><td class="num">11.3x</td></tr>
+      <tr><td>Enterprise value (× €400m)</td><td class="num">€3,770m</td><td class="num">€4,180m</td><td class="num">€4,530m</td></tr>
+      <tr><td>Less net debt incl. leases</td><td class="num">(€600m)</td><td class="num">(€600m)</td><td class="num">(€600m)</td></tr>
+      <tr><td>Equity value</td><td class="num">€3,170m</td><td class="num">€3,580m</td><td class="num">€3,930m</td></tr>
+      <tr class="hl"><td>Per share (÷ 100m)</td><td class="num">€31.70</td><td class="num">€35.80</td><td class="num">€39.30</td></tr>
+    </table></div>
+    <h3>Step 3: cross-check with P/E</h3>
+    <p>15.5 × €220m net income = €3,410m equity value, or <strong>€34.10 per share</strong>. The two routes agree within 5%, which is reassuring. A large gap would point to a difference in debt, interest cost or tax between Nordwerk and its peers, since P/E is affected by all three and EV/EBITDA by none.</p>
+    <h3>Step 4: test the sensitivity to peer choice</h3>
+    <p>Dropping Peer F changes the median EV/EBITDA from 10.45x to 10.1x and the value per share to €34.40. Dropping Peer A instead moves it to 10.8x and €37.20. The result is reasonably robust, but the exercise shows how much a single peer can move the answer.</p>
+    <div class="callout">Result: a comparables range of roughly €32–39 per share, centred around €35. On a football field this becomes one bar, to be set against the DCF and other methods.</div>
+
+    <h2 id="when">9 · When to use it, and when it misleads</h2>
     <div class="two">
-      <div class="yes"><b>Use when</b>Several genuinely comparable listed peers exist; you need a market check on a DCF; you need a quick first estimate before a full model.</div>
-      <div class="no"><b>Misleads when</b>The whole sector is over- or undervalued (you inherit the market's mistake); peers differ in growth, leverage or accounting; the target has no real peers.</div>
+      <div class="yes"><b>Use when</b>Several genuinely comparable listed peers exist; you need a market check on a DCF; you need a quick first estimate before building a full model; the market for the sector is liquid and well followed.</div>
+      <div class="no"><b>Misleads when</b>The whole sector is over- or undervalued (you inherit the market's mistake); peers differ in growth, leverage or accounting; the target has no real peers; earnings are temporarily depressed or inflated.</div>
     </div>
-    <p style="margin-top:12px"><strong>European pitfalls to watch:</strong> since IFRS 16, leases are debt and EBITDA excludes lease costs, so peers reporting under US GAAP are not directly comparable; companies report in different currencies and some calendarise their financial year differently.</p>
 
-    <h2>4 · Worked example</h2>
-    <p>A fictional industrial company, <strong>Nordwerk AG</strong>, with EBITDA of €400m, net income of €220m, net debt of €600m and 100m diluted shares. Six listed peers (fictional) trade at:</p>
-    <div class="table-wrap"><table>
-      <tr><th>Peer</th><th class="num">EV/EBITDA</th><th class="num">P/E</th><th>Note</th></tr>
-      <tr><td>Peer A</td><td class="num">8.5x</td><td class="num">13.0x</td><td>Slower growth</td></tr>
-      <tr><td>Peer B</td><td class="num">9.2x</td><td class="num">14.5x</td><td></td></tr>
-      <tr><td>Peer C</td><td class="num">10.1x</td><td class="num">15.0x</td><td></td></tr>
-      <tr><td>Peer D</td><td class="num">10.8x</td><td class="num">16.0x</td><td></td></tr>
-      <tr><td>Peer E</td><td class="num">11.5x</td><td class="num">17.5x</td><td>Higher margins</td></tr>
-      <tr><td>Peer F</td><td class="num">14.0x</td><td class="num">24.0x</td><td>Takeover speculation: outlier</td></tr>
-      <tr class="hl"><td>Median</td><td class="num">10.45x</td><td class="num">15.5x</td><td>Average would be 10.7x and 16.7x</td></tr>
-    </table></div>
-    <p><strong>EV/EBITDA route.</strong> 10.45 × €400m = €4,180m enterprise value. Minus €600m net debt = €3,580m equity value, or <strong>€35.80 per share</strong>. Using the interquartile range of peer multiples (9.4x–11.3x) gives €31.70–39.30 per share.</p>
-    <p><strong>P/E cross-check.</strong> 15.5 × €220m = €3,410m equity value, or <strong>€34.10 per share</strong>. Close to the EV/EBITDA result, which is reassuring; a large gap would point to a difference in debt or tax between Nordwerk and its peers.</p>
-    <div class="callout">Result: a range of roughly €32–39 per share, centred around €35. Note how Peer F would pull an average up: the median ignores it, which is exactly why it is used.</div>
+    <h2 id="mistakes">10 · Common mistakes</h2>
+    <ul>
+      <li>Mixing enterprise value and equity measures in one multiple.</li>
+      <li>Comparing trailing multiples for some peers with forward multiples for others.</li>
+      <li>Using the average when one outlier dominates it.</li>
+      <li>Forgetting leases, minorities or associates in the enterprise value bridge.</li>
+      <li>Not cleaning one-off items, or cleaning them for the target but not for the peers.</li>
+      <li>Calling a company "cheap" because it trades below peers, without checking whether it has lower growth or higher risk.</li>
+      <li>Treating the result as a point estimate instead of a range.</li>
+    </ul>
 
-    <h2>5 · Where it fits in the strategy</h2>
+    <h2 id="strategy">11 · Where it fits in the strategy</h2>
     <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a>, comparables are the standard cross-check for every company, never the only method:</p>
     <ul>
       <li><strong>Security and defence, industry and infrastructure, energy:</strong> EV/EBITDA against European peers, alongside a DCF.</li>
-      <li><strong>Technology and chips:</strong> EV/EBIT or P/E, with care for very different growth rates.</li>
-      <li><strong>Health and life sciences:</strong> P/E and EV/EBITDA for established firms; pipelines need rNPV.</li>
-      <li><strong>Private equity sleeve:</strong> price to net asset value against other listed private equity firms.</li>
+      <li><strong>Technology and chips:</strong> EV/EBIT or P/E, with care for very different growth rates; a sector regression on growth is often needed.</li>
+      <li><strong>Health and life sciences:</strong> P/E and EV/EBITDA for established companies; drug pipelines need rNPV.</li>
+      <li><strong>Private equity sleeve:</strong> price to net asset value against other listed private equity firms and holdings.</li>
     </ul>
 
-    <h2>6 · Sources</h2>
+    <h2 id="sources">Sources</h2>
     <ul>
-      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., ch. 17–20 (relative valuation, earnings, book value and revenue multiples). Companion slides and industry multiple datasets: <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
-      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., ch. 2, "Corporate Valuation Overview".</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 17–20: relative valuation, earnings, book value and revenue multiples. Companion slides and industry multiple datasets on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014, ch. 2: corporate valuation overview and the efficient markets approach.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: the chapter on using multiples.</li>
+      <li>J. Rosenbaum, J. Pearl, <em>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</em>, 3rd ed., Wiley, 2020, ch. 1: comparable companies analysis.</li>
     </ul>
 
     <div class="pagenav"><a href="../index.html">← Toolkit</a><span class="side-note">Next: Precedent transactions (coming soon)</span></div>
