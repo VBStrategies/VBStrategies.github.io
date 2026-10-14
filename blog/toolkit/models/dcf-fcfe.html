@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — DCF: free cash flow to equity</title>
+  <meta name="description" content="How to value equity directly with free cash flow to equity: the definition, the role of debt, when to prefer it over FCFF, a worked example that reconciles both methods, and the common mistakes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Intrinsic value</div>
+    <div class="kicker">Model · Intrinsic value</div>
+    <h1>DCF: free cash flow to equity</h1>
+    <p class="lead">Values the shareholders' stake directly, as the present value of the cash left for them after the business has reinvested and the lenders have been served. It is discounted at the cost of equity, not the WACC.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Stable leverage, financial firms, minority equity stakes</div>
+      <div><b>Main inputs</b>Net income, reinvestment, net borrowing, cost of equity</div>
+      <div><b>Effort</b>As FCFF, plus a debt forecast</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#formula">The formula</a> · <a href="#debt">The role of debt</a> · <a href="#vs">FCFE or FCFF?</a> · <a href="#dividends">FCFE and dividends</a> · <a href="#terminal">Terminal value</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>The <a href="dcf-fcff.html">FCFF model</a> values the whole business and subtracts debt at the end. The FCFE model takes the opposite route: it subtracts the claims of lenders year by year, from interest payments to new borrowing and repayments, and values only what is left for shareholders.</p>
+    <p>Done consistently, both routes should arrive at roughly the same equity value. In practice they differ when the assumptions about debt differ, and that difference is often where the most useful questions hide.</p>
+
+    <h2 id="formula">2 · The formula</h2>
+    <div class="formula">FCFE = Net income + Depreciation − Capital expenditure − Increase in working capital + (New debt issued − Debt repaid)</div>
+    <p>or, starting from free cash flow to the firm:</p>
+    <div class="formula">FCFE = FCFF − Interest × (1 − tax rate) + Net borrowing</div>
+    <div class="formula">Equity value = Σ FCFE<sub>t</sub> ÷ (1 + cost of equity)<sup>t</sup> + Terminal value of equity ÷ (1 + cost of equity)<sup>n</sup> + Cash not used in operations</div>
+    <p>Because the cash flows already belong to shareholders, the discount rate must be the cost of equity. Discounting FCFE at the WACC would mix a return for lenders into a cash flow lenders no longer share in.</p>
+
+    <h2 id="debt">3 · The role of debt</h2>
+    <p>The term that makes FCFE tricky is net borrowing. Borrowing more raises FCFE today, because the company spends borrowed money instead of shareholders' money, but it raises interest and repayments later. A model in which the company borrows heavily every year can show an attractive FCFE for years while quietly building up risk.</p>
+    <p>The standard way to keep this honest is to assume a <strong>target debt ratio</strong>: the company finances a fixed share δ of its net reinvestment with debt. Damodaran writes FCFE in this form:</p>
+    <div class="formula">FCFE = Net income − (1 − δ) × (Capital expenditure − Depreciation) − (1 − δ) × Increase in working capital</div>
+    <p>With a stable debt ratio, debt grows at the same rate as the business, and the cost of equity stays consistent with the leverage assumed. If the debt ratio is going to change a lot, for example after an acquisition or a leveraged buyout, neither FCFE with a single cost of equity nor FCFF with a single WACC is ideal; the <em>APV</em> model handles that case better.</p>
+
+    <h2 id="vs">4 · FCFE or FCFF?</h2>
+    <div class="table-wrap"><table>
+      <tr><th></th><th>FCFF</th><th>FCFE</th></tr>
+      <tr><td>Values</td><td>The whole business, then subtracts debt</td><td>Equity directly</td></tr>
+      <tr><td>Discount rate</td><td>WACC</td><td>Cost of equity</td></tr>
+      <tr><td>Needs a debt forecast</td><td>No, only target weights in the WACC</td><td>Yes: interest, borrowing, repayments</td></tr>
+      <tr><td>Best when</td><td>Debt changes over time; most operating companies</td><td>Leverage is stable; banks and insurers; valuing a minority equity stake</td></tr>
+      <tr><td>Main risk</td><td>WACC weights inconsistent with the resulting values</td><td>Net borrowing that flatters cash flow</td></tr>
+    </table></div>
+    <p>For banks and insurers, FCFF hardly makes sense: debt is raw material, deposits are part of operations, and "capital expenditure" and "working capital" are not well defined. Equity-based models, FCFE, dividend discount and residual income, are the natural choice there.</p>
+
+    <h2 id="dividends">5 · FCFE and dividends</h2>
+    <p>FCFE is sometimes called <em>potential dividends</em>: the cash a company could pay out without changing its debt policy or running down its operations. Comparing FCFE with what the company actually pays out, as dividends plus buybacks, is informative:</p>
+    <ul>
+      <li><strong>Pays out much less than FCFE:</strong> cash builds up. Shareholders must trust management to use it well; a dividend model would undervalue the company.</li>
+      <li><strong>Pays out more than FCFE:</strong> the payout is funded by borrowing or by cutting investment, which cannot last.</li>
+      <li><strong>Pays out about its FCFE:</strong> FCFE and the <em>dividend discount model</em> give similar values.</li>
+    </ul>
+
+    <h2 id="terminal">6 · Terminal value</h2>
+    <div class="formula">Terminal value of equity<sub>n</sub> = FCFE<sub>n+1</sub> ÷ (Cost of equity − stable growth)</div>
+    <p>The same rules apply as for FCFF: stable growth no higher than long-run nominal growth, reinvestment consistent with growth, and in the terminal period a cost of equity that reflects a mature firm with a sustainable debt ratio. Net borrowing in the terminal period should simply keep debt growing at the stable growth rate.</p>
+
+    <h2 id="example">7 · Worked example</h2>
+    <p>The same fictional <strong>Nordwerk AG</strong> as on the <a href="../inputs.html#example">inputs page</a>, in stable growth of 3%: EBIT €300m, tax 25%, gross debt including leases €780m at 4%, cash €180m, net reinvestment €50m, cost of equity 8.26%, 100m shares. Debt grows with the business, so it rises by 3% a year.</p>
+    <h3>Step 1: from EBIT to FCFE (€m)</h3>
+    <div class="table-wrap"><table>
+      <tr><td>EBIT</td><td class="num">300.0</td></tr>
+      <tr><td>− Interest (4% × €780m)</td><td class="num">(31.2)</td></tr>
+      <tr><td>= Profit before tax</td><td class="num">268.8</td></tr>
+      <tr><td>− Tax at 25%</td><td class="num">(67.2)</td></tr>
+      <tr><td>= Net income</td><td class="num">201.6</td></tr>
+      <tr><td>− Net reinvestment (capex − depreciation + working capital)</td><td class="num">(50.0)</td></tr>
+      <tr><td>+ Net borrowing (3% × €780m)</td><td class="num">23.4</td></tr>
+      <tr class="hl"><td>FCFE</td><td class="num">175.0</td></tr>
+    </table></div>
+    <p>FCFE happens to equal FCFF (€175m) here, because the after-tax interest cost (4% × 0.75 = 3% of debt) is exactly offset by new borrowing at the 3% growth rate. That is a coincidence of the numbers, not a rule.</p>
+    <h3>Step 2: value the equity</h3>
+    <div class="table-wrap"><table>
+      <tr><td>Present value of FCFE: €175.0m × 1.03 ÷ (8.26% − 3.0%)</td><td class="num">€3,427m</td></tr>
+      <tr><td>+ Cash not used in operations</td><td class="num">€180m</td></tr>
+      <tr class="hl"><td>Equity value</td><td class="num">€3,607m</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="num">€36.10</td></tr>
+    </table></div>
+    <p>Cash is added separately because its interest income was left out of net income; counting both would count the cash twice.</p>
+    <h3>Step 3: reconcile with FCFF</h3>
+    <p>The FCFF route on the inputs page gave <strong>€35.90</strong> per share; FCFE gives <strong>€36.10</strong>, a difference of under 1%. The small gap comes from the capital structure: the WACC used equity worth €3,580m to set its weights, while the FCFE model produces €3,607m. Repeating both calculations until the values used for the weights equal the values produced, a few iterations, brings the two methods together at about €35.70–36.10.</p>
+    <div class="callout">When FCFE and FCFF disagree by more than a few percent, the cause is almost always an inconsistent debt assumption: different leverage in the cost of equity, the WACC and the borrowing forecast.</div>
+
+    <h2 id="when">8 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Leverage is stable or follows a clear target; valuing banks and insurers; valuing a minority stake where the payout policy matters.</div>
+      <div class="no"><b>Misleads when</b>Borrowing is forecast to rise sharply; debt is about to be restructured; FCFE is negative for years and the model hides how the gap is financed.</div>
+    </div>
+
+    <h2 id="mistakes">9 · Common mistakes</h2>
+    <ul>
+      <li>Discounting FCFE at the WACC.</li>
+      <li>Forecasting large net borrowing every year without the matching interest and repayments.</li>
+      <li>Using a cost of equity based on today's leverage while the forecast changes it.</li>
+      <li>Including interest income on cash in net income and then adding the cash again.</li>
+      <li>Treating FCFE as what will be paid out, when the company may retain it.</li>
+    </ul>
+
+    <h2 id="strategy">10 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> FCFE is the cross-check to FCFF for companies with stable leverage, and a primary model for any bank or insurer in the universe, alongside residual income. A large gap between the two DCF routes is treated as a sign to revisit the debt assumptions before the result is used.</p>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 14: free cash flow to equity discount models; ch. 21: valuing financial services firms. Examples and spreadsheets on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>J. Pinto, E. Henry, T. Robinson, J. Stowe, S. Wilcox, <em>Equity Asset Valuation</em>, 4th ed., CFA Institute Investment Series, Wiley, 2020: free cash flow valuation.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: alternatives to enterprise DCF, including the equity cash flow approach.</li>
+    </ul>
+
+    <div class="pagenav"><a href="dcf-fcff.html">← DCF – FCFF</a><span class="side-note">Next: Dividend discount (coming soon)</span></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>
