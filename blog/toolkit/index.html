@@ -57,6 +57,44 @@
       <tr data-type="industrial holding"><td>Changing debt (buyout, recapitalisation)</td><td><span class="m main">APV</span></td><td><span class="m">LBO</span></td></tr>
     </table></div>
 
+    <h3 style="margin-top:20px">Where this table comes from</h3>
+    <div class="prose">
+      <p>The table is a synthesis, not one author's rule. The main valuation references agree on the logic but weigh the methods differently:</p>
+      <ul>
+        <li><strong>Damodaran</strong> picks the model by asking what is measurable and stable: are cash flows positive and predictable, is the firm's debt changing, are its assets better valued as separate parts, and where is it in its life cycle?</li>
+        <li><strong>The CFA Institute curriculum</strong> (Pinto et al.) gives explicit conditions: dividend discount models when dividends track profitability; free cash flow models when dividends differ from cash flow or a controlling stake is valued; residual income when there are no dividends, free cash flow is negative or unpredictable, and accounting is transparent.</li>
+        <li><strong>McKinsey</strong> (Koller, Goedhart, Wessels) treats the enterprise DCF, or its equivalent economic profit model, as the core method for almost every company, with multiples as a check rather than a separate answer.</li>
+        <li><strong>Investment banking practice</strong> (Rosenbaum and Pearl) uses four standard methods side by side: comparable companies, precedent transactions, DCF and LBO analysis, shown together on a football field.</li>
+      </ul>
+      <p>Where they differ is mostly in emphasis. Academic and consulting texts start from intrinsic value; banking practice gives the market-based methods more weight because deals are priced against them. This toolkit follows the intrinsic-first view for investment decisions and uses the market-based methods as a test.</p>
+    </div>
+
+    <h3 style="margin-top:20px">Other ways to choose a model</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Lens</th><th>The question</th><th>What it points to</th></tr>
+      <tr><td>Life cycle</td><td>Is the firm young, growing, mature or declining?</td><td>Young: DCF from target margins, EV/Sales · Growth: DCF, PEG · Mature: DCF, EV/EBITDA, DDM · Decline: liquidation value, NAV</td></tr>
+      <tr><td>Purpose</td><td>Minority investment, takeover, or a lender's view?</td><td>Minority: trading comparables, DDM · Takeover: transactions, FCFF/APV, LBO · Lender: downside cases, asset values</td></tr>
+      <tr><td>Data available</td><td>Are there reliable forecasts, listed peers, market prices for the assets?</td><td>Good forecasts: DCF · Many peers: comparables · Marked assets: NAV</td></tr>
+      <tr><td>What creates value</td><td>Cash flows, the balance sheet, or options on the future?</td><td>Cash flows: DCF family · Balance sheet: residual income, NAV · Options: real options, rNPV</td></tr>
+    </table></div>
+
+    <h3 style="margin-top:20px">What to watch out for in each model</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Model</th><th>The trap</th></tr>
+      <tr><td>Comparables</td><td>Inherits the market's mispricing; peers that are not really similar</td></tr>
+      <tr><td>Precedent transactions</td><td>Old deals in different markets; control premiums and synergies built into the price</td></tr>
+      <tr><td>DCF (FCFF, FCFE)</td><td>Terminal value often 60–80% of the result; small changes in WACC or growth move it a lot</td></tr>
+      <tr><td>Dividend discount</td><td>Useless when dividends do not reflect earning power, for example with large buybacks</td></tr>
+      <tr><td>APV</td><td>Requires estimating tax shields and distress costs separately, both uncertain</td></tr>
+      <tr><td>Residual income</td><td>Only as good as the accounting; aggressive book values flatter the result</td></tr>
+      <tr><td>Sum of the parts</td><td>Ignores costs and synergies at group level; the "conglomerate discount"</td></tr>
+      <tr><td>NAV</td><td>Asset marks can be stale or optimistic, especially for private holdings</td></tr>
+      <tr><td>rNPV</td><td>Success probabilities per trial phase are averages that may not fit the specific drug</td></tr>
+      <tr><td>LBO</td><td>Gives what a financial buyer could pay, not what the company is worth to a long-term owner</td></tr>
+      <tr><td>Real options</td><td>Volatility and exercise assumptions are hard to estimate; easy to overvalue "potential"</td></tr>
+    </table></div>
+    <p class="side-note">The common thread: no single model is reliable alone. Each page in the library explains its model's weak points in detail, and the football field brings the results together.</p>
+
     <h2>Model library</h2>
     <div class="lib-group"><h3>Start here</h3><div class="lib">
       <a class="soon"><b>Inputs</b><span>Cash flows, cost of capital (CAPM, WACC), growth, terminal value · coming soon</span></a>
@@ -84,10 +122,13 @@
       <a class="soon"><b>Portfolio construction</b><span>Markowitz → constraints → covariance → Black-Litterman</span></a>
     </div></div>
 
-    <h2>Sources used across the toolkit</h2>
+    <h2>Sources</h2>
     <ul class="prose" style="margin-left:22px">
       <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, and the <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">companion materials</a> on his website.</li>
       <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020.</li>
+      <li>J. Pinto, E. Henry, T. Robinson, J. Stowe, <em>Equity Asset Valuation</em>, 4th ed., CFA Institute Investment Series, Wiley, 2020.</li>
+      <li>J. Rosenbaum, J. Pearl, <em>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</em>, 3rd ed., Wiley, 2020.</li>
     </ul>
   </main>
 
