@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Precedent transactions</title>
+  <meta name="description" content="How to value a company from what acquirers paid for similar companies: selecting deals, computing transaction multiples, the control premium, a worked example and the common mistakes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="../toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../../index.html" class="nav-link">Home</a>
+      <a href="../../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container prose">
+    <div class="crumb"><a href="../../../blog.html">Blog</a> / <a href="../index.html">Toolkit</a> / Relative valuation</div>
+    <div class="kicker">Model · Relative valuation</div>
+    <h1>Precedent transactions</h1>
+    <p class="lead">Values a company by the multiples acquirers paid for similar companies in past takeovers. Because buyers pay for control, it usually gives a higher value than trading comparables, and the difference tells you what a takeover might be worth.</p>
+    <div class="factbar">
+      <div><b>Best for</b>Takeover candidates, consolidating sectors, M&amp;A pricing</div>
+      <div><b>Main inputs</b>Deal prices, target financials at announcement</div>
+      <div><b>Effort</b>Data-hungry: deal details are hard to find</div>
+    </div>
+
+    <nav class="toc">
+      <b>On this page</b>
+      <a href="#idea">The idea</a> · <a href="#premium">Why takeovers cost more</a> · <a href="#deals">Choosing deals</a> · <a href="#build">Computing transaction multiples</a> · <a href="#data">Where to find the data</a> · <a href="#example">Worked example</a> · <a href="#when">When it misleads</a> · <a href="#mistakes">Common mistakes</a> · <a href="#strategy">In the strategy</a> · <a href="#sources">Sources</a>
+    </nav>
+
+    <h2 id="idea">1 · The idea</h2>
+    <p>Trading comparables ask what investors pay today for a small stake in similar companies. Precedent transactions ask a different question: what have buyers actually paid to <em>own</em> similar companies outright? The method uses the same multiples, EV/EBITDA, EV/Sales or P/E, but calculated at the price of completed acquisitions.</p>
+    <div class="formula">Value of target = Median transaction multiple × Target's metric</div>
+    <p>It is a standard part of every investment banking valuation, next to trading comparables, a DCF and an LBO analysis. For an investor in listed shares, its main use is to estimate what the company might be worth to an acquirer, and therefore how much upside a takeover could bring.</p>
+
+    <h2 id="premium">2 · Why takeovers cost more: the control premium</h2>
+    <p>Acquirers almost always pay more than the share price before the bid. The difference is the control premium, and it has three sources:</p>
+    <ul>
+      <li><strong>Control itself.</strong> The owner decides strategy, management, dividends and capital structure. A minority shareholder decides none of these.</li>
+      <li><strong>Synergies.</strong> Cost savings and extra revenue from combining two businesses. Buyers often share part of them with the seller to win the deal.</li>
+      <li><strong>Competition.</strong> When several bidders want the same company, the price rises.</li>
+    </ul>
+    <p>Premiums vary widely with the market and the deal, and are commonly found in a range of around 20–40% over the undisturbed share price. This is why transaction multiples are not directly comparable with trading multiples: they answer a question about control, not about a minority stake.</p>
+
+    <h2 id="deals">3 · Choosing deals</h2>
+    <p>The same logic as choosing peers for comparables applies, with two extra dimensions: time and type of buyer.</p>
+    <ol>
+      <li><strong>Similar target.</strong> Same business model, end markets and, as far as possible, size and profitability.</li>
+      <li><strong>Recent.</strong> Usually the last five years or so. Older deals were struck in different interest rate and credit conditions; a deal from a peak year can mislead in a downturn and the reverse.</li>
+      <li><strong>Type of buyer.</strong> Strategic buyers (competitors) can count on synergies and often pay more; financial buyers (private equity funds) pay what their return targets and debt capacity allow.</li>
+      <li><strong>Type of deal.</strong> Full takeovers, not minority stakes; and note whether the price was paid in cash or shares, since share deals made at high valuations can inflate multiples.</li>
+      <li><strong>Distressed sales.</strong> Usually excluded, or treated separately: a forced seller accepts a lower price.</li>
+    </ol>
+    <p>Finding even five good deals can be difficult. A small, carefully chosen set is better than a long list of loosely related transactions.</p>
+
+    <h2 id="build">4 · Computing transaction multiples</h2>
+    <div class="formula">Transaction EV = Offer price per share × Diluted shares + Net debt assumed + Minorities − Non-operating assets</div>
+    <ul>
+      <li><strong>Price:</strong> the final offer price, including any increases during the bidding process.</li>
+      <li><strong>Metric:</strong> the target's last-twelve-months (LTM) figures at announcement, since that is what the buyer knew. Forward multiples are used when reliable forecasts at the time are available.</li>
+      <li><strong>Debt:</strong> the net debt the buyer took on, from the target's last balance sheet before the deal.</li>
+      <li><strong>Premium:</strong> offer price divided by the undisturbed share price, typically measured one day and four weeks before the announcement or before rumours started.</li>
+    </ul>
+
+    <h2 id="data">5 · Where to find the data</h2>
+    <p>Professional databases such as Mergermarket, Capital IQ or Refinitiv collect deal multiples, but they are expensive. Without them:</p>
+    <ul>
+      <li><strong>Offer documents and announcements:</strong> listed targets must publish the offer terms, and the buyer's announcement often states the multiple paid.</li>
+      <li><strong>Fairness opinions:</strong> in many public takeovers, the advisers' fairness opinion lists the comparable transactions they used.</li>
+      <li><strong>Annual reports of serial acquirers:</strong> note disclosures on business combinations give the price and the target's revenue or profit.</li>
+      <li><strong>Financial press and sector reports:</strong> often quote the EV/EBITDA paid in large deals.</li>
+      <li><strong>University library:</strong> check whether students have access to a database.</li>
+    </ul>
+
+    <h2 id="example">6 · Worked example</h2>
+    <p>The same fictional company as on the <a href="comparables.html#example">comparables page</a>, <strong>Nordwerk AG</strong>: LTM EBITDA €400m, net debt including leases €600m, 100m shares. Five fictional takeovers of similar industrial companies over the last five years:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Deal (fictional)</th><th>Buyer type</th><th class="num">EV/EBITDA LTM</th><th class="num">Premium</th><th>Note</th></tr>
+      <tr><td>Deal 1</td><td>Financial</td><td class="num">10.5x</td><td class="num">22%</td><td>High interest rates at the time</td></tr>
+      <tr><td>Deal 2</td><td>Strategic</td><td class="num">11.8x</td><td class="num">28%</td><td></td></tr>
+      <tr><td>Deal 3</td><td>Strategic</td><td class="num">12.4x</td><td class="num">31%</td><td></td></tr>
+      <tr><td>Deal 4</td><td>Strategic</td><td class="num">13.0x</td><td class="num">35%</td><td>Large announced synergies</td></tr>
+      <tr><td>Deal 5</td><td>Strategic</td><td class="num">15.5x</td><td class="num">48%</td><td>Bidding war: outlier</td></tr>
+      <tr class="hl"><td>Median</td><td></td><td class="num">12.4x</td><td class="num">31%</td><td></td></tr>
+    </table></div>
+    <div class="table-wrap"><table>
+      <tr><th></th><th class="num">Low (Deal 2)</th><th class="num">Median</th><th class="num">High (Deal 4)</th></tr>
+      <tr><td>EV/EBITDA multiple</td><td class="num">11.8x</td><td class="num">12.4x</td><td class="num">13.0x</td></tr>
+      <tr><td>Enterprise value (× €400m)</td><td class="num">€4,720m</td><td class="num">€4,960m</td><td class="num">€5,200m</td></tr>
+      <tr><td>Less net debt</td><td class="num">(€600m)</td><td class="num">(€600m)</td><td class="num">(€600m)</td></tr>
+      <tr class="hl"><td>Value per share</td><td class="num">€41.20</td><td class="num">€43.60</td><td class="num">€46.00</td></tr>
+    </table></div>
+    <p>The median transaction value of €43.60 is 22% above the trading comparables median of €35.80. That gap is the implied control premium, below the 31% median premium in the deals. A reasonable reading: an acquirer could justify paying around €41–46 per share, but only if it can realise synergies similar to the buyers in Deals 2–4.</p>
+    <div class="callout">For an investor, this is not the value of a share today; it is the value in a takeover scenario. It belongs on the football field as a separate bar, and its probability matters as much as its level.</div>
+
+    <h2 id="when">7 · When to use it, and when it misleads</h2>
+    <div class="two">
+      <div class="yes"><b>Use when</b>Valuing a company for a takeover; the sector is consolidating and the target is a plausible candidate; checking whether a bid is fair.</div>
+      <div class="no"><b>Misleads when</b>Deals are old or few; market conditions have changed; prices include synergies specific to one buyer; it is used to value a minority stake without adjustment.</div>
+    </div>
+
+    <h2 id="mistakes">8 · Common mistakes</h2>
+    <ul>
+      <li>Applying transaction multiples to value a minority investment, which adds a control premium the investor will never receive.</li>
+      <li>Mixing deals from very different interest rate environments without comment.</li>
+      <li>Using forward metrics for some deals and LTM for others.</li>
+      <li>Ignoring whether the price was paid in cash or in overvalued shares.</li>
+      <li>Keeping a single bidding-war deal that dominates a small sample.</li>
+      <li>Treating the result as certain rather than as a scenario with a probability.</li>
+    </ul>
+
+    <h2 id="strategy">9 · Where it fits in the strategy</h2>
+    <p>In <a href="../../../investments/europe-strategic/statute.html">VB Europe Strategic</a> the portfolio holds minority stakes, so transactions are never the primary valuation. They are used to:</p>
+    <ul>
+      <li>estimate the upside if a holding becomes a takeover target, relevant in sectors that are consolidating, such as European defence;</li>
+      <li>value the private equity sleeve, where private equity firms realise their investments through sales to strategic or financial buyers;</li>
+      <li>check whether a bid for a holding is fair before deciding to accept or hold.</li>
+    </ul>
+
+    <h2 id="sources">Sources</h2>
+    <ul>
+      <li>J. Rosenbaum, J. Pearl, <em>Investment Banking: Valuation, LBOs, M&amp;A, and IPOs</em>, 3rd ed., Wiley, 2020, ch. 2: precedent transactions analysis.</li>
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, 2012, ch. 25: acquisitions and takeovers, control and synergy. Companion materials on <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">Damodaran Online</a>.</li>
+      <li>T. Koller, M. Goedhart, D. Wessels, <em>Valuation: Measuring and Managing the Value of Companies</em>, 7th ed., Wiley, 2020: mergers, acquisitions and their value.</li>
+    </ul>
+
+    <div class="pagenav"><a href="comparables.html">← Trading comparables</a><span class="side-note">Next: DCF – FCFF (coming soon)</span></div>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+</body>
+</html>
