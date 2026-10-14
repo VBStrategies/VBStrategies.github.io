@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB Strategies — Valuation &amp; Portfolio Toolkit</title>
+  <meta name="description" content="Every main way to value a company, when each one fits, and how to turn many valuations into one portfolio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="toolkit.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="../../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+    <nav class="nav">
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../investments.html" class="nav-link">On Investments</a>
+      <a href="../../blog.html" class="nav-link active">Blog</a>
+      <a href="../../about.html" class="nav-link">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="crumb"><a href="../../blog.html">Blog</a> / Valuation &amp; Portfolio Toolkit</div>
+    <div class="kicker">Handbook</div>
+    <h1>Valuation &amp; Portfolio Toolkit</h1>
+    <p class="lead">Every main way to value a company, when each one fits, and how to turn many valuations into one portfolio. One page per model, all built on the same template so they can be compared.</p>
+
+    <h2 style="margin-top:20px">Three ways to value a company</h2>
+    <div class="approaches">
+      <div class="appr"><b>Relative</b><span>What does the market pay for similar companies? Multiples such as EV/EBITDA and P/E.</span></div>
+      <div class="appr"><b>Intrinsic</b><span>What are the company's future cash flows worth today? DCF and its relatives.</span></div>
+      <div class="appr"><b>Option-based</b><span>What is flexibility worth? Real options for pipelines and staged projects.</span></div>
+    </div>
+    <p class="side-note">The three approaches can give very different answers. That is not a flaw: each one asks a different question, and the gap between them is information.</p>
+
+    <h2>Which model when</h2>
+    <div class="chips" role="group" aria-label="Filter by type of company">
+      <button class="active" data-type="all">All companies</button>
+      <button data-type="industrial">Industrial</button>
+      <button data-type="financial">Bank / insurer</button>
+      <button data-type="holding">Holding / PE</button>
+      <button data-type="pharma">Pharma / biotech</button>
+      <button data-type="young">Loss-making / young</button>
+    </div>
+    <div class="table-wrap"><table id="which">
+      <tr><th>Type of company</th><th>Primary</th><th>Cross-check</th></tr>
+      <tr data-type="industrial"><td>Stable industrial, defence</td><td><span class="m main">DCF (FCFF)</span></td><td><span class="m">Comparables</span><span class="m">Transactions</span></td></tr>
+      <tr data-type="industrial"><td>Cyclical industrial</td><td><span class="m main">DCF on normalised earnings</span></td><td><span class="m">EV/EBITDA mid-cycle</span></td></tr>
+      <tr data-type="financial"><td>Bank, insurer</td><td><span class="m main">Residual income</span></td><td><span class="m">DDM</span><span class="m">P/B vs. ROE</span></td></tr>
+      <tr data-type="holding"><td>Holding, listed private equity</td><td><span class="m main">NAV</span></td><td><span class="m">SOTP</span><span class="m">P/E</span></td></tr>
+      <tr data-type="holding industrial"><td>Conglomerate</td><td><span class="m main">SOTP</span></td><td><span class="m">DCF per segment</span></td></tr>
+      <tr data-type="pharma"><td>Pharma with a pipeline</td><td><span class="m main">DCF + rNPV</span></td><td><span class="m">Comparables</span><span class="m">Real options</span></td></tr>
+      <tr data-type="young"><td>Young, loss-making growth company</td><td><span class="m main">DCF from target margins</span></td><td><span class="m">EV/Sales</span><span class="m">Real options</span></td></tr>
+      <tr data-type="industrial holding"><td>Changing debt (buyout, recapitalisation)</td><td><span class="m main">APV</span></td><td><span class="m">LBO</span></td></tr>
+    </table></div>
+
+    <h2>Model library</h2>
+    <div class="lib-group"><h3>Start here</h3><div class="lib">
+      <a class="soon"><b>Inputs</b><span>Cash flows, cost of capital (CAPM, WACC), growth, terminal value · coming soon</span></a>
+      <a class="soon"><b>Football field</b><span>Turning several valuations into one range · coming soon</span></a>
+    </div></div>
+    <div class="lib-group"><h3>Relative valuation</h3><div class="lib">
+      <a href="models/comparables.html"><b>Trading comparables →</b><span>Peer multiples: EV/EBITDA, P/E, EV/Sales, P/B</span></a>
+      <a class="soon"><b>Precedent transactions</b><span>What acquirers paid · coming soon</span></a>
+    </div></div>
+    <div class="lib-group"><h3>Intrinsic value</h3><div class="lib">
+      <a class="soon"><b>DCF – FCFF</b><span>Firm value at the WACC</span></a>
+      <a class="soon"><b>DCF – FCFE</b><span>Equity value at the cost of equity</span></a>
+      <a class="soon"><b>Dividend discount</b><span>Stable payers, banks</span></a>
+      <a class="soon"><b>APV</b><span>When leverage changes</span></a>
+      <a class="soon"><b>Residual income</b><span>Banks and insurers</span></a>
+      <a class="soon"><b>Sum of the parts</b><span>Conglomerates</span></a>
+      <a class="soon"><b>NAV</b><span>Holdings, private equity</span></a>
+      <a class="soon"><b>rNPV</b><span>Drug pipelines</span></a>
+    </div></div>
+    <div class="lib-group"><h3>Special cases</h3><div class="lib">
+      <a class="soon"><b>LBO</b><span>A valuation floor from a buyout</span></a>
+      <a class="soon"><b>Real options</b><span>The value of flexibility</span></a>
+    </div></div>
+    <div class="lib-group"><h3>From valuations to a portfolio</h3><div class="lib">
+      <a class="soon"><b>Portfolio construction</b><span>Markowitz → constraints → covariance → Black-Litterman</span></a>
+    </div></div>
+
+    <h2>Sources used across the toolkit</h2>
+    <ul class="prose" style="margin-left:22px">
+      <li>A. Damodaran, <em>Investment Valuation</em>, 3rd ed., Wiley, and the <a href="https://pages.stern.nyu.edu/~adamodar/New_Home_Page/Inv3ed.htm">companion materials</a> on his website.</li>
+      <li>S. Benninga, <em>Financial Modeling</em>, 4th ed., MIT Press, 2014.</li>
+    </ul>
+  </main>
+
+  <footer class="site-footer">
+    Illustrative research, not investment advice. Past performance does not indicate future results.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.chips button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var t = btn.dataset.type;
+        document.querySelectorAll('.chips button').forEach(function (b) { b.classList.toggle('active', b === btn); });
+        document.querySelectorAll('#which tr[data-type]').forEach(function (r) {
+          r.style.display = (t === 'all' || r.dataset.type.split(' ').indexOf(t) !== -1) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
