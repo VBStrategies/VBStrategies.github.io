@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Instruments in Depth — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Financial Instruments in Depth</h1>
+    <p class="section-sub">Bonds, equities and derivatives — how they work, how they are priced, and what can go wrong</p>
+    <p class="article-lead">The previous article drew the map of instruments. This one goes down to street level for the three that matter most to a portfolio manager: <strong>bonds</strong>, <strong>equities</strong> and <strong>derivatives</strong>. For each, the same questions: what exactly am I buying, what drives its price, which risks come with it, and what should I watch when I work with it.</p>
+    <p class="article-meta">Part 2b of the series: (1) how the market is divided → (2) the instruments: <a href="financial-instruments.html">the map</a> and this deep dive → (3) <a href="toolkit/index.html">valuation &amp; portfolio toolkit</a>. Depth: roughly CFA Level I.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#objective">Objective — why instruments matter</a></li>
+      <li><a href="#bonds">Part A — Bonds</a></li>
+      <li><a href="#equities">Part B — Equities</a></li>
+      <li><a href="#derivatives">Part C — Derivatives</a></li>
+      <li><a href="#conclusion">Conclusion &amp; comparison table</a></li>
+    </ol>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>Why go this deep into instruments? Because they are the thing a portfolio manager has to master completely. The earlier articles introduced <strong>who</strong> operates in finance, <strong>which companies</strong> exist and how they behave, and <strong>where</strong> they can be found and traded. The next step is to actually invest — and you never invest in a company directly. You invest <strong>through an instrument</strong>: a share, a bond, a contract written on either. The instrument decides what you are really exposed to.</p>
+    <p>That is why its specifics need to be known in depth: how it is built, how it is priced, <strong>which risks it carries</strong>, and <strong>what to look at</strong> when working with it. The same company can be a safe income investment through its senior bond and a highly volatile bet through its shares or options. Choosing the instrument is part of the investment decision, not an afterthought.</p>
+    <div class="callout">
+      <div class="callout-title">How each part is built</div>
+      <p style="margin:0;">Every part follows the same order: <strong>anatomy</strong> (what you own) → <strong>types</strong> → <strong>pricing</strong>, with a worked example → <strong>risks</strong> → <strong>what to watch</strong> → <strong>in my portfolio</strong>, where I connect it to my own VB Europe Strategic portfolio. Numbers in the examples are illustrative.</p>
+    </div>
+  </div>
+
+  <!-- ===================== PART A: BONDS ===================== -->
+  <div class="inst prose" id="bonds">
+    <div class="inst-header">
+      <div class="inst-num">Part A · Debt</div>
+      <h2 class="inst-title">Bonds</h2>
+      <div class="inst-sub">A contractual promise: fixed payments, a fixed end date, a claim ahead of shareholders</div>
+    </div>
+
+    <div class="layer-label">1 · Anatomy — what you actually own</div>
+    <p>A bond is a loan cut into tradable pieces. The issuer borrows money and promises, in a legal contract (the <strong>indenture</strong>), to pay interest and return the principal on a set date. Six features define every bond:</p>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">Issuer</span> — who owes the money: a government, a supranational body, a bank, a company. The issuer determines the credit risk.</div>
+      <div class="f-row"><span class="f-name">Par (face) value</span> — the amount repaid at maturity, usually quoted as 100.</div>
+      <div class="f-row"><span class="f-name">Coupon</span> — the interest rate paid on par, annually or semi-annually.</div>
+      <div class="f-row"><span class="f-name">Maturity</span> — when the principal is repaid. The longer it is, the more the price reacts to interest rates.</div>
+      <div class="f-row"><span class="f-name">Currency</span> — the currency of all payments; for a foreign investor it adds FX risk.</div>
+      <div class="f-row"><span class="f-name">Seniority &amp; security</span> — where the bond ranks in default (secured, senior unsecured, subordinated) and whether collateral backs it. <strong>Covenants</strong> in the indenture restrict what the issuer may do (e.g. limits on extra debt).</div>
+    </div>
+
+    <div class="layer-label">2 · Types</div>
+    <p><strong>By issuer.</strong> <em>Sovereign</em> bonds (German Bunds, French OATs, Italian BTPs, Swiss Confederation bonds) are the benchmark of each currency. <em>Supranational and agency</em> bonds (e.g. the European Investment Bank) carry quasi-sovereign quality. <em>Corporate</em> bonds split into <strong>investment grade</strong> (rated BBB−/Baa3 or better) and <strong>high yield</strong> (below that). A European speciality is the <strong>covered bond</strong> (the German <em>Pfandbrief</em>): issued by a bank but also backed by a ring-fenced pool of mortgages or public loans, so the investor has a claim on both — which is why covered bonds are among the safest private-sector debt.</p>
+    <p><strong>By coupon.</strong> <em>Fixed-rate</em> bonds pay the same coupon throughout. <em>Zero-coupon</em> bonds pay nothing until maturity and are bought at a discount. <em>Floating-rate notes</em> (FRNs) pay a reference rate (€STR, EURIBOR, SARON) plus a fixed margin, so their price barely reacts to rate moves. <em>Inflation-linked</em> bonds adjust principal or coupon to a price index, protecting real value.</p>
+    <p><strong>With embedded options.</strong> A <em>callable</em> bond lets the issuer repay early — it will do so when rates fall, exactly when you would want to keep the bond, so investors demand a higher yield. A <em>putable</em> bond lets the investor sell it back early and therefore yields less. A <em>convertible</em> bond can be exchanged into shares — debt with an equity option attached.</p>
+
+    <div class="layer-label">3 · Pricing — present value of promised cash flows</div>
+    <p>A bond's price is the present value of its cash flows, discounted at the market's required return:</p>
+    <div class="callout">
+      <p style="margin:0;"><strong>P = C/(1+r) + C/(1+r)² + … + (C + Par)/(1+r)<sup>N</sup></strong></p>
+    </div>
+    <p>The single rate r that makes this equation hold at today's market price is the <strong>yield to maturity (YTM)</strong> — the bond's internal rate of return if held to maturity and coupons are reinvested at the same rate. Three consequences follow. Price and yield move in <strong>opposite directions</strong>. If the coupon is above the YTM, the bond trades at a <strong>premium</strong> (above 100); below the YTM, at a <strong>discount</strong>; equal, at par. And as maturity approaches, the price is pulled towards par.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>A 5-year bond, par 100, annual coupon 4%, market yield 3%:<br>
+    P = 4/1.03 + 4/1.03² + 4/1.03³ + 4/1.03⁴ + 104/1.03⁵ = <strong>104.58</strong>.<br>
+    The coupon (4%) is above the yield (3%), so the bond trades at a premium. On the BA II Plus: N=5, I/Y=3, PMT=4, FV=100, CPT PV → −104.58.</div>
+    <p><strong>Clean vs. dirty price.</strong> Between coupon dates the seller has earned part of the next coupon. Markets quote the <strong>clean price</strong> (without it), but the buyer pays the <strong>dirty price</strong> = clean price + <strong>accrued interest</strong>. Without this convention, quoted prices would jump on every coupon date.</p>
+
+    <div class="layer-label">4 · Interest-rate risk — duration and convexity</div>
+    <p><strong>Duration</strong> measures how sensitive a bond's price is to a change in yield. <em>Macaulay duration</em> is the weighted-average time to receive the cash flows (in years). <em>Modified duration</em> = Macaulay ÷ (1 + YTM) translates that into a price effect: the approximate percentage price change for a 1-percentage-point change in yield. Longer maturity and lower coupon both mean higher duration.</p>
+    <p>Duration is a straight-line approximation of a curved relationship. <strong>Convexity</strong> captures the curve: for a normal bond, prices rise more when yields fall than they drop when yields rise by the same amount. The full approximation is:</p>
+    <div class="callout">
+      <p style="margin:0;"><strong>%ΔP ≈ −ModDur × Δy + ½ × Convexity × (Δy)²</strong></p>
+    </div>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example (continued)</span><br>For the same bond: Macaulay duration 4.64 years, modified duration <strong>4.50</strong>, convexity 25.6.<br>
+    If yields rise by 1 point (3% → 4%): duration alone predicts −4.50%; adding convexity gives −4.50% + ½ × 25.6 × 0.01² = <strong>−4.38%</strong>. The true new price is exactly 100.00, i.e. −4.38%. Convexity closes the gap.</div>
+
+    <div class="layer-label">5 · Credit risk, ratings and spreads</div>
+    <p>Above the risk-free yield, a corporate bond pays a <strong>credit spread</strong>. It compensates for <strong>expected loss</strong> — probability of default (PD) × loss given default (LGD) — plus liquidity and uncertainty premia. Rating agencies (S&amp;P, Moody's, Fitch) summarise credit quality from AAA down to D; the line between BBB− and BB+ splits investment grade from high yield, and crossing it (a "fallen angel") forces many funds to sell. Recovery in default depends on seniority — which is why the capital-structure ladder from the previous article matters so much here.</p>
+    <p>The <strong>yield curve</strong> plots yields against maturity. Normally it slopes upward (longer money costs more); a flat or inverted curve signals that markets expect rate cuts and weaker growth. In the euro area the German Bund curve is the risk-free benchmark, and the <strong>spread of other sovereigns over Bunds</strong> (e.g. Italian BTPs) is a running gauge of stress in the currency union.</p>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Key risks of bonds</span><br>
+    <strong>Interest-rate risk.</strong> Rising yields lower prices; the higher the duration, the bigger the hit.<br>
+    <strong>Credit and downgrade risk.</strong> Default, or merely a downgrade, widens the spread and lowers the price.<br>
+    <strong>Reinvestment risk.</strong> Coupons and early redemptions may have to be reinvested at lower rates.<br>
+    <strong>Inflation risk.</strong> Fixed payments lose real value; only inflation-linked bonds protect against it.<br>
+    <strong>Call risk.</strong> Callable bonds are redeemed precisely when keeping them would be most valuable.<br>
+    <strong>Liquidity risk.</strong> Many corporate bonds trade rarely; selling quickly can mean a steep discount.<br>
+    <strong>Currency risk.</strong> A bond in a foreign currency carries the exchange rate on top.</div>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What to watch when working with bonds</span><br>
+    <strong>Yield, not coupon.</strong> The coupon is fixed history; the YTM is what you actually earn from today's price.<br>
+    <strong>Duration vs. your horizon.</strong> Match interest-rate sensitivity to how long you plan to hold.<br>
+    <strong>Spread vs. rating.</strong> A spread that is wide for its rating may signal a coming downgrade — or an opportunity.<br>
+    <strong>Seniority and covenants.</strong> Two bonds of the same issuer can carry very different risk.<br>
+    <strong>Embedded options.</strong> For callable bonds look at yield-to-worst, not YTM.<br>
+    <strong>Central-bank path.</strong> ECB and SNB decisions move the whole curve.</div>
+
+    <div class="layer-label">In my portfolio</div>
+    <p>VB Europe Strategic is an equity strategy, so bonds are not its building blocks — but they are still essential to it. The <strong>risk-free rate</strong> in every DCF and in the cost of equity comes from government bonds (Bunds for euro cash flows, Swiss Confederation bonds for franc cash flows). The <strong>BTP–Bund spread</strong> is my quick read of stress in the euro area, and the shape of the yield curve tells me where the cycle may be heading.</p>
+
+    <p class="sources">Sources: CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Fixed Income); F. J. Fabozzi, <em>Bond Markets, Analysis, and Strategies</em>; J. Berk &amp; P. DeMarzo, <em>Corporate Finance</em>, ch. on valuing bonds.</p>
+  </div>
+
+  <!-- ===================== PART B: EQUITIES ===================== -->
+  <div class="inst prose" id="equities">
+    <div class="inst-header">
+      <div class="inst-num">Part B · Ownership</div>
+      <h2 class="inst-title">Equities</h2>
+      <div class="inst-sub">A residual claim: paid last, but entitled to everything that is left</div>
+    </div>
+
+    <div class="layer-label">1 · Anatomy — what a share gives you</div>
+    <p>A share is a unit of ownership. Unlike a bondholder, the shareholder has <strong>no promised payment</strong> and no maturity date. In return, the shareholder owns the <strong>residual</strong> — whatever value remains after every creditor has been paid — with no upper limit, and with <strong>limited liability</strong>: the most you can lose is what you paid. Ownership usually brings three rights: to <strong>vote</strong> (board elections, major transactions), to receive <strong>dividends</strong> when the board declares them, and to a share of the assets in liquidation, after everyone else.</p>
+
+    <div class="layer-label">2 · Types and share classes</div>
+    <p><strong>Common vs. preferred.</strong> Common shares carry votes and the full residual. Preferred shares usually have no vote but a fixed dividend paid before common dividends; <em>cumulative</em> preferreds accumulate missed dividends, which must be paid before common shareholders receive anything.</p>
+    <p><strong>Dual-class structures.</strong> Many European companies issue separate voting and non-voting lines. German <em>Vorzugsaktien</em> (e.g. Volkswagen's preference shares) trade alongside ordinary shares; Roche has bearer shares and non-voting equity securities (<em>Genussscheine</em>) — with the non-voting line the more widely traded of the two. Same company, same economic interest, different control rights, and often a persistent price gap between the lines.</p>
+    <p><strong>Registered vs. bearer.</strong> Registered shares (<em>Namenaktien</em>) record the owner in the company's register; bearer shares belong to whoever holds them. The distinction matters for voting and for some ownership restrictions.</p>
+    <p><strong>Depositary receipts.</strong> ADRs and GDRs let a foreign company's shares trade on another market (e.g. a European company in New York) in the local currency — convenient, but the currency risk of the underlying share does not disappear.</p>
+    <p><strong>Public vs. private equity.</strong> Listed shares trade daily with full disclosure; private equity stakes are illiquid and valued infrequently. Listed private-equity firms and investment holdings are a way to get private-market exposure through a public instrument.</p>
+
+    <div class="layer-label">3 · Return — where the money comes from</div>
+    <p>An equity investor earns from two sources: <strong>price change</strong> and <strong>cash distributions</strong>. Companies distribute cash either as <strong>dividends</strong> or through <strong>share buybacks</strong>, which reduce the share count and raise each remaining share's claim. Measuring only price change understates the return of a dividend payer, which is why <strong>total return</strong> is the correct measure:</p>
+    <div class="callout">
+      <p style="margin:0;"><strong>Total return = (P₁ − P₀ + D) / P₀</strong></p>
+    </div>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>Bought at 50, sold a year later at 54, with a dividend of 1.50: price return 8%, dividend yield 3%, total return (54 − 50 + 1.5) / 50 = <strong>11%</strong>.</div>
+
+    <div class="layer-label">4 · Pricing — what a share is worth</div>
+    <p>A share is worth the present value of the cash it will deliver to its owners, discounted at the <strong>cost of equity</strong>. Because nothing is promised, both the cash flows and the discount rate must be estimated — which is why equity valuation is half model, half judgement. The two families of methods are covered in depth in the <a href="toolkit/index.html">Valuation &amp; Portfolio Toolkit</a>; here are the two building blocks at CFA Level I depth.</p>
+    <p><strong>Cost of equity (CAPM).</strong> Investors require the risk-free rate plus a premium for the market risk they cannot diversify away: <strong>r = r<sub>f</sub> + β × (E[R<sub>m</sub>] − r<sub>f</sub>)</strong>.</p>
+    <p><strong>Gordon growth model.</strong> If dividends grow at a constant rate g forever: <strong>V₀ = D₁ / (r − g)</strong>. It only works when r is clearly above g, and the result is very sensitive to both inputs.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>Risk-free rate 2.5%, beta 1.2, equity risk premium 5% → cost of equity 2.5% + 1.2 × 5% = <strong>8.5%</strong>.<br>
+    A stock expected to pay D₁ = 3.00 with growth of 3% and r = 8%: V₀ = 3 / (0.08 − 0.03) = <strong>60</strong>. Raise growth to 4% and the value jumps to 75 — a 25% change from a one-point assumption.</div>
+    <p><strong>Relative valuation</strong> compares multiples — P/E, EV/EBITDA, P/B — against peers or history. It is quick and market-anchored, but it only says whether a stock is cheap <em>relative to others</em>, not whether the whole group is mispriced.</p>
+
+    <div class="layer-label">5 · Corporate actions — events that change what you own</div>
+    <p><strong>Stock splits</strong> change the number of shares, not the value. <strong>Rights issues</strong> raise new capital by letting existing shareholders buy at a discount; those who do not take part are diluted. <strong>Spin-offs</strong> hand shareholders a new, separately listed company. <strong>Takeovers</strong> can deliver a premium — or, in a share-for-share deal, swap your holding for the acquirer's stock. Each one changes the position, its price history and often the return comparison, so they need to be tracked.</p>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Key risks of equities</span><br>
+    <strong>Residual-claim risk.</strong> Paid last — in distress, shareholders are wiped out first.<br>
+    <strong>Market (systematic) risk.</strong> Even a good company falls in a broad sell-off; this part cannot be diversified away.<br>
+    <strong>Company-specific risk.</strong> Earnings misses, management errors, litigation — diversifiable, but painful in a concentrated portfolio.<br>
+    <strong>Valuation risk.</strong> A great company bought at too high a price can be a poor investment for years.<br>
+    <strong>Dilution.</strong> New share issues, convertibles and employee options reduce your claim.<br>
+    <strong>Currency and tax.</strong> Foreign shares carry FX risk, and dividends may lose withholding tax at source, only partly reclaimable.</div>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What to watch when working with equities</span><br>
+    <strong>Which line you buy.</strong> Voting vs. non-voting, ordinary vs. preference: check liquidity and the price gap.<br>
+    <strong>Free float and liquidity.</strong> Market cap says little if most shares are locked with a founder or state.<br>
+    <strong>Cash, not just earnings.</strong> Free cash flow funds dividends and buybacks; accounting profit does not.<br>
+    <strong>Balance sheet.</strong> Debt ahead of you on the ladder is risk you share in.<br>
+    <strong>Total return in one currency.</strong> Measure performance including dividends and in your base currency.<br>
+    <strong>Corporate-action calendar.</strong> Ex-dividend dates, rights issues and spin-offs change the position.</div>
+
+    <div class="layer-label">In my portfolio</div>
+    <p>Equities are the core of VB Europe Strategic: the thesis is about European companies, so listed shares — and listed private-equity firms for private-market exposure — are the main instrument. Two points from this part go straight into the statute. My base currency is the Swiss franc while most holdings are in euros, so every return has to be measured <strong>in CHF and as total return</strong>. And where a company has several share lines, I need a rule for which one the portfolio holds.</p>
+
+    <p class="sources">Sources: CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Equity Investments); Z. Bodie, A. Kane &amp; A. Marcus, <em>Investments</em>; A. Damodaran, <em>Investment Valuation</em>.</p>
+  </div>
+
+  <!-- ===================== PART C: DERIVATIVES ===================== -->
+  <div class="inst prose" id="derivatives">
+    <div class="inst-header">
+      <div class="inst-num">Part C · Contracts</div>
+      <h2 class="inst-title">Derivatives</h2>
+      <div class="inst-sub">Contracts whose value comes from something else — tools for moving risk</div>
+    </div>
+
+    <div class="layer-label">1 · Anatomy — a contract, not an asset</div>
+    <p>A derivative is a contract between two parties whose value <strong>derives from an underlying</strong>: a share, an index, a bond, an interest rate, a currency, a commodity, even a company's credit. It has a <strong>notional</strong> amount (the exposure it references), a <strong>maturity</strong>, and terms that set who pays whom under which conditions. It is used for three purposes: <strong>hedging</strong> (removing a risk you already have), <strong>speculation</strong> (taking a risk cheaply, with leverage) and <strong>arbitrage</strong> (exploiting mispricing between related instruments).</p>
+    <p>There are two basic shapes. In a <strong>forward commitment</strong> (forwards, futures, swaps) both sides are obliged to perform — the payoff is linear and can be negative for either side. In a <strong>contingent claim</strong> (options) one side buys a right, not an obligation, and pays a premium for it — the payoff is asymmetric.</p>
+
+    <div class="layer-label">2 · Forwards and futures</div>
+    <p>A <strong>forward</strong> fixes today the price at which an asset will be bought on a future date. It is negotiated bilaterally (OTC) and settled at maturity, so each side carries the other's <strong>counterparty risk</strong>. A <strong>future</strong> is the exchange-traded, standardised version: a clearing house stands between the parties, positions are <strong>marked to market daily</strong>, and losses must be covered by <strong>margin</strong> (initial margin to open, variation margin each day; falling below the maintenance level triggers a margin call). In Europe, Eurex futures on the Euro Stoxx 50 and on Bunds are among the most traded contracts in the world.</p>
+    <p>The fair forward price follows from <strong>no arbitrage</strong>: buying the asset today with borrowed money and delivering it later must cost the same as agreeing a forward. Without income on the asset, <strong>F₀ = S₀ × (1 + r)<sup>T</sup></strong>; income on the asset (dividends, coupons) lowers it, because the forward holder does not receive it.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>Spot 100, interest rate 3%, one year: F₀ = 100 × 1.03 = <strong>103</strong>. If the asset pays income worth 2 in present value: F₀ = (100 − 2) × 1.03 = <strong>100.94</strong>.<br>
+    At maturity a long forward pays S<sub>T</sub> − F₀: if the price ends at 110, the buyer of the 103 forward gains 7; at 95, they lose 8.</div>
+
+    <div class="layer-label">3 · Options</div>
+    <p>A <strong>call</strong> gives the right to buy the underlying at the <strong>strike</strong> price K; a <strong>put</strong> gives the right to sell at K. The buyer pays a <strong>premium</strong>; the seller (writer) receives it and takes on the obligation. At expiry, a call pays max(0, S<sub>T</sub> − K) and a put pays max(0, K − S<sub>T</sub>). The buyer's loss is capped at the premium; the call writer's loss is unlimited.</p>
+    <p>An option's price consists of <strong>intrinsic value</strong> (what it would pay if exercised now) and <strong>time value</strong> (the chance it becomes more valuable before expiry). An option is <em>in the money</em> when it has intrinsic value, <em>at the money</em> when S ≈ K, and <em>out of the money</em> otherwise.</p>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead><tr><th>When this rises…</th><th>Call value</th><th>Put value</th><th>Sensitivity (Greek)</th></tr></thead>
+        <tbody>
+          <tr><td>Underlying price S</td><td>↑</td><td>↓</td><td>Delta (gamma = change in delta)</td></tr>
+          <tr><td>Strike K</td><td>↓</td><td>↑</td><td>—</td></tr>
+          <tr><td>Volatility σ</td><td>↑</td><td>↑</td><td>Vega</td></tr>
+          <tr><td>Time to expiry T</td><td>↑ (usually)</td><td>↑ (usually)</td><td>Theta (time decay)</td></tr>
+          <tr><td>Interest rate r</td><td>↑</td><td>↓</td><td>Rho</td></tr>
+          <tr><td>Dividends on underlying</td><td>↓</td><td>↑</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>For European options on the same underlying, strike and expiry, calls and puts are tied together by <strong>put–call parity</strong>: <strong>c + PV(K) = p + S</strong>. A call plus cash equal to the discounted strike pays exactly the same as the share plus a protective put.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>A call with K = 100 bought for 5: if the share ends at 115, payoff 15, profit <strong>10</strong>; at 95, it expires worthless and the loss is the 5 premium.<br>
+    Parity: S = 100, K = 100, one year, r = 3%, call price 10 → put price = 10 + 100/1.03 − 100 = <strong>7.09</strong>.</div>
+
+    <div class="layer-label">4 · Swaps</div>
+    <p>A swap exchanges one stream of cash flows for another. In a plain <strong>interest-rate swap</strong>, one side pays a fixed rate and the other a floating rate on the same notional, which is never exchanged — only the net difference is paid. A company with floating-rate debt can turn it into fixed-rate debt this way. A <strong>currency swap</strong> exchanges payments, and usually principal, in two currencies. A <strong>credit default swap (CDS)</strong> works like insurance on a borrower: the protection buyer pays a regular premium and receives compensation if a credit event (default, restructuring) occurs; CDS prices are a live market reading of credit risk.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>Notional €10m; you pay fixed 2.5% and receive floating. If the floating rate resets at 3% for the year, you receive the net 0.5% × €10m = <strong>€50,000</strong>; at 2%, you pay €50,000.</div>
+
+    <div class="layer-label">5 · How a portfolio manager uses them</div>
+    <p><strong>Currency hedging</strong> with FX forwards locks in the exchange rate on foreign holdings. <strong>Index futures</strong> adjust the portfolio's market exposure (beta) quickly and cheaply without selling individual stocks. A <strong>protective put</strong> sets a floor under a position for the price of the premium; a <strong>covered call</strong> earns premium income in exchange for giving up upside above the strike. <strong>Interest-rate swaps and bond futures</strong> manage duration in fixed-income portfolios.</p>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Key risks of derivatives</span><br>
+    <strong>Leverage.</strong> A small outlay controls a large notional; small moves create large gains or losses.<br>
+    <strong>Counterparty risk.</strong> OTC contracts depend on the other side paying; clearing reduces but does not remove this.<br>
+    <strong>Margin and liquidity risk.</strong> Daily margin calls can force selling at the worst moment, even if the position is right in the end.<br>
+    <strong>Basis risk.</strong> The hedge and the exposure may not move together.<br>
+    <strong>Time decay.</strong> Bought options lose value every day if nothing happens.<br>
+    <strong>Model risk.</strong> Option and OTC values depend on assumptions — volatility above all.</div>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What to watch when working with derivatives</span><br>
+    <strong>Purpose first.</strong> Know whether a position hedges, speculates or arbitrages — and size it accordingly.<br>
+    <strong>Notional, not premium.</strong> Risk is measured on the exposure controlled, not the cash paid.<br>
+    <strong>Implied volatility.</strong> It decides whether options are cheap or expensive.<br>
+    <strong>Expiry and roll costs.</strong> Futures must be rolled, and rolling has a cost.<br>
+    <strong>Contract specifications.</strong> Multiplier, settlement (cash or physical), exercise style (European or American).</div>
+
+    <div class="layer-label">In my portfolio</div>
+    <p>At the planned live size of around CHF 1,000, exchange-traded derivatives make little practical sense — one index future already references far more than the whole portfolio. Their logic still shapes my decisions. The biggest risk I carry beyond the companies themselves is <strong>EUR/CHF</strong>: if the euro weakens against the franc, my returns fall even when the shares rise. Whether to hedge that exposure, and at what cost, is a question I want to answer explicitly in the statute rather than ignore.</p>
+
+    <p class="sources">Sources: CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Derivatives); J. C. Hull, <em>Options, Futures, and Other Derivatives</em>; J. Berk &amp; P. DeMarzo, <em>Corporate Finance</em>, ch. on options.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion · Three instruments side by side</p>
+    <h3>Bringing it together</h3>
+    <p>The three families answer the same company in three different ways. A <strong>bond</strong> buys a promise: limited upside, priority in distress, price driven by rates and credit. A <strong>share</strong> buys the residual: unlimited upside, last in line, price driven by expectations about future cash. A <strong>derivative</strong> buys neither — it reshapes the risk of either, and its power is also its danger. Knowing which one fits a given view, and what each can do to the portfolio when that view is wrong, is the core skill behind every investment decision. The next step is to put numbers on value — the subject of the <a href="toolkit/index.html">Valuation &amp; Portfolio Toolkit</a>.</p>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th></th><th>Bonds</th><th>Equities</th><th>Derivatives</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>What you own</td><td>A contractual claim to coupons and principal</td><td>A residual ownership claim</td><td>A contract on an underlying</td></tr>
+          <tr><td>Source of return</td><td>Coupons + pull to par</td><td>Price change + dividends/buybacks</td><td>Change in the underlying (leveraged)</td></tr>
+          <tr><td>Main price driver</td><td>Interest rates, credit spread</td><td>Expected cash flows, cost of equity</td><td>Underlying price, volatility, time</td></tr>
+          <tr><td>Key measure</td><td>YTM, duration, spread</td><td>Total return, P/E, EV/EBITDA, beta</td><td>Notional, delta, implied volatility</td></tr>
+          <tr><td>Main risk</td><td>Rate and credit risk</td><td>Market and residual-claim risk</td><td>Leverage and counterparty risk</td></tr>
+          <tr><td>Place on the ladder</td><td>Above equity</td><td>Last</td><td>Outside the ladder</td></tr>
+          <tr><td>Role in my portfolio</td><td>Risk-free rate, stress signals</td><td>Core holdings</td><td>Understanding FX and hedging decisions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>
