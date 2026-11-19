@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Macro and Central Banks — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Macro and Central Banks</h1>
+    <p class="section-sub">How growth, inflation and interest rates move markets — with the ECB and the SNB as the two central banks that matter most to me</p>
+    <p class="article-lead">Companies do not operate in a vacuum. Their sales depend on the economy, their valuations on interest rates, and a foreign investor's returns on exchange rates. This article connects the macro picture to asset prices, and looks at the two central banks behind my portfolio: the European Central Bank and the Swiss National Bank.</p>
+    <p class="article-meta">Context article for <a href="../investments.html">VB Europe Strategic</a>. Rates and forecasts are as of November 2026 and will change.</p>
+  </div>
+
+  <div class="toc"><div class="toc-title">Contents</div><ol><li><a href="#objective">Objective</a></li><li><a href="#variables">The macro variables that matter</a></li><li><a href="#policy">How monetary policy works</a></li><li><a href="#ecb">The ECB now</a></li><li><a href="#snb">The SNB now</a></li><li><a href="#mine">What I watch for VB Europe Strategic</a></li><li><a href="#conclusion">Conclusion</a></li></ol></div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>The sectors article showed that companies behave differently across the economic cycle. What drives the cycle — and how central banks steer it — was left open. For my portfolio this is not abstract: the ECB sets the cost of money for the companies I hold, the SNB for the currency I measure my results in, and the gap between the two moves the EUR/CHF exchange rate that sits on top of every return.</p>
+    <p>This article covers the main macro variables, how monetary policy works and reaches markets, where the ECB and SNB stand now, and what I should watch.</p>
+  </div>
+
+  <div class="inst prose" id="variables">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · The dashboard</div>
+      <h2 class="inst-title">The macro variables that matter</h2>
+      <div class="inst-sub">Growth, inflation, labour, and the cycle</div>
+    </div>
+    <div class="facts"><div class="f-row"><span class="f-name">GDP growth</span> — the size and pace of the economy; drives company revenues, especially in cyclical sectors.</div><div class="f-row"><span class="f-name">Inflation</span> — the rise in the general price level. Central banks in the euro area and Switzerland target price stability: 2% for the ECB, 0–2% for the SNB.</div><div class="f-row"><span class="f-name">Labour market</span> — employment and wages; strong wage growth can keep inflation high.</div><div class="f-row"><span class="f-name">Leading indicators</span> — PMIs, business and consumer confidence, the yield curve, credit spreads; they move before GDP does.</div></div>
+    <p>The <strong>business cycle</strong> moves through expansion, peak, contraction and trough. Markets move ahead of the data: equities usually fall before a recession is confirmed and recover before it ends. That is why investors watch leading indicators and central banks rather than last quarter's GDP.</p>
+  </div>
+
+  <div class="inst prose" id="policy">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · The toolkit</div>
+      <h2 class="inst-title">How monetary policy works</h2>
+      <div class="inst-sub">Interest rates, balance sheets and the exchange rate</div>
+    </div>
+    <p>A central bank's main tool is its <strong>policy rate</strong> — the price at which banks can borrow from or deposit money with it. In the euro area there are three key rates: the <strong>deposit facility rate</strong> (DFR, which in today's environment of ample liquidity is the one that steers market rates), the <strong>main refinancing rate</strong> and the <strong>marginal lending rate</strong>. Raising rates cools demand and inflation; cutting them supports growth.</p>
+    <p>Beyond rates, central banks use their <strong>balance sheets</strong>: buying bonds (quantitative easing) lowers long-term yields, letting bonds mature without replacing them (quantitative tightening) does the opposite. The ECB also has a tool (TPI) to counter unwarranted widening of government bond spreads. The SNB, running a small open economy with a safe-haven currency, also uses <strong>foreign-exchange interventions</strong> — selling francs to stop the currency from strengthening too much, or buying them back.</p>
+    <div class="layer-label">Transmission — how policy reaches asset prices</div>
+    <div class="table-wrap"><table class="compare"><thead><tr><th>Channel</th><th>When rates rise…</th></tr></thead><tbody><tr><td>Discount rate</td><td>Future cash flows are worth less; long-duration assets (growth stocks, long bonds) fall most</td></tr><tr><td>Earnings</td><td>Higher borrowing costs and weaker demand reduce profits, especially in cyclical and leveraged companies</td></tr><tr><td>Banks</td><td>Wider lending margins often help bank profits — until credit losses rise</td></tr><tr><td>Exchange rate</td><td>The currency tends to strengthen against those with lower rates</td></tr><tr><td>Risk appetite</td><td>Cash and bonds pay more, so the equity risk premium has to compete</td></tr></tbody></table></div>
+  </div>
+
+  <div class="inst prose" id="ecb">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · The euro area</div>
+      <h2 class="inst-title">The ECB now</h2>
+      <div class="inst-sub">An energy shock and a rate hike</div>
+    </div>
+    <p>After cutting rates from mid-2024 to a deposit rate of 2.00% by June 2025, the ECB reversed course in 2026. The war in the Middle East pushed energy prices and inflation up, and in June 2026 the Governing Council raised rates for the first time since 2023, taking the deposit rate to 2.25%. A second 25-basis-point hike followed in September, to <strong>2.50%</strong> (effective 16 September), with the Council saying inflation was set to stay well above target for an extended period. At its meeting on 29 October 2026 it held rates unchanged and did not pre-commit to a path.</p>
+    <p>On the same day it was confirmed that President Christine Lagarde will step down early, on 7 February 2027, about nine months before her term ends. Who succeeds her — and how hawkish that person is — becomes a market variable in its own right.</p>
+  </div>
+
+  <div class="inst prose" id="snb">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · Switzerland</div>
+      <h2 class="inst-title">The SNB now</h2>
+      <div class="inst-sub">Zero rates and a watchful eye on the franc</div>
+    </div>
+    <p>The Swiss National Bank has held its policy rate at <strong>0%</strong> since June 2025, the lowest among major central banks, and kept it there in September 2026. Its conditional inflation forecast was about 0.7% for 2026 and 0.8% for 2027 and 2028 — inside its 0–2% range — and it repeated that it is willing to intervene in the foreign-exchange market if needed. Banks' sight deposits above a threshold are remunerated 0.25 percentage points below the policy rate.</p>
+    <p>The result is a <strong>widening rate gap</strong>: euro rates at 2.50%, Swiss rates at zero. Rate differentials are one driver of EUR/CHF, alongside safe-haven flows that tend to push the franc up in times of stress.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Two central banks, one portfolio</span><br>ECB deposit rate 2.50% (since 16 Sept 2026) · SNB policy rate 0% (since June 2025) · EUR/CHF around 0.94 after the SNB decision in September 2026.</div>
+  </div>
+
+  <div class="inst prose" id="mine">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · My portfolio</div>
+      <h2 class="inst-title">What I watch for VB Europe Strategic</h2>
+      <div class="inst-sub">Turning macro into a checklist</div>
+    </div>
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Macro checklist</span><br>
+    <strong>ECB path and the new president.</strong> Further hikes would weigh on long-duration and leveraged holdings, and support banks.<br>
+    <strong>Energy prices.</strong> The main driver of the current inflation shock and of margins in industry.<br>
+    <strong>EUR/CHF.</strong> A weaker euro cuts my CHF returns even when the shares rise; SNB interventions and safe-haven flows matter.<br>
+    <strong>Sovereign spreads.</strong> BTP–Bund widening signals stress in the euro area.<br>
+    <strong>Fiscal policy.</strong> Defence and infrastructure spending shift earnings towards industrials and defence.<br>
+    <strong>Leading indicators.</strong> Eurozone PMIs and the yield curve for the direction of the cycle.</div>
+    <p>I do not want to trade on macro forecasts — that is a different strategy. The goal is to understand which holdings are most exposed to which macro risk, so the portfolio is not unintentionally one big bet on rates or on the euro.</p>
+  </div>
+
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion</p>
+    <h3>Bringing it together</h3>
+    <p>Macro variables set the backdrop, and central banks are the most powerful actors in it. Their rates feed into discount rates, earnings, bank margins, exchange rates and risk appetite. In late 2026 the ECB is tightening against an energy shock while the SNB holds at zero — a divergence that matters directly for a Swiss-franc investor in European equities.</p>
+    <p class="sources">Sources: <a href="https://www.bde.es/wbe/en/noticias-eventos/actualidad-bce/decisiones-politica-monetaria/bce-tipos-junio26.html">ECB — Monetary policy decisions, 11 June 2026</a>; <a href="https://ecb.europa.eu//press/pr/date/2026/html/ecb.mp260910~314e508016.en.html">ECB — Monetary policy decisions, 10 Sept 2026</a>; <a href="https://www.banque-france.fr/en/press-release/monetary-policy-decisions-23">ECB via Banque de France — Monetary policy decisions, 29 Oct 2026</a>; <a href="https://cyprus-mail.com/2026/10/29/ecb-holds-interest-rates-steady-as-energy-shock-threatens-inflation-and-growth">Cyprus Mail — ECB holds rates; Lagarde to step down</a>; <a href="https://www.snb.ch/en/publications/communication/press-releases-restricted/pre_20260924">SNB — Monetary policy assessment, 24 Sept 2026</a>; <a href="https://www.bis.org/speeches/20260929-introductory-remarks-governing-board-swiss-national-bank-news-conference.pdf">SNB introductory remarks (BIS)</a>; <a href="https://theedgemalaysia.com/node/819213">Reuters via The Edge — SNB holds at 0%</a>; CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Economics).</p>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>

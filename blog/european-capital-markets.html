@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Europe's Capital Markets — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Europe's Capital Markets</h1>
+    <p class="section-sub">Where European companies are listed and traded, why the market is fragmented, and what is changing</p>
+    <p class="article-lead">Earlier articles described markets in general. This one looks at the specific market my portfolio lives in: the exchanges, indices and infrastructure of continental Europe, the reasons it has fallen behind the US in size, and the reforms that aim to change that.</p>
+    <p class="article-meta">Context article for <a href="../investments.html">VB Europe Strategic</a>. Figures are date-stamped and will age.</p>
+  </div>
+
+  <div class="toc"><div class="toc-title">Contents</div><ol><li><a href="#objective">Objective</a></li><li><a href="#venues">Where European equities trade</a></li><li><a href="#indices">How European equities are measured</a></li><li><a href="#fragmentation">Why Europe is fragmented and under-sized</a></li><li><a href="#reform">From Capital Markets Union to Savings and Investments Union</a></li><li><a href="#mine">What this means for VB Europe Strategic</a></li><li><a href="#conclusion">Conclusion</a></li></ol></div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>My portfolio thesis is about Europe: competitive, self-sufficient European companies that help the continent lead again. A thesis about Europe needs an honest picture of the market where those companies are actually traded — where they list, which indices measure them, how money flows through the system, and why Europe's equity market is smaller and cheaper than America's. Without that, "invest in Europe" is only a slogan.</p>
+    <p>So this article answers four questions: <strong>where</strong> European equities trade, <strong>how</strong> the European market is measured, <strong>why</strong> it is fragmented and under-sized, and <strong>what</strong> is being done about it — and what all of that means for my own portfolio.</p>
+  </div>
+
+  <div class="inst prose" id="venues">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · The map</div>
+      <h2 class="inst-title">Where European equities trade</h2>
+      <div class="inst-sub">Exchange groups, alternative venues and post-trade plumbing</div>
+    </div>
+    <p>Continental Europe has no single stock exchange. It has several large <strong>exchange groups</strong>, each running national markets plus the clearing and settlement behind them:</p>
+    <div class="facts"><div class="f-row"><span class="f-name">Euronext</span> — a pan-European group with regulated exchanges in Amsterdam, Brussels, Dublin, Lisbon, Milan, Oslo, Paris and, since it took a majority stake in the Athens exchange in November 2025, Athens. As of June 2026 it hosted over 1,800 issuers with about <strong>€7 trillion</strong> of market capitalisation.</div><div class="f-row"><span class="f-name">Deutsche Börse</span> — Frankfurt and its electronic platform Xetra, the derivatives exchange <strong>Eurex</strong> (home of Euro Stoxx 50 and Bund futures) and the settlement and custody house Clearstream.</div><div class="f-row"><span class="f-name">SIX</span> — the Swiss exchange in Zurich, where heavyweights such as Nestlé, Novartis and Roche are listed and trade in Swiss francs.</div><div class="f-row"><span class="f-name">Nasdaq Nordic and BME</span> — the Nordic and Baltic exchanges (Stockholm, Copenhagen, Helsinki) and the Spanish exchanges.</div><div class="f-row"><span class="f-name">London (LSE)</span> — historically Europe's largest venue, but outside the EU since Brexit and outside the scope of my portfolio.</div></div>
+    <p>Since MiFID I (2007) a share is no longer traded only on its home exchange. <strong>Multilateral trading facilities</strong> such as Cboe Europe and Aquis, plus systematic internalisers run by banks, compete for the same orders, so liquidity in one stock is spread across several venues.</p>
+    <p>Behind every trade sits <strong>post-trade infrastructure</strong>: central counterparties (CCPs) that guarantee trades and central securities depositories (CSDs) that settle them and record ownership. In the US this is largely concentrated in a single system; in Europe it is still split along national lines, and that split is a cost every investor pays, mostly without seeing it.</p>
+  </div>
+
+  <div class="inst prose" id="indices">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · Measuring the market</div>
+      <h2 class="inst-title">How European equities are measured</h2>
+      <div class="inst-sub">Benchmarks, their composition and why it matters</div>
+    </div>
+    <div class="table-wrap"><table class="compare"><thead><tr><th>Index</th><th>What it covers</th><th>Typical use</th></tr></thead><tbody><tr><td>STOXX Europe 600</td><td>600 large, mid and small caps from 17 European countries, UK included</td><td>Broad European benchmark</td></tr><tr><td>Euro Stoxx 50</td><td>50 blue chips from the eurozone</td><td>Futures and options on Eurex; headline index</td></tr><tr><td>MSCI Europe ex UK</td><td>Developed Europe without the UK</td><td>Benchmark for continental strategies</td></tr><tr><td>DAX, CAC 40, FTSE MIB, AEX, SMI</td><td>National blue chips (Germany, France, Italy, Netherlands, Switzerland)</td><td>Country exposure</td></tr></tbody></table></div>
+    <p>Index composition shapes what "Europe" means in practice. The continental market is concentrated: France, Germany and Switzerland made up roughly <strong>55%</strong> of MSCI Europe ex UK as of March 2026. Sector weights also differ sharply from the US: Europe is heavy in financials, industrials, health care and consumer staples, and light in technology. A European portfolio is therefore not just a geographic bet but also a <strong>sector bet</strong> — something to keep in mind when comparing it with a global benchmark.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Europe vs. the US — size and price</span><br>From 2007 to mid-2025 the US share of advanced economies' stock-market capitalisation rose from about 42% to 62%, while Europe's share fell from about 34% to 21%. US stocks made up roughly 63% of the MSCI ACWI IMI in mid-2026. European equities also trade cheaper: around 15× forward earnings for MSCI Europe ex UK against about 22× for MSCI USA. In 2025, European equities outperformed the US by double digits for the first time since the financial crisis.</div>
+  </div>
+
+  <div class="inst prose" id="fragmentation">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · The structural problem</div>
+      <h2 class="inst-title">Why Europe is fragmented and under-sized</h2>
+      <div class="inst-sub">Banks, borders and savings habits</div>
+    </div>
+    <p>Europe's equity market is small relative to its economy for reasons that run deeper than any single year's performance:</p>
+    <div class="facts"><div class="f-row"><span class="f-name">Bank-based financing.</span> European companies have traditionally borrowed from banks rather than raising money on capital markets, so fewer firms list and those that do list later.</div><div class="f-row"><span class="f-name">National borders in law.</span> Insolvency law, tax treatment, company law and supervision still differ country by country, which makes cross-border investing more complex and expensive.</div><div class="f-row"><span class="f-name">Fragmented infrastructure.</span> Many exchanges, CCPs and CSDs mean higher trading and settlement costs and thinner liquidity per venue.</div><div class="f-row"><span class="f-name">Savings sitting in deposits.</span> European households hold a large share of their wealth in bank deposits, and pension systems in many countries are pay-as-you-go rather than funded, so less domestic capital flows into equities.</div><div class="f-row"><span class="f-name">Scale-up gap.</span> Fast-growing European companies often turn to US investors — or list in New York — when they need large amounts of growth capital.</div></div>
+    <p>These are exactly the obstacles that the Letta and Draghi reports of 2024 identified as a drag on European competitiveness.</p>
+  </div>
+
+  <div class="inst prose" id="reform">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · What is changing</div>
+      <h2 class="inst-title">From Capital Markets Union to Savings and Investments Union</h2>
+      <div class="inst-sub">The EU's attempt to build one market</div>
+    </div>
+    <p>The EU has tried to integrate its capital markets since the first Capital Markets Union action plan in 2015. In March 2025 the Commission relaunched the effort as the <strong>Savings and Investments Union (SIU)</strong>, built on the idea of giving citizens better ways to grow their savings while making it easier for European businesses to raise the funding they need. Its strands cover citizens and savings, investment and financing, market integration and supervision.</p>
+    <p>The centrepiece so far is the <strong>Market Integration and Supervision Package</strong>, proposed in December 2025. It aims to remove barriers to cross-border activity, simplify rules and strengthen supervision at EU level, and includes changes to post-trade infrastructure. As of 2026 it is being negotiated in the Council and Parliament; whether national governments accept more centralised supervision is the key political question.</p>
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What to watch</span><br>
+    <strong>Supervision.</strong> Does ESMA gain direct supervision of large cross-border players, or do national supervisors keep control?<br>
+    <strong>Pensions and savings accounts.</strong> Funded pensions and simple savings accounts could bring a lasting flow of domestic money into European equities.<br>
+    <strong>Listings and IPOs.</strong> Whether European scale-ups list at home rather than in New York.<br>
+    <strong>Defence and industrial policy.</strong> Public spending programmes can shift earnings across sectors — a theme in its own right in my portfolio.</div>
+  </div>
+
+  <div class="inst prose" id="mine">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · My portfolio</div>
+      <h2 class="inst-title">What this means for VB Europe Strategic</h2>
+      <div class="inst-sub">Turning the market picture into rules</div>
+    </div>
+    <p>Three practical consequences follow for my portfolio. First, the <strong>benchmark</strong>: because I exclude the UK, a broad index that includes it would be the wrong yardstick; an ex-UK European index is the honest comparison. Second, <strong>currency</strong>: Swiss holdings trade in francs, most others in euros, a few in Nordic currencies — so returns must be converted into my base currency, CHF. Third, <strong>expectations</strong>: Europe being cheaper than the US is not a reason to invest by itself. A valuation gap can persist for years; my thesis has to rest on companies and earnings, with structural reform as a possible tailwind rather than the core of the case.</p>
+  </div>
+
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion</p>
+    <h3>Bringing it together</h3>
+    <p>Continental Europe is a large but fragmented market: several exchange groups, competing trading venues and national post-trade systems, measured by indices that are concentrated in a few countries and tilted towards older-economy sectors. It has lost ground to the US in size and trades at a discount, for structural reasons the EU is now trying to address through the Savings and Investments Union. For an investor, the opportunity and the risk come from the same place: if integration succeeds, European companies gain access to deeper capital; if it stalls, the discount may simply stay.</p>
+    <p class="sources">Sources: <a href="https://www.euronext.com/en/about/media/euronext-press-releases/ishares-geeft-prioriteit-aan-fixed-income-nieuwste-etf-aanbod">Euronext — company profile (June 2026)</a>; <a href="https://www.trustnet.com/news/13479571/european-equities-on-the-up">Trustnet — European equities on the up</a>; <a href="https://www.invesco.com/ae/en/insights/rethinking-european-equities-for-diversification.html">Invesco — Rethinking European equities</a>; <a href="https://www.voronoiapp.com/markets/-US-Stock-Market-Soars-While-Europe-Stalls-Since-2008-Crisis-5189">Voronoi — US vs Europe market share since 2008</a>; <a href="https://www.msci.com/downloads/web/msci-com/research-and-insights/video/acwi-imi-complete-geographic-breakdown/oct-2026/A%20Complete%20Geographic%20Breakdown%20of%20the%20MSCI%20ACWI%20IMI.pdf">MSCI — ACWI IMI geographic breakdown (Oct 2026)</a>; <a href="https://finance.ec.europa.eu/regulation-and-supervision/savings-and-investments-union_en">European Commission — Savings and Investments Union</a>; <a href="https://finance.ec.europa.eu/publications/market-integration-package_en">European Commission — Market integration package</a>.</p>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>

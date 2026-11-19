@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Measuring Portfolio Performance — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Measuring Portfolio Performance</h1>
+    <p class="section-sub">Returns, risk, risk-adjusted ratios, benchmarks — and how to tell skill from luck</p>
+    <p class="article-lead">Running a portfolio means being judged by numbers. This article sets out how returns and risk are measured, which ratios compare portfolios fairly, and why a short track record proves much less than it seems.</p>
+    <p class="article-meta">Methodology article for <a href="../investments.html">VB Europe Strategic</a> reporting. Depth: roughly CFA Level I (Quantitative Methods, Portfolio Management).</p>
+  </div>
+
+  <div class="toc"><div class="toc-title">Contents</div><ol><li><a href="#objective">Objective</a></li><li><a href="#returns">Measuring return correctly</a></li><li><a href="#risk">Measuring risk</a></li><li><a href="#ratios">Comparing portfolios fairly</a></li><li><a href="#benchmark">Compared with what?</a></li><li><a href="#luck">What a track record can prove</a></li><li><a href="#mine">The rules I want to apply to VB Europe Strategic</a></li><li><a href="#conclusion">Conclusion</a></li></ol></div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>Once my portfolio is running, every report will show a return. The question is what that number actually says. A return without risk, without a benchmark, and without the right method of calculation can make an average strategy look brilliant — or a good one look poor. I want the measurement rules fixed <strong>before</strong> the results arrive, so I cannot choose the flattering method afterwards.</p>
+    <p>This article is therefore my methodology: how to calculate returns, how to measure risk, which risk-adjusted ratios to use, how to choose a benchmark, and how to stay honest about what a short record can and cannot prove.</p>
+  </div>
+
+  <div class="inst prose" id="returns">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · Returns</div>
+      <h2 class="inst-title">Measuring return correctly</h2>
+      <div class="inst-sub">Holding-period, arithmetic vs. geometric, time- vs. money-weighted</div>
+    </div>
+    <p>The <strong>holding-period return</strong> is the basic building block: (ending value − beginning value + income) ÷ beginning value. Over several periods, two averages answer different questions. The <strong>arithmetic mean</strong> is the best estimate of a single future period's return; the <strong>geometric mean</strong> is the actual compound growth rate achieved. With volatile returns the geometric mean is always lower — a −50% year followed by +50% leaves you 25% down, though the arithmetic average is zero.</p>
+    <p>When money flows in or out of a portfolio, a second choice appears. The <strong>time-weighted return (TWR)</strong> chains the returns of each sub-period and removes the effect of the timing of deposits and withdrawals — it measures the manager. The <strong>money-weighted return (MWR)</strong> is the internal rate of return on all cash flows — it measures the investor's actual experience, including the luck or skill of when money was added. Industry standards (GIPS) require TWR for judging managers.</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example — same portfolio, two answers</span><br>Start with 100. Year 1: +20% → 120. The investor adds 100 → 220. Year 2: −10% → 198.<br>TWR: (1.20 × 0.90)<sup>1/2</sup> − 1 = <strong>+3.9% a year</strong> — the strategy made money.<br>MWR: the IRR of −100, −100, +198 = <strong>−0.7% a year</strong> — the investor lost money, because more capital was in the portfolio during the bad year.</div>
+  </div>
+
+  <div class="inst prose" id="risk">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · Risk</div>
+      <h2 class="inst-title">Measuring risk</h2>
+      <div class="inst-sub">Volatility, downside and drawdown</div>
+    </div>
+    <div class="facts"><div class="f-row"><span class="f-name">Standard deviation (volatility)</span> — the dispersion of returns around their mean, usually annualised (monthly σ × √12). The standard measure of total risk.</div><div class="f-row"><span class="f-name">Downside deviation</span> — counts only returns below a target. Investors fear losses more than upside surprises.</div><div class="f-row"><span class="f-name">Maximum drawdown</span> — the largest fall from a peak to a subsequent trough. A path of 100 → 120 → 90 → 130 has a maximum drawdown of −25% (from 120 to 90), even though it ends higher.</div><div class="f-row"><span class="f-name">Beta</span> — sensitivity to the benchmark; the systematic part of risk.</div><div class="f-row"><span class="f-name">Tracking error</span> — the volatility of the difference between portfolio and benchmark returns; how far the portfolio deviates from the index.</div><div class="f-row"><span class="f-name">Value at Risk (VaR)</span> — the loss not expected to be exceeded with a given probability over a given horizon (e.g. 95%, one month). Useful, but silent about how bad the remaining 5% can be.</div></div>
+  </div>
+
+  <div class="inst prose" id="ratios">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · Risk-adjusted performance</div>
+      <h2 class="inst-title">Comparing portfolios fairly</h2>
+      <div class="inst-sub">Sharpe, Treynor, Jensen's alpha, Sortino, information ratio</div>
+    </div>
+    <div class="table-wrap"><table class="compare"><thead><tr><th>Measure</th><th>Formula</th><th>What it answers</th></tr></thead><tbody><tr><td>Sharpe ratio</td><td>(R<sub>p</sub> − R<sub>f</sub>) / σ<sub>p</sub></td><td>Excess return per unit of total risk</td></tr><tr><td>Treynor ratio</td><td>(R<sub>p</sub> − R<sub>f</sub>) / β<sub>p</sub></td><td>Excess return per unit of systematic risk</td></tr><tr><td>Jensen's alpha</td><td>R<sub>p</sub> − [R<sub>f</sub> + β<sub>p</sub>(R<sub>m</sub> − R<sub>f</sub>)]</td><td>Return above what CAPM predicts for the beta taken</td></tr><tr><td>Sortino ratio</td><td>(R<sub>p</sub> − target) / downside deviation</td><td>Excess return per unit of downside risk</td></tr><tr><td>Information ratio</td><td>(R<sub>p</sub> − R<sub>b</sub>) / tracking error</td><td>Active return per unit of active risk</td></tr></tbody></table></div>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> Worked example</span><br>Portfolio A returns 9% with volatility 14%; portfolio B returns 7% with volatility 8%; risk-free rate 2%.<br>Sharpe A = (9 − 2) / 14 = <strong>0.50</strong>; Sharpe B = (7 − 2) / 8 = <strong>0.63</strong>.<br>A earned more, but B earned more <em>per unit of risk</em>. Levered to A's volatility, B would have returned more.</div>
+    <p>Use the Sharpe ratio when the portfolio is the investor's whole wealth; Treynor and alpha when it is one piece of a diversified whole; the information ratio when the task is to beat a specific benchmark.</p>
+  </div>
+
+  <div class="inst prose" id="benchmark">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · Benchmarks and attribution</div>
+      <h2 class="inst-title">Compared with what?</h2>
+      <div class="inst-sub">Choosing a benchmark and explaining the difference</div>
+    </div>
+    <p>A good benchmark is <strong>specified in advance</strong>, <strong>investable</strong>, <strong>measurable</strong> and <strong>appropriate</strong> to the strategy — covering the same universe the manager actually chooses from. Changing the benchmark after the fact is one of the oldest ways of flattering results.</p>
+    <p><strong>Performance attribution</strong> explains where the difference from the benchmark came from. The classic Brinson approach splits it into an <strong>allocation effect</strong> (over- or under-weighting sectors or countries that did well or badly) and a <strong>selection effect</strong> (picking better or worse stocks within them). For an investor whose base currency differs from the assets', a <strong>currency effect</strong> comes on top.</p>
+  </div>
+
+  <div class="inst prose" id="luck">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · Skill or luck?</div>
+      <h2 class="inst-title">What a track record can prove</h2>
+      <div class="inst-sub">Statistics, biases and honesty</div>
+    </div>
+    <p>Returns are noisy, so even a skilled manager has bad years and an unskilled one good years. A rough test of whether active returns are statistically different from zero is the t-statistic ≈ information ratio × √(number of years).</p>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> The uncomfortable arithmetic</span><br>An information ratio of 0.5 is considered good. To reach a t-statistic of 2 (roughly 95% confidence), it needs (2 / 0.5)² = <strong>16 years</strong> of data. One or two years of outperformance prove almost nothing.</div>
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Biases that inflate results</span><br>
+    <strong>Survivorship bias.</strong> Databases that drop failed funds or delisted companies overstate average returns.<br>
+    <strong>Look-ahead bias.</strong> Using information in a backtest that was not available at the time.<br>
+    <strong>Backfill bias.</strong> Adding a fund's history only after it has done well.<br>
+    <strong>Data snooping.</strong> Testing many strategies and reporting the one that worked.<br>
+    <strong>Benchmark shopping.</strong> Picking the comparison that makes results look best.</div>
+  </div>
+
+  <div class="inst prose" id="mine">
+    <div class="inst-header">
+      <div class="inst-num">Part 6 · My portfolio</div>
+      <h2 class="inst-title">The rules I want to apply to VB Europe Strategic</h2>
+      <div class="inst-sub">Fixed in advance</div>
+    </div>
+    <p>For my own reporting this translates into a short list: returns <strong>time-weighted</strong> and in <strong>CHF</strong>, including dividends; the benchmark fixed in the statute before the first trade; volatility, maximum drawdown, Sharpe ratio, tracking error and information ratio reported every month; currency effect shown separately; and an honest note that a track record of a year or two is a learning exercise, not proof of skill. The point of measuring is to learn what worked and why — not to produce a good-looking number.</p>
+  </div>
+
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion</p>
+    <h3>Bringing it together</h3>
+    <p>Performance measurement is a discipline of choosing the right question before computing the answer. Time-weighted returns judge the strategy, money-weighted returns the investor's experience. Risk has several faces — volatility, downside, drawdown, beta, tracking error — and risk-adjusted ratios make portfolios comparable. A benchmark has to be fixed in advance, attribution explains the gap, and statistics remind us how long it takes before any of this proves skill.</p>
+    <p class="sources">Sources: CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Quantitative Methods; Portfolio Management); CFA Institute, Global Investment Performance Standards (GIPS); W. F. Sharpe, "The Sharpe Ratio", <em>Journal of Portfolio Management</em> (1994); R. C. Grinold &amp; R. N. Kahn, <em>Active Portfolio Management</em>; G. P. Brinson, L. R. Hood &amp; G. L. Beebower, "Determinants of Portfolio Performance", <em>Financial Analysts Journal</em> (1986).</p>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>

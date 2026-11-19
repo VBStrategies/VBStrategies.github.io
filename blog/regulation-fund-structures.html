@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulation and Fund Structures — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Regulation and Fund Structures</h1>
+    <p class="section-sub">UCITS, AIFs and MiFID II — the rules that shape how money is managed in Europe, Liechtenstein and Switzerland</p>
+    <p class="article-lead">Asset management is one of the most regulated activities in finance. The rules decide what a fund may hold, who may buy it, how it must be sold, and what investors must be told. This article maps the main European frameworks and the position of Liechtenstein and Switzerland within them.</p>
+    <p class="article-meta">Context article; this is a general overview, not legal advice.</p>
+  </div>
+
+  <div class="toc"><div class="toc-title">Contents</div><ol><li><a href="#objective">Objective</a></li><li><a href="#ucits">UCITS — the European standard</a></li><li><a href="#aif">AIFs and the AIFM Directive</a></li><li><a href="#mifid">MiFID II — conduct and markets</a></li><li><a href="#li-ch">Liechtenstein and Switzerland</a></li><li><a href="#mine">What I take from this for VB Europe Strategic</a></li><li><a href="#conclusion">Conclusion</a></li></ol></div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>I want to work in asset and investment management in the DACH region — and I live in Liechtenstein, a fund centre that sits between the EU and Switzerland. The structures a fund can take and the rules it lives under are part of the daily work in this industry, and they are also a source of good discipline for my own portfolio: regulated funds have diversification limits, disclosure duties and conduct rules for very good reasons.</p>
+    <p>The article covers the two families of European funds (UCITS and AIFs), the rules for selling investments (MiFID II), and the special positions of Liechtenstein and Switzerland.</p>
+  </div>
+
+  <div class="inst prose" id="ucits">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · Retail funds</div>
+      <h2 class="inst-title">UCITS — the European standard</h2>
+      <div class="inst-sub">A fund passport built on strict limits</div>
+    </div>
+    <p><strong>UCITS</strong> (Undertakings for Collective Investment in Transferable Securities) is the EU framework for funds that can be sold to the general public. Once authorised in one member state, a UCITS can be marketed across the EU and EEA with a <strong>passport</strong>. The brand travels well beyond Europe, and the European fund industry is large: UCITS and alternative funds together held about <strong>€27.5 trillion</strong> at the end of the second quarter of 2026.</p>
+    <div class="facts"><div class="f-row"><span class="f-name">Eligible assets</span> — mainly liquid, transferable securities (listed shares and bonds), money-market instruments, deposits, other funds and derivatives within limits.</div><div class="f-row"><span class="f-name">Diversification — the 5/10/40 rule</span> — no more than 10% of assets in one issuer, and holdings above 5% may together make up no more than 40% of the fund.</div><div class="f-row"><span class="f-name">Liquidity</span> — investors must be able to redeem regularly, at least twice a month and in practice usually daily.</div><div class="f-row"><span class="f-name">Leverage</span> — global exposure from derivatives is capped.</div><div class="f-row"><span class="f-name">Investor information</span> — a prospectus and a short, standardised key information document (KID).</div><div class="f-row"><span class="f-name">Safekeeping</span> — assets held by an independent depositary.</div></div>
+  </div>
+
+  <div class="inst prose" id="aif">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · Alternative funds</div>
+      <h2 class="inst-title">AIFs and the AIFM Directive</h2>
+      <div class="inst-sub">Regulating the manager rather than the product</div>
+    </div>
+    <p>Everything that is not a UCITS is an <strong>alternative investment fund (AIF)</strong>: private equity and venture funds, hedge funds, real-estate funds, infrastructure and private-credit funds. The AIFM Directive regulates mainly the <strong>manager</strong> — authorisation, capital, risk and liquidity management, valuation, depositary and reporting — rather than imposing product limits. AIFs are mostly sold to professional investors, and they can use leverage, illiquid assets and concentrated positions that a UCITS cannot.</p>
+    <div class="table-wrap"><table class="compare"><thead><tr><th></th><th>UCITS</th><th>AIF</th></tr></thead><tbody><tr><td>Investors</td><td>Retail and professional</td><td>Mainly professional</td></tr><tr><td>Assets</td><td>Liquid securities</td><td>Anything: private companies, property, loans</td></tr><tr><td>Liquidity</td><td>Regular, usually daily</td><td>Often locked up for years</td></tr><tr><td>Leverage and concentration</td><td>Strictly limited</td><td>Allowed, with disclosure</td></tr><tr><td>Regulated mainly</td><td>The product</td><td>The manager</td></tr></tbody></table></div>
+  </div>
+
+  <div class="inst prose" id="mifid">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · Selling investments</div>
+      <h2 class="inst-title">MiFID II — conduct and markets</h2>
+      <div class="inst-sub">How investments may be sold and traded</div>
+    </div>
+    <p>The <strong>Markets in Financial Instruments Directive (MiFID II)</strong>, in force since 2018, governs investment firms and trading venues. For investors, its core is <strong>client protection</strong>:</p>
+    <div class="facts"><div class="f-row"><span class="f-name">Client categories</span> — retail clients, professional clients and eligible counterparties, with protection falling as experience rises.</div><div class="f-row"><span class="f-name">Suitability and appropriateness</span> — advice and portfolio management must fit the client's knowledge, experience, financial situation and objectives.</div><div class="f-row"><span class="f-name">Product governance</span> — manufacturers define a target market for each product.</div><div class="f-row"><span class="f-name">Inducements and costs</span> — limits on commissions and full disclosure of all costs.</div><div class="f-row"><span class="f-name">Best execution</span> — orders must be executed on the best terms reasonably available.</div></div>
+    <p>It works alongside the Market Abuse Regulation (insider dealing and market manipulation) and the PRIIPs rules on key information documents. Sustainability disclosures come from a separate regulation, SFDR — covered in the article on sustainable finance.</p>
+  </div>
+
+  <div class="inst prose" id="li-ch">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · Where I live</div>
+      <h2 class="inst-title">Liechtenstein and Switzerland</h2>
+      <div class="inst-sub">Two neighbours, two regimes</div>
+    </div>
+    <p><strong>Liechtenstein</strong> is in a customs and currency union with Switzerland — it uses the Swiss franc — but as a member of the <strong>European Economic Area</strong> it applies EU financial-market law, including UCITS, AIFMD and MiFID II, supervised by the Financial Market Authority (FMA). A fund set up in Vaduz can therefore use the EU passport. That bridge position is one of the foundations of Liechtenstein's fund and wealth-management industry.</p>
+    <p><strong>Switzerland</strong> is not in the EEA and has its own regime: FINMA supervises, the Collective Investment Schemes Act (CISA) governs funds, and the Financial Services Act (FinSA) sets conduct rules similar in spirit to MiFID II. Swiss funds are not UCITS and have no EU passport; foreign funds offered to Swiss retail investors need FINMA approval.</p>
+  </div>
+
+  <div class="inst prose" id="mine">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · My portfolio</div>
+      <h2 class="inst-title">What I take from this for VB Europe Strategic</h2>
+      <div class="inst-sub">Borrowing discipline from regulation</div>
+    </div>
+    <p>My portfolio is a personal project, not a regulated fund, so none of these rules apply to it legally. But they are tested answers to real risks, and I want to borrow from them. The statute plays the role of a prospectus: objective, universe, process and limits written down in advance. A UCITS-style diversification limit — no single position above 10%, and positions above 5% together capped at 40% — is a sensible default to test against the weights my statistical methods suggest. And reporting costs and risks as openly as a KID would is part of doing it properly.</p>
+  </div>
+
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion</p>
+    <h3>Bringing it together</h3>
+    <p>European asset management runs on two tracks: UCITS for liquid, diversified funds that can be sold to anyone and passported across Europe, and AIFs for everything alternative, with a regulated manager. MiFID II sets the rules for how investments are sold and traded. Liechtenstein combines the Swiss franc with EU financial law; Switzerland runs its own parallel system. For a student heading into this industry, these frameworks are the vocabulary of the job.</p>
+    <p class="sources">Sources: <a href="https://www.efama.org/node/501">EFAMA — Quarterly statistics Q2 2026</a>; EU Directive 2009/65/EC (UCITS); EU Directive 2011/61/EU (AIFMD); EU Directive 2014/65/EU (MiFID II); Financial Market Authority Liechtenstein (fma-li.li); FINMA (finma.ch); CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Ethical and Professional Standards; Portfolio Management).</p>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>

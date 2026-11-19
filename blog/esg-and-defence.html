@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustainable Finance and Defence — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+table.compare.even td:first-child { font-weight: 400; color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Sustainable Finance and Defence</h1>
+    <p class="section-sub">What ESG investing is, how EU rules define it, and why defence has moved from the exclusion list into the debate</p>
+    <p class="article-lead">For years, defence companies were among the first names cut from "responsible" portfolios. Since 2022 that view has been challenged across Europe — by governments, regulators and investors. This article explains the framework, sets out the arguments on both sides, and states where my own portfolio stands.</p>
+    <p class="article-meta">Context article for <a href="../investments.html">VB Europe Strategic</a>. Regulatory status as of November 2026.</p>
+  </div>
+
+  <div class="toc"><div class="toc-title">Contents</div><ol><li><a href="#objective">Objective</a></li><li><a href="#esg">What ESG investing is</a></li><li><a href="#sfdr">SFDR and its overhaul</a></li><li><a href="#shift">Why defence came back into the debate</a></li><li><a href="#debate">The case for and against</a></li><li><a href="#law">Controversial weapons — where law decides</a></li><li><a href="#mine">Defence in VB Europe Strategic</a></li><li><a href="#conclusion">Conclusion</a></li></ol></div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>My portfolio includes defence without exclusions inside the sector. That is a deliberate choice, and it runs against a decade of practice in European sustainable investing. A choice like that should be argued, not just stated — and it should be argued knowing the strongest case against it.</p>
+    <p>This article covers what ESG investing is, how the EU regulates it through SFDR, how the treatment of defence has changed, the arguments on each side, and the legal limits that apply regardless of one's view.</p>
+  </div>
+
+  <div class="inst prose" id="esg">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · The framework</div>
+      <h2 class="inst-title">What ESG investing is</h2>
+      <div class="inst-sub">Several different things under one label</div>
+    </div>
+    <p><strong>ESG</strong> stands for environmental, social and governance factors. The label covers approaches that are quite different from each other:</p>
+    <div class="facts"><div class="f-row"><span class="f-name">ESG integration</span> — using ESG factors as financial risk inputs, like any other analysis (e.g. carbon costs, governance failures).</div><div class="f-row"><span class="f-name">Exclusions (negative screening)</span> — removing whole sectors or companies, such as tobacco, coal or weapons.</div><div class="f-row"><span class="f-name">Best-in-class</span> — holding the companies that score best within each sector.</div><div class="f-row"><span class="f-name">Thematic and impact investing</span> — targeting specific outcomes, such as renewable energy, with measurable impact.</div><div class="f-row"><span class="f-name">Stewardship</span> — voting and engagement to change company behaviour from the inside.</div></div>
+    <p>The distinction matters: integration asks whether ESG risks affect value; exclusion asks whether an activity is acceptable at all. Defence has mostly been handled by exclusion.</p>
+  </div>
+
+  <div class="inst prose" id="sfdr">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · EU rules</div>
+      <h2 class="inst-title">SFDR and its overhaul</h2>
+      <div class="inst-sub">From disclosure categories to product labels</div>
+    </div>
+    <p>Since 2021 the EU's <strong>Sustainable Finance Disclosure Regulation (SFDR)</strong> has required fund managers to disclose how they treat sustainability. In practice, its Article 8 ("promotes environmental or social characteristics") and Article 9 ("sustainable investment objective") became used as quality labels — something they were never designed to be — and many managers excluded defence to fit them, even though the regulation did not require it.</p>
+    <p>In November 2025 the Commission proposed a revision, often called <strong>SFDR 2.0</strong>. It would replace Articles 8 and 9 with three voluntary product categories — <strong>Transition</strong>, <strong>ESG Basics</strong> and <strong>Sustainable</strong> — each with minimum criteria and exclusions, and it clarifies that SFDR should not be read as preventing investment in the defence sector (while keeping exclusions for controversial weapons). The Council adopted its position in June 2026 and the Parliament's ECON committee in September 2026; trilogue negotiations may conclude around the turn of 2026/27, with application not expected before late 2028 or 2029.</p>
+  </div>
+
+  <div class="inst prose" id="shift">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · What changed</div>
+      <h2 class="inst-title">Why defence came back into the debate</h2>
+      <div class="inst-sub">War, budgets and policy</div>
+    </div>
+    <p>Russia's full-scale invasion of Ukraine in 2022 changed the political context. In March 2025 the Commission presented the <strong>ReArm Europe Plan / Readiness 2030</strong>, aiming to enable up to around €800 billion of defence spending, including <strong>SAFE</strong> — up to €150 billion of EU-backed loans for joint procurement, with funding approved for 18 member states by April 2026. At the 2025 NATO summit in The Hague, allies agreed a target of 5% of GDP for defence and security-related spending by 2035.</p>
+    <p>Governments and regulators began to state openly that defence and sustainable investing are not incompatible. For investors, defence turned from a reputational risk into a policy-supported growth theme — which is also why it needs careful valuation rather than enthusiasm.</p>
+  </div>
+
+  <div class="inst prose" id="debate">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · The arguments</div>
+      <h2 class="inst-title">The case for and against</h2>
+      <div class="inst-sub">Both sides at their strongest</div>
+    </div>
+    <div class="table-wrap"><table class="compare even"><thead><tr><th>Including defence</th><th>Excluding defence</th></tr></thead><tbody><tr><td>Security is a precondition for every other social goal; democracies need to be able to defend themselves.</td><td>Weapons are designed to cause harm; investors may not want to profit from that under any circumstances.</td></tr><tr><td>Deterrence prevents wars; underfunded defence can make conflict more likely.</td><td>Arms exports can reach conflicts and regimes the investor never intended to support.</td></tr><tr><td>Europe's strategic autonomy depends on a capable home industry.</td><td>Higher military spending can crowd out spending on climate, health and social needs.</td></tr><tr><td>Excluding a whole sector removes investor influence over its governance and export controls.</td><td>Defence has known governance and corruption risks, and its revenue depends on political decisions.</td></tr><tr><td>Many defence firms are dual-use technology companies (aerospace, cyber, space, electronics).</td><td>Valuations driven by policy announcements can overshoot and reverse.</td></tr></tbody></table></div>
+    <p>Neither column is trivially wrong. What matters for an investor is to decide <strong>explicitly</strong>, on stated principles, rather than to inherit a default.</p>
+  </div>
+
+  <div class="inst prose" id="law">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · Hard limits</div>
+      <h2 class="inst-title">Controversial weapons — where law decides</h2>
+      <div class="inst-sub">Not a matter of preference</div>
+    </div>
+    <p>Separate from the conventional-defence debate, some weapons are banned by international treaties: <strong>biological and chemical weapons</strong>, <strong>anti-personnel mines</strong> (Ottawa Convention) and <strong>cluster munitions</strong> (Oslo Convention). Several European countries go further and restrict the <em>financing</em> of companies involved in them; Switzerland's War Material Act, for example, prohibits the direct financing of the development or manufacture of prohibited war materiel. Nuclear weapons sit in a contested middle ground: banned by a treaty that most European states have not signed, yet excluded by many investors.</p>
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What to check</span><br>
+    <strong>Revenue exposure.</strong> What share of a company's revenue comes from defence, and from which products.<br>
+    <strong>Controversial weapons involvement.</strong> Data providers flag companies linked to banned weapons — check before buying.<br>
+    <strong>Export markets.</strong> Who the customers are, and how export licences are controlled.<br>
+    <strong>Order backlog vs. valuation.</strong> Policy-driven demand can be priced in long before it reaches earnings.<br>
+    <strong>Regulatory change.</strong> The final SFDR 2.0 text and national rules may change what funds can hold.</div>
+  </div>
+
+  <div class="inst prose" id="mine">
+    <div class="inst-header">
+      <div class="inst-num">Part 6 · My position</div>
+      <h2 class="inst-title">Defence in VB Europe Strategic</h2>
+      <div class="inst-sub">A stated choice, with one boundary</div>
+    </div>
+    <p>My portfolio treats defence as part of European self-sufficiency: a continent that wants to lead again needs to be able to protect itself, and its defence industry is part of the industrial base my thesis is about. That is why the statute does not exclude companies within the sector.</p>
+    <p>One clarification belongs in the statute: "no exclusions within defence" should mean <strong>conventional defence</strong>. Companies involved in weapons banned by international treaties are a different category, and financing them can be restricted by law. Writing that boundary down explicitly is part of taking the choice seriously.</p>
+  </div>
+
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion</p>
+    <h3>Bringing it together</h3>
+    <p>ESG is a family of approaches, not one rule. For most of the past decade, European sustainable funds excluded defence by default, partly because the SFDR's categories were used as labels. Since 2022 war, budgets and regulation have reopened the question, and the coming SFDR 2.0 explicitly states that it does not stand in the way of defence financing. The debate is legitimate on both sides; what an investor owes is an explicit, reasoned position — and respect for the legal limits on controversial weapons.</p>
+    <p class="sources">Sources: <a href="https://www.debevoise.com/insights/publications/2026/09/sfdr-20-recap-briefing">Debevoise — SFDR 2.0 recap (Sept 2026)</a>; <a href="https://www.arthurcox.com/knowledge/sfdr-2-0-update/">Arthur Cox — SFDR 2.0 update (Oct 2026)</a>; <a href="https://www.walkersglobal.com/en/Insights/2025/12/SFDR-2-0-Proposal-for-amending-regulation-published">Walkers — SFDR 2.0 proposal</a>; <a href="https://goodwinlaw.com/en/insights/publications/2026/07/alerts-practices-pif-esg-sfdr-defence-investment-greater-investor-choice">Goodwin — ESG, SFDR and defence investment</a>; <a href="https://defence-industry-space.ec.europa.eu/eu-defence-industry/safe-security-action-europe_en">European Commission — SAFE</a>; <a href="https://www.consilium.europa.eu/en/policies/safe/">Council of the EU — SAFE</a>; Swiss Federal Act on War Material (SR 514.51).</p>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>
