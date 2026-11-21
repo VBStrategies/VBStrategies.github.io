@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behavioural Finance — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>Behavioural Finance</h1>
+    <p class="section-sub">Why investors — including me — make predictable mistakes, and how to build a process that guards against them</p>
+    <p class="article-lead">Classical finance assumes rational investors. Real investors feel losses more than gains, hold on to losers, trade too much and trust their own judgement too far. This article covers the main biases, the evidence behind them, and the practical defences I want to build into my own portfolio.</p>
+    <p class="article-meta">Depth: roughly CFA Level I (Portfolio Management — behavioural biases). Written before the real-money phase of <a href="../investments.html">VB Europe Strategic</a>, to be revisited after it.</p>
+  </div>
+
+  <div class="toc"><div class="toc-title">Contents</div><ol><li><a href="#objective">Objective</a></li><li><a href="#theory">From rational investors to prospect theory</a></li><li><a href="#biases">The main biases</a></li><li><a href="#evidence">What the research shows</a></li><li><a href="#defences">Building a process that protects me from myself</a></li><li><a href="#mine">What I will track in the live phase</a></li><li><a href="#conclusion">Conclusion</a></li></ol></div>
+
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>One reason I plan to invest real money in my portfolio, not just paper money, is to learn behavioural finance from the inside. On paper, every rule is easy to follow. With my own money at stake, the same rules will feel very different — and the research says exactly how they will feel different.</p>
+    <p>So this article is written <strong>before</strong> that phase: what the biases are, where the evidence comes from, which ones are most dangerous for a strategy like mine, and which defences I put in place in advance. After the live phase I want to come back and compare.</p>
+  </div>
+
+  <div class="inst prose" id="theory">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · The foundation</div>
+      <h2 class="inst-title">From rational investors to prospect theory</h2>
+      <div class="inst-sub">How people actually weigh gains and losses</div>
+    </div>
+    <p>Traditional finance assumes investors are rational, risk-averse and update beliefs correctly. Behavioural finance, built on the work of Daniel Kahneman and Amos Tversky, shows systematic departures from that. Their <strong>prospect theory</strong> (1979) describes three regularities: people judge outcomes as <strong>gains and losses relative to a reference point</strong> (often the purchase price), not as final wealth; they are <strong>loss-averse</strong> — a loss hurts roughly twice as much as an equal gain pleases; and they are risk-averse for gains but <strong>risk-seeking for losses</strong>, preferring to gamble rather than accept a sure loss.</p>
+    <p>These regularities are not random errors that cancel out across investors. They are predictable, which is why they can move prices and why they can be guarded against.</p>
+  </div>
+
+  <div class="inst prose" id="biases">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · The catalogue</div>
+      <h2 class="inst-title">The main biases</h2>
+      <div class="inst-sub">Cognitive errors and emotional biases</div>
+    </div>
+    <p>The CFA curriculum splits biases into two groups. <strong>Cognitive errors</strong> come from faulty reasoning and can often be corrected with better information and process. <strong>Emotional biases</strong> come from feelings and are harder to fix; they usually have to be accommodated with rules.</p>
+    <div class="table-wrap"><table class="compare"><thead><tr><th>Bias</th><th>Type</th><th>What it looks like</th></tr></thead><tbody><tr><td>Confirmation bias</td><td>Cognitive</td><td>Seeking information that supports the thesis, discounting what contradicts it</td></tr><tr><td>Anchoring</td><td>Cognitive</td><td>Sticking to an initial number — the purchase price, a past target — despite new information</td></tr><tr><td>Representativeness</td><td>Cognitive</td><td>Judging by resemblance: a good company must be a good stock</td></tr><tr><td>Hindsight bias</td><td>Cognitive</td><td>"I knew it all along" — which makes the future seem more predictable than it is</td></tr><tr><td>Mental accounting</td><td>Cognitive</td><td>Treating money differently by label rather than as one portfolio</td></tr><tr><td>Loss aversion</td><td>Emotional</td><td>Holding losers to avoid realising a loss; selling winners too early</td></tr><tr><td>Overconfidence</td><td>Emotional</td><td>Overestimating one's knowledge and precision; trading too often</td></tr><tr><td>Endowment effect</td><td>Emotional</td><td>Valuing what one owns more highly than the same thing not owned</td></tr><tr><td>Status quo bias</td><td>Emotional</td><td>Doing nothing because change feels risky</td></tr><tr><td>Regret aversion and herding</td><td>Emotional</td><td>Following the crowd so that mistakes are shared</td></tr></tbody></table></div>
+  </div>
+
+  <div class="inst prose" id="evidence">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · The evidence</div>
+      <h2 class="inst-title">What the research shows</h2>
+      <div class="inst-sub">Biases measured in real portfolios</div>
+    </div>
+    <div class="facts"><div class="f-row"><span class="f-name">The disposition effect</span> — investors sell winners too early and hold losers too long. Shefrin and Statman named it in 1985; Odean (1998) confirmed it in thousands of brokerage accounts, and found that the winners sold went on to outperform the losers kept.</div><div class="f-row"><span class="f-name">Overtrading</span> — Barber and Odean (2000) found that the households that traded most earned markedly lower net returns than those that traded least. Activity felt like skill; it was mostly cost.</div><div class="f-row"><span class="f-name">Home bias</span> — French and Poterba (1991) documented that investors hold far more domestic stocks than diversification would justify.</div><div class="f-row"><span class="f-name">Momentum and overreaction</span> — patterns such as short-term momentum and long-term reversal are often explained by investors under- and over-reacting to news.</div></div>
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> A bias close to home</span><br>A portfolio built only from European companies by a European investor is, by construction, open to the charge of <strong>home bias</strong>. My answer is that it is an explicit thematic strategy, not an accidental default — but that distinction only holds if the statute says so and the results are compared honestly with a broader benchmark.</div>
+  </div>
+
+  <div class="inst prose" id="defences">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · Defences</div>
+      <h2 class="inst-title">Building a process that protects me from myself</h2>
+      <div class="inst-sub">Rules decided in calm conditions</div>
+    </div>
+    <p>Knowing about biases does little on its own; experienced investors show them too. What works is <strong>process</strong> — decisions made in advance, written down, and checked afterwards:</p>
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> My defences</span><br>
+    <strong>A written statute.</strong> Objective, universe, weights, rebalancing and sell rules fixed before the first trade — an investment policy statement for myself.<br>
+    <strong>A decision journal.</strong> For every trade: the thesis, the expected outcome, what would prove me wrong, and my emotional state. Reviewed later against what happened.<br>
+    <strong>Pre-defined sell criteria.</strong> Sell when the thesis breaks, not because of the purchase price. This targets the disposition effect directly.<br>
+    <strong>A devil's-advocate section.</strong> For each holding, the strongest case against it — a check on confirmation bias.<br>
+    <strong>Rebalancing by calendar.</strong> Fixed dates rather than reactions to headlines, which limits overtrading.<br>
+    <strong>Fixed benchmark and metrics.</strong> Decided in advance, so I cannot choose the flattering comparison afterwards.</div>
+  </div>
+
+  <div class="inst prose" id="mine">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · My portfolio</div>
+      <h2 class="inst-title">What I will track in the live phase</h2>
+      <div class="inst-sub">Turning the journal into data</div>
+    </div>
+    <p>When real money is in the portfolio, the decision journal becomes a dataset. I want to track, for each trade, whether I followed the statute or deviated from it, how long I held winners compared with losers, how often I traded compared with the plan, and how the deviations performed. At the end of the project, that comparison — what the rules said versus what I actually did — will be the most honest part of the reflection.</p>
+  </div>
+
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion</p>
+    <h3>Bringing it together</h3>
+    <p>Behavioural finance replaces the rational investor with a real one: loss-averse, overconfident, anchored to reference points and prone to follow the crowd. The biases are well documented and predictable, and they cost money — through holding losers, overtrading and under-diversifying. The defence is not willpower but process: rules written in calm conditions, a journal that records decisions as they happen, and an honest review of the gap between the two.</p>
+    <p class="sources">Sources: D. Kahneman &amp; A. Tversky, "Prospect Theory: An Analysis of Decision under Risk", <em>Econometrica</em> (1979); H. Shefrin &amp; M. Statman, "The Disposition to Sell Winners Too Early and Ride Losers Too Long", <em>Journal of Finance</em> (1985); T. Odean, "Are Investors Reluctant to Realize Their Losses?", <em>Journal of Finance</em> (1998); B. Barber &amp; T. Odean, "Trading Is Hazardous to Your Wealth", <em>Journal of Finance</em> (2000); K. French &amp; J. Poterba, "Investor Diversification and International Equity Markets", <em>American Economic Review</em> (1991); CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Portfolio Management).</p>
+  </div>
+
+</main>
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>

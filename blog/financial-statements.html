@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Three Financial Statements Connect — VB Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* == DOLADĚNÍ VELIKOSTÍ == */
+.container { max-width: 920px; }
+.prose p, .prose ul, .prose ol, .prose li, .numbered li { font-size: 19px; }
+.container h3 { font-size: 20px; }
+.quant-note { font-size: 18px; }
+.quant-note svg { height: 18px; width: 18px; vertical-align: middle; }
+table.compare { font-size: 16px; }
+
+/* == ČLÁNKOVÉ STYLY == */
+.prose p { margin-bottom: 14px; text-align: justify; font-size: 19px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: var(--navy); font-weight: 700; }
+.prose ul { margin: 0 0 16px 22px; }
+.prose li { margin-bottom: 8px; }
+.prose h3 { margin: 26px 0 10px; }
+.article-lead { font-size: 20px; line-height: 1.55; opacity: 0.9; margin-bottom: 10px; }
+.article-meta { font-style: italic; font-size: 17px; color: var(--navy); opacity: 0.7; margin-bottom: 32px; }
+.eyebrow { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; margin-bottom: 6px; }
+.quant-note { border-left: 3px solid var(--navy); background: rgba(10, 46, 112, 0.04); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; }
+.quant-note .quant-label { display: inline-block; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.sources { font-style: italic; font-size: 16px; opacity: 0.7; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.sources a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--line); }
+.sources a:hover { border-bottom-color: var(--navy); }
+.callout { border: 1px solid var(--line); border-radius: 8px; background: rgba(10, 46, 112, 0.04); padding: 18px 22px; margin: 22px 0; font-size: 18px; }
+.callout .callout-title { font-weight: 700; color: var(--navy); font-size: 20px; margin-bottom: 6px; }
+.table-wrap { overflow-x: auto; margin: 20px 0; -webkit-overflow-scrolling: touch; }
+table.compare { border-collapse: collapse; width: 100%; min-width: 640px; }
+table.compare th, table.compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+table.compare thead th { color: var(--navy); font-weight: 700; border-bottom: 2px solid var(--line); }
+table.compare tbody tr:hover { background: rgba(10, 46, 112, 0.03); }
+table.compare td:first-child { font-weight: 700; color: var(--navy); }
+.back-link { display: inline-block; margin-bottom: 20px; color: var(--navy); text-decoration: none; font-size: 18px; opacity: 0.8; }
+.back-link:hover { opacity: 1; }
+
+/* == UČEBNÍ PRVKY == */
+.toc { border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin: 24px 0 40px; background: rgba(10,46,112,0.02); }
+.toc-title { font-weight: 700; color: var(--navy); font-size: 17px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.toc ol { margin: 0 0 0 20px; font-size: 17px; }
+.toc li { margin-bottom: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.inst { margin: 0 0 56px; scroll-margin-top: 90px; padding-top: 12px; }
+.inst-header { border-bottom: 2px solid var(--navy); padding-bottom: 10px; margin-bottom: 18px; }
+.inst-num { font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy); opacity: 0.55; font-weight: 600; }
+.inst-title { font-size: 27px; font-weight: 700; color: var(--navy); margin: 2px 0 0; }
+.inst-sub { font-size: 16px; opacity: 0.7; font-style: italic; }
+.layer-label { font-size: 15px; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); font-weight: 700; opacity: 0.7; margin: 24px 0 8px; padding-left: 10px; border-left: 3px solid var(--navy); }
+.watchout { border-left: 3px solid #b04a2f; background: rgba(176,74,47,0.05); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 18px 0; font-size: 18px; }
+.watchout .wo-label { display: inline-block; font-weight: 700; color: #b04a2f; letter-spacing: 0.5px; font-size: 15px; text-transform: uppercase; margin-bottom: 4px; }
+.glossary dt { font-weight: 700; color: var(--navy); font-size: 18px; margin-top: 14px; }
+.glossary dd { margin: 2px 0 0; font-size: 18px; opacity: 0.9; }
+/* Seniority ladder */
+.ladder { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 18px 0; }
+.rung { padding: 12px 18px; border-bottom: 1px solid var(--line-soft); font-size: 17px; }
+.rung:last-child { border-bottom: none; }
+.rung .r-name { font-weight: 700; color: var(--navy); }
+.rung.r1 { background: rgba(10,46,112,0.10); }
+.rung.r2 { background: rgba(10,46,112,0.075); }
+.rung.r3 { background: rgba(10,46,112,0.05); }
+.rung.r4 { background: rgba(10,46,112,0.03); }
+.rung.r5 { background: rgba(10,46,112,0.015); }
+/* Key facts box */
+.facts { border: 1px solid var(--line); border-radius: 8px; padding: 4px 22px 8px; margin: 18px 0; }
+.facts .f-row { padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 18px; }
+.facts .f-row:last-child { border-bottom: none; }
+.facts .f-name { font-weight: 700; color: var(--navy); }
+.article-meta a, .prose a { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="brand-link"><div class="brand">VB Strategies</div></a>
+  <nav class="nav">
+    <a href="../index.html" class="nav-link">Home</a>
+    <a href="../investments.html" class="nav-link">On Investments</a>
+    <a href="../blog.html" class="nav-link active">Blog</a>
+    <a href="../about.html" class="nav-link">About</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <a href="../blog.html" class="back-link">← Back to Blog</a>
+
+  <div class="section">
+    <p class="eyebrow">Foundations · Deep Reference</p>
+    <h1>How the Three Financial Statements Connect</h1>
+    <p class="section-sub">Income statement, balance sheet and cash flow statement — how each is built, and how one change ripples through the other two</p>
+    <p class="article-lead">Every company reports three statements, and most introductions explain them one at a time. That is exactly why they stay abstract. This article treats them as <strong>one connected system</strong>: we build a small company from scratch, record its transactions one by one, and watch each of them land in all three statements at once.</p>
+    <p class="article-meta">The bridge between the instruments and valuation: before putting a value on a share or a bond, you need to read the numbers behind it. Depth: roughly CFA Level I (Financial Statement Analysis).</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#objective">Objective — why this matters to me</a></li>
+      <li><a href="#three">1 — The three statements, one question each</a></li>
+      <li><a href="#accrual">2 — Why profit is not cash: accrual accounting</a></li>
+      <li><a href="#links">3 — The links between the statements</a></li>
+      <li><a href="#walkthrough">4 — Building a company, transaction by transaction</a></li>
+      <li><a href="#whatif">5 — "What happens if…": one change, three statements</a></li>
+      <li><a href="#reading">6 — Reading statements as an investor</a></li>
+      <li><a href="#conclusion">Conclusion &amp; summary table</a></li>
+    </ol>
+  </div>
+
+  <!-- OBJECTIVE -->
+  <div class="section prose" id="objective">
+    <h3>Objective</h3>
+    <p>I know that there are three financial statements. What I could not picture was <strong>how they are put together</strong> and, above all, <strong>how an increase or decrease in one of them turns into changes in the other two</strong>. Reading them separately, each one made sense; as a system, it was a black box. That is the gap this article sets out to close.</p>
+    <p>It matters because everything that follows depends on it. A DCF starts from cash flows that are derived from all three statements; a bond analyst checks whether operating cash covers interest; a portfolio manager has to tell a company whose profits are real from one whose profits exist only on paper. None of that works without understanding how the statements move together.</p>
+    <div class="callout">
+      <div class="callout-title">The one rule to hold on to</div>
+      <p style="margin:0;"><strong>Assets = Liabilities + Equity</strong>, always. Every transaction touches at least two places, and after every transaction this equation still holds. If you can check that, you understand the system.</p>
+    </div>
+  </div>
+
+  <!-- 1 THREE STATEMENTS -->
+  <div class="inst prose" id="three">
+    <div class="inst-header">
+      <div class="inst-num">Part 1 · The building blocks</div>
+      <h2 class="inst-title">The three statements, one question each</h2>
+      <div class="inst-sub">A film, a photograph, and the bank statement</div>
+    </div>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">Income statement — "Did the company make a profit?"</span> A <em>film</em> of one period (a quarter, a year). Revenue minus expenses gives net income. It follows accrual accounting, so it records what was <em>earned</em> and <em>incurred</em>, not what was paid.</div>
+      <div class="f-row"><span class="f-name">Balance sheet — "What does it own and owe?"</span> A <em>photograph</em> at one moment. Assets on one side; liabilities and shareholders' equity on the other. The two sides are equal by construction.</div>
+      <div class="f-row"><span class="f-name">Cash flow statement — "Where did the cash come from and go?"</span> The <em>bank statement</em> of the period, sorted into three buckets: <strong>operating</strong> (CFO, running the business), <strong>investing</strong> (CFI, buying and selling long-term assets) and <strong>financing</strong> (CFF, dealing with lenders and shareholders).</div>
+    </div>
+    <p>A fourth, smaller statement — the <strong>statement of changes in equity</strong> — explains how equity moved during the period: profit added, dividends paid, shares issued or bought back. It is the place where the income statement formally meets the balance sheet.</p>
+
+    <div class="layer-label">The main lines</div>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead><tr><th>Income statement</th><th>Balance sheet</th><th>Cash flow statement</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue</td><td><strong>Assets:</strong> cash, receivables, inventory, PP&amp;E (property, plant &amp; equipment), intangibles</td><td><strong>CFO:</strong> net income, adjusted for non-cash items and working capital</td></tr>
+          <tr><td>− Cost of goods sold = Gross profit</td><td><strong>Liabilities:</strong> payables, accrued expenses, debt</td><td><strong>CFI:</strong> capital expenditure (capex), acquisitions, asset sales</td></tr>
+          <tr><td>− Operating expenses, D&amp;A = EBIT</td><td><strong>Equity:</strong> share capital, retained earnings</td><td><strong>CFF:</strong> borrowing and repaying debt, issuing shares, buybacks, dividends</td></tr>
+          <tr><td>− Interest, − Tax = Net income</td><td></td><td>= Net change in cash</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2 ACCRUAL -->
+  <div class="inst prose" id="accrual">
+    <div class="inst-header">
+      <div class="inst-num">Part 2 · The reason for three statements</div>
+      <h2 class="inst-title">Why profit is not cash</h2>
+      <div class="inst-sub">Accrual accounting separates earning from getting paid</div>
+    </div>
+    <p>If every sale were paid immediately and every cost paid on the spot, profit and cash would be the same and one statement would be enough. In reality they drift apart, because accounting under IFRS and US GAAP follows the <strong>accrual principle</strong>: revenue is recognised when it is <strong>earned</strong> (the goods are delivered), and expenses when they are <strong>incurred</strong> — matched to the revenue they helped produce — regardless of when cash moves.</p>
+    <p>Three things create the gap. <strong>Timing</strong>: a sale on credit is revenue today and cash next month (a receivable); a supplier bill paid later is a cost today and cash outflow next month (a payable). <strong>Non-cash expenses</strong>: depreciation spreads the cost of a machine over its life, so profit falls every year while the cash left in the year the machine was bought. <strong>Balance-sheet-only flows</strong>: borrowing, repaying debt or buying equipment move cash without touching profit at all.</p>
+    <p>The balance sheet is where these gaps are parked — as receivables, inventory, payables, PP&amp;E and debt. The cash flow statement is the reconciliation that explains, line by line, how profit became cash. That is the whole logic of the three-statement system.</p>
+  </div>
+
+  <!-- 3 LINKS -->
+  <div class="inst prose" id="links">
+    <div class="inst-header">
+      <div class="inst-num">Part 3 · The wiring</div>
+      <h2 class="inst-title">The links between the statements</h2>
+      <div class="inst-sub">Three bridges hold the system together</div>
+    </div>
+
+    <div style="margin:22px 0;">
+    <svg viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'Cormorant Garamond',serif;" role="img" aria-label="Diagram of the links between the three financial statements">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0a2e70"/></marker></defs>
+      <rect x="20" y="120" width="220" height="110" rx="8" fill="rgba(10,46,112,0.06)" stroke="#0a2e70" stroke-width="1.5"/>
+      <text x="130" y="160" text-anchor="middle" font-size="21" font-weight="700" fill="#0a2e70">Income statement</text>
+      <text x="130" y="186" text-anchor="middle" font-size="16" fill="#222">Revenue − expenses</text>
+      <text x="130" y="208" text-anchor="middle" font-size="16" fill="#222">= Net income</text>
+      <rect x="330" y="120" width="220" height="110" rx="8" fill="rgba(10,46,112,0.06)" stroke="#0a2e70" stroke-width="1.5"/>
+      <text x="440" y="160" text-anchor="middle" font-size="21" font-weight="700" fill="#0a2e70">Cash flow statement</text>
+      <text x="440" y="186" text-anchor="middle" font-size="16" fill="#222">CFO + CFI + CFF</text>
+      <text x="440" y="208" text-anchor="middle" font-size="16" fill="#222">= Change in cash</text>
+      <rect x="640" y="120" width="220" height="110" rx="8" fill="rgba(10,46,112,0.06)" stroke="#0a2e70" stroke-width="1.5"/>
+      <text x="750" y="160" text-anchor="middle" font-size="21" font-weight="700" fill="#0a2e70">Balance sheet</text>
+      <text x="750" y="186" text-anchor="middle" font-size="16" fill="#222">Assets =</text>
+      <text x="750" y="208" text-anchor="middle" font-size="16" fill="#222">Liabilities + Equity</text>
+      <line x1="240" y1="160" x2="326" y2="160" stroke="#0a2e70" stroke-width="1.6" marker-end="url(#ah)"/>
+      <text x="283" y="148" text-anchor="middle" font-size="15" font-weight="700" fill="#0a2e70">②</text>
+      <line x1="550" y1="160" x2="636" y2="160" stroke="#0a2e70" stroke-width="1.6" marker-end="url(#ah)"/>
+      <text x="593" y="148" text-anchor="middle" font-size="15" font-weight="700" fill="#0a2e70">③</text>
+      <path d="M130,120 C130,40 750,40 750,116" fill="none" stroke="#0a2e70" stroke-width="1.6" marker-end="url(#ah)"/>
+      <text x="440" y="52" text-anchor="middle" font-size="16" fill="#0a2e70"><tspan font-weight="700">①</tspan> Net income − dividends → retained earnings</text>
+      <path d="M750,230 C750,300 440,300 440,234" fill="none" stroke="#0a2e70" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#ah)"/>
+      <text x="600" y="312" text-anchor="middle" font-size="16" fill="#0a2e70"><tspan font-weight="700">④</tspan> Changes in balance-sheet items explain the cash flows</text>
+      <text x="283" y="254" text-anchor="middle" font-size="14" fill="#444">NI is line 1</text>
+      <text x="283" y="272" text-anchor="middle" font-size="14" fill="#444">of CFO</text>
+      <text x="593" y="254" text-anchor="middle" font-size="14" fill="#444">Ending cash</text>
+      <text x="593" y="272" text-anchor="middle" font-size="14" fill="#444">= BS cash</text>
+    </svg>
+    </div>
+
+    <p><strong>① Income statement → balance sheet.</strong> Net income does not vanish at the end of the year; whatever is not paid out as dividends is added to <strong>retained earnings</strong> in equity: <strong>RE<sub>end</sub> = RE<sub>begin</sub> + Net income − Dividends</strong>. This is how profit becomes part of what shareholders own.</p>
+    <p><strong>② Income statement → cash flow statement.</strong> Under the <em>indirect method</em>, used by most companies, CFO starts from net income and then undoes everything that was not cash: it <strong>adds back</strong> non-cash expenses such as depreciation and amortisation, and adjusts for changes in working capital.</p>
+    <p><strong>③ Cash flow statement → balance sheet.</strong> Opening cash + net change in cash = closing cash, and that closing cash is exactly the cash line on the balance sheet. If they differ, something is missing.</p>
+    <p><strong>④ Balance sheet → cash flow statement.</strong> The cash flow statement is, in effect, the explanation of how every balance-sheet line changed. Rules of thumb:</p>
+    <div class="facts">
+      <div class="f-row"><span class="f-name">An asset (other than cash) goes up → cash goes down.</span> Higher receivables mean sales not yet collected; more inventory means cash tied up in goods; more PP&amp;E means capex was spent.</div>
+      <div class="f-row"><span class="f-name">A liability or equity goes up → cash goes up.</span> Higher payables mean bills not yet paid; new debt or new shares bring cash in.</div>
+      <div class="f-row"><span class="f-name">And the reverse.</span> Collecting receivables or selling assets brings cash in; paying suppliers, repaying debt, paying dividends or buying back shares takes it out.</div>
+    </div>
+
+    <div class="quant-note"><span class="quant-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#0a2e70"><path d="M202.83-173.67q-23.5 0-39.33-16.09-15.83-16.1-15.83-38.84v-610.57h23.16v610.34q0 12 9.75 22t22.25 10h610.34v23.16H202.83ZM317-323v-264.67h45.67V-323H317Zm172.5 0v-465.5h46.33V-323H489.5Zm171.83 0v-104.33h46.34V-323h-46.34Z"/></svg> IFRS vs. US GAAP — where a cash flow is classified</span><br>Under US GAAP, interest paid is operating and dividends paid are financing. IAS 7 has allowed IFRS companies to choose (interest paid in operating or financing; interest and dividends received in operating or investing). From 2027, IFRS 18 removes most of these choices for non-financial companies. When comparing CFO across companies, check where interest sits.</div>
+  </div>
+
+  <!-- 4 WALKTHROUGH -->
+  <div class="inst prose" id="walkthrough">
+    <div class="inst-header">
+      <div class="inst-num">Part 4 · Learning by doing</div>
+      <h2 class="inst-title">Building a company, transaction by transaction</h2>
+      <div class="inst-sub">Alpen Tools AG, a fictional company, in its first year — tax rate 20%</div>
+    </div>
+    <p>The founders put in <strong>100</strong> of cash in exchange for shares. Opening balance sheet: cash 100 = share capital 100. Now follow nine transactions. For each, read the three columns together — and check that assets still equal liabilities plus equity.</p>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead><tr><th>#</th><th>Transaction</th><th>Income statement</th><th>Cash flow statement</th><th>Balance sheet</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Borrow 50 from a bank</td><td>—</td><td>CFF +50</td><td>Cash +50 · Debt +50</td></tr>
+          <tr><td>2</td><td>Buy a machine for 60 in cash</td><td>— (not an expense yet)</td><td>CFI −60</td><td>Cash −60 · PP&amp;E +60</td></tr>
+          <tr><td>3</td><td>Buy inventory for 40 on credit</td><td>—</td><td>— (no cash yet)</td><td>Inventory +40 · Payables +40</td></tr>
+          <tr><td>4</td><td>Sell goods that cost 30 for 70, on credit</td><td>Revenue +70 · COGS −30</td><td>— (no cash yet)</td><td>Receivables +70 · Inventory −30 · Retained earnings +40</td></tr>
+          <tr><td>5</td><td>Depreciate the machine (60 over 5 years)</td><td>Depreciation −12</td><td>— (non-cash)</td><td>PP&amp;E −12 · Retained earnings −12</td></tr>
+          <tr><td>6</td><td>Pay interest of 3</td><td>Interest −3</td><td>CFO −3</td><td>Cash −3 · Retained earnings −3</td></tr>
+          <tr><td>7</td><td>Pay tax: 20% × (70 − 30 − 12 − 3) = 5</td><td>Tax −5</td><td>CFO −5</td><td>Cash −5 · Retained earnings −5</td></tr>
+          <tr><td>8</td><td>Customers pay 50 of their receivables</td><td>— (revenue already counted)</td><td>CFO +50</td><td>Cash +50 · Receivables −50</td></tr>
+          <tr><td>9</td><td>Pay a dividend of 5</td><td>— (not an expense)</td><td>CFF −5</td><td>Cash −5 · Retained earnings −5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Now close the year. The three statements are simply the transactions above, summed by column:</p>
+
+    <div class="dual" style="display:flex;flex-wrap:wrap;gap:12px;margin:18px 0;">
+      <div class="facts" style="flex:1;min-width:250px;margin:0;">
+        <div class="f-row"><span class="f-name">Income statement</span></div>
+        <div class="f-row">Revenue 70 − COGS 30 = <strong>Gross profit 40</strong></div>
+        <div class="f-row">− Depreciation 12 = <strong>EBIT 28</strong></div>
+        <div class="f-row">− Interest 3 = EBT 25</div>
+        <div class="f-row">− Tax 5 = <strong>Net income 20</strong></div>
+      </div>
+      <div class="facts" style="flex:1;min-width:250px;margin:0;">
+        <div class="f-row"><span class="f-name">Cash flow statement (indirect)</span></div>
+        <div class="f-row">Net income 20 + Depreciation 12</div>
+        <div class="f-row">− ↑Receivables 20 − ↑Inventory 10 + ↑Payables 40</div>
+        <div class="f-row">= <strong>CFO 42</strong> · CFI −60 · CFF +45</div>
+        <div class="f-row">= <strong>Change in cash +27</strong></div>
+      </div>
+      <div class="facts" style="flex:1;min-width:250px;margin:0;">
+        <div class="f-row"><span class="f-name">Closing balance sheet</span></div>
+        <div class="f-row">Cash 127 · Receivables 20 · Inventory 10 · PP&amp;E 48 = <strong>Assets 205</strong></div>
+        <div class="f-row">Payables 40 · Debt 50 = Liabilities 90</div>
+        <div class="f-row">Share capital 100 · Retained earnings 15 = Equity 115</div>
+        <div class="f-row"><strong>90 + 115 = 205 ✓</strong></div>
+      </div>
+    </div>
+
+    <p>Check every bridge from Part 3. <strong>①</strong> Retained earnings went from 0 to 15 = net income 20 − dividend 5. <strong>②</strong> CFO starts with net income 20. <strong>③</strong> Opening cash 100 + change 27 = 127, the balance-sheet cash. <strong>④</strong> Each adjustment in CFO is a balance-sheet change: receivables rose by 20 (70 billed, 50 collected), inventory by 10 (40 bought, 30 sold), payables by 40 (nothing paid yet).</p>
+    <p>Notice what the numbers say. The company earned <strong>20</strong> of profit but generated <strong>42</strong> of operating cash — mainly because it has not yet paid its supplier. After the machine purchase, free cash flow (CFO − capex) was <strong>−18</strong>, and the business was funded by the bank. Profit alone would never have shown that.</p>
+    <p>A useful check: the CFO can also be built directly from the cash transactions — collected 50, paid interest 3, paid tax 5 → 42. The indirect and direct methods always give the same CFO; they only show the route differently.</p>
+  </div>
+
+  <!-- 5 WHAT IF -->
+  <div class="inst prose" id="whatif">
+    <div class="inst-header">
+      <div class="inst-num">Part 5 · The core skill</div>
+      <h2 class="inst-title">"What happens if…": one change, three statements</h2>
+      <div class="inst-sub">The classic exercise — trace a single change through the whole system (tax rate 20%)</div>
+    </div>
+    <p>The method is always the same: <strong>start with the income statement</strong> (does profit change?), <strong>move to the cash flow statement</strong> (start from the change in net income, then adjust for non-cash and balance-sheet effects), and <strong>finish on the balance sheet</strong> (cash from the cash flow statement, retained earnings from net income, plus any other line affected) — and check that both sides move by the same amount.</p>
+
+    <div class="callout">
+      <div class="callout-title">Worked in full: depreciation increases by 10</div>
+      <p style="margin:0 0 8px;"><strong>Income statement:</strong> EBIT −10 → taxable profit −10 → tax −2 → <strong>net income −8</strong>.</p>
+      <p style="margin:0 0 8px;"><strong>Cash flow statement:</strong> net income −8, but depreciation is added back +10 → <strong>CFO +2</strong>. Cash goes <em>up</em>, because the company pays 2 less in tax (the <em>depreciation tax shield</em>).</p>
+      <p style="margin:0;"><strong>Balance sheet:</strong> cash +2, PP&amp;E −10 → assets −8. Retained earnings −8 → equity −8. <strong>−8 = −8 ✓</strong></p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead><tr><th>Change</th><th>Income statement</th><th>Cash flow statement</th><th>Balance sheet</th></tr></thead>
+        <tbody>
+          <tr><td>Depreciation +10</td><td>Net income −8</td><td>CFO +2 (−8 + 10)</td><td>Cash +2, PP&amp;E −10 · RE −8</td></tr>
+          <tr><td>Sale of 100 on credit (no cost, tax paid in cash)</td><td>Revenue +100, tax −20 → NI +80</td><td>NI +80, ↑receivables −100 → CFO −20</td><td>Cash −20, receivables +100 · RE +80</td></tr>
+          <tr><td>Buy inventory 10 in cash</td><td>—</td><td>↑Inventory → CFO −10</td><td>Cash −10, inventory +10</td></tr>
+          <tr><td>Buy equipment 100, financed by new debt</td><td>—</td><td>CFI −100, CFF +100 → net 0</td><td>PP&amp;E +100 · Debt +100</td></tr>
+          <tr><td>Customer pays a receivable of 20</td><td>—</td><td>↓Receivables → CFO +20</td><td>Cash +20, receivables −20</td></tr>
+          <tr><td>Pay a dividend of 10</td><td>— (not an expense)</td><td>CFF −10</td><td>Cash −10 · RE −10</td></tr>
+          <tr><td>Write down inventory by 10</td><td>Expense −10, tax −2 → NI −8</td><td>NI −8, write-down added back +10 → CFO +2</td><td>Cash +2, inventory −10 · RE −8</td></tr>
+          <tr><td>Accrue a salary of 10, unpaid</td><td>Expense −10, tax −2 → NI −8</td><td>NI −8, ↑accrued liabilities +10 → CFO +2</td><td>Cash +2 · Accrued liabilities +10, RE −8</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Two patterns repeat. A <strong>non-cash expense</strong> (depreciation, write-downs, accruals) lowers profit but <em>raises</em> cash by the tax it saves. A <strong>balance-sheet-only</strong> transaction (inventory bought, debt-funded capex, collections) never touches profit but moves cash — which is precisely why the cash flow statement exists.</p>
+    <p style="font-size:17px;opacity:0.8;"><em>Simplification:</em> tax is assumed to be paid in cash in the same period and book and tax depreciation are assumed equal. In reality, timing differences create deferred taxes — a later topic.</p>
+  </div>
+
+  <!-- 6 READING -->
+  <div class="inst prose" id="reading">
+    <div class="inst-header">
+      <div class="inst-num">Part 6 · From mechanics to judgement</div>
+      <h2 class="inst-title">Reading statements as an investor</h2>
+      <div class="inst-sub">What the links reveal that a single statement hides</div>
+    </div>
+    <p>Once the links are clear, the statements become a tool for checking each other. Profit is shaped by accounting choices; cash is much harder to dress up. Comparing the two is the first test of <strong>earnings quality</strong>.</p>
+
+    <div class="watchout"><span class="wo-label"><svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 0 24 24" width="18px" fill="#b04a2f" style="vertical-align:middle"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> What to watch</span><br>
+    <strong>CFO persistently below net income.</strong> Profits that never turn into cash deserve suspicion.<br>
+    <strong>Receivables growing faster than revenue.</strong> Sales may be booked aggressively, or customers are paying later.<br>
+    <strong>Inventory growing faster than sales.</strong> Demand may be weakening, or write-downs may be coming.<br>
+    <strong>CFO boosted by stretching payables.</strong> Delaying suppliers lifts cash once, but it cannot be repeated forever.<br>
+    <strong>Capex well below depreciation for years.</strong> The company may be under-investing to flatter free cash flow.<br>
+    <strong>Growth funded by CFF.</strong> If operating cash cannot fund the business, it depends on lenders and shareholders.<br>
+    <strong>Classification choices.</strong> Under IFRS, check where interest and dividends sit before comparing CFO.</div>
+
+    <div class="layer-label">In my portfolio</div>
+    <p>This is the foundation under every valuation I want to publish. A DCF does not value profit; it values <strong>free cash flow</strong>, which comes from all three statements at once: <strong>FCFF = CFO + interest × (1 − t) − capex</strong>, or built up from EBIT × (1 − t) + D&amp;A − capex − Δworking capital. For VB Europe Strategic, the checks in the box above become the first screen on any candidate — before I get to any multiple or model in the <a href="toolkit/index.html">Valuation &amp; Portfolio Toolkit</a>.</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section prose" id="conclusion">
+    <p class="eyebrow">Conclusion · The system on one page</p>
+    <h3>Bringing it together</h3>
+    <p>The three statements are three views of the same set of transactions. The income statement measures performance on an accrual basis; the balance sheet stores the results and the timing differences; the cash flow statement reconciles profit with cash. Net income flows into retained earnings and opens the cash flow statement; the change in cash closes it and lands on the balance sheet; and every other balance-sheet change shows up as a cash flow. Trace any transaction through all three, check that assets still equal liabilities plus equity, and the black box opens.</p>
+
+    <div class="table-wrap">
+      <table class="compare">
+        <thead><tr><th>Link</th><th>From</th><th>To</th><th>Formula</th></tr></thead>
+        <tbody>
+          <tr><td>① Retained earnings</td><td>Income statement</td><td>Balance sheet</td><td>RE<sub>end</sub> = RE<sub>begin</sub> + NI − Dividends</td></tr>
+          <tr><td>② Start of CFO</td><td>Income statement</td><td>Cash flow statement</td><td>CFO = NI + non-cash items − Δworking capital</td></tr>
+          <tr><td>③ Cash</td><td>Cash flow statement</td><td>Balance sheet</td><td>Cash<sub>end</sub> = Cash<sub>begin</sub> + CFO + CFI + CFF</td></tr>
+          <tr><td>④ PP&amp;E</td><td>CFI and income statement</td><td>Balance sheet</td><td>PP&amp;E<sub>end</sub> = PP&amp;E<sub>begin</sub> + Capex − Depreciation</td></tr>
+          <tr><td>④ Debt and equity</td><td>CFF</td><td>Balance sheet</td><td>Debt<sub>end</sub> = Debt<sub>begin</sub> + New debt − Repayments</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="sources">Sources: CFA Institute, <a href="https://www.cfainstitute.org/sites/default/files/2027levelitopicoutline_online.pdf">2027 Level I Topic Outlines</a> (Financial Statement Analysis); IFRS Foundation, IAS 7 <em>Statement of Cash Flows</em> and IFRS 18 <em>Presentation and Disclosure in Financial Statements</em>; J. Berk &amp; P. DeMarzo, <em>Corporate Finance</em>, ch. 2.</p>
+  </div>
+
+</main>
+
+
+
+<footer class="site-footer">
+  <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#0a2e70"><path d="M408.5-340h143q8.99 0 14.74-5.99 5.76-5.99 5.76-14.84v-44.67h-17.5v48h-149v-245h149v48H572v-44.88q0-8.52-5.76-14.57-5.75-6.05-14.74-6.05h-143q-8.99 0-14.74 6.04Q388-607.93 388-599v238q0 8.92 5.76 14.96 5.75 6.04 14.74 6.04Zm72.01 187q-67.42 0-127.14-25.52-59.72-25.53-104.62-70.35-44.9-44.83-70.32-104.29Q153-412.62 153-480.22q0-67.69 25.52-126.91 25.53-59.22 70.35-104.12 44.83-44.9 104.29-70.32Q412.62-807 480.22-807q67.69 0 126.91 25.52 59.22 25.53 104.12 70.35 44.9 44.83 70.32 104.05Q807-547.85 807-480.51q0 67.42-25.52 127.14-25.53 59.72-70.35 104.62-44.83 44.9-104.05 70.32Q547.85-153 480.51-153Zm-.54-17.5q128.53 0 219.03-90.47 90.5-90.46 90.5-219 0-128.53-90.47-219.03-90.46-90.5-219-90.5-128.53 0-219.03 90.47-90.5 90.46-90.5 219 0 128.53 90.47 219.03 90.46 90.5 219 90.5ZM480-480Z"/></svg> 19.11.2026; Vaduz, Liechtenstein
+</footer>
+
+</body>
+</html>
